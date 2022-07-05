@@ -1,0 +1,650 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<style>
+<!--
+table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif"}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="740" height="350" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+	<tr>
+      <td width="740" height="133" background="Site/top.jpg" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="127" height="356" background="Site/middle1.jpg" valign="top">
+        <p align="left">
+        <b><font face="Arial" size="1" color="#505866">&nbsp;&nbsp;&nbsp; 
+		<a href="http://www.blitz-school.info"><font color="#FFFF99">Курсы</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font face="Arial" size="1" color="#FFFF99">
+		<a href="http://www.blitz-school.info/reg.html"><font color="#FFFF99">Регистрация</font></a><br>
+        &nbsp;&nbsp;&nbsp;
+		<a href="http://www.blitz-school.info/study_tech.html">
+		<font color="#FFFF99">Методика</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font>
+		<a href="http://www.blitz-school.info/program.html"><font face="Arial" size="1" color="#FFFF99">Оглавление</font></a><font face="Arial" size="1" color="#FFFF99"><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://www.blitz-school.info/login.html">
+		<font color="#FFFF99">Для учащихся</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font></b>
+		<img border="0" src="../navdiv.gif" width="80" height="4"><br>
+        <b><font size="1" face="Arial" color="#505866">&nbsp;&nbsp;&nbsp;
+        <a href="http://www.blitz-school.info/articles.html">
+		<font color="#FFFF99">Статьи</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font size="1" face="Arial" color="#FFFF99">
+		<a href="http://www.blitz-school.info/instrum.html">
+		<font color="#FFFF99">Инструменты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span>
+		<a href="http://www.blitz-school.info/contacts.html">
+		<font color="#FFFF99">Контакты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span></font></b>&nbsp;</td>
+      <td width="586" height="356" background="Site/bg.gif" valign="top">
+
+<p align="center"><font color="#008000"><b><span lang="ru"><font size="5">Урок </font>
+</span>
+<font size="5">5<span lang="ru">. </span></font></b><span lang="ru">
+<font size="5"><b>Создание инвентаря</b></font><br>
+</span>
+</font><b><span lang="ru"></p>
+<p align="justify"><font face="Arial" size="2" color="#000080">5</font><font face="Arial" color="#000080"><a name="kopv"><font size="2">.1. 
+</font></a></font></span></b><span lang="ru"><b><a name="kopv">
+<font size="2" face="Arial" color="#000080">&nbsp;Инвентарь .</font></a></b><font size="2" face="Arial">
+<br>
+<br></font></span><font size="2" face="Arial">
+&nbsp;&nbsp; <span lang="ru">Инвентарь в нашей онлайн игре - это рюкзак 
+персонажа, где могут содержаться какие-либо вещи. Как Вы уже знаете, активные 
+предметы в нашей игре, могут находится в одном из нескольких состояний - быть в 
+слотах игрока (предметы надеты на игроке), лежать у него в рюкзаке и содержаться 
+на полке комиссионного магазина.<br>
+<br></span><font color="#000080"><b><a name="kopv0"><span lang="en-us">5</span></a></b></font><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv0"><font size="2">.2. 
+</font></a></font></span><a name="kopv1">
+<font size="2" face="Arial" color="#000080"><span lang="ru">&nbsp;Описание 
+слотов персонажа.</span></font></a></b><span lang="ru"> <br><br> </span>
+<span lang="en-us">&nbsp;&nbsp;&nbsp;&nbsp;</span>Слоты нашего с Вами персонажа 
+используются для надевания различных предметов.<br>
+<br>
+<span lang="en-us"><img border="0" src="slots.jpg" width="234" height="321"> </span><span lang="ru"> &nbsp;&nbsp;<br>
+<br>
+&nbsp;&nbsp; Слева от героя сверху вниз размещены такие слоты:<br>
+<br>
+1. Слот для шлемов и головных уборов&nbsp;&nbsp; <br>
+2. Слот для различного рода оружия<br>
+3. Два слота для колец<br>
+4. Слот для рубашек или брони.<br>
+5. Слот для пояса<br>
+<br>
+&nbsp;&nbsp; Справа от героя сверху вниз размещены следующие слоты:<br>
+<br>
+6. Слот для сережек<br>
+7. Слот для кулонов или колье<br>
+8. Слот для щита<br>
+9. Еще два слота для колец<br>
+10. Слот для перчаток<br>
+11. Слот для обуви<br>
+<br>
+Три слота, которые находятся внизу игрока мы рассмотрим в других уроках.<br>
+Как Вы помните из Урока 4, предметы в справочнике предметов описывались таким 
+образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">INSERT INTO 
+		Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) VALUES(1,1,1,'Молот Новичка',20,'mace.jpg','<b>Weapon</b>',1,20);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) VALUES(5,4,1,'Перчатки 
+		кузнеца',15,'gloves.jpg','<b>Gloves</b>',1,20);</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Courier" size="2">&nbsp; </font>
+<font size="2" face="Arial">где поле </font><font face="Courier" size="2">
+ItemSlotName </font><font size="2" face="Arial">- как раз и отвечало за слот, в 
+котором может размещаться данный&nbsp; тип предмета. Так для Молота Новичка 
+слотом размещения является - <span lang="en-us">Weapon, </span>для Перчаток 
+кузнеца - <span lang="en-us">Gloves. </span>Э<span lang="ru">то поле понадобится 
+нам, когда мы начнем реализовывать одевание/раздевание нашего героя в 4 пункте 
+нашего сегодняшнего урока.<br>
+<br> </span><font color="#000080"><b><a name="kopv2"><span lang="en-us">5</span></a></b></font><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv2"><font size="2">.3. </font>
+</a></font></span></b><span lang="ru"><b><a name="kopv3">
+<font size="2" face="Arial" color="#000080">&nbsp;Отображение инвентаря героя.</font></a></b> <br>
+<br>
+&nbsp;&nbsp; В прошлом уроке, мы добавили немного предметов одному из 
+автоматически созданных нами персонажей&nbsp; - &quot;Создателю&quot; . Вот они:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">INSERT INTO Items (IT_ID,IL_ID,<font color="#0000FF">Item_Owner</font>,Item_Position,Item_CurrentLife) 
+		VALUES(1,9,<font color="#0000FF">1</font>,2,0);<br>
+		INSERT INTO Items (IT_ID,IL_ID,<font color="#0000FF">Item_Owner</font>,Item_Position,Item_CurrentLife) 
+		VALUES(2,10,<font color="#0000FF">1</font>,2,12);<br>
+		INSERT INTO Items (IT_ID,IL_ID,<font color="#0000FF">Item_Owner</font>,Item_Position,Item_CurrentLife) 
+		VALUES(3,3,<font color="#0000FF">1</font>,2,15);</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Поле </span>
+</font><font face="Courier" size="2">Item_Position = 2 </font>
+<font size="2" face="Arial"><span lang="ru">указывает на то, что все эти 
+предметы находятся у нас в рюкзаке. Давайте создадим файл<b> </b> </span>
+<span lang="en-us"><b>inventory.phtml</b>, </span>в<span lang="ru"> котором мы 
+попробуем реализовать отображение, лежащих в рюкзаке предметов.<br>
+Для начала в файле </span><span lang="en-us"><b>char.phtml</b> </span><span lang="ru">
+добавьте кнопку&nbsp;  <input type=button value = "Рюкзачок">&nbsp; чтоб мы 
+попасть на страницу </span>
+<span lang="en-us"><b>inventory.phtml</b></span><span lang="ru">
+.&nbsp; Вот это описание кнопки:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;INPUT TYPE=button 
+		value=&quot;Рюкзачок&quot; onclick=&quot;gotoInventory()&quot;&gt;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">
+А функция</span><span lang="en-us"> </span><span lang="ru">
+на </span><span lang="en-us">JavaScript </span><span lang="ru">
+&nbsp;</span></font><font face="Courier" size="2">gotoInventory </font>
+<font size="2" face="Arial"><span lang="ru">
+выглядит также просто:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">function 
+		gotoInventory(){<br>
+		<span lang="en-us">&nbsp; </span>location.href='inventory.phtml?NickName=<b>&lt;?php</b>
+		<font color="#0000FF">echo</font> $aNickName <b>?&gt;</b>';<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">
+&nbsp;&nbsp;&nbsp; Отобразим теперь все предметы, принадлежащие игроку создатель 
+и лежащие у него в инвентаре.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;<font color="#008080">table</font> 
+		border=1&gt;<br>
+		&lt;tr&gt;&lt;td width=&quot;700&quot; bgcolor=&quot;#6B6683&quot; height=&quot;16&quot;&gt;&lt;b&gt;&lt;font face=&quot;Arial&quot; 
+		color=&quot;#FFFF00&quot; size=&quot;2&quot;&gt;<br>
+		Рюкзачок&lt;/font&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;<br>
+		<b>&lt;?php</b><br>
+		<font color="#0000FF">echo</font> &quot;&quot;;<br>
+		// Отобразим содержимое рюкзачка<br>
+		$query = <font color="#008000">&quot;SELECT i.IT_ID, i.Item_Position, 
+		il.ItemType, il.ItemNo, il.Item_Image, il.ItemName FROM Items i </font>
+		<font color="#FF0000">inner join</font><font color="#008000"> Items_List 
+		il on il.il_id=i.il_id WHERE Item_Owner='$aUserID' and Item_Position='2'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		while ($aRow = <font color="#0000FF">mysql_fetch_array</font>($result)) 
+		{<br>
+		$aSlotItemID = $aRow[&quot;IT_ID&quot;];<br>
+		$aItemType = $aRow[&quot;ItemType&quot;];<br>
+		$aItemNo = $aRow[&quot;ItemNo&quot;];<br>
+		$aItemImage = $aRow[&quot;Item_Image&quot;];<br>
+		$aItemName = $aRow[&quot;ItemName&quot;];<br>
+		<br>
+		<font color="#0000FF">echo</font> &quot;&lt;tr&gt;&lt;td&gt;&quot; . &quot;&lt;img border=0 src=Items/&quot;.$aItemImage.&quot; 
+		alt='$aItemName'&gt;&quot; . &quot;&lt;/td&gt;&lt;/tr&gt;&quot;;<br>
+		}<br>
+		<b>?&gt;</b><br>
+		&lt;/<font color="#008080">table</font>&gt;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">
+&nbsp; В нашем </span><span lang="en-us">SQL-</span>з<span lang="ru">апросе мы 
+отбираем только те предметы которые удовлетворяют двум условиям&nbsp; </span></font>
+<font color="#008000" face="Courier" size="2">Item_Owner = </font>
+<font color="#008000" face="Courier" size="2">$aUserID</font><font size="2" face="Arial"><span lang="ru">, 
+то есть предмет имеет идентификатор владельца такой же как </span>
+<span lang="en-us">USER_ID </span>н<span lang="ru">ашего героя и </span></font>
+<font color="#008000" face="Courier" size="2">Item_Position='2'</font><font size="2" face="Arial"><span lang="ru">
+- что означает: предмет лежит у нас в рюкзаке. Таблица предметов соединяется со 
+справочником предметов (</span></font><font color="#FF0000" face="Courier" size="2">inner 
+join</font><font size="2" face="Arial"><span lang="ru">), откуда мы узнаем их 
+дополнительные характеристики (в частности - </span></font>
+<font face="Courier" size="2">ItemName</font><font size="2" face="Arial"><span lang="ru">).<br>
+</span></font><font face="Courier" size="2">$aUserID</font><font size="2" face="Arial"><span lang="ru">
+мы узнаем чуть выше:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">$query = &quot;<font color="#008080">SELECT 
+		* FROM users WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+		$aUserID = $aRow[&quot;USER_ID&quot;];<br>
+		...</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">
+Смотрите полный текст файла </span><b>
+<span lang="en-us">inventory.phtml</span> </b><span lang="ru">
+<a href="5_3/inventory.phtml">здесь</a>.<br>
+<br> </span><font color="#000080"><b><a name="kopv4"><span lang="en-us">5</span></a></b></font><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv4"><font size="2">.4. </font></a></font></span></b>
+<span lang="ru"><b><a name="kopv5"><font size="2" face="Arial" color="#000080">&nbsp;Перемещение 
+предметов из инвентаря в слоты</font></a></b> <br><br>
+&nbsp;&nbsp;&nbsp;Теперь нам остается только реализовать возможность надевать 
+предметы в слоты игрока и возвращать их обратно в рюкзак. <br>
+&nbsp;&nbsp;&nbsp; Для начала немного видоизменим строку кода на
+</span><span lang="en-us">PHP </span>д<span lang="ru">ля отображения предметов в 
+ссылку (</span><span lang="en-us">&lt;a href&gt;</span><span lang="ru">)</span><span lang="en-us">
+</span>к<span lang="ru">оторая будет приводить к передаче параметра
+</span><span lang="en-us">seton=</span><span lang="ru">&lt;</span></font><font face="Courier" size="2">$aSlotItemID</font><font size="2" face="Arial"><span lang="en-us">&gt;
+</span>в<span lang="ru">новь на нашу же страницу
+</span><b>
+<span lang="en-us">inventory.phtml</span> </b><span lang="ru">для перемещения 
+предмета в соответствующий слот.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+	<tr>
+		<td bgcolor="#FFFFCC">...<br>
+		<font face="Courier" size="2">echo &quot;&lt;tr&gt;&lt;td&gt;&quot; . &quot;&lt;<b>a</b> href='<font color="#000080">inventory.phtml</font>?NickName=&quot;.$aNickName.&quot;&amp;<font color="#0000FF">seton</font>=&quot;.$aSlotItemID.&quot;&amp;<font color="#0000FF">atype</font>=&quot;.$aItemType.&quot;<br>
+		&amp;<font color="#0000FF">ano</font>=&quot;.$aItemNo.&quot;'&gt;&lt;img border=0 src=Items/&quot;.$aItemImage.&quot; 
+		ALT=<font color="#008000">'Одеть предмет</font> &quot;.$aItemName.&quot;'&gt;&lt;<b>/a</b>&gt;&quot; 
+		. &quot;&lt;/td&gt;&lt;/tr&gt;&quot;;<br>
+		&lt;/<font color="#008080">table</font>&gt;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Теперь, кликая на 
+картинке предмета, игрок вызовет переход по ссылке в этот же файл с передачей в 
+него параметров (</span></font><font color="#0000FF" face="Courier" size="2">seton, 
+atype</font><font size="2" face="Arial"><span lang="ru">,&nbsp;
+</span></font><font face="Courier" size="2"><font color="#0000FF">ano</font>
+</font><font size="2" face="Arial"><span lang="ru">) то есть идентификатора 
+предмета из таблицы предметов, тип предмета и порядковый номер предмета из 
+справочника предметов.<br>
+Чтоб проанализировать значения этих передаваемых параметров, воспользуемся 
+следующим кодом на
+</span><span lang="en-us">PHP</span><span lang="ru">:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table8">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#0000FF">if</font> (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['seton']))<br>
+		{<br>
+		<span lang="en-us">&nbsp; </span>// Вошли после режима одевания предмета<br>
+		<span lang="en-us">&nbsp; </span>$seton = $<font color="#0000FF">_GET</font>['seton'];<br>
+		<span lang="en-us">&nbsp; </span>$aItemType = $<font color="#0000FF">_GET</font>['atype'];<br>
+		<span lang="en-us">&nbsp; </span>$aItemNo = $<font color="#0000FF">_GET</font>['ano'];<br>
+		}<br>
+		<font color="#0000FF">else</font><br>
+		{<br>
+		<span lang="en-us">&nbsp; </span>$seton = 0;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Теперь, когда эти 
+переданные параметры стали для нас известны, можно осуществлять перенос предмета 
+из рюкзака в соответствующий слот персонажа. Реализуем это следующим образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table9">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Надеваем предмет с идентификатором в переменной 
+		seton в слот<br>
+		</font>if( $seton != 0 ){<br>
+		<br>
+		<font color="#008080">// Убираем из рюкзака - перемещаем в слоты<br>
+		</font>$query = <font color="#008000">&quot;UPDATE Items SET Item_Position='3' 
+		WHERE IT_ID='$seton'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		<br>
+		<font color="#008080">// В какой слот ? из справочника предметов<br>
+		</font>$query = <font color="#008000">&quot;SELECT * FROM Items_List WHERE 
+		ItemType='$aItemType' and ItemNo='$aItemNo'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$aRow = mysql_fetch_array( $result);<br>
+		$aItemSlot = $aRow[&quot;ItemSlotName&quot;].&quot;_Slot&quot;;<br>
+		if ($aItemSlot == 'Ring_Slot'){<br>
+		<font color="#008080">// Пытаемся засунуть в пустой слот, либо, если все 
+		заняты - тогда в первый<br>
+		</font>$query = <font color="#008000">&quot;SELECT * FROM users WHERE 
+		Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$aRow = mysql_fetch_array( $result);<br>
+		$aRing1_Slot = $aRow[&quot;Ring1_Slot&quot;];<br>
+		$aRing2_Slot = $aRow[&quot;Ring2_Slot&quot;];<br>
+		$aRing3_Slot = $aRow[&quot;Ring3_Slot&quot;];<br>
+		$aRing4_Slot = $aRow[&quot;Ring4_Slot&quot;];<br>
+		$NotEmpty = false;<br>
+		if ($aRing1_Slot == 0){<br>
+		$query = <font color="#008000">&quot;UPDATE Users SET Ring1_Slot='$seton' 
+		WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$NotEmpty = true;<br>
+		}<br>
+		if (($aRing2_Slot == 0) &amp;&amp; (!$NotEmpty) ){<br>
+		$query = <font color="#008000">&quot;UPDATE Users SET Ring2_Slot='$seton' 
+		WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$NotEmpty = true;<br>
+		}<br>
+		if (($aRing3_Slot == 0) &amp;&amp; (!$NotEmpty) ){<br>
+		$query = <font color="#008000">&quot;UPDATE Users SET Ring3_Slot='$seton' 
+		WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$NotEmpty = true;<br>
+		}<br>
+		if (($aRing4_Slot == 0) &amp;&amp; (!$NotEmpty) ){<br>
+		$query = <font color="#008000">&quot;UPDATE Users SET Ring4_Slot='$seton' 
+		WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$NotEmpty = true;<br>
+		}<br>
+		if (!$NotEmpty){ <font color="#008080">// Если все слоты под кольца 
+		заняты - засовываем в первый<br>
+		// сперва снимем первое кольцо<br>
+		</font>$query = <font color="#008000">&quot;UPDATE Items SET Item_Position='2' 
+		WHERE ID='$aRing1_Slot'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		<font color="#008080">// засунем из рюкзака<br>
+		</font>$query = <font color="#008000">&quot;UPDATE Users SET Ring1_Slot='$seton' 
+		WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$NotEmpty = true;<br>
+		}<br>
+		<br>
+		}<br>
+		else <font color="#008080">// не кольца</font><br>
+		{<br>
+		$query = <font color="#008000">&quot;SELECT * FROM users WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$aRow = mysql_fetch_array( $result);<br>
+		$aHelmet_Slot = $aRow[&quot;Helmet_Slot&quot;];<br>
+		$aShield_Slot = $aRow[&quot;Shield_Slot&quot;];<br>
+		$aWeapon_Slot = $aRow[&quot;Weapon_Slot&quot;];<br>
+		$aGloves_Slot = $aRow[&quot;Gloves_Slot&quot;];<br>
+		$aShoes_Slot = $aRow[&quot;Shoes_Slot&quot;];<br>
+		$aArmor_Slot = $aRow[&quot;Armor_Slot&quot;];<br>
+		$aNecklace_Slot = $aRow[&quot;Necklace_Slot&quot;];<br>
+		$aEar_Slot = $aRow[&quot;Ear_Slot&quot;];<br>
+		$aBelt_Slot = $aRow[&quot;Belt_Slot&quot;];<br>
+		<br>
+		<font color="#008080">// сперва снимем если что-то есть?</font><br>
+		$link_slot_var = &quot;a&quot;.$aItemSlot;<br>
+		$aSlotItemID = $$link_slot_var;<br>
+		if ($aSlotItemID &lt;&gt; 0){<br>
+		$query = <font color="#008000">&quot;UPDATE Items SET Item_Position='2' WHERE 
+		IT_ID='$aSlotItemID'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		}<br>
+		$query = <font color="#008000">&quot;UPDATE Users SET &quot;.$aItemSlot.&quot;='$seton' 
+		WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; Надо 
+заметить, что у нас несколько отличается работа с предметами типа &quot;кольцо&quot; и 
+остальными вещами. Остальные вещи имеют единственный четко прописанный слот, в 
+который они могут быть помещены. Шлем в
+</span><span lang="en-us">&quot;Helmet&quot;, </span>Р<span lang="ru">убашка в
+</span><span lang="en-us">&quot;Armor&quot;, </span>Щ<span lang="ru">ит в
+</span><span lang="en-us">&quot;Shield&quot; </span>и<span lang="ru"> т.д. Слотов же для 
+колец у нас четыре и в них - как могут находится кольца, так эти слоты и могут 
+пустовать. <br>
+&nbsp;&nbsp;&nbsp; Как видно из приведенного выше кода, при одевании предмета 
+типа &quot;кольцо&quot; сперва последовательно проверяется - свободны ли слоты. Кольцо 
+надевается в первый из свободных слотов. Если все занято - снимается первое 
+кольцо (поле
+</span></font><font face="Courier" size="2">
+		Ring1_Slot</font><font size="2" face="Arial"><span lang="ru">) и 
+возвращается в рюкзак, на его место одевается кольцо из рюкзака. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Что касается остальных предметов экипировки и оружия, 
+то там все просто - если слот свободен - сразу одеваем, если занят - сперва 
+снимаем в рюкзак, ранее одетый в слот предмет.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; В таблице
+</span><span lang="en-us"><b>Items</b> </span>м<span lang="ru">ы модифицируем 
+поле&nbsp;
+</span></font><font color="#008000" face="Courier" size="2">Item_Position </font>
+<font size="2" face="Arial"><span lang="ru">меняя его на 3, если предмет 
+одевается в слот, либо на 2, если предмет возвращается в рюкзак. В таблице
+</span><span lang="en-us"><b>Users</b> </span>м<span lang="ru">ы модифицируем 
+поля
+</span></font><font face="Courier" size="2">
+		Helmet_Slot</font><font size="2" face="Arial"><span lang="ru">,
+</span></font><font face="Courier" size="2">
+		Shield_Slot</font><font size="2" face="Arial"><span lang="ru">,
+</span></font><font face="Courier" size="2">
+		Weapon_Slot</font><font size="2" face="Arial"><span lang="ru"> и т.д.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Отображение одетых предметов осуществим следующим 
+скриптом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table10">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Теперь смотрим героя во всей красе<br>
+		</font><br>
+		$query = &quot;<font color="#008000">SELECT * FROM users WHERE Nick_Name='$aNickName'</font>&quot;;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$aRow = mysql_fetch_array( $result);<br>
+		<br>
+		$aUserID = $aRow[&quot;ID&quot;];<br>
+		$aStrength = $aRow[&quot;Character_Strength&quot;];<br>
+		$aEndurance = $aRow[&quot;Character_Endurance&quot;];<br>
+		$aAccuracy = $aRow[&quot;Character_Accuracy&quot;];<br>
+		$aDexterity = $aRow[&quot;Character_Dexterity&quot;];<br>
+		$aNotUsedStats = $aRow[&quot;Character_UnUsed_Points&quot;];<br>
+		$aSwordSkill = $aRow[&quot;Character_Sword&quot;];<br>
+		$aSpearSkill = $aRow[&quot;Character_Spear&quot;];<br>
+		$aMaceSkill = $aRow[&quot;Character_Mace&quot;];<br>
+		$aAxeSkill = $aRow[&quot;Character_Axe&quot;];<br>
+		$aDaggerSkill = $aRow[&quot;Character_Dagger&quot;];<br>
+		$aCharLevel = $aRow[&quot;Character_Level&quot;];<br>
+		$aMoney = $aRow[&quot;Character_Money&quot;];<br>
+		<br>
+		<font color="#008080">// Узнаем что там в слотах?</font><br>
+		$aHelmet_Slot = $aRow[&quot;Helmet_Slot&quot;];<br>
+		$aShield_Slot = $aRow[&quot;Shield_Slot&quot;];<br>
+		$aWeapon_Slot = $aRow[&quot;Weapon_Slot&quot;];<br>
+		$aGloves_Slot = $aRow[&quot;Gloves_Slot&quot;];<br>
+		$aShoes_Slot = $aRow[&quot;Shoes_Slot&quot;];<br>
+		$aArmor_Slot = $aRow[&quot;Armor_Slot&quot;];<br>
+		$aNecklace_Slot = $aRow[&quot;Necklace_Slot&quot;];<br>
+		$aRing1_Slot = $aRow[&quot;Ring1_Slot&quot;];<br>
+		$aRing2_Slot = $aRow[&quot;Ring2_Slot&quot;];<br>
+		$aRing3_Slot = $aRow[&quot;Ring3_Slot&quot;];<br>
+		$aRing4_Slot = $aRow[&quot;Ring4_Slot&quot;];<br>
+		$aEar_Slot = $aRow[&quot;Ear_Slot&quot;];<br>
+		$aBelt_Slot = $aRow[&quot;Belt_Slot&quot;];<br>
+		<br>
+		mysql_free_result($result);<br>
+		<br>
+		<br>
+		<font color="#008080">// Эта функция получает переменную из слота<br>
+		// и если не 0 ищет этот предмет в таблице предметов<br>
+		// затем по типу и номеру предмета-ищет картинку в справочнике</font>
+		<font color="#008080">предметов<br>
+		</font><b>function</b> <font color="#000080">DrawItem</font>($aSlot){<br>
+		global $aNickName,$aHelmet_Slot,$aShield_Slot,$aWeapon_Slot,$aGloves_Slot, 
+		$aShoes_Slot,$aArmor_Slot;<br>
+		global $aNecklace_Slot,$aRing1_Slot,$aRing2_Slot,$aRing3_Slot,$aRing4_Slot, 
+		$aEar_Slot,$aBelt_Slot;<br>
+		global $mysql_host,$mysql_user,$mysql_password,$my_database;<br>
+		<br>
+		$link_slot_var = &quot;a&quot;.$aSlot.&quot;_Slot&quot;;<br>
+		$aSlotItemID = $$link_slot_var;<br>
+		if ( $aSlotItemID != 0 ){<br>
+		<font color="#008000">// сперва выберем предмет из таблицы предметов</font><br>
+		$query = &quot;SELECT i.Item_Position, il.ItemType, il.ItemNo, il.Item_Image, </font>
+		<p><font face="Courier" size="2">
+		il.ItemName FROM Items i inner join Items_List il on il.il_id=i.il_id 
+		WHERE IT_ID='$aSlotItemID'&quot;;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		$aRow = mysql_fetch_array( $result );<br>
+		$aItemType = $aRow[&quot;ItemType&quot;];<br>
+		$aItemNo = $aRow[&quot;ItemNo&quot;];<br>
+		$aItemPos = $aRow[&quot;Item_Position&quot;];<br>
+		$aItemImage = $aRow[&quot;Item_Image&quot;];<br>
+		$aItemName = $aRow[&quot;ItemName&quot;];<br>
+		<br>
+		if($aItemPos == 3){ <font color="#008000">// Точно в слоте?</font><br>
+		$aRetS = &quot;&lt;a href='inventory.phtml?NickName=&quot;.$aNickName.&quot;&amp;setoff=&quot;.$aSlotItemID.&quot;&amp;atype=&quot;.$aItemType.&quot; 
+		&amp;ano=&quot;.$aItemNo.&quot;&amp;aslot=&quot;.$aSlot.&quot;'&gt;&lt;img border=0 src=Items/&quot;.$aItemImage.&quot; 
+		ALT='Снять предмет $aItemName'&gt;&lt;/a&gt;&quot;;<br>
+		}<br>
+		else<br>
+		{<br>
+		$aRetS = &quot;&lt;img src=Items/&quot;.$aSlot.&quot;_empty.jpg&gt;&quot;;<br>
+		}<br>
+		}<br>
+		else<br>
+		{<br>
+		$aRetS = &quot;&lt;img src=Items/&quot;.$aSlot.&quot;_empty.jpg&gt;&quot;;<br>
+		}<br>
+		return $aRetS;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="left"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+Как Вы догадались, сперва мы читаем содержимое слотов из таблицы
+</span><span lang="en-us"><b>users</b>. </span>З<span lang="ru">атем нам 
+понадобится функция
+</span><span lang="en-us"><font color="#000080">DrawItem</font>, </span>к<span lang="ru">оторая 
+займется непосредственным выводом картинок предметов на страничку. Более тог, мы 
+должны реализовать снятие предмета по нажатию на его картинку. Это достигается 
+созданием ссылки типа <br>
+(</span></font><font face="Courier" size="2">&lt;a href='inventory.phtml?NickName=&quot;.$aNickName.&quot;<font color="#000080">&amp;setoff</font>=&quot;.$aSlotItemID.&quot;&amp;atype=&quot;.$aItemType.&quot; 
+&amp;ano=&quot;.$aItemNo.&quot;&amp;aslot=&quot;.$aSlot.&quot;'&gt;&lt;imgborder=0 src=Items/&quot;.$aItemImage.&quot; ALT='Снять 
+предмет $aItemName'&gt;&lt;/a&gt;</font><font size="2" face="Arial"><span lang="ru">),
+<br>
+по которой переходит игрок, намеревающийся вернуть ненужный предмет из слота в 
+рюкзак<br>
+Параметр
+</span></font><font face="Courier" size="2" color="#000080">
+		&amp;setoff</font><font size="2" face="Arial"><span lang="ru"> указывает 
+нашему скрипту, что будет инициирован режим снятия предмета.<br>
+<br>
+&nbsp;&nbsp; Наш герой с несколькими предметами, одетыми в слоты будет выглядеть 
+так:<br>
+<br>
+<img border="0" src="inv2.jpg" width="513" height="336"><br>
+<br>
+&nbsp; Перед снятием предмета, мы проверяем переданный параметр
+</span><font color="#000080"><span lang="en-us">&amp;setoff</span></font></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table11">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#0000FF">if</font> (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['setoff']))<br>
+		{<br>
+		<font color="#008080">// Вошли после режима снятия предмета</font><br>
+		$setoff = $<font color="#0000FF">_GET</font>['setoff'];<br>
+		$aItemType = $<font color="#0000FF">_GET</font>['atype'];<br>
+		$aItemNo = $<font color="#0000FF">_GET</font>['ano'];<br>
+		$aSlot = $<font color="#0000FF">_GET</font>['aslot'];<br>
+		<br>
+		}<br>
+		<font color="#0000FF">else</font><br>
+		{<br>
+		$setoff = 0;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="left"><font size="2" face="Arial"><span lang="en-us">&nbsp;&nbsp;&nbsp;
+</span>И<span lang="ru"> производим перенос предмета из слота&nbsp; в рюкзак:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table12">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Уберем предмет с идентификатором в переменной 
+		setoff в рюкзак<br>
+		</font><font color="#0000FF">if</font>( $setoff != 0 ){<br>
+		$query = <font color="#008000">&quot;UPDATE Items SET Item_Position='2' WHERE 
+		IT_ID='$setoff'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$aSlot = $aSlot.&quot;_Slot&quot;;<br>
+		<font color="#008080">// Очищаем слот</font><br>
+		$query = <font color="#008000">&quot;UPDATE Users SET &quot;.$aSlot.&quot;='0' WHERE 
+		Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+Полный текст программы из файла
+</span><span lang="en-us">inventory.phtml </span>В<span lang="ru">ы найдете
+<a href="5_4/inventory.phtml">здесь</a>.<br>
+<br>
+</span><a name="kopv6"><span lang="en-us"><font color="#000080"><b>5</b></font></span></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv6"><font size="2">.5. </font></a></font></span></b>
+<a name="kopv6"><font color="#000080"><b>Ограничения предметов по уровню, статам 
+героя</b></font></a><span lang="ru"><b><a name="kopv7"><font size="2" face="Arial" color="#000080">.</font></a></b>
+<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;Во избежание одевания предметов старших уровней 
+(так персонаж первого уровня не может одеть броню рассчитанную на игроков более 
+старших уровней), мы сделаем небольшую проверку при попытке одеть предмет.<br>
+&nbsp;&nbsp; Давайте сделаем несколько предметов, которые лежат в рюкзаке нашего 
+героя предназначенными для второго уровня:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table13">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,<font color="#0000FF">Item_Level</font>,Item_FullLife) 
+		VALUES(9,8,1,'Пояс отваги',10,'belt.jpg','Belt',<font color="#0000FF">2</font>,20);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,<font color="#0000FF">Item_Level</font>,Item_FullLife) 
+		VALUES(10,9,1,'Кольцо повелевания',15,'ring1.jpg','Ring',<font color="#0000FF">2</font>,30);</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; 
+Таким образом &quot;Кольцо повелевания&quot; и &quot;</span></font><font face="Courier" size="2">Пояс 
+отваги</font><font size="2" face="Arial"><span lang="ru">&quot; не должны одеваться в 
+слоты персонажа первого уровня, так как у них параметр </span></font>
+<font color="#0000FF" face="Courier" size="2">Item_Level</font><font size="2" face="Arial"><span lang="en-us">
+</span>р<span lang="ru">авен 2.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Проверку в файле </span><span lang="en-us"><b>
+inventory.phtml</b> </span>м<span lang="ru">ы можем легко реализовать так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table14">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		&nbsp;if( $aCharLevel &gt;= $aItem_Level ) <font color="#008080">// 
+		проверка на уровень (level)</font></font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; где&nbsp; </span></font>
+<font face="Courier" size="2">
+		$aCharLevel </font><font size="2" face="Arial"><span lang="ru">- это 
+уровень нашего героя, а&nbsp; </span></font><font face="Courier" size="2">
+		$aItem_Level </font><font size="2" face="Arial"><span lang="ru">- 
+уровень персонажа, который может воспользоваться этим предметом.<br>
+&nbsp;&nbsp; Теперь эти предметы:<br>
+<img border="0" src="level.jpg" width="126" height="140"><br>
+<br>
+останутся в рюкзаке игрока до тех пор, пока он не повысит уровень своего героя.<br>
+Немного измененный файл </span><span lang="en-us"><b>inventory.phtml</b></span><span lang="ru"> 
+Вы найдете <a href="5_5/inventory.phtml">здесь</a>.<br>
+<br>
+&nbsp;&nbsp; Что касается проверки по статам героя, то это также легко 
+реализовать путем сравнения полей (Item_Strength, Item_Endurance, Item_Accuracy 
+и т.д.) из таблицы <b>Items_List</b> с полями (Character_Strength, 
+Character_Endurance, Character_Accuracy и т.д.) из таблицы </span>
+<span lang="en-us"><b>users</b>. </span>В<span lang="ru">ы легко можете сделать 
+такую проверку сами, в качестве домашнего задания.<br>
+<b><br>
+В следующем уроке</b> мы создадим разные локации для перемещения игрока между 
+ними. Более подробно остановимся на создании магазина оружия и ремонтной 
+мастерской для починки изношенных предметов.<br>
+&nbsp;</span></font></p>
+<font size="2" face="Arial">
+        <p align="left">&nbsp;</font></td>
+      <td width="27" height="356" background="Site/middle2.jpg">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="740" height="38" background="Site/bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

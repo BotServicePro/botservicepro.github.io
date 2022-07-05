@@ -1,0 +1,533 @@
+<HTML>
+
+<HEAD>
+<meta content="text/html; charset=windows-1251" http-equiv=Content-type>
+<META Http-Equiv=Cache-Control Content=no-cache>
+<meta http-equiv=PRAGMA content=NO-CACHE>
+<META Http-Equiv=Expires Content=0>
+<LINK href="main.css" type=text/css rel=stylesheet>
+
+<?php
+
+$lBankMode = 0;
+$aNickName = 0;
+$aMoney = 0;
+$aMoneyEuro = 0;
+$aUserID = 0;
+$aAccMoneyKR = 0;
+$aAccMoneyEKR = 0;
+$aPsw = 0;
+$aAccNum = 0;
+$aNotes = "";
+
+$aOperation = 0;
+$OBJECT_TYPE = 10;    // тип данного объекта 10 для всех городов
+
+     // Коннект к базе
+     $mysql_host = "localhost";
+     $mysql_user = "root";
+     $mysql_password = "";
+     $my_database = "mmclub";
+
+     $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+             or die("Could not connect : " . mysql_error());
+             mysql_select_db($my_database) or die("Could not select database");
+
+
+
+if (!empty($_GET['NickName']) ){
+   $aNickName = $_GET['NickName'];
+}
+if (!empty($_POST['NickName']) ){
+   $aNickName = $_POST['NickName'];
+}
+if (!empty($_GET['bankmode']) ){
+   $lBankMode = $_GET['bankmode'];
+}
+
+   getPlayerInfo();
+
+// Пытаемся войти с паролем в счет
+if (!empty($_POST['num']) && !empty($_POST['psw'])){
+   $aAccNum = $_POST['num'];
+   $aPsw = $_POST['psw'];
+   checkAccInfo();
+}
+
+// Окрываем новый счет
+if ( !empty($_GET['newacc']) ){
+   $query = "INSERT INTO accounts(USER_ID,ACC_Pass,DateOpen) values ($aUserID,'1111',Now())";
+   $result = mysql_query($query) or die("Query failed : " . mysql_error());
+   $aNewAcc = mysql_insert_id();
+   printf ("<font color=red>Вы удачно открыли новый счет %d\n. Новому счету назначен временный пароль 1111. </font>", $aNewAcc);
+}
+
+
+if ( !empty($_POST['operation']) ){
+   $aOperation = $_POST['operation'];
+   // положить наличные на кр счет
+   if ($aOperation==1) {
+      $aSumm = $_POST['add_sum'];
+      if ($aSumm <= $aMoney){
+      // Уменьшим наличные деньги
+      $query = "UPDATE users SET Character_Money=Character_Money-'$aSumm' WHERE Nick_Name='$aNickName'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      // Пополним банковский счет кредитов
+      $query = "UPDATE accounts SET Money_KR=Money_KR+'$aSumm' WHERE ACC_ID='$aAccNum' and USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      getPlayerInfo();
+      checkAccInfo();
+      } else {
+       print("<font size=2 color=red>У вас недостаточно наличных денег!</font>");
+      }
+
+   }
+
+   // снять наличные с кр счета
+   if ($aOperation==2) {
+      $aSumm = $_POST['get_sum'];
+      if ($aSumm <= $aAccMoneyKR){
+      // Увеличим наличные деньги
+      $query = "UPDATE users SET Character_Money=Character_Money+'$aSumm' WHERE Nick_Name='$aNickName'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      // Уменьшим банковский счет кредитов
+      $query = "UPDATE accounts SET Money_KR=Money_KR-'$aSumm' WHERE ACC_ID='$aAccNum' and USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      getPlayerInfo();
+      checkAccInfo();
+      } else {
+      print("<font size=2 color=red>У Вас недостаточно денег на кредитном счете!</font>");
+      }
+   }
+   // положить наличные на екр счет
+   if ($aOperation==3) {
+      $aSumm = $_POST['add_esum'];
+      if ($aSumm <= $aMoneyEuro){
+      // Уменьшим наличные деньги
+      $query = "UPDATE users SET Character_Euro=Character_Euro-'$aSumm' WHERE Nick_Name='$aNickName'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      // Пополним банковский счет кредитов
+      $query = "UPDATE accounts SET Money_EKR=Money_EKR+'$aSumm' WHERE ACC_ID='$aAccNum' and USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      getPlayerInfo();
+      checkAccInfo();
+      } else {
+       print("<font size=2 color=red>У вас недостаточно наличных екр денег!</font>");
+      }
+
+   }
+   // снять наличные с екр счета
+   if ($aOperation==4) {
+      $aSumm = $_POST['get_esum'];
+      if ($aSumm <= $aAccMoneyEKR){
+      // Увеличим наличные деньги
+      $query = "UPDATE users SET Character_Euro=Character_Euro+'$aSumm' WHERE Nick_Name='$aNickName'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      // Уменьшим банковский счет кредитов
+      $query = "UPDATE accounts SET Money_EKR=Money_EKR-'$aSumm' WHERE ACC_ID='$aAccNum' and USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      getPlayerInfo();
+      checkAccInfo();
+      } else {
+      print("<font size=2 color=red>У Вас недостаточно денег на &euro; кредитном счете!</font>");
+      }
+   }
+   // перевод кредитов на другой счет
+   if ($aOperation==5) {
+      $aSumm = $_POST['tansfer_sum'];
+      $aNum2 = $_POST['num2'];
+
+      // найдем, есть ли такой счет куда переводить кредиты
+      $query = "select ACC_ID,Money_KR,Money_EKR from accounts where ACC_ID='$aNum2'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      if( mysql_num_rows($result) <> 0 ){
+        $aRow = mysql_fetch_array($result);
+        $aAccMoneyKR      = $aRow["Money_KR"];
+        $lBankMode = 1;
+        if ($aSumm <= $aMoney){
+          // Уменьшим банковский счет кредитов
+          $query = "UPDATE accounts SET Money_KR=Money_KR+'$aSumm' WHERE ACC_ID='$aNum2'";
+          $result = mysql_query($query) or die("Query failed : " . mysql_error());
+          print("<font size=2 color=red>Вы удачно перевели $aSumm кр на счет $aNum2!</font>");
+          getPlayerInfo();
+          checkAccInfo();
+        } else {
+          print("<font size=2 color=red>У Вас недостаточно денег для перевода!</font>");
+        }
+      } else {
+        print("<font size=2 color=red>Такой номер счета не найден!</font>");
+      }
+  }
+
+   // обмен кредитов на еврокредиты
+   if ($aOperation==6) {
+      $aSumm = $_POST['convert_sum'];
+      if ($aSumm <= $aAccMoneyEKR){
+      // Изменим суммы на кредитном и еврокредитном счете
+      $query = "UPDATE accounts SET Money_EKR=Money_EKR-'$aSumm', Money_KR=Money_KR+('$aSumm'*20) WHERE ACC_ID='$aAccNum' and USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      print("<font size=2 color=red>Вы удачно обменяли $aSumm екр на ".($aSumm*20)." кр!</font>");
+      getPlayerInfo();
+      checkAccInfo();
+      } else {
+      print("<font size=2 color=red>У Вас недостаточно денег на &euro; кредитном счете!</font>");
+      }
+   }
+
+   // Смена пароля
+   if ($aOperation==7) {
+      $aNewPsw = $_POST['new_psw'];
+      // Изменим суммы на кредитном и еврокредитном счете
+      $query = "UPDATE accounts SET ACC_Pass = '$aNewPsw' WHERE ACC_ID='$aAccNum' and USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      print("<font size=2 color=red>Пароль удачно сменен! (запомните его: $aNewPsw )</font>");
+   }
+
+   // Сохранение записной книжки
+   if ($aOperation==8) {
+      $aNotes = $_POST['notepad'];
+      // Изменим данные в записной книжке
+      $query = "UPDATE accounts SET Notes = '$aNotes' WHERE ACC_ID='$aAccNum' and USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      print("<font size=2 color=red>Запись сохранена! </font>");
+   }
+
+
+}
+
+function getPlayerInfo(){
+     global $aNickName, $aUserID, $aMoney, $aMoneyEuro, $OBJECT_TYPE;
+     $query = "SELECT * FROM users WHERE Nick_Name='$aNickName'";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+     $aRow = mysql_fetch_array( $result);
+     $aUserID = $aRow["USER_ID"];
+     $aMoney     = $aRow["Character_Money"];
+     $aMoneyEuro = $aRow["Character_Euro"];
+	 $aUserTown = $aRow["Town"];
+
+     $query = "SELECT ID FROM Buildings where Town=$aUserTown and BuildingType=$OBJECT_TYPE";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+     $aRow = mysql_fetch_array( $result);
+     $aObjectID = $aRow["ID"];
+     // меняем комнату у игрока
+     $query = "UPDATE Users SET Building=$aObjectID WHERE Nick_Name='$aNickName'";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+}
+
+function checkAccInfo( ){
+   global $aAccMoneyKR, $aAccMoneyEKR, $lBankMode, $aUserID, $aPsw, $aAccNum, $aNotes;
+   // найдем, есть ли такой счет с паролем у этого персонажа
+   $query = "select ACC_ID,Money_KR,Money_EKR,Notes from accounts where USER_ID='$aUserID' and ACC_Pass='$aPsw' and ACC_ID='$aAccNum'";
+   $result = mysql_query($query) or die("Query failed : " . mysql_error());
+   if( mysql_num_rows($result) <> 0 ){
+      $aRow = mysql_fetch_array($result);
+      $aAccMoneyKR      = $aRow["Money_KR"];
+      $aAccMoneyEKR      = $aRow["Money_EKR"];
+      $aNotes      = $aRow["Notes"];
+      $lBankMode = 1;
+   } else {
+      print("<font size=2 color=red>Вы ввели неверный пароль к счету $aAccNum !</font>");
+   }
+}
+
+?>
+
+
+
+<script>
+
+
+function feedbackAccOpen(){
+   if (document.accopen.psw.value=="") {
+      alert("Вы не ввели пароль ко счету!");
+      document.accopen.psw.focus();
+      return false;
+   }
+   document.accopen.submit();
+}
+
+function getCookie(Name) {
+var search = Name + "="
+if (document.cookie.length > 0){
+  offset = document.cookie.indexOf(search)
+  if (offset != -1) {
+    offset += search.length
+    end = document.cookie.indexOf(";", offset)
+    if (end == -1) end = document.cookie.length
+    return unescape(document.cookie.substring(offset, end))
+  }
+}
+}
+
+function setCookie(name, value) {
+   document.cookie=name+"="+escape(value)+"; path=/";
+}
+
+var MMCLUB_ACC_NUMBER = getCookie("MMCLUB_ACC_NUMBER");
+var MMCLUB_ACC_PASS = getCookie("MMCLUB_ACC_PASS");
+
+
+function f_add_kred(){
+    if (isNaN(parseFloat(document.bankactions.add_sum.value))) {
+          alert('Укажите сумму');
+          return false;
+    } else {
+         if( confirm('Вы хотите положить на свой счет '+parseFloat(document.bankactions.add_sum.value)+' кр. ?') ){
+            document.getElementById('operation').value = 1;
+            document.bankactions.submit();
+         }
+    }
+}
+
+
+function f_get_kred(){
+    if (isNaN(parseFloat(document.bankactions.get_sum.value))) {
+          alert('Укажите сумму');
+          return false;
+    } else {
+         if( confirm('Вы хотите снять со своео счета '+parseFloat(document.bankactions.get_sum.value)+' кр. ?') ){
+            document.getElementById('operation').value = 2;
+            document.bankactions.submit();
+         }
+    }
+}
+
+function f_add_ekred(){
+    if (isNaN(parseFloat(document.bankactions.add_esum.value))) {
+          alert('Укажите сумму');
+          return false;
+    } else {
+         if( confirm('Вы хотите положить на свой счет '+parseFloat(document.bankactions.add_esum.value)+' кр. ?') ){
+            document.getElementById('operation').value = 3;
+            document.bankactions.submit();
+         }
+    }
+}
+
+
+function f_get_ekred(){
+    if (isNaN(parseFloat(document.bankactions.get_esum.value))) {
+          alert('Укажите сумму');
+          return false;
+    } else {
+         if( confirm('Вы хотите снять со своео счета '+parseFloat(document.bankactions.get_esum.value)+' кр. ?') ){
+            document.getElementById('operation').value = 4;
+            document.bankactions.submit();
+         }
+    }
+}
+
+
+function transfer_kr(){
+   if (isNaN(parseFloat(document.bankactions.tansfer_sum.value)) || isNaN(parseInt(document.bankactions.num2.value)) ) {
+       alert('Укажите сумму и номер счета'); return false;
+   } else {
+       if( confirm('Вы хотите перевести со своего счета '+parseFloat(document.bankactions.tansfer_sum.value)+' кр. на счет номер '+parseInt(document.bankactions.num2.value)+' ?') ){
+           document.getElementById('operation').value = 5;
+           document.bankactions.submit();
+       }
+   }
+}
+
+function exChange(){
+if (isNaN(parseFloat(document.bankactions.convert_sum.value))) {
+    alert('Укажите сумму для обмена'); return false;
+} else {
+    if( confirm('Вы хотите обменять '+parseFloat(document.bankactions.convert_sum.value)+' екр. на кредиты ?')){
+        document.getElementById('operation').value = 6;
+        document.bankactions.submit();
+    }
+}
+}
+
+function ChangePass(){
+   if ( document.bankactions.new_psw.value == "" || document.bankactions.new_psw2.value == "" ) {
+       alert('Введите дважды новый пароль для счета!'); return false;
+   } else {
+   if ( document.bankactions.new_psw.value == document.bankactions.new_psw2.value ) {
+       if( confirm('Вы действительно хотите сменить пароль для счета?') ){
+           document.getElementById('operation').value = 7;
+           document.bankactions.submit();
+       }
+   }
+   }
+}
+
+function SaveNotepad(){
+ if( confirm('Хотите сохранить записную книжку по счету?') ){
+     document.getElementById('operation').value = 8;
+     document.bankactions.submit();
+ }
+}
+
+function OpenAcc(){
+  if( confirm('Хотите открыть счет за 3 кр ?') ){
+    document.getElementById('newacc').value = 1;
+    document.accnew.submit();
+  }
+}
+
+
+</script>
+
+
+</HEAD>
+
+<body bgcolor=e2e0e0>
+<TABLE width=100%>
+<TR><TD><H3>Банк</H3> </TD><TD>(<a href="map2.phtml?NickName=<?php echo $aNickName; ?>"> Выйти</a> )
+</TD>
+</TR>
+</TABLE>
+
+
+<?php
+if($lBankMode == 0){
+?>
+
+
+Мы предоставляем следующие услуги:
+<OL>
+<LI>Открытие счета<LI>Возможность положить/снять кредиты/еврокредиты со счета
+<LI>Перевести кредиты/еврокредиты с одного счета на другой
+<LI>Обменный пункт. Обмен еврокредитов на кредиты
+</OL>
+<FORM action="bank.phtml?newacc=1" name=accnew method=POST">
+Хотите открыть свой счет? Услуга платная: 3.00 кр.</B> <INPUT TYPE=button value="Открыть счет" name=open onClick="OpenAcc()">
+<INPUT TYPE=hidden value="<?php echo $aNickName; ?>" name=NickName></td>
+<INPUT TYPE=hidden value="" name=newacc></td>
+</FORM>
+
+<TABLE><TR><FORM action="bank.phtml" name="accopen" method=POST onSubmit="feedbackAccOpen()"><TD>
+<FIELDSET><LEGEND><B>Управление счетом</B> </LEGEND>
+<TABLE>
+<TR><TD valign=top>
+<TABLE>
+<TR><TD>Номер счета</td> <TD colspan=2><select name="num" size=0 style="width: 90px">
+
+<?php
+     // Узнаем какие счета открыты у игрока
+     $query = "SELECT ACC_ID from accounts WHERE USER_ID='$aUserID'";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+     while ($aRow = mysql_fetch_array($result)) {
+        print('<option value="'.$aRow["ACC_ID"].'">'.$aRow["ACC_ID"].'</option>');
+     }
+?>
+
+
+
+
+</select></td></tr>
+<TR><TD>Пароль</td><td> <INPUT style='width:90;' type=password value="" name=psw></td><TD style='padding: 0, 0, 3, 5'></TD></tr>
+<TR><TD colspan=3 align=center><INPUT TYPE=button value="Войти" name=enter onClick="feedbackAccOpen()"></td>
+<INPUT TYPE=hidden value="<?php echo $aNickName; ?>" name=NickName></td>
+</tr>
+</TABLE>
+</TD>
+<TD></TD></TR>
+</TABLE>
+</FIELDSET>
+</TD></TR></TABLE>
+<br><br>
+</FORM>
+
+<?php
+} else {
+?>
+
+<FORM action="bank.phtml?bankmode=1" method=POST name=bankactions>
+<TABLE width=100%>
+<TR>
+<TD valign=top width="19%"><H4>Управление счетом</H4> &nbsp;
+<b>Счёт №:</b><font color=green> <?php echo $aAccNum; ?>
+</font><a href="bank.phtml?NickName=<?php echo $aNickName ?>" title="Окончить работу c текущим счетом"> [x]</a><br>
+</TD>
+<TD valign=top align=center width="23%">
+<TABLE width="185"><TR><TD>
+<FIELDSET><LEGEND><B>У вас на счету</B> </LEGEND>
+<TABLE width="180">
+<TR><TD width="104">Кредитов:</TD><TD width="66"><B><?php echo $aAccMoneyKR; ?></B></TD></TR>
+<TR><TD width="104">Еврокредитов:</TD><TD width="66"><B><?php echo $aAccMoneyEKR; ?></B></TD></TR>
+<TR><TD colspan=2><HR></TD></TR>
+<TR><TD width="104">Наличных:</TD><TD width="66"></TD></TR>
+<TR><TD width="104">Кредитов:</TD><TD width="66"><B><?php echo $aMoney; ?></B></TD></TR>
+<TR><TD width="104">Еврокредитов:</TD><TD width="66"><B><?php echo $aMoneyEuro; ?></B></TD></TR>
+
+</TABLE>
+</FIELDSET>
+</TD></TR></TABLE>
+</TD>
+<TD valign=top align=right width="57%">&nbsp;</TD>
+</TR>
+</TABLE>
+<TABLE cellspacing=5><TR>
+<TD valign=top width=50%><FIELDSET><LEGEND><B>Пополнить кредитный счет</B> </LEGEND>
+Сумма <INPUT TYPE=text NAME=add_sum size=6 maxlength=10> кр. <INPUT TYPE=button name=add_kredit value="Положить кредиты на счет" onclick="f_add_kred()"><BR>
+
+</FIELDSET></TD>
+<TD valign=top width=50%><FIELDSET><LEGEND><B>Снять с кредитного счета</B> </LEGEND>
+Сумма <INPUT TYPE=text NAME=get_sum size=6 maxlength=10> кр. <INPUT TYPE=button name=get_kredit value="Снять кредиты со счета" onclick="f_get_kred()"><BR>
+
+</FIELDSET></TD>
+</TR>
+
+<TABLE cellspacing=5><TR>
+<TD valign=top width=50%><FIELDSET><LEGEND><B>Пополнить <font color=green>&euro; </font>кредитный счет</B> </LEGEND>
+Сумма <INPUT TYPE=text NAME=add_esum size=6 maxlength=10> кр. <INPUT TYPE=button name=add_ekredit value="Положить екр на &euro; счет" onclick="f_add_ekred()"><BR>
+
+</FIELDSET></TD>
+<TD valign=top width=50%><FIELDSET><LEGEND><B>Снять с <font color=green>&euro; </font>кредитного счета</B> </LEGEND>
+Сумма <INPUT TYPE=text NAME=get_esum size=6 maxlength=10> кр. <INPUT TYPE=button name=get_ekredit value="Снять екр с &euro; счета" onclick="f_get_ekred()"><BR>
+
+</FIELDSET></TD>
+</TR>
+
+<TR><TD valign=top><FIELDSET><LEGEND><B>Перевести кредиты на другой счет</B> </LEGEND>
+Сумма <INPUT TYPE=text NAME=tansfer_sum size=6 maxlength=10> кр.<BR>
+Номер счета куда перевести кредиты <INPUT TYPE=text NAME=num2 size=12 maxlength=15><BR>
+<INPUT TYPE=button name=transfer_kredit value="Перевести кредиты на другой счет" onclick="transfer_kr()"><BR>
+</FIELDSET></TD>
+<TD valign=top><FIELDSET><LEGEND><B>Курс еврокредита к мировой валюте</B> </LEGEND>
+Данные на 29.06.08 09:42<BR>
+1 екр. = <b>1.5</b> долларов США<BR>
+1 екр. = <b>1.0000</b> ЕВРО<BR>
+&nbsp;</FIELDSET></TD>
+</TR><TR>
+<TD valign=top><FIELDSET><LEGEND><B>Обменный пункт</B> </LEGEND>
+Обменять еврокредиты на кредиты.<BR>
+Курс <B>1 екр.</B> = <B>20.00 кр.</B><BR>
+Сумма <INPUT TYPE=text NAME=convert_sum size=6 maxlength=10> екр.
+<INPUT TYPE=button name=convert_ekredit value="Обменять" onclick="exChange()">
+</FIELDSET><br>
+<FIELDSET><LEGEND><B>Настройки</B> </LEGEND>
+<B>Сменить пароль</B><BR>
+<table id="table1">
+<tr><TD>Новый пароль</TD><TD><INPUT TYPE=password name=new_psw></TD><TD></TD></tr>
+<tr><TD>Введите новый пароль повторно</TD><TD><INPUT TYPE=password name=new_psw2></TD><TD></TD></tr>
+</table>
+<INPUT TYPE=button name=change_psw value="Сменить пароль" onClick="ChangePass()"><BR>
+
+</FIELDSET></TD>
+<TD><FIELDSET><LEGEND><B>Записная книжка</B> </LEGEND>
+Здесь вы можете записывать любую информацию для себя. <BR>
+<TEXTAREA NAME=notepad ROWS=11 COLS=67><?php echo $aNotes; ?></TEXTAREA><BR>
+<INPUT TYPE=button name=save_notepad value="Сохранить изменения" onClick="SaveNotepad()">
+</FIELDSET>
+</TD>
+</TR><TR>
+<TD valign=top>&nbsp;</TD>
+<TD valign=top>&nbsp;</TD>
+</TR></TABLE>
+<INPUT TYPE=hidden value="<?php echo $aNickName; ?>" name=NickName></td>
+<INPUT TYPE=hidden value="<?php echo $aAccNum; ?>" name=num></td>
+<INPUT TYPE=hidden value="<?php echo $aPsw; ?>" name=psw></td>
+<INPUT TYPE=hidden value="" name=operation></td>
+</FORM>
+
+<?php
+}
+?>
+
+
+</BODY>
+</HTML>

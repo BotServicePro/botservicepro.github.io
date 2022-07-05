@@ -1,0 +1,664 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<style>
+<!--
+table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif"}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="740" height="350" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+	<tr>
+      <td width="740" height="133" background="Site/top.jpg" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="127" height="356" background="Site/middle1.jpg" valign="top">
+        <p align="left">
+        <b><font face="Arial" size="1" color="#505866">&nbsp;&nbsp;&nbsp; 
+		<a href="http://www.blitz-school.info"><font color="#FFFF99">Курсы</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font face="Arial" size="1" color="#FFFF99">
+		<a href="http://www.blitz-school.info/reg.html"><font color="#FFFF99">Регистрация</font></a><br>
+        &nbsp;&nbsp;&nbsp;
+		<a href="http://www.blitz-school.info/study_tech.html">
+		<font color="#FFFF99">Методика</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font>
+		<a href="http://www.blitz-school.info/program.html"><font face="Arial" size="1" color="#FFFF99">Оглавление</font></a><font face="Arial" size="1" color="#FFFF99"><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://www.blitz-school.info/login.html">
+		<font color="#FFFF99">Для учащихся</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font></b>
+		<img border="0" src="../navdiv.gif" width="80" height="4"><br>
+        <b><font size="1" face="Arial" color="#505866">&nbsp;&nbsp;&nbsp;
+        <a href="http://www.blitz-school.info/articles.html">
+		<font color="#FFFF99">Статьи</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font size="1" face="Arial" color="#FFFF99">
+		<a href="http://www.blitz-school.info/instrum.html">
+		<font color="#FFFF99">Инструменты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span>
+		<a href="http://www.blitz-school.info/contacts.html">
+		<font color="#FFFF99">Контакты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span></font></b>&nbsp;</td>
+      <td width="586" height="356" background="Site/bg.gif" valign="top">
+
+<p align="center"><font color="#008000"><b><font size="5"><span lang="ru">Урок 
+</span>
+7<span lang="ru">. </span> </font>
+</b><span lang="ru">
+<font size="5"><b>В преддверие поединка</b></font><br>
+</span>
+</font><b></p>
+<p align="justify"><font face="Arial" size="2" color="#000080">7</font><span lang="ru"><font face="Arial" color="#000080"><a name="kopv"><font size="2">.1. 
+</font></a></font></span></b><span lang="ru"><b><a name="kopv">
+<font size="2" face="Arial" color="#000080">Таблица одиночных заявок .</font></a></b><font size="2" face="Arial">
+<br>
+</font></span><font size="2" face="Arial">
+&nbsp;&nbsp;&nbsp;&nbsp; <span lang="ru"><br>
+</span>&nbsp;&nbsp;&nbsp; <span lang="ru">Мы все ближе и ближе подходим 
+непосредственно к поединку персонажей и в этом уроке рассмотрим механизм работы 
+с заявками на бой.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Чтоб перейти в фазу поединка (сейчас будем 
+рассматривать одиночный поединок двух соперников), один игрок должен создать 
+заявку, а другой принять ее. Таким образом, мы должны создать таблицу, где будут 
+сохраняться созданные игроками заявки.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Наша таблица <b>zayavki</b> на </span>SQL <span lang="ru">
+для этих целей будет выглядеть так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">/*Таблица Заявок для физического боя 1 х 1 */<br>
+		</font>CREATE TABLE `zayavki` (<br>
+		`ZV_ID` BIGINT unsigned NOT NULL auto_increment, <font color="#008080">
+		/*номер заявки*/</font><br>
+		`CHAR1_NAME` Char(32) NOT NULL, <font color="#008080">/*Ник 1 игрока*/</font><br>
+		`level1` INT NOT NULL, <font color="#008080">/*level 1 игрока*/</font><br>
+		`CHAR2_NAME` Char(32), <font color="#008080">/*Ник 2 игрока*/</font><br>
+		`level2` INT, <font color="#008080">/*level 2 игрока*/</font><br>
+		`ZDATA` DATE, <font color="#008080">/*дата заявки*/</font><br>
+		`ZTIME` TIME, <font color="#008080">/*время заявки*/</font><br>
+		`ZTYPE` SMALLINT(2) unsigned, <font color="#008080">/*Тип заявки*/</font><br>
+		`ZTIMEOUT` SMALLINT(2), <font color="#008080">/*Таймаут заявки*/</font><br>
+		PRIMARY KEY (`ZV_ID`)<br>
+		) TYPE=MyISAM;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp; Итак, каждая новая заявка имеет свой уникальный 
+номер, который содержится в поле </span></font><b><font face="Courier" size="2">
+		ZV_ID</font></b><font size="2" face="Arial"><span lang="ru">. Ник 
+создающего заявку сохраняется в поле </span></font>
+<font face="Courier" size="2" color="#000080">
+		CHAR1_NAME</font><font size="2" face="Arial"><span lang="ru">. По 
+большому счету рациональнее было бы сохранять </span><font color="#000080">
+USER_ID</font> <span lang="ru">игрока из таблицы </span><b>users</b><span lang="ru">, 
+но для разнообразия будем сохранять строку ника персонажа. </span></font>
+<font face="Courier" size="2">
+		<font color="#000080">level1</font><span lang="ru"> </span></font>
+<font size="2" face="Arial">
+<span lang="ru">- будет хранить уровень подающего, а&nbsp; </span></font>
+<font face="Courier" size="2">
+		<font color="#000080">level<span lang="ru">2</span></font><span lang="ru">
+</span></font><font size="2" face="Arial">
+<span lang="ru">- принимающего заявку.<br>
+&nbsp;&nbsp;&nbsp; Каждая заявка на поединок должна иметь дату и время ее 
+создания (подачи). Эти два значения будем хранить соответственно в полях -&nbsp; </span></font>
+<font face="Courier" size="2">
+		<font color="#000080">ZDATA</font><span lang="ru"> </span></font>
+<font size="2" face="Arial">
+<span lang="ru">и </span></font><font face="Courier" size="2" color="#000080">
+		ZTIME</font><font size="2" face="Arial"><span lang="ru">. Также нас 
+может заинтересовать информация о типе заявки - кулачный или бой с 
+использованием оружия. Для этих целей будем использовать поле </span></font>
+<font face="Courier" size="2" color="#000080">
+		ZTYPE</font><font size="2" face="Arial"><span lang="ru">. И последнее - 
+введем также поле </span></font><font face="Courier" size="2" color="#000080">
+		ZTIMEOUT</font><font size="2" face="Arial"><span lang="ru">, которое 
+будет содержать значение интервала времени допустимого для хода соперника. Если 
+противник долго не отвечает на ход и исчерпал свой лимит времени, указанный в </span></font>
+<font face="Courier" size="2" color="#000080">
+		ZTIMEOUT</font><font size="2" face="Arial"><span lang="ru"> боя, то 
+второй игрок может завершить бой технической победой.<br>
+Смотрите </span>SQL <span lang="ru">скрипт таблицы <b>zayavki</b>&nbsp;
+<a href="7_1/zayavki.sql">здесь</a>.<br>
+<br>
+</span>&nbsp; <span lang="ru"><br>
+<br></span><a name="kopv0"><font color="#000080"><b>7</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv0"><font size="2">.2. 
+</font></a></font></span><font size="2" face="Arial" color="#000080">
+<span lang="ru"><a name="kopv0">Кулачные бои и бои с оружием</a><a name="kopv1">.</a></span></font></b><span lang="ru"> <br>
+<br>
+</span>
+&nbsp;&nbsp;&nbsp; <span lang="ru"> Как мы выяснили в прошлом пункте нашего 
+урока, поле </span></font><font face="Courier" size="2" color="#000080">
+		ZTYPE</font><font size="2" face="Arial"><span lang="ru"> отвечает за тип 
+поданной заявки. У нас есть только два значения этого параметра - бой&nbsp; с 
+оружием или кулачный бой. На страничке это будет выглядеть так:<br>
+<img border="0" src="type.jpg" width="161" height="72"><br>
+<br>
+&nbsp;&nbsp;&nbsp; Если выбран кулачный тип боя, то перед началом поединка 
+должно обязательно выполниться следующее событие - сброс всего оружия и доспехов 
+из слотов в рюкзак. Если тип боя &quot;с оружием&quot;, то естественно - персонаж должен 
+оставаться в полном боевом облачении.<br>
+&nbsp;&nbsp; Кроме того тип боя может влиять на количество очков опыта 
+получаемых за победу в поединке. Но это уже отдельный разговор.<br>
+<br> </span>
+<span lang="en-us">&nbsp;&nbsp;&nbsp;&nbsp;</span><span lang="ru"><br> </span>
+<a name="kopv2"><font color="#000080"><b>7</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv2"><font size="2">.3. </font>
+</a></font></span></b><span lang="ru"><b><a name="kopv3">
+<font size="2" face="Arial" color="#000080">&nbsp;Подача заявки на бой.</font></a></b> <br>
+<br>
+&nbsp;&nbsp;&nbsp; Для подачи заявки давайте создадим страницу </span><b>
+zayavka.phtml</b>.<span lang="ru"> В обычном состоянии эта страница должна 
+содержать несколько разделов меню для доступа к созданию разных видов заявок. 
+Это - бои Новичков, Физические бои, Договорные, Групповые и Хаотичные бои. Кроме 
+того можно еще в этой странице выводить текущие и завершенные бои. Для простоты 
+(в учебных целях) мы будем создавать только один вид заявок - заявка для 
+проведения Физического боя. Вид такой странички будет примерно таким:<br>
+<br>
+<img border="0" src="types.jpg" width="586" height="97"><br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp; На </span>HTML <span lang="ru">описание такого меню будет выглядеть так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		&lt;TABLE width=100% cellspacing=1 cellpadding=1&gt;<br>
+		&lt;TR&gt;&lt;TD colspan=8 align=right&gt;<br>
+		&amp;nbsp; &lt;INPUT class=btn TYPE=button value=&quot;Вернуться&quot; onclick=&quot;gotoBack()&quot;&gt;<br>
+		&lt;/TD&gt;&lt;/TR&gt;<br>
+		&lt;TR&gt;<br>
+		&lt;TD class=m width=40&gt;&amp;nbsp;&lt;B&gt;Бои:&lt;/B&gt;&lt;/TD&gt;<br>
+		&lt;TD class=btn&gt;&lt;A HREF=&quot;zayavka.phtml?level=novice&amp;NickName=<b>&lt;?</b>echo 
+		$aNickName; <b>?&gt;</b>&quot;&gt;<font color="#008000">Новичков</font>&lt;/A&gt;&lt;/TD&gt;<br>
+		&lt;TD class=btn&gt;&lt;A HREF=&quot;zayavka.phtml?level=fiz&amp;NickName=<b>&lt;?</b>echo $aNickName;
+		<b>?&gt;</b>&quot;&gt;<font color="#008000">Физические</font>&lt;/A&gt;&lt;/TD&gt;<br>
+		&lt;TD class=btn&gt;&lt;A HREF=&quot;zayavka.phtml?level=dog&amp;NickName=<b>&lt;?</b>echo $aNickName;
+		<b>?&gt;</b>&quot;&gt;<font color="#008000">Договорные</font>&lt;/A&gt;&lt;/TD&gt;<br>
+		&lt;TD class=btn&gt;&lt;A HREF=&quot;zayavka.phtml?level=grup&amp;NickName=<b>&lt;?</b>echo $aNickName;
+		<b>?&gt;</b>&quot;&gt;<font color="#008000">Групповые</font>&lt;/A&gt;&lt;/TD&gt;<br>
+		&lt;TD class=btn&gt;&lt;A HREF=&quot;zayavka.phtml?level=haot&amp;NickName=<b>&lt;?</b>echo $aNickName;
+		<b>?&gt;</b>&quot;&gt;<font color="#008000">Хаотичные</font>&lt;/A&gt;&lt;/TD&gt;<br>
+		&lt;TD class=btn&gt;&lt;A HREF=&quot;zayavka.phtml?level=tek&amp;NickName=<b>&lt;?</b>echo $aNickName;
+		<b>?&gt;</b>&quot;&gt;<font color="#008000">Текущие</font>&lt;/A&gt;&lt;/TD&gt;<br>
+		&lt;TD class=btn&gt;&lt;A HREF=&quot;zayavka.phtml?level=zav&amp;NickName=<b>&lt;?</b>echo $aNickName;
+		<b>?&gt;</b>&quot;&gt;<font color="#008000">Завершенные</font>&lt;/A&gt;&lt;/TD&gt;<br>
+		&lt;/TR&gt;&lt;/TABLE&gt;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">Параметр </span></font><font face="Courier" size="2">
+		<font color="#000080">level</font><span lang="ru"> </span></font>
+<span lang="ru"><font face="Arial" size="2">
+		определяет вид поединка. Для рассматриваемого нами Физического боя этот 
+параметр равен ( </font></span><font face="Courier" size="2">
+		level=fiz<span lang="ru"> </span></font>
+<font face="Arial" size="2">
+		<span lang="ru">
+		)<br>
+<br>
+При выборе игроком Физического поединка, у него должна отобразиться следующая 
+картина:<br>
+<br>
+<img border="0" src="fiz.jpg" width="477" height="161"><br>
+<br>
+&nbsp; Игрок может выбрать тайм-аут поединка от 3 до 10 минут, тип боя (пока 
+будем рассматривать только кулачный бой) и&nbsp; нажать кнопку &quot;Подать заявку&quot;<br>
+&nbsp;&nbsp; Эта форма на </span>HTML <span lang="ru">может быть просто 
+реализована таким образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		print('&lt;FIELDSET&gt;&lt;LEGEND&gt;&lt;B&gt;Подать заявку на бой&lt;/B&gt; &lt;/LEGEND&gt;');<br>
+		print('Таймаут &lt;SELECT class=btn NAME=timeout&gt;&lt;OPTION value=3&gt;3 мин.&lt;OPTION 
+		value=4&gt;4 мин.&lt;OPTION value=5&gt;5 мин.&lt;OPTION value=7&gt;7 мин.&lt;OPTION value=10 
+		selected&gt;10 мин.&lt;/SELECT&gt; Тип боя &lt;SELECT class=btn NAME=bt&gt;&lt;OPTION 
+		value=1&gt;с оружием&lt;OPTION value=0&gt;кулачный&lt;/SELECT&gt;');<br>
+		print(&quot;&lt;INPUT TYPE=hidden name=level value=fiz&gt;&lt;INPUT TYPE=hidden name=NickName 
+		value=&quot;.$aNickName.&quot;&gt;&quot;);<br>
+		print('&lt;INPUT class=btn TYPE=button name=open value=&quot;<font color="#008000">Подать 
+		заявку</font>&quot; onClick=&quot;<font color="#000080">setZayavka</font>()&quot;&gt;&amp;nbsp;');<br>
+		print('&lt;/FIELDSET&gt;');</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		&nbsp;&nbsp; <span lang="ru">Как Вы видите, эта форма содержит список 
+выбора таймаута боя: (3,4,5,7,10 минут) а также выбор типа боя (кулачный и с 
+оружием). После того как играющий определяется с выбором, он нажимает на кнопку 
+&quot;Подать заявку&quot; вследствие чего вызывается функция
+</span></font><font color="#000080" face="Courier" size="2">setZayavka</font><font face="Arial" size="2"><span lang="ru">, 
+которая выглядит так на языке
+</span>JavaScript.</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		function setZayavka(){<br>
+		var v = document.F1.timeout.value;<br>
+		var b = document.F1.bt.value;<br>
+		location.href='zayavka.phtml?level=fiz&amp;bt='+b+'&amp;settime='+v+'&amp;NickName=<b><font color="#000080">&lt;?php</font></b>
+		<font color="#0000FF">echo</font> $aNickName; <font color="#000080"><b>
+		?&gt;</b></font>';<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		&nbsp;&nbsp; <span lang="ru">Эта функция передает в этот же файл
+</span></font><font face="Courier" size="2">
+		zayavka.phtml</font><font face="Arial" size="2"><span lang="ru"> кроме 
+параметра
+</span><font color="#000080">level</font> <span lang="ru">еще дополнительные 
+параметры
+</span></font><font face="Courier" size="2" color="#000080">
+		bt</font><font face="Arial" size="2"><span lang="ru"> и
+</span></font><font face="Courier" size="2" color="#000080">
+		settime</font><font face="Arial" size="2"><span lang="ru">, которые 
+несут в себе информацию о типе боя и таймауте соответственно.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Естественно, что мы должны проверить эти значения 
+на входе нашего скрипта:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// подали заявку<br>
+		</font><font color="#0000FF">if</font> (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['settime'])){<br>
+		$lSetZayavka = <b>1</b>;<br>
+		$aTimeOut = $<font color="#0000FF">_GET</font>['settime'];<br>
+		$aBT = $<font color="#0000FF">_GET</font>['bt'];<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Установив флаг
+</span></font><font face="Courier" size="2" color="#000080">
+		$lSetZayavka</font><font face="Arial" size="2"><span lang="ru">, мы чуть 
+дальше в коде нашего файла
+</span>zayavka.phtml <span lang="ru">можем засунуть поданную игроком заявку в 
+таблицу заявок:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Подали заявку - засовываем в таблицу<br>
+		</font><font color="#0000FF">if</font> ($lSetZayavka){<br>
+		$query = <font color="#008000">&quot;INSERT INTO 
+		zayavki(ZV_ID,CHAR1_NAME,level1,ZDATA,ZTIME,ZTYPE,ZTIMEOUT) 
+		values('$aUserID','$aNickName','$aUserLevel','&quot;.Date('Y-m-d').&quot;','&quot;.Date('H:i').&quot;','$aBT','$aTimeOut')&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; . mysql_error());<br>
+		$aUser1ID = $aUserID;<font color="#0000FF"><br>
+		</font>$lInZayavka1 = 1;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp;&nbsp; При выполнении вышеприведенного
+</span>SQL <span lang="ru">запроса, в таблицу
+</span><b>zayavki</b> <span lang="ru">вставляется запись с ником персонажа 
+подавшего заявку, уровнем персонажа, а также датой и временем подачи, кроме того 
+также заполняются поля типа боя и таймаута.<br>
+Переменная&nbsp;
+</span></font><font face="Courier" size="2">
+		<font color="#000080">$aUser1ID</font><span lang="ru"> </span></font>
+<font face="Arial" size="2">
+		<span lang="ru">хранит информацию об идентификаторе подавшего заявку.<br>
+Когда скрипт отработает, наше окно заявок в браузере примет такой вид:<br>
+<br>
+<img border="0" src="zv_pd.jpg" width="475" height="178"><br>
+<br>
+&nbsp;&nbsp;&nbsp; Надо учитывать, что кроме нашей с Вами тестовой заявки, может 
+быть подано еще немало заявок других игроков, ведь мы пишем игру не для двух 
+играющих, а для гораздо большего их количества. <br>
+&nbsp;&nbsp;&nbsp; Следующий фрагмент
+</span>PHP <span lang="ru">кода из нашего файла
+</span>zayavka.phtml<span lang="ru"> как раз отвечает за визуализацию перечня 
+заявок в окне браузера игрока:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">&nbsp;//////////////// Показываем заявки 
+		////////////////<br>
+		</font><font color="#0000FF">print</font>('&lt;INPUT class=btn TYPE=submit 
+		value=&quot;Принять вызов&quot; id=&quot;confirm1&quot; NAME=&quot;confirm1&quot;&gt;&lt;BR&gt;');<br>
+		$query = <font color="#008000">&quot;SELECT * FROM zayavki&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		<font color="#0000FF">while</font> ($aRow = <font color="#0000FF">
+		mysql_fetch_array</font>($result))<br>
+		{<br>
+		$aTime = $aRow[&quot;ZTIME&quot;];<br>
+		$aNick = $aRow[&quot;CHAR1_NAME&quot;];<br>
+		$aNick2 = $aRow[&quot;CHAR2_NAME&quot;];<br>
+		$aTimeOut = $aRow[&quot;ZTIMEOUT&quot;];<br>
+		$aBattleType = $aRow[&quot;ZTYPE&quot;];<br>
+		$aLevel1 = $aRow[&quot;level1&quot;];<br>
+		$aUserID = $aRow[&quot;ZV_ID&quot;];<br>
+		<font color="#008080">// Если это наша заявка</font><br>
+		if ($aNick == $aNickName){<br>
+		<font color="#008080">// пока никем не выбрана</font><br>
+		if ($aNick2 != ''){<br>
+		print(&quot;&lt;INPUT TYPE=radio NAME=gocombat value=$aUserID disabled&gt;&lt;font 
+		color=green&gt;&quot;.$aTime.&quot;&lt;/font&gt; &quot;.$aNick.&quot; [$aLevel1] против &quot;.$aNickName.&quot; 
+		[$aUserLevel] тип боя: &lt;img src=Items\fighttype&quot;.$aBattleType.&quot;.gif&gt; (таймаут 
+		$aTimeOut мин)&lt;br&gt;&quot;);<br>
+		}<br>
+		<font color="#008080">// кем-то выбрана и ждет подтверждения</font><br>
+		<font color="#0000FF">else</font><br>
+		{<br>
+		<font color="#0000FF">print</font>(&quot;&lt;INPUT TYPE=radio NAME=gocombat 
+		value=$aUserID disabled&gt;&lt;font color=green&gt;&quot;.$aTime.&quot;&lt;/font&gt; &quot;.$aNick.&quot; 
+		[$aLevel1] тип боя: &lt;img src=Items\fighttype&quot;.$aBattleType.&quot;.gif&gt; (таймаут 
+		$aTimeOut мин)&lt;br&gt;&quot;);<br>
+		}<br>
+		}<br>
+		<font color="#008080">// не наше заявка</font><br>
+		<font color="#0000FF">elseif</font> ($aNick2 != $aNickName)<br>
+		{<br>
+		<font color="#0000FF">print</font>(&quot;&lt;INPUT TYPE=radio NAME=gocombat 
+		value=$aUserID onClick='enable_btn(&quot;.$lInZayavka1.&quot;,&quot;.$lInZayavka2.&quot;)'&gt;&lt;font 
+		color=green&gt;&quot;.$aTime.&quot;&lt;/font&gt; &quot;.$aNick.&quot; [$aLevel1] тип боя: &lt;img src=Items\fighttype&quot;.$aBattleType.&quot;.gif&gt; 
+		(таймаут $aTimeOut мин)&lt;br&gt;&quot;);<br>
+		}<br>
+		<font color="#008080">// не наша заявка но выбрана нами</font><br>
+		<font color="#0000FF">if</font> ($aNick2 == $aNickName){<br>
+		<font color="#0000FF">print</font>(&quot;&lt;INPUT TYPE=radio NAME=gocombat 
+		value=$aUserID disabled&gt;&lt;font color=green&gt;&quot;.$aTime.&quot;&lt;/font&gt; &quot;.$aNick.&quot; 
+		[$aLevel1] против &quot;.$aNickName.&quot; [$aUserLevel] тип боя: &lt;img src=Items\fighttype&quot;.$aBattleType.&quot;.gif&gt; 
+		(таймаут $aTimeOut мин)&lt;br&gt;&quot;);<br>
+		}<br>
+		}<br>
+		<br>
+		<font color="#0000FF">print</font>('&lt;INPUT class=btn TYPE=submit value=&quot;Принять 
+		вызов&quot; id=&quot;confirm2&quot; NAME=&quot;confirm2&quot;&gt;&lt;BR&gt;');<br>
+		<font color="#0000FF">print</font>('&lt;/form&gt;');<br>
+		<font color="#0000FF">print</font>('<font color="#008000">&lt;script&gt;</font> 
+		enable_btn( '.$lInZayavka1.','.$lInZayavka2.' ); <font color="#008000">
+		&lt;/script&gt;</font>');<br>
+		<font color="#008080">////////////////////////////////////////////////</font></font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp;&nbsp;&nbsp; Есть несколько условий касательно 
+заявок. Во-первых, поданная нами заявка не может быть принята нами же - это 
+вполне естественно. Если срабатывает условие (</span></font><font face="Courier" size="2">$aNick 
+== $aNickName</font><font face="Arial" size="2"><span lang="ru">) то мы выводим
+</span>radio-<span lang="ru">кнопку в неактивном состоянии и соответственно 
+игрок не может ее выбрать. Во-вторых в этом коде учитывается отображение режима, 
+когда подана чужая заявка, которую мы можем выбрать. Вот как это выглядит.<br>
+<br>
+<img border="0" src="zv_pd2.png" width="485" height="208"><br>
+<br>
+&nbsp;&nbsp; Заявку игрока </span>Stranger <span lang="ru">мы уже можем выбрать, 
+хотя это ни к чему не приведет. Потому что не активны кнопки &quot;Принять вызов&quot;. 
+Это вызвано тем, что мы не можем принять чужую заявку, пока не отозвали свою.<br>
+&nbsp;&nbsp; 
+<br> </span><a name="kopv4"><font color="#000080"><b>7</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv4"><font size="2">.4. </font></a></font></span></b>
+<span lang="ru"><b><a name="kopv5"><font size="2" face="Arial" color="#000080">&nbsp;</font></a></b><a name="kopv5"><font color="#000080"><b>Прием 
+чужой заявки</b></font></a> <br><br>
+&nbsp;&nbsp;&nbsp; Предположим, мы не подавали никаких заявок, и видим чужую 
+заявку:<br>
+<img border="0" src="zv_pd3.png" width="482" height="176"><br>
+<br>
+&nbsp;&nbsp; Радио-кнопка выбора заявки у нас активна и мы нажимаем на нее. В 
+результате у нас стают активными кнопки &quot;Принять вызов&quot;<br>
+<br>
+<img border="0" src="zv_pd4.png" width="473" height="181"><br>
+<br>
+&nbsp;&nbsp;&nbsp; Этот процесс реализован в
+</span>JavaScript
+<span lang="ru">функции
+</span></font><font face="Courier" size="2">
+		enable_btn</font><font face="Arial" size="2"><span lang="ru">, в которую 
+передаются параметры
+</span>zayavka1 <span lang="ru">и
+</span>zayavka2. <span lang="ru">Сама функция выглядит так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table8">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<b>function</b> enable_btn( zayavka1,zayavka2 ){<br>
+		var aInp = document.getElementsByTagName('INPUT');<br>
+		document.getElementById('confirm1').disabled = true;<br>
+		document.getElementById('confirm2').disabled = true;<br>
+		if( (<font color="#000080">zayavka1</font> == 0) &amp;&amp; (<font color="#000080">zayavka2</font> 
+		== 0)){ <font color="#008080">// мы не можем принимать чужую заявку, 
+		будучи в заявке<span lang="ru"> и сами подав ее</span></font><br>
+		<span lang="ru">&nbsp;</span>for(i=0; i &lt; aInp.length; i++){<br>
+		<span lang="ru">&nbsp; </span>if( aInp[i].name.indexOf('gocombat') != -1 
+		){<br>
+		<span lang="ru">&nbsp;&nbsp;&nbsp; </span>if( aInp[i].checked ){<br>
+		<span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+		document.getElementById('confirm1').disabled = false;<br>
+		<span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+		document.getElementById('confirm2').disabled = false;<br>
+		<span lang="ru">&nbsp;&nbsp;&nbsp; </span>}<br>
+		<span lang="ru">&nbsp; </span>}<br>
+		<span lang="ru">&nbsp;</span>}<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp;&nbsp; Как видно из кода кнопки &quot;Принять заявку&quot;&nbsp; 
+(</span></font><font face="Courier" size="2">confirm1<span lang="ru"> и</span> 
+confirm<span lang="ru">2</span></font><font face="Arial" size="2"><span lang="ru">) 
+становятся активными только в случае если мы не подали заявку и не приняли ее.
+<br>
+&nbsp;&nbsp; Итак, что же будет, когда все условия приема заявки соблюдены и мы 
+нажимаем на кнопку &quot;Принять вызов&quot; ?&nbsp; Надо заметить, что эти кнопки имеют 
+тип </span><font color="#000080">submit</font> <span lang="ru">и что естественно 
+происходит передача параметров формы опять же нашему файлу </span>zayavka.phtml<span lang="ru">, 
+но теперь уже методом </span>POST.<span lang="ru"><br>
+</span>&nbsp;&nbsp;&nbsp; <span lang="ru">Прием этих параметров осуществим так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table9">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Выбрали заявку</font><font color="#0000FF"><br>
+		if (!</font><font color="#0000FF">empty($_POST</font><font color="#0000FF">['confirm1']) 
+		|| !</font><font color="#0000FF">empty($_POST</font>['confirm2'])){<br>
+		$aBattleType = $<font color="#0000FF">_POST</font>['level'];<br>
+		$aNickName = $<font color="#0000FF">_POST</font>['NickName'];<br>
+		<font color="#0000FF">if</font> (!empty($<font color="#0000FF">_POST</font>['gocombat']))<br>
+		{<br>
+		$aChoosen = $<font color="#0000FF">_POST</font>['gocombat'];
+		<font color="#008080">// ID бойца, чью заявку выбрали</font><br>
+		}<br>
+		<font color="#0000FF">else</font><br>
+		{<br>
+		<font color="#0000FF">print</font>(&quot;&lt;SCRIPT&gt;location.href=zayavka.phtml?level=fiz&amp;NickName=$aNickName&quot;);<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp; </span>&nbsp;<span lang="ru">Параметр&nbsp;
+</span></font><font face="Courier" size="2">
+		gocombat<span lang="ru"> </span></font><font face="Arial" size="2">
+		<span lang="ru">- это по сути </span>ID <span lang="ru">игрока, заявку 
+которого мы выбираем (вы помните, что радио-кнопки мы определяли как (</span></font><font face="Courier" size="2">&lt;INPUT 
+TYPE=radio NAME=gocombat <font color="#008080">value</font>=<font color="#000080">$aUserID</font>
+<span lang="ru">...</span></font><font face="Arial" size="2"><span lang="ru">)<br>
+<br>
+&nbsp;&nbsp; Теперь, так как мы являемся принимающей стороной, заполним вторую 
+часть полей записи в заявке.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table10">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Выбрали заявку - засунем ее во вторую часть 
+		строки заявки<br>
+		</font><font color="#0000FF">if</font> ($aChoosen != 0){<br>
+		$query = <font color="#008000">&quot;SELECT * FROM zayavki where ZV_ID='$aChoosen'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$aRow = <font color="#0000FF">mysql_fetch_array</font>($result);<br>
+		$aUser1Name = $aRow[&quot;CHAR1_NAME&quot;];<br>
+		<font color="#0000FF">if</font> (<font color="#0000FF">mysql_num_rows</font>($result) 
+		&gt; 0 ){<br>
+		$query = <font color="#008000">&quot;UPDATE zayavki SET CHAR2_NAME='$aNickName', 
+		level2='$aUserLevel' where ZV_ID='$aChoosen'&quot;</font>;<font color="#0000FF"><br>
+		$result = </font><font color="#0000FF">mysql_query($query) or </font>
+		<font color="#0000FF">die(&quot;Query failed : &quot; . mysql_error</font>());<br>
+		$aUser2ID = $aUserID;<br>
+		$lInZayavka2 = 1;<br>
+		}<br>
+		<font color="#0000FF">else</font>{<br>
+		<font color="#008080">// Заявку уже отозвали<span lang="ru"> </span>
+		</font><br>
+		}<br>
+		<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp; Все! Теперь обе части заявки заполнены - то есть 
+в ней присутствует как первая так и вторая сторона. На странице в браузере <u>у 
+принимающей стороны</u> это будет выглядеть так:<br>
+<br>
+<img border="0" src="zv_pd5.png" width="526" height="178"><br>
+&nbsp; <br>
+<u>у подающей стороны</u> так:<br>
+<br>
+<img border="0" src="zv_pd6.png" width="526" height="150"><br>
+<br>
+&nbsp;&nbsp; Принимающая сторона может отозвать запрос, а подающая&nbsp; - 
+отозвать заявку.<br>
+<br>
+<br>
+</span><a name="kopv6"><font color="#000080"><b>7</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv6"><font size="2">.5. 
+Отзыв заявки. </font></a></font></span></b><a name="kopv6">
+<font color="#000080"><b>Отзыв запроса</b></font></a><span lang="ru"><b><a name="kopv7"><font size="2" face="Arial" color="#000080">.</font></a></b>
+<br>&nbsp;<br>&nbsp;&nbsp; Вполне возможно, что по каким-то причинам, обе 
+стороны участвующие в заявке могут внезапно расхотеть проводить поединок. 
+Подающий заявку может нажать на кнопку &quot;Отозвать заявку&quot;, которая приводит к 
+выполнению функции deleteZayavka() код которой на </span>JavaScript <span lang="ru">
+выглядит следующим образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table11">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<b>function</b> <font color="#000080">deleteZayavka</font>(){<br>
+		location.href='zayavka.phtml?<font color="#000080">delete=1</font>&amp;level=fiz&amp;NickName=<b>&lt;?php</b>
+		<font color="#0000FF">echo</font> $aNickName; <b>?&gt;</b>';<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp; Все предельно просто - мы передаем скрипту флажок </span></font>
+<font face="Courier" size="2">
+		<font color="#000080">delete=1</font></font><font face="Arial" size="2"><span lang="ru">, 
+сигнализирующий о том, что мы хотим отменить нашу заявку. </span>PHP
+<span lang="ru">сценарий принимает этот параметр:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table12">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// отзываем заявку</font><br>
+		<font color="#0000FF">if</font> (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['delete'])){<br>
+		<span lang="ru">&nbsp; </span>$lDeleteZayavka = true;<br>
+		<span lang="ru">&nbsp; </span>$lInZayavka1 = 0;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">устанавливая&nbsp; </span></font>
+<font face="Courier" size="2">
+		$<font color="#000080">lDeleteZayavka</font><span lang="ru"> </span></font>
+<font face="Arial" size="2">
+		<span lang="ru">в значение </span></font><b>
+<font face="Courier" size="2">
+		true</font></b><font face="Arial" size="2"><span lang="ru"> и дальше мы 
+обрабатываем эту ситуацию:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table13">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Отозвали заявку - уберем ее из таблицы<br>
+		</font><font color="#0000FF">if</font> ($lDeleteZayavka){<br>
+		$query = <font color="#008000">&quot;DELETE FROM zayavki WHERE CHAR1_NAME='$aNickName'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$aUser1ID = 0;<br>
+		$lInZayavka1 = 0;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp;&nbsp;&nbsp; Принимающий заявку тоже может 
+отозвать свой запрос, нажав на кнопку &quot;Отозвать запрос&quot;. Это действие активирует </span>
+JavaScript <span lang="ru">функцию otzivZapros(), которая выглядит столь же 
+просто:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table14">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<b>function</b> <font color="#000080">otzivZapros</font>(){<br>
+		location.href='zayavka.phtml?<font color="#000080">otziv=1</font>&amp;level=fiz&amp;NickName=<b>&lt;?php</b>
+		<font color="#0000FF">echo</font> $aNickName; <b>?&gt;</b>';<br>
+		}</font></td>
+	</tr>
+</table>
+<p><span lang="ru"><font face="Arial" size="2">В это раз,</font></span><font face="Arial" size="2"><span lang="ru"> 
+мы передаем скрипту флажок </span></font><font face="Courier" size="2">
+		<font color="#000080">otziv</font></font><font color="#000080" face="Courier" size="2">=1</font><font face="Arial" size="2"><span lang="ru">, 
+сигнализирующий о том, что игрок имеет намерение отменить свой запрос. </span>
+PHP <span lang="ru">сценарий в нашем файле </span>zayavka.phtml<span lang="ru">
+</span><span lang="ru">принимает этот параметр: </span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table15">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// отзываем запрос<br>
+		</font>if (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['otziv'])){<br>
+		$lOtzivZapros = 1;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">устанавливая&nbsp; </span></font>
+<font face="Courier" size="2">
+		$<font color="#000080">lOtzivZapros</font><span lang="ru"> </span></font>
+<font face="Arial" size="2">
+		<span lang="ru">в значение </span></font><b>
+<font face="Courier" size="2">
+		true</font></b><font face="Arial" size="2"><span lang="ru"> и дальше мы 
+обрабатываем эту ситуацию:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table16">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Отозвали запрос - уберем из 2ой части таблицы<br>
+		</font><font color="#0000FF">if</font> ($lOtzivZapros){<br>
+		$query = <font color="#008000">&quot;UPDATE zayavki SET CHAR2_NAME='', 
+		level2='' where CHAR2_NAME='$aNickName'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$aUser2ID = 0;<br>
+		$lInZayavka2 = 0;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font face="Arial" size="2">
+		<span lang="ru">&nbsp; После этого заявка подавшего снова может быть 
+принята кем-нибудь!<br>
+Полный текст файла </span>zayavka.phtml<span lang="ru"> Вы можете переписать
+<a href="7_5/zayavka.phtml">тут</a>.<br>
+&nbsp;&nbsp;&nbsp;<b><br>
+В следующем уроке</b> мы наконец-то научимся входить в бой, проведем первые 
+поединки, рассмотрим вопросы выведения результатов боя и просмотра статистики по 
+окончанию поединка.</span></font></p>
+<font size="2" face="Arial">
+        <p align="left">&nbsp;</font></td>
+      <td width="27" height="356" background="Site/middle2.jpg">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="740" height="38" background="Site/bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

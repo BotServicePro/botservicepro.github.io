@@ -1,0 +1,218 @@
+<html>
+<head>
+<META http-equiv=content-type content="text/html; charset=windows-1251">
+<LINK href="main.css" type=text/css rel=stylesheet>
+
+<?php
+  if (!empty($_GET['NickName'])){
+     $aNickName = $_GET['NickName'];
+
+    $aWhatStat = "";
+    $aWhatSkill = "";
+    // Узнаем характеристики персонажа
+
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+
+       $query = "SELECT * FROM users WHERE Nick_Name='$aNickName'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       $aRow = mysql_fetch_array( $result);
+
+       $aStrength = $aRow["Character_Strength"];
+       $aEndurance = $aRow["Character_Endurance"];
+       $aAccuracy = $aRow["Character_Accuracy"];
+       $aDexterity = $aRow["Character_Dexterity"];
+       $aNotUsedStats = $aRow["Character_UnUsed_Points"];
+       $aSwordSkill = $aRow["Character_Sword"];
+       $aSpearSkill = $aRow["Character_Spear"];
+       $aMaceSkill = $aRow["Character_Mace"];
+       $aAxeSkill = $aRow["Character_Axe"];
+       $aDaggerSkill = $aRow["Character_Dagger"];
+       $aCharLevel = $aRow["Character_Level"];
+       $aMoney = $aRow["Character_Money"];
+    mysql_free_result($result);
+    }
+?>
+<SCRIPT>
+
+function gotoInventory(){
+    location.href='inventory.phtml?NickName=<?php echo $aNickName ?>';
+}
+
+function getCookie(Name) {
+var search = Name + "="
+if (document.cookie.length > 0){
+  offset = document.cookie.indexOf(search)
+  if (offset != -1) {
+    offset += search.length
+    end = document.cookie.indexOf(";", offset)
+    if (end == -1) end = document.cookie.length
+    return unescape(document.cookie.substring(offset, end))
+  }
+}
+}
+
+var MMCLUB_NICK_NAME = getCookie("MMCLUB_NICK_NAME");
+var MMCLUB_SESSION = getCookie("MMCLUB_SESSION");
+                               
+if (MMCLUB_NICK_NAME != "<?php echo $aNickName ?>"){
+   top.location.href="index.phtml";
+}
+
+var rnd = Math.random();
+
+//-- Смена хитпоинтов
+var delay = 2;    // Каждые 18сек. увеличение HP на 1%
+var redHP = 0.33; // меньше 30% красный цвет
+var yellowHP = 0.66;    // меньше 60% желтый цвет, иначе зеленый
+var TimerOn = -1; // id таймера
+var tkHP, maxHP;
+var speed=100;
+var mspeed=100;
+
+function setHP(value, max, newspeed) {
+  tkHP=value; maxHP=max;
+  if (TimerOn>=0) { clearTimeout(TimerOn); TimerOn=-1; }
+  speed=newspeed;
+  setHPlocal();
+}
+function setHPlocal() {
+  if (tkHP>maxHP) { tkHP=maxHP; }
+  var sz1 = Math.round((149/maxHP)*tkHP);
+  var sz2 = 150 - sz1;
+  if (document.all("HP")) {
+    document.HP1.width=sz1;
+    document.HP2.width=sz2;
+    if (tkHP/maxHP < redHP) { document.HP1.src='items/1red.gif'; }
+    else {
+      if (tkHP/maxHP < yellowHP) { document.HP1.src='items/1yellow.gif'; }
+      else { document.HP1.src='items/1green.gif'; }
+    }
+    var s = document.all("HP").innerHTML;
+    document.all("HP").innerHTML = s.substring(0, s.lastIndexOf(':')+1) + Math.round(tkHP)+"/"+maxHP;
+  }
+  tkHP = (tkHP+(maxHP/100)*speed/1000);
+  if (tkHP<maxHP) { TimerOn=setTimeout('setHPlocal()', delay*100); }
+  else { TimerOn=-1; 
+   }
+}
+
+function gotoCity(){
+    location.href='map.phtml?NickName=<?php echo "$aNickName"; ?>';
+}
+
+function gotoZayavka(){
+    location.href='zayavka.phtml?NickName=<?php echo "$aNickName"; ?>';
+}
+
+</SCRIPT>
+</head>
+
+
+<body bgcolor="#BFBFBF" onLoad="setHP(18,<?php echo $aEndurance*6 ?>,100)">
+<div align="left">
+  <table border="0" width="887" cellspacing="0" cellpadding="0" bgcolor="#BFBFBF">
+    <tr>
+      <td width="883" height="13" valign="top" colspan="3">
+      </td>
+    </tr>
+
+    <tr>
+      <td width="238" height="8" valign="top">
+        <p align="center"><?php echo "$aNickName [$aCharLevel]" ?></td>
+      <td width="645" height="8" valign="top" colspan="2"></td>
+    </tr>
+
+   <!--  Тут размещено здоровье персонажа  -->
+    <td width="238">
+   <table cellspacing=0 cellpadding=0 border="0" bordercolor="#000080"><tr><td>
+   <NOBR><div id=HP>
+  <IMG SRC="items/herz.gif" ALT="Уровень жизни"> <IMG SRC=1silver.gif WIDTH=1 HEIGHT=10 ALT="Уровень жизни" name=HP1><IMG SRC=1silver.gif WIDTH=1 HEIGHT=10 ALT="Уровень жизни" name=HP2>:</div>
+   </nobr>
+  </table>
+  <!--  Конец Секции-->
+
+    <tr>
+      <td width="238" height="1" valign="top">
+        <table border="1" width="183" height="228" cellspacing="0" cellpadding="0" bgcolor="#BFBFBF" bordercolor="#666699">
+          <tr>
+            <td width="27" height="32" rowspan="2" colspan="2" valign="top"><img src="items\helmet_empty.jpg"></td>
+            <td width="99" height="176" rowspan="5" valign="top" colspan="2"><img border="0" name = "mainimage" src="items/pers.jpg"></td>
+            <td width="49" height="23" colspan="2" valign="top"><img src="items\ear_empty.jpg"></td>
+          </tr>
+          <tr>
+            <td width="49" height="2" colspan="2" valign="top"><img src="items\necklace_empty.jpg"></td>
+          </tr>
+          <tr>
+            <td width="27" height="80" colspan="2" valign="top"><img src="items\weapon_empty.jpg"></td>
+            <td width="49" height="80" colspan="2" valign="top"><img src="items\shield_empty.jpg"></td>
+          </tr>
+          <tr>
+            <td width="1" height="24" valign="top"><img src="items\ring_empty.jpg"></td>
+            <td width="25" height="24" valign="top"><img src="items\ring_empty.jpg"></td>
+            <td width="22" height="24" valign="top"><img src="items\ring_empty.jpg"></td>
+            <td width="26" height="24" valign="top"><img src="items\ring_empty.jpg"></td>
+          </tr>
+          <tr>
+            <td width="27" height="77" colspan="2" rowspan="2" valign="top"><img src="items\armor_empty.jpg"></td>
+            <td width="49" height="40" colspan="2" valign="top"><img src="items\gloves_empty.jpg"></td>
+          </tr>
+          <tr>
+            <td width="99" height="34" valign="top" colspan="2">&nbsp;</td>
+            <td width="49" height="31" colspan="2" valign="top" rowspan="2"><img src="items\shoes_empty.jpg"></td>
+          </tr>
+          <tr>
+            <td width="27" height="1" colspan="2" valign="top"><img src="items\belt_empty.jpg"></td>
+            <td width="44" height="3" valign="top">&nbsp;</td>
+            <td width="53" height="3" valign="top">&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+      
+      <td width="252" height="1" valign="top"><font color="#000080">
+        Сила: <?php echo "$aStrength"; ?><br>
+        Ловкость: <?php echo "$aDexterity"; ?><br>
+        Точность: <?php echo "$aAccuracy"; ?><br>
+        Выносливость: <?php echo "$aEndurance"; ?><br>
+        <HR>
+        Опыт: 0 <br>
+        Уровень: 0<br>
+        Побед: 0 <br>
+        Поражений: 0<br>
+        Ничьих: 0<br>
+        Деньги: </font><b><font color="#FF0000"><?php echo "$aMoney"; ?></font></b> <font color="#000080">кр<br>
+        <HR>
+        <p>&nbsp;</font>
+        
+      </td>
+      <td width="391" height="1" valign="top">
+
+      <!--
+      Тут будут кнопки управления и ссылки на форум, энциклопедию и т.д.
+      -->
+      <INPUT TYPE=button value="Выйти на Центральную Площадь" onclick="gotoCity()">
+      <INPUT TYPE=button value="Рюкзачок" onclick="gotoInventory()">
+      <INPUT TYPE=button value="Поединки" onclick="gotoZayavka()">
+
+      </td>
+    </tr>
+    <tr>
+      <td width="238" height="1" valign="top"></td>
+      <td width="645" height="1" valign="top" colspan="2">
+      <form name="F1">   
+          <p><input type="hidden" name="Pers_Image" value="" size="20">
+      </form>    
+        <p>&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+</body>
+
+</html>

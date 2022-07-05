@@ -1,0 +1,317 @@
+<HTML><HEAD>
+<link rel=stylesheet type="text/css" href="main.css">
+<meta content="text/html; charset=windows-1251" http-equiv=Content-type>
+<META Http-Equiv=Cache-Control Content=no-cache>
+<meta http-equiv=PRAGMA content=NO-CACHE>
+<META Http-Equiv=Expires Content=0>
+
+<?php
+
+  $aNickName = '';
+  $lInZayavka1 = 0;    // подавший в заявке
+  $lInZayavka2 = 0;    // принявший в заявке
+  $lSetZayavka = 0;
+  $aChoosen = '';
+  $lDeleteZayavka = 0;
+  $lOtzivZapros = 0;
+  $lOtkazZapros = 0;
+  $aChoosen = 0;
+  if (!empty($_GET['NickName'])){
+     $aNickName   = $_GET['NickName'];
+  }
+  if (!empty($_GET['level'])){
+     $aBattleType = $_GET['level'];
+  }
+  else
+  {
+     $aBattleType = 'none';
+  }
+  // подали заявку
+  if (!empty($_GET['settime'])){
+      $lSetZayavka = 1;
+      $aTimeOut = $_GET['settime'];
+      $aBT = $_GET['bt'];
+  }
+  // Выбрали заявку
+  if (!empty($_POST['confirm1']) || !empty($_POST['confirm2'])){
+      $aBattleType = $_POST['level'];
+      $aNickName   = $_POST['NickName'];
+      if (!empty($_POST['gocombat']))
+      {
+          $aChoosen = $_POST['gocombat']; // ID бойца, чью заявку выбрали
+      }
+      else
+      {
+      print("<SCRIPT>location.href=zayavka.phtml?level=fiz&NickName=$aNickName");
+      }
+      //print('>>>> '.$aChoosen);
+  }
+  // отзываем заявку
+  if (!empty($_GET['delete'])){
+      $lDeleteZayavka = true;
+      $lInZayavka1 = 0;
+  }
+  // отзываем заявку
+  if (!empty($_GET['otziv'])){
+      $lOtzivZapros = 1;
+  }
+  // отказываем принявшему
+  if (!empty($_GET['otkaz'])){
+      $lOtkazZapros = 1;
+  }
+
+
+?>
+
+<SCRIPT>
+function setZayavka(){
+  var v = document.F1.timeout.value;
+  var b = document.F1.bt.value;
+  location.href='zayavka.phtml?level=fiz&bt='+b+'&settime='+v+'&NickName=<?php echo $aNickName; ?>';
+}
+
+function deleteZayavka(){
+  location.href='zayavka.phtml?delete=1&level=fiz&NickName=<?php echo $aNickName; ?>';
+}
+
+function otzivZapros(){
+  location.href='zayavka.phtml?otziv=1&level=fiz&NickName=<?php echo $aNickName; ?>';
+}
+
+function otkazZapros(){
+  location.href='zayavka.phtml?otkaz=1&level=fiz&NickName=<?php echo $aNickName; ?>';
+}
+
+function gotoBack(){
+    location.href='char.phtml?NickName=<?php echo $aNickName; ?>';
+}
+
+function gotoBack(){
+    location.href='char.phtml?NickName=<?php echo $aNickName; ?>';
+}
+
+function gotoBattleCheck(){
+    location.href='battlecheck.phtml?NickName=<?php echo $aNickName; ?>';
+}
+
+function enable_btn( zayavka1,zayavka2 ){
+   //alert([zayavka1,zayavka2]);
+   var aInp = document.getElementsByTagName('INPUT');
+   document.getElementById('confirm1').disabled = true;
+   document.getElementById('confirm2').disabled = true;
+   if( (zayavka1 == 0) && (zayavka2 == 0)){    // мы не можем принимать чужую заявку, будучи в заявке
+   for(i=0; i <  aInp.length; i++){
+      if( aInp[i].name.indexOf('gocombat') != -1 ){
+         if( aInp[i].checked ){
+             document.getElementById('confirm1').disabled = false;
+             document.getElementById('confirm2').disabled = false;
+         }
+      }
+   }
+   }
+}
+
+
+</SCRIPT>
+
+
+</HEAD>
+<body leftmargin=5 topmargin=5 marginwidth=5 marginheight=5 bgcolor=e2e0e0>
+<TABLE width=100% cellspacing=1 cellpadding=1>
+<TR><TD colspan=8 align=right>
+&nbsp; <INPUT class=btn TYPE=button value="Вернуться" onclick="gotoBack()">
+</TD></TR>
+<TR>
+<TD class=m width=40>&nbsp;<B>Бои:</B></TD>
+<TD class=btn><A HREF="zayavka.phtml?level=novice&NickName=<?echo $aNickName; ?>">Новичков</A></TD>
+<TD class=btn><A HREF="zayavka.phtml?level=fiz&NickName=<?echo $aNickName; ?>">Физические</A></TD>
+<TD class=btn><A HREF="zayavka.phtml?level=dog&NickName=<?echo $aNickName; ?>">Договорные</A></TD>
+<TD class=btn><A HREF="zayavka.phtml?level=grup&NickName=<?echo $aNickName; ?>">Групповые</A></TD>
+<TD class=btn><A HREF="zayavka.phtml?level=haot&NickName=<?echo $aNickName; ?>">Хаотичные</A></TD>
+<TD class=btn><A HREF="zayavka.phtml?level=tek&NickName=<?echo $aNickName; ?>">Текущие</A></TD>
+<TD class=btn><A HREF="zayavka.phtml?level=zav&NickName=<?echo $aNickName; ?>">Завершенные</A></TD>
+</TR></TABLE>
+
+
+<?php
+
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+
+if ($aBattleType=="none")
+{
+   print("<BR><BR><CENTER><B>Выберите раздел</B></CENTER>");
+}
+else
+{
+   if ($aBattleType=="fiz")
+   {
+        print('<FORM METHOD=POST ACTION=zayavka.phtml name=F1>');
+
+        // Мы являемся подавшими заявку
+        $aUser1ID = 0;
+        $aUser1Name = '';
+        $query = "SELECT * FROM zayavki where CHAR1_NAME='$aNickName'";
+        $result = mysql_query($query) or die("Query failed : " . mysql_error());
+        if (mysql_num_rows($result) > 0 ){
+            $lInZayavka1 = 1;
+            $aRow = mysql_fetch_array($result);
+            $aUser1ID = $aRow["ZV_ID"];
+            $aUser1Name = $aRow["CHAR1_NAME"];
+            //$aUser1Level = $aRow["level1"];
+        }
+
+        // Мы являемся принявшими заявку
+        $aUser2ID = 0;
+        $query = "SELECT * FROM zayavki where CHAR2_NAME='$aNickName'";
+        $result = mysql_query($query) or die("Query failed : " . mysql_error());
+        if (mysql_num_rows($result) > 0 ){
+             $lInZayavka2 = 1;
+             $aRow = mysql_fetch_array($result);
+             $aUser2ID = $aRow["ZV_ID"];
+             //$aUser2Level = $aRow["level2"];
+        }
+
+            // Определим некоторые параметры нашего персонажа
+            $query = "SELECT * FROM users where Nick_Name='$aNickName'";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+            $aRow = mysql_fetch_array($result);
+            $aUserID = $aRow["USER_ID"];
+            $aUserName = $aRow["Nick_Name"];
+            $aUserLevel = $aRow["Character_Level"];
+
+
+            // Подали заявку - засовываем в таблицу
+            if ($lSetZayavka){
+               $query = "INSERT INTO zayavki(ZV_ID,CHAR1_NAME,level1,ZDATA,ZTIME,ZTYPE,ZTIMEOUT) values('$aUserID','$aNickName','$aUserLevel','".Date('Y-m-d')."','".Date('H:i')."','$aBT','$aTimeOut')";
+               $result = mysql_query($query) or die("Query failed : " . mysql_error());
+               $aUser1ID = $aUserID;
+               $lInZayavka1 = 1;
+            }
+
+            // Отозвали заявку - уберем ее из таблицы
+            if ($lDeleteZayavka){
+               $query = "DELETE FROM zayavki WHERE CHAR1_NAME='$aNickName'";
+               $result = mysql_query($query) or die("Query failed : " . mysql_error());
+               $aUser1ID = 0;
+               $lInZayavka1 = 0;
+            }
+
+            // Отозвали запрос - уберем из 2ой части таблицы
+            if ($lOtzivZapros){
+               $query = "UPDATE zayavki SET CHAR2_NAME='', level2='' where CHAR2_NAME='$aNickName'";
+               $result = mysql_query($query) or die("Query failed : " . mysql_error());
+               $aUser2ID = 0;
+               $lInZayavka2 = 0;
+            }
+
+            // Отозвали запрос - уберем из 2ой части принявшего
+            if ($lOtkazZapros){
+               $query = "UPDATE zayavki SET CHAR2_NAME='', level2='' where CHAR1_NAME='$aNickName'";
+               $result = mysql_query($query) or die("Query failed : " . mysql_error());
+               $aUser2ID = 0;
+               $lInZayavka2 = 0;
+            }
+
+            // Выбрали заявку - засунем ее во вторую часть строки заявки
+            if ($aChoosen != 0){
+                $query = "SELECT * FROM zayavki where ZV_ID='$aChoosen'";
+                $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                $aRow = mysql_fetch_array($result);
+                $aUser1Name = $aRow["CHAR1_NAME"];
+                if (mysql_num_rows($result) > 0 ){
+                    $query = "UPDATE zayavki SET CHAR2_NAME='$aNickName', level2='$aUserLevel' where ZV_ID='$aChoosen'";
+                    $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                    $aUser2ID = $aUserID;
+                    $lInZayavka2 = 1;
+                }
+                else{
+                    // Заявку уже отозвали
+                }
+                
+            }
+        /////////////////////////////////////////////////////////////////////
+
+
+        ///////////////// Верхнее статусное сообщение ///////////////////////
+        //////// Выбор заявки, ожидаем подтверждения, отозвать заявку ///////
+
+        if (($aUser1ID == 0) && ($aUser2ID == 0)){
+            print('<FIELDSET><LEGEND><B>Подать заявку на бой</B> </LEGEND>');
+            print('Таймаут <SELECT class=btn NAME=timeout><OPTION value=3>3 мин.<OPTION value=4>4 мин.<OPTION value=5>5 мин.<OPTION value=7>7 мин.<OPTION value=10 selected>10 мин.</SELECT> Тип боя <SELECT class=btn NAME=bt><OPTION value=1>с оружием<OPTION value=0>кулачный</SELECT>');
+            print("<INPUT TYPE=hidden name=level value=fiz><INPUT TYPE=hidden name=NickName value=".$aNickName.">");
+            print('<INPUT class=btn TYPE=button name=open value="Подать заявку" onClick="setZayavka()">&nbsp;');
+            print('</FIELDSET>');
+            print('</td></tr></table>');
+
+        }else
+        {
+           if ($aUser2ID != 0 )
+           {
+              print('Ожидаем подтверждения от '.$aUser1Name.' <INPUT class=btn TYPE=button name=close value="Отозвать запрос" onClick="otzivZapros()"><br><br>');
+           }
+           else
+           {
+              if ($aUserID != 0 )
+              {
+                 print('Вы уже подали заявку на бой  <INPUT class=btn TYPE=button name=close value="Отозвать заявку" onClick="deleteZayavka()"><br><br>');
+              }
+           }
+        }
+        //////////////////////////////
+
+
+
+            ////////////////   Показываем заявки  ////////////////
+            print('<INPUT class=btn TYPE=submit value="Принять вызов" id="confirm1" NAME="confirm1"><BR>');
+            $query = "SELECT * FROM zayavki";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+            while ($aRow = mysql_fetch_array($result))
+            {
+               $aTime = $aRow["ZTIME"];
+               $aNick = $aRow["CHAR1_NAME"];
+               $aNick2 = $aRow["CHAR2_NAME"];
+               $aTimeOut = $aRow["ZTIMEOUT"];
+               $aBattleType = $aRow["ZTYPE"];
+               $aLevel1 = $aRow["level1"];
+               $aUserID = $aRow["ZV_ID"];
+               // Если это наша заявка
+               if ($aNick == $aNickName){
+                  // выбрана
+                  if ($aNick2 != ''){
+                     print("<INPUT TYPE=radio NAME=gocombat value=$aUserID disabled><font color=green>".$aTime."</font><b> ".$aNick." </b>[$aLevel1] против <b>".$aNick2." </b>[$aUserLevel] тип боя: <img src=Items\fighttype".$aBattleType.".gif> (таймаут $aTimeOut мин)");
+                     print('<INPUT class=btn TYPE=button value="Начать бой" id="battle" NAME="battle" onClick="gotoBattleCheck()">&nbsp;');
+                     print('<INPUT class=btn TYPE=button value="Отказать" id="decline" NAME="decline" onClick="otkazZapros()"><br>');
+                  }
+                  // не выбрана
+                  else
+                  {
+                     print("<INPUT TYPE=radio NAME=gocombat value=$aUserID disabled><font color=green>".$aTime."</font> ".$aNick." [$aLevel1] тип боя: <img src=Items\fighttype".$aBattleType.".gif> (таймаут $aTimeOut мин)<br>");
+                  }
+               }
+               // не наше заявка
+               elseif ($aNick2 != $aNickName)
+               {
+                     print("<INPUT TYPE=radio NAME=gocombat value=$aUserID onClick='enable_btn(".$lInZayavka1.",".$lInZayavka2.")'><font color=green>".$aTime."</font> ".$aNick." [$aLevel1] тип боя: <img src=Items\fighttype".$aBattleType.".gif> (таймаут $aTimeOut мин)<br>");
+               }
+               // не наша заявка но выбрана нами
+               if ($aNick2 == $aNickName){
+                   print("<INPUT TYPE=radio NAME=gocombat value=$aUserID disabled><font color=green>".$aTime."</font> ".$aNick." [$aLevel1] против ".$aNickName." [$aUserLevel] тип боя: <img src=Items\fighttype".$aBattleType.".gif> (таймаут $aTimeOut мин)<br>");
+               }
+            }
+
+            print('<INPUT class=btn TYPE=submit value="Принять вызов" id="confirm2" NAME="confirm2"><BR>');
+            print('</form>');
+            print('<script> enable_btn( '.$lInZayavka1.','.$lInZayavka2.' ); </script>');
+            ////////////////////////////////////////////////
+   }
+}
+?>
+
+</BODY>
+</HTML>

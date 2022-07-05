@@ -1,0 +1,19 @@
+<html>
+<?php
+if (!empty($_GET['NickName'])){
+  $aNickName = $_GET['NickName'];
+  print( '<frameset rows="62%, *, 30, 0" FRAMEBORDER="0" BORDER="0" FRAMESPACING="1">' );
+  print( '<frame name="main" src="char.phtml?NickName='.$aNickName.'">' );
+  print(  '<frameset cols="*,220">' );
+  print(  '<frame name="chat" src="chat.html" target="_top" scrolling=YES FRAMEBORDER="0" BORDER="0" FRAMESPACING="0" MARGINWIDTH="3" MARGINHEIGHT="3">' );
+  print(  '<frame name="online" src="room.phtml?NickName='.$aNickName.'" target="_blank" scrolling=YES FRAMEBORDER=0 BORDER=0 FRAMESPACING=0 MARGINWIDTH=3 MARGINHEIGHT=0>' );
+  print(  '</frameset>' );
+  print(  '<frame name="bottom" scrolling="no" noresize src="buttons.html">' );
+  print(  '<frame name="refreshed" target="_top" scrolling="no" noresize src="refreshed.html">' );
+  print(  '</frameset>' );
+} else {
+  // На стартовую
+  print( '<SCRIPT>top.location.href="index.phtml";</SCRIPT>' );
+}
+?>
+</html>

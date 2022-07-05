@@ -1,0 +1,1079 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<style>
+<!--
+table.MsoTableGrid
+  {border:1.0pt solid windowtext;
+  font-size:10.0pt;
+  font-family:"Times New Roman","serif"}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="740" height="350" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+  <tr>
+      <td width="740" height="133" background="Site/top.jpg" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="127" height="356" background="Site/middle1.jpg" valign="top">
+        <p align="left">
+        <b><font face="Arial" size="1" color="#505866">&nbsp;&nbsp;&nbsp; 
+    <a href="http://www.blitz-school.info"><font color="#FFFF99">Курсы</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font face="Arial" size="1" color="#FFFF99">
+    <a href="http://www.blitz-school.info/reg2.phtml"><font color="#FFFF99">Регистрация</font></a><br>
+        &nbsp;&nbsp;&nbsp;
+    <a href="http://www.blitz-school.info/study_tech.phtml">
+    <font color="#FFFF99">Методика</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font>
+    <a href="http://www.blitz-school.info/program.phtml"><font face="Arial" size="1" color="#FFFF99">Оглавление</font></a><font face="Arial" size="1" color="#FFFF99"><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://www.blitz-school.info/login.phtml">
+    <font color="#FFFF99">Для учащихся</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font></b>
+    <img border="0" src="../navdiv.gif" width="80" height="4"><br>
+        <b><font size="1" face="Arial" color="#505866">&nbsp;&nbsp;&nbsp;
+        <a href="http://www.blitz-school.info/articles.phtml">
+    <font color="#FFFF99">Статьи</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font size="1" face="Arial" color="#FFFF99">
+    <a href="http://www.blitz-school.info/links.phtml">
+    <font color="#FFFF99">Инструменты</font></a><br>
+    <span lang="en-us">&nbsp;&nbsp;&nbsp; </span>
+    <a href="http://www.blitz-school.info/contacts.phtml">
+    <font color="#FFFF99">Контакты</font></a><br>
+    <span lang="en-us">&nbsp;&nbsp;&nbsp; </span></font></b>&nbsp;</td>
+      <td width="586" height="356" background="Site/bg.gif" valign="top">
+
+<p align="center"><font color="#008000"><b><span lang="ru"><font size="5">Урок </font>
+</span>
+<font size="5">3<span lang="ru">. </span></font></b><span lang="ru">
+<font size="5"><b>Основной экран игры</b></font><br>
+</span>
+</font><b><span lang="ru"></p>
+<p align="justify"><font face="Arial" color="#000080"><a name="kopv">
+<font size="2">3.1. 
+</font></a></font></span></b><span lang="ru"><b><a name="kopv">
+<font size="2" face="Arial" color="#000080">&nbsp;Главный фрейм и слагающие его 
+элементы.</font></a></b><font size="2" face="Arial">
+<br>
+<br></font></span><font size="2" face="Arial">
+&nbsp;&nbsp; <span lang="ru">Как большинство браузерных игр наподобие 
+Бойцовского Клуба, наша игра будет строится из фреймов, каждый из которых должен 
+содержать необходимые для полноценной игры страницы. В некоторых фреймах будут 
+находится постоянные страницы, такие как - чат, комната игрока и т.д. , в 
+основном же фрейме (назовем его </span><b>main</b><span lang="ru">) - 
+информационная страница будет меняться в</span> <span lang="ru">зависимости от 
+того, что в данный момент происходит с игроком. Фрейм </span><b>main</b>
+<span lang="ru">будет содержать у нас и страницу с характеристиками нашего 
+персонажа, и Центральную площадь, и содержимое рюкзака, и страницу с поединком, 
+и различного род магазины в игре и т.д.<br>
+&nbsp;&nbsp; Приведем ниже </span>HTML<span lang="ru">&nbsp;&nbsp;код нашей главной 
+игровой страницы, открыть которую после удачной авторизации мы еще пытались в 
+нашем втором уроке. Тогда это был простой файл с одной строкой, сейчас же мы 
+должны реализовать работающую страницу. Итак вот он наш файл </span>game.phtml.</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    &lt;</font><font color="#008000" face="Courier" size="2">html</font><font color="#000080" face="Courier" size="2">&gt;<br>
+    <b>&lt;?php</b><br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    if</font><font color="#000080" face="Courier" size="2">
+    (!</font><font color="#0000FF" face="Courier" size="2">empty</font><font color="#000080" face="Courier" size="2">($</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['NickName'])){<br>
+    $aNickName = $</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['NickName'];<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( '&lt;frameset 
+    rows=&quot;62%, *, 30, 0&quot; FRAMEBORDER=&quot;0&quot; BORDER=&quot;0&quot; FRAMESPACING=&quot;1&quot;&gt;' );<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( '&lt;frame 
+    name=&quot;main&quot; src=&quot;</font><font color="#008000" face="Courier" size="2">char.phtml</font><font color="#000080" face="Courier" size="2">?NickName='.$aNickName.'&quot;&gt;' 
+    );<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( '&lt;frameset 
+    cols=&quot;*,180&quot;&gt;' );<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( '&lt;frame 
+    name=&quot;chat&quot; src=&quot;</font><font color="#008000" face="Courier" size="2">chat.html</font><font color="#000080" face="Courier" size="2">&quot; 
+    target=&quot;_top&quot; scrolling=YES FRAMEBORDER=&quot;0&quot; BORDER=&quot;0&quot; FRAMESPACING=&quot;0&quot; 
+    MARGINWIDTH=&quot;3&quot; MARGINHEIGHT=&quot;3&quot;&gt;' );<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( '&lt;frame 
+    name=&quot;online&quot; src=&quot;</font><font color="#008000" face="Courier" size="2">room.html</font><font color="#000080" face="Courier" size="2">&quot; 
+    target=&quot;_blank&quot; scrolling=YES FRAMEBORDER=0 BORDER=0 FRAMESPACING=0 
+    MARGINWIDTH=3 MARGINHEIGHT=0&gt;' );<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( 
+    '&lt;/frameset&gt;' );<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( '&lt;frame 
+    name=&quot;bottom&quot; scrolling=&quot;no&quot; noresize src=&quot;</font><font color="#008000" face="Courier" size="2">buttons</font><font color="#000080" face="Courier" size="2">.html&quot;&gt;' 
+    );<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( '&lt;frame 
+    name=&quot;refreshed&quot; target=&quot;_top&quot; scrolling=&quot;no&quot; noresize src=&quot;</font><font color="#008000" face="Courier" size="2">refreshed.html</font><font color="#000080" face="Courier" size="2">&quot;&gt;' 
+    );<br>
+    print( '&lt;/frameset&gt;' );<br>
+    } </font><font color="#0000FF" face="Courier" size="2">
+    else</font><font color="#000080" face="Courier" size="2">
+    {<br>
+    // На стартовую<br>
+    </font><font color="#0000FF" face="Courier" size="2">
+    print</font><font color="#000080" face="Courier" size="2">( '&lt;SCRIPT&gt;top.location.href=&quot;</font><font color="#FF00FF" face="Courier" size="2">index.phtml</font><font color="#000080" face="Courier" size="2">&quot;;&lt;/SCRIPT&gt;' 
+    );<br>
+    }<br>
+    <b>?&gt;</b><br>
+    &lt;</font><font color="#008000" face="Courier" size="2">/html</font><font color="#000080" face="Courier" size="2">&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Как видно из кода, мы здесь при помощи функции </span>PHP print <span lang="ru">
+просто выводим описание структуры фреймов прямо в окно браузера. Наша игра 
+слагается из следующих фреймов: </span><b>main</b> - <span lang="ru">который в 
+данном случае содержит в себе страницу </span>char.phtml <span lang="ru">с 
+отображением характеристик нашего персонажа, </span>&nbsp;<b><span lang="ru">c</span>hat</b> 
+- <span lang="ru">содержит страницу чата </span>chat.html, <b>online</b> -
+<span lang="ru">содержит в себе страницу перечня всех игроков, находящихся с 
+нашим игроком в одной комнате </span>room.html,<span lang="ru"> </span><b>bottom</b> 
+- <span lang="ru">содержит в себе страницу управления игрой </span>buttons.html&nbsp;
+<span lang="ru">и, наконец, </span>refreshed - <span lang="ru">некий служебный 
+фрейм.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Как вы успели заметить, если мы передали в нашу 
+главную страницу </span>NickName <span lang="ru">авторизовавшегося игрока, то
+</span>PHP <span lang="ru">код создаст нам структуру фреймов, если нет - 
+переадресует нас на стартовую страницу игры (</span>index.phtml<span lang="ru">)<br>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span lang="ru">Более того </span>
+NickName <span lang="ru">передается также во фрейм </span><b>main</b>,
+<span lang="ru">а вернее в содержащуюся в нем в данный момент страницу нашего 
+героя (</span>char.phtml<span lang="ru">)</span>, <span lang="ru">что 
+реализовано следующей строкой кода:</span> : </font>
+<font color="#0000FF" face="Courier" size="2">print</font><font color="#000080" face="Courier" size="2">( 
+'&lt;frame name=&quot;main&quot; src=&quot;</font><font color="#008000" face="Courier" size="2">char.phtml</font><font color="#000080" face="Courier" size="2">?NickName='.$aNickName.'&quot;&gt;' 
+);<br>
+</font><font size="2" face="Arial">&nbsp; <span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Пока что практически все страницы, входящие во фреймы пусты и при авторизации, 
+мы увидим следующую картину:<br>
+<br>
+<img border="0" src="main.jpg" width="463" height="400"><br>
+&nbsp;<br>
+Даже для того, чтоб отобразить надпись &quot;Вы зашли как </span>Defender<span lang="ru">&quot;</span>
+<span lang="ru">нам нужно приложить кое-какие усилия. Во-первых 
+зарегистрироваться в игре под этим ником, либо создать его в нашем скриптовом
+</span>SQL <span lang="ru">файле.<br>
+Чтоб сразу определиться, где у нас что находится, скажем, что страничка белого 
+цвета - это наш </span><b>main</b> <span lang="ru">фрейм, страничка салатного 
+цвета - это наш фрейм, содержащий перечень игроков в комнате, желтый - 
+зарезервирован под чат, а голубоватый - для страницы управления игрой. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Чтоб вывести строку &quot;Вы зашли как </span>Defender<span lang="ru">&quot; 
+наш файл </span>char.phtml <span lang="ru">должен содержать следующий </span>PHP
+<span lang="ru">код:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2"><b>
+    &lt;?php<br>
+    </b>if (!</font><font color="#0000FF" face="Courier" size="2">empty</font><font color="#000080" face="Courier" size="2">($</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['NickName'])){<br>
+    $aNickName = $</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['NickName'];<br>
+    }<br>
+    </font><font color="#0000FF" face="Courier" size="2">print</font><font color="#000080" face="Courier" size="2">('Вы 
+    зашли как: '.$aNickName); <br>
+    <b>?&gt;</b></font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Объяснять этот 
+код, думается нет смысла. Все вышеперечисленные странички вы можете найти
+<a href="3_1">здесь</a>. Большинство из них пока пусты, но мы вскоре начнем их 
+создавать.<br>
+<br></span><a name="kopv0"><span lang="ru"><font color="#000080"><b>3</b></font></span></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv0"><font size="2">.2. 
+</font></a></font></span><a name="kopv1">
+<font size="2" face="Arial" color="#000080"><span lang="ru">&nbsp;Страница 
+действия (наш персонаж).</span></font></a></b><span lang="ru"> <br><br>&nbsp;&nbsp;&nbsp;&nbsp; 
+Наступил момент сделать более информативную страницу с характеристиками нашего
+&nbsp;персонажа. Как вы уже знаете - это страница </span>char.phtml.
+<span lang="ru"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Что же мы планируем там отображать? <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Во-первых: картинку нашего героя.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Во-вторых: слоты для экипировки и оружия.<br>
+&nbsp;&nbsp;&nbsp; В-третьих: информацию о характеристиках (сила, ловкость, 
+интеллект, запасе денег, количестве побед и поражений и т.д.)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; В-четвертых: полоску здоровья нашего героя.<br>
+&nbsp;&nbsp; Отрисовка картинки нашего персонажа с пустыми слотами не должна 
+вызвать у нас затруднений и на языке разметки </span>HTML <span lang="ru">
+реализуется обычными таблицами. Но перед этим давайте чуть расширим нашу с вами 
+таблицу </span>users <span lang="ru">в скриптовом </span>SQL<span lang="ru"> 
+файле. К уже используемым нами полям мы добавим еще:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    /*Таблица персонажей*/<br>
+    CREATE TABLE <b>`users`</b> (<br>
+    </font><font color="#0000FF" face="Courier" size="2">ID bigint(20) 
+    unsigned NOT NULL auto_increment,<br>
+    Nick_Name CHAR(32) UNIQUE,<br>
+    User_Pass CHAR(32), <br>
+    SessionID bigint, <br>
+    User_EMail CHAR(64) UNIQUE, <br>
+    Security_Answer CHAR(30),<br>
+    Full_Name CHAR(50), <br>
+    User_Birth_Day DATE NOT NULL,<br>
+    Character_Birth_Day DATE NOT NULL,<br>
+    User_Gender SMALLINT(1), <br>
+    User_City CHAR(32), <br>
+    ICQ_Number CHAR(16), </font>
+    <font color="#000080" face="Courier" size="2"><br>
+    <b>Character_Money</b> INT DEFAULT 200, /*деньги*/<br>
+    <b>Character_Strength</b> INT DEFAULT 3, /*сила персонажа*/<br>
+    <b>Character_Strength_Total</b> INT DEFAULT 3, /*сила персонажа c учетом 
+    вещей*/<br>
+    <b>Character_Endurance</b> INT DEFAULT 3, /*Выносливость (Здоровье=Выносливость*5)*/<br>
+    <b>Character_Accuracy</b> INT DEFAULT 3,/*Точность перса (влияет на 
+    крит.удар)*/<br>
+    <b>Character_Accuracy_Total</b> INT DEFAULT 0, /*Точность с уч. вещей 
+    перса*/<br>
+    <b>Character_Dexterity</b> INT DEFAULT 3, /*Ловкость перса (влияет на 
+    уворот)*/<br>
+    <b>Character_Dexterity_Total</b> INT DEFAULT 0, /*Ловкость перса с уч. 
+    вещей*/<br>
+    <b>Character_Sword</b> INT DEFAULT 0, /*Мастерство владения мечом*/<br>
+    <b>Character_Spear</b> INT DEFAULT 0, /*Мастерство владения копьем*/<br>
+    <b>Character_Axe</b> INT DEFAULT 0, /*Мастерство владения Топором*/<br>
+    <b>Character_Mace</b> INT DEFAULT 0, /*Мастерство владения Молот,Дубина*/<br>
+    <b>Character_Dagger</b> INT DEFAULT 0, /*Мастерство владения Ножом*/<br>
+    <b>Character_CurHealth</b> INT DEFAULT 0, /*тек здоровье во время боя*/<br>
+    <b>Character_MaxHealth</b> INT DEFAULT 20, /*Максимальное здоровье с 
+    учетом вещей*/<br>
+    <b>Character_Level</b> INT DEFAULT 0, /*УРОВЕНЬ ИГРОКА*/<br>
+    <b>Character_Experience</b> INT DEFAULT 0, /*ОПЫТ ИГРОКА*/<br>
+    <b>Character_NextExperience</b> INT DEFAULT 10, /*Следующая граничная 
+    точка опыта*/<br>
+    <b>Character_UnUsed_Points</b> INT DEFAULT 3, /*Неиспользованные очки 
+    для распределения в статы (сила, ловкость....)*/<br>
+    <b>Town</b> INT DEFAULT 0 REFERENCES Towns(`ID`), /*Текущий город перса*/<br>
+    <b>Building</b> INT DEFAULT 0 REFERENCES Buildings(`ID`), /*текущее 
+    положение перса в городе (здание, площадь)*/<br>
+    <b>Moving_Type</b> INT DEFAULT 0 REFERENCES MovingTypes(`ID`), /*текущее 
+    транспортное средство (корабль, карета)*/<br>
+    <b>EndMoving_Time</b> DATETIME DEFAULT 'Now' NOT NULL, /*время прибытия 
+    в Пункт Назначения*/<br>
+    <b>Character_Disposition</b> INT DEFAULT 0 REFERENCES Dispositions(`ID`), 
+    /*склонность перса*/<br>
+    <b>Character_Clan</b> INT DEFAULT 0 REFERENCES Clans(`ID`), /*клан перса*/<br>
+    <b>Character_Image</b> CHAR(30) DEFAULT 'standart1.gif', /*изображения 
+    перса*/<br>
+    <b>Character_MaxWeigth</b> INT DEFAULT 20, /*максимальный вес предметов 
+    в рюкзаке*/<br>
+    <b>Helmet_Slot</b> INT DEFAULT 0, /*слот шлема*/<br>
+    <b>Shield_Slot</b> INT DEFAULT 0, /*слот щита*/<br>
+    <b>Weapon_Slot</b> INT DEFAULT 0, /*слот оружия*/<br>
+    <b>Gloves_Slot</b> INT DEFAULT 0, /*слот перчаток*/<br>
+    <b>Shoes_Slot</b> INT DEFAULT 0, /*слот обуви*/<br>
+    <b>Armor_Slot</b> INT DEFAULT 0, /*слот брони*/<br>
+    <b>Necklace_Slot</b> INT DEFAULT 0, /*слот ожерелья*/<br>
+    <b>Ring1_Slot</b> INT DEFAULT 0, /*слот 1 кольца*/<br>
+    <b>Ring2_Slot</b> INT DEFAULT 0, /*слот 2 кольца*/<br>
+    <b>Ring3_Slot</b> INT DEFAULT 0, /*слот 3 кольца*/<br>
+    <b>Ring4_Slot</b> INT DEFAULT 0, /*слот 4 кольца*/<br>
+    <b>Ear_Slot</b> INT DEFAULT 0, /*слот серег*/<br>
+    <b>Belt_Slot</b> INT DEFAULT 0, /*слот пояса*/<br>
+    PRIMARY KEY (`ID`)<br>
+    ) ENGINE=MyISAM DEFAULT CHARSET=</font><font color="#FF0000" face="Courier" size="2">cp1251</font><font color="#000080" face="Courier" size="2">;</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Те поля, которые 
+уже содержались в таблице </span>users <span lang="ru">мы оставили голубым 
+цветом, остальные вместе с комментариями добавили ниже. Пока что нам понадобится 
+далеко не все поля.<br>
+Более того, чтоб каждый раз после сборки скрипта в </span>EMS MySQL Managere
+<span lang="ru">нам не приходилось регистрироваться, давайте сразу введем в игру 
+парочку персонажей:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+  <tr>
+    <td bgcolor="#FFFFCC"><font size="2" face="Courier">
+    <font color="#008000">INSERT</font> <font color="#008000">INTO</font> <b>
+    users</b> (Nick_Name,<br>
+    User_Pass,<br>
+    Character_Money,<br>
+    Character_Level,<br>
+    User_Birth_Day)<br>
+    <font color="#008000">VALUES</font>('<span lang="ru">Создатель</span>','1234','500','1','2008-03-11');<br>
+    <br>
+    <font color="#008000">INSERT</font> <font color="#008000">INTO</font> <b>
+    users</b> (Nick_Name,<br>
+    User_Pass,<br>
+    Character_Money,<br>
+    Character_Level,<br>
+    User_Birth_Day)<br>
+    <font color="#008000">VALUES</font>('Defender','1234','200','1','2008-03-11');<br>
+    <br>
+    <font color="#008000">INSERT</font> <font color="#008000">INTO</font> <b>
+    users</b> (Nick_Name,<br>
+    User_Pass,<br>
+    Character_Money,<br>
+    Character_Level,<br>
+    User_Birth_Day)<br>
+    <font color="#008000">VALUES</font>('Stranger','1234','200','1','2008-03-11');</font><br>
+&nbsp;</td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Добавим эти 
+строки также в наш скрипт </span><b>mmclub.sql</b> - <span lang="ru">в котором 
+мы накапливаем наш </span>MySQL <span lang="ru">код. Весь файл </span><b>
+mmclub.sql</b><span lang="ru"> </span><span lang="ru">целиком Вы можете взять <b>
+<a href="3_2/sql/mmclub.sql">здесь</a></b>.<br>
+Выполните его,<br>
+<img border="0" src="f9.jpg" width="547" height="26"><br>
+нажав на треугольник или воспользовавшись клавишей </span>F9.<br>
+<span lang="ru">После этого - у нас появились поля в таблице </span>users,
+<span lang="ru">которые отвечают за деньги, характеристики игрока, содержимое 
+слотов и многие другие параметры.<br>
+Картинки для пока еще пустых слотов (тех ячеек таблицы, где будут содержаться 
+игровые предметы нашего героя) Вы можете увидеть <b><a href="3_2/items">тут</a></b>.<br>
+Теперь мы вполне сможем сделать таблицу (</span>&lt;table&gt;<span lang="ru">)</span>
+<span lang="ru">на </span>HTML <span lang="ru">для отображения слотов и 
+характеристик нашего героя:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">&lt;<b>table</b> 
+    border=&quot;1&quot; width=&quot;183&quot; height=&quot;228&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; 
+    bgcolor=&quot;#BFBFBF&quot; bordercolor=&quot;#666699&quot;&gt;<br>
+    &lt;tr&gt;<br>
+    &lt;td width=&quot;27&quot; height=&quot;32&quot; rowspan=&quot;2&quot; colspan=&quot;2&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\helmet_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;99&quot; height=&quot;176&quot; rowspan=&quot;5&quot; valign=&quot;top&quot; colspan=&quot;2&quot;&gt;&lt;img 
+    border=&quot;0&quot; name = &quot;mainimage&quot; src=&quot;</font><font color="#FF00FF" face="Courier" size="2">items/pers.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;49&quot; height=&quot;23&quot; colspan=&quot;2&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\ear_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;tr&gt;<br>
+    &lt;td width=&quot;49&quot; height=&quot;2&quot; colspan=&quot;2&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\necklace_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;tr&gt;<br>
+    &lt;td width=&quot;27&quot; height=&quot;80&quot; colspan=&quot;2&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\weapon_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;49&quot; height=&quot;80&quot; colspan=&quot;2&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\shield_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;tr&gt;<br>
+    &lt;td width=&quot;1&quot; height=&quot;24&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\ring_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;25&quot; height=&quot;24&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\ring_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;22&quot; height=&quot;24&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\ring_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;26&quot; height=&quot;24&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\ring_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;tr&gt;<br>
+    &lt;td width=&quot;27&quot; height=&quot;77&quot; colspan=&quot;2&quot; rowspan=&quot;2&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\armor_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;49&quot; height=&quot;40&quot; colspan=&quot;2&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\gloves_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;tr&gt;<br>
+    &lt;td width=&quot;99&quot; height=&quot;34&quot; valign=&quot;top&quot; colspan=&quot;2&quot;&gt;&amp;nbsp;&lt;/td&gt;<br>
+    &lt;td width=&quot;49&quot; height=&quot;31&quot; colspan=&quot;2&quot; valign=&quot;top&quot; rowspan=&quot;2&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\shoes_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;tr&gt;<br>
+    &lt;td width=&quot;27&quot; height=&quot;1&quot; colspan=&quot;2&quot; valign=&quot;top&quot;&gt;&lt;img src=&quot;</font><font color="#008000" face="Courier" size="2">items\belt_empty.jpg</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;44&quot; height=&quot;3&quot; valign=&quot;top&quot;&gt;&amp;nbsp;&lt;/td&gt;<br>
+    &lt;td width=&quot;53&quot; height=&quot;3&quot; valign=&quot;top&quot;&gt;&amp;nbsp;&lt;/td&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;/<b>table</b>&gt;<br>
+&nbsp;</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Итак, пока у нас 
+в ячейках таблицы только картинки пустых слотов (</span></font><font color="#008000" face="Courier" size="2">helmet_empty.jpg<span lang="ru"> 
+-</font><font face="Arial" size="2">пустая картинка шлема</font><font color="#008000" face="Courier" size="2">,
+</font></span><font color="#008000" face="Courier" size="2">shield_empty.jpg<span lang="ru"> 
+- </span></font><span lang="ru"><font face="Arial" size="2">пустая картинка щита 
+и т.д.</font></span><font size="2" face="Arial"><span lang="ru">)<br>
+Остальные характеристики тоже можно вывести:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">&lt;td 
+    width=&quot;252&quot; height=&quot;1&quot; valign=&quot;top&quot;&gt;&lt;font color=&quot;#000080&quot;&gt;<br>
+    Сила: <b>&lt;?php </b></font><font color="#0000FF" face="Courier" size="2">
+    echo</font><font color="#000080" face="Courier" size="2"> &quot;$aStrength&quot;;
+    <b>?&gt;</b>&lt;br&gt;<br>
+    Ловкость: <b>&lt;?php</b> </font>
+    <font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2"> 
+    &quot;$aDexterity&quot;; <b>?&gt;</b>&lt;br&gt;<br>
+    Точность: <b>&lt;?php </b></font>
+    <font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2"> 
+    &quot;$aAccuracy&quot;; <b>?&gt;</b>&lt;br&gt;<br>
+    Выносливость: <b>&lt;?php</b> </font>
+    <font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2"> 
+    &quot;$aEndurance&quot;; <b>?&gt;</b>&lt;br&gt;</font><span lang="ru"><font color="#000080" face="Courier" size="2">&nbsp;
+    <br>
+    &lt;HR&gt;<br>
+    Опыт: 0 &lt;br&gt;<br>
+    Уровень: 0&lt;br&gt;<br>
+    Побед: 0 &lt;br&gt;<br>
+    Поражений: 0&lt;br&gt;<br>
+    Ничьих: 0&lt;br&gt;<br>
+    Деньги: &lt;/font&gt;&lt;b&gt;&lt;font color=&quot;#FF0000&quot;&gt;<b>&lt;?php</b> </font>
+    <font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2"> 
+    &quot;$aMoney&quot;; <b>?&gt;</b> &lt;/font&gt;&lt;/b&gt; &lt;font color=&quot;#000080&quot;&gt;кр&lt;br&gt;<br>
+    &lt;HR&gt;<br>
+    &lt;p&gt;&amp;nbsp;&lt;/font&gt;<br>
+    &lt;/td&gt;</font></span></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+Еще мы намеревались сделать полоску жизни нашего героя, которая должна выглядеть 
+примерно так:<br>
+<img border="0" src="life.jpg" width="222" height="16"><br>
+Когда у героя мало здоровья ( например 2 из 18) полоска должна быть красной, 
+если в районе половины (т.е. порядка 11/18, как на рисунке) - полоска будет у 
+нас желтой, если здоровье почти восстановилось - полоска становится зеленой.<br>
+&nbsp;&nbsp;&nbsp; Чтоб реализовать полоску, которая будет стремиться к полному 
+здоровью персонажа и еще и менять цвет, простым </span>HTML <span lang="ru">
+кодом не отделаешься и нам придется воспользоваться языком </span>JavaScript.
+<span lang="ru">Полоска реализуется также при помощи </span>HTML <span lang="ru">
+таблиц</span> <span lang="ru">и картинок соответствующих цветов:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">&lt;!-- 
+    Тут размещено здоровье персонажа --&gt;<br>
+    &lt;td width=&quot;238&quot;&gt;<br>
+    &lt;table cellspacing=0 cellpadding=0 border=&quot;0&quot; bordercolor=&quot;#000080&quot;&gt;&lt;tr&gt;&lt;td&gt;<br>
+    &lt;NOBR&gt;&lt;div id=</font><font color="#0000FF" face="Courier" size="2">HP</font><font color="#000080" face="Courier" size="2">&gt;<br>
+    &lt;IMG SRC=&quot;items/herz.gif&quot; ALT=&quot;Уровень жизни&quot;&gt; &lt;IMG SRC=1silver.gif 
+    WIDTH=1 HEIGHT=10 ALT=&quot;Уровень жизни&quot; name=</font><font color="#008000" face="Courier" size="2">HP1</font><font color="#000080" face="Courier" size="2">&gt;&lt;IMG 
+    SRC=1silver.gif WIDTH=1 HEIGHT=10 ALT=&quot;Уровень жизни&quot; name=</font><font color="#008080" face="Courier" size="2">HP2</font><font color="#000080" face="Courier" size="2">&gt;:&lt;/div&gt;<br>
+    &lt;/nobr&gt;<br>
+    &lt;/table&gt;<br>
+    &lt;!-- Конец Секции--&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">Теперь приведем 
+функции на </span>JavaScript<span lang="ru">, которые будут реализовывать 
+отображение здоровья персонажа, если текущие очки жизни его отличаются от 
+максимальных (т.е к примеру 11/18)</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table8">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">&lt;</font><font color="#008000" face="Courier" size="2">SCRIPT</font><font color="#000080" face="Courier" size="2">&gt;<br>
+    var delay = 2; // <span lang="ru">задержка изменения очков здоровья</span><br>
+    var redHP = 0.33; // меньше 30% красный цвет<br>
+    var yellowHP = 0.66; // меньше 60% желтый цвет, иначе зеленый<br>
+    var TimerOn = -1; // id таймера<br>
+    var tkHP, maxHP;<br>
+    var speed=100;<br>
+    var mspeed=100;<br>
+    <br>
+    <br>
+    </font><font color="#008080" face="Courier" size="2">//-- Смена 
+    хитпоинтов (<span lang="ru">очков здоровья</span>)<span lang="ru"> со 
+    временем</span></font><font color="#000080" face="Courier" size="2"><br>
+    <b>function</b> setHP(value, max, newspeed) {<br>
+    tkHP=value; maxHP=max;<br>
+    if (TimerOn&gt;=0) { </font><font color="#0000FF" face="Courier" size="2">
+    clearTimeout</font><font color="#000080" face="Courier" size="2">(TimerOn); 
+    TimerOn=-1; }<br>
+    speed=newspeed;<br>
+    setHPlocal();<br>
+    }<br>
+    <br>
+    <b>function</b> setHPlocal() {<br>
+    if (tkHP&gt;maxHP) { tkHP=maxHP; }<br>
+    var sz1 = Math.round((149/maxHP)*tkHP);<br>
+    var sz2 = 150 - sz1;<br>
+    if (document.all(&quot;<b>HP</b>&quot;)) {<br>
+    <span lang="ru">&nbsp;</span>document.<b>HP1</b>.width=sz1;<br>
+    <span lang="ru">&nbsp;</span>document.<b>HP2</b>.width=sz2;<br>
+    if (tkHP/maxHP &lt; redHP) { document.<b>HP1</b>.src='</font><font color="#008000" face="Courier" size="2">items/1red.gif</font><font color="#000080" face="Courier" size="2">'; 
+    }<br>
+    else {<br>
+    if (tkHP/maxHP &lt; yellowHP) { document.<b>HP1</b>.src='</font><font color="#008000" face="Courier" size="2">items/1yellow.gif</font><font color="#000080" face="Courier" size="2">'; 
+    }<br>
+    else { document.<b>HP1</b>.src='</font><font color="#008000" face="Courier" size="2">items/1green.gif</font><font color="#000080" face="Courier" size="2">'; 
+    }<br>
+    }<br>
+    var s = document.all(&quot;<b>HP</b>&quot;).innerHTML;<br>
+    document.all(&quot;<b>HP</b>&quot;).innerHTML = s.substring(0, s.lastIndexOf(':')+1) 
+    + Math.round(tkHP)+&quot;/&quot;+maxHP;<br>
+    }<br>
+    tkHP = (tkHP+(maxHP/100)*speed/1000);<br>
+    if (tkHP&lt;maxHP) { TimerOn=</font><font color="#0000FF" face="Courier" size="2">setTimeout</font><font color="#000080" face="Courier" size="2">('setHPlocal()', 
+    delay*100); }<br>
+    else { TimerOn=-1; <br>
+    }<br>
+    }<br>
+    <br>
+    &lt;</font><font color="#008000" face="Courier" size="2">/SCRIPT</font><font color="#000080" face="Courier" size="2">&gt;<br>
+&nbsp;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+Первый вызов функции&nbsp; мы должны сделать в теге </span>&lt;<font color="#0000FF">body</font>&gt;<span lang="ru"> 
+нашей веб-странички в событии </span>onLoad. <span lang="ru">А дальше все уже 
+будет работать автоматически под управлением таймера (как вы знаете в </span>
+JavaScript<span lang="ru"> функции таймера это - </span></font>
+<font color="#000080" face="Courier" size="2">setTimeout</font><font face="Arial" size="2"><span lang="ru"> 
+и</span> </font><font color="#000080" face="Courier" size="2">clearTimeout</font><font face="Arial" size="2"><span lang="ru">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Работает все это предельно просто, несмотря на 
+кажущийся громоздкий код. Наши </span>JavaScript <span lang="ru">функции (</span></font><font color="#000080" face="Courier" size="2">setHP<span lang="ru">
+</font><font face="Arial" size="2">и</font><font color="#000080" face="Courier" size="2">
+</font></span><font color="#000080" face="Courier" size="2">setHPlocal</font><font face="Arial" size="2"><span lang="ru">) 
+должны знать сколько текущих очков здоровья у нашего героя (</span></font><font color="#000080" face="Courier" size="2">tkHP</font><font face="Arial" size="2"><span lang="ru">) 
+и их максимальное количество (</span></font><font color="#000080" face="Courier" size="2">maxHP</font><font face="Arial" size="2"><span lang="ru">). 
+и вычислить размер полоски по ширине для отображения текущего здоровья. Полная 
+полоска у нас задана размеров <b>150</b> пикселей. Значит по пропорции (</span></font><font color="#000080" face="Courier" size="2">var 
+sz1 = Math.round((149/maxHP)*tkHP);</font><font face="Arial" size="2"><span lang="ru">) 
+- определит нам размер текущей полоски здоровья и (</span></font><font color="#000080" face="Courier" size="2">var 
+sz2 = 150 - sz1;</font><font face="Arial" size="2"><span lang="ru">) - это 
+оставшаяся до максимального значения здоровья полоска. </span>HP1
+<span lang="ru">и </span>HP2 - <span lang="ru">как вы догадались это имена наших 
+картинок, чей размер мы изменяем (</span></font><font color="#000080" face="Courier" size="2">document.<b>HP1</b>.width=sz1;<span lang="ru">
+</span></font><font face="Arial" size="2"><span lang="ru">и&nbsp; </span></font>
+<font color="#000080" face="Courier" size="2"><span lang="ru">&nbsp;</span>document.<b>HP2</b>.width=sz2;</font><font face="Arial" size="2"><span lang="ru">)</span>
+<span lang="ru">по событию таймера. В результате визуально получается эффект 
+ползущей вправо полоски &quot;заживления&quot; нашего героя.<br>
+&nbsp;&nbsp;&nbsp; Кроме полоски мы еще пишем через &quot;слэш&quot; текущее и полное 
+здоровье персонажа цифрами: (</span></font><font color="#000080" face="Courier" size="2">document.all(&quot;<b>HP</b>&quot;).innerHTML 
+= s.substring(0, s.lastIndexOf(':')+1) + Math.round(tkHP)+&quot;/&quot;+maxHP;</font><font face="Arial" size="2"><span lang="ru">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Остается вопрос, как же нашей функции на </span>
+JavaScript, <span lang="ru">которая работает на стороне браузера на клиентской 
+машине игрока, узнать&nbsp; - сколько здоровья у персонажа, которое хранится в 
+поле <font color="#0000FF">Character_CurHealth</font> в нашей таблице </span><b>
+users</b> <span lang="ru">в базе данных </span><b>mmclub</b> <span lang="ru">на 
+стороне сервера? А очень просто - мы передаем ее во встроенном куске кода на
+</span>PHP, <span lang="ru">предварительно прочитав&nbsp; и все другие 
+необходимые параметры игрока для отображения на странице </span>char.phtml.</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table9">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2"><b>
+    &lt;?php</b><br>
+    if (!</font><font color="#0000FF" face="Courier" size="2">empty</font><font color="#000080" face="Courier" size="2">($</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['NickName'])){<br>
+    $aNickName = $</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['NickName'];<br>
+    <br>
+    $aWhatStat = &quot;&quot;;<br>
+    $aWhatSkill = &quot;&quot;;<br>
+    </font><font color="#008000" face="Courier" size="2">// Узнаем 
+    характеристики персонажа<br>
+    </font><font color="#000080" face="Courier" size="2"><br>
+    $mysql_host = &quot;localhost&quot;;<br>
+    $mysql_user = &quot;root&quot;;<br>
+    $mysql_password = &quot;&quot;;<br>
+    $my_database = &quot;mmclub&quot;;<br>
+    <br>
+    $link = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_connect</font><font color="#000080" face="Courier" size="2">($mysql_host, 
+    $mysql_user, $mysql_password)<br>
+    or </font><font color="#0000FF" face="Courier" size="2">die</font><font color="#000080" face="Courier" size="2">(&quot;Could 
+    not connect : &quot; . </font><font color="#0000FF" face="Courier" size="2">
+    mysql_error</font><font color="#000080" face="Courier" size="2">());<br>
+    </font><font color="#0000FF" face="Courier" size="2">mysql_select_db</font><font color="#000080" face="Courier" size="2">($my_database) 
+    or </font><font color="#0000FF" face="Courier" size="2">die</font><font color="#000080" face="Courier" size="2">(&quot;Could 
+    not select database&quot;);<br>
+    <br>
+    $query = &quot;</font><font color="#008000" face="Courier" size="2">SELECT * 
+    FROM users WHERE Nick_Name='$aNickName'</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+    $result = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_query</font><font color="#000080" face="Courier" size="2">($query) 
+    or die(&quot;Query failed : &quot; . </font>
+    <font color="#0000FF" face="Courier" size="2">mysql_error</font><font color="#000080" face="Courier" size="2">());<br>
+    $aRow = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_fetch_array</font><font color="#000080" face="Courier" size="2">( 
+    $result);<br>
+    <br>
+    $aStrength = $aRow[&quot;Character_Strength&quot;];<br>
+    $aEndurance = $aRow[&quot;Character_Endurance&quot;];<br>
+    $aAccuracy = $aRow[&quot;Character_Accuracy&quot;];<br>
+    $aDexterity = $aRow[&quot;Character_Dexterity&quot;];<br>
+    $aNotUsedStats = $aRow[&quot;Character_UnUsed_Points&quot;];<br>
+    $aSwordSkill = $aRow[&quot;Character_Sword&quot;];<br>
+    $aSpearSkill = $aRow[&quot;Character_Spear&quot;];<br>
+    $aMaceSkill = $aRow[&quot;Character_Mace&quot;];<br>
+    $aAxeSkill = $aRow[&quot;Character_Axe&quot;];<br>
+    $aDaggerSkill = $aRow[&quot;Character_Dagger&quot;];<br>
+    $aCharLevel = $aRow[&quot;Character_Level&quot;];<br>
+    $aMoney = $aRow[&quot;Character_Money&quot;];<br>
+    </font><font color="#0000FF" face="Courier" size="2">mysql_free_result</font><font color="#000080" face="Courier" size="2">($result);<br>
+    }<br>
+    <b>?&gt;</b></font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">Теперь осталось 
+только подставить инициализированные переменные в нужное место в именно в&nbsp; 
+вызов функции&nbsp; </span></font><font color="#000080" face="Courier" size="2">
+setHP<span lang="ru"> </span></font><font face="Arial" size="2"><span lang="ru">
+в теге </span>&lt;body&gt;<span lang="ru"> </span>с<span lang="ru">обытия </span>
+onLoad<span lang="ru">: </span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table10">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    &lt;body bgcolor=&quot;#BFBFBF&quot; onLoad=&quot;setHP(<b>&lt;?php</b> </font>
+    <font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2"> 
+    $Character_CurHealth; ?&gt;,<b>&lt;?php</b> </font>
+    <font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2"> 
+    $aEndurance*6 <b>?&gt;</b>,100)&quot;&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">Естественно так 
+будет тег </span>&lt;<font color="#0000FF">body</font>&gt;<span lang="ru"> на стороне 
+сервера</span> <span lang="ru">а на стороне клиента уже будут подставлены 
+соответствующие значения переменных и этот тег будет выглядеть так: </span>
+</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table11">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    &lt;body bgcolor=&quot;#BFBFBF&quot; onLoad=&quot;setHP(0,18,100)&quot;&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font color="#000080" face="Courier" size="2">$aEndurance*6</font><font face="Arial" size="2"><span lang="ru"> 
+- означает, что полное здоровье нашего героя вычисляется по формуле выносливость 
+умножить на шесть.<br>
+<br>
+Как всегда полный текст файла </span>char.phtml <span lang="ru">вы можете найти
+<b><a href="3_2/char.phtml">здесь</a></b>. А так будет выглядеть эта страничка в 
+браузере на стороне клиента:<br>
+<br>
+<img border="0" src="char.jpg" width="396" height="313"><br>
+<br>
+Для того, чтоб все это протестировать в работе, скопируйте все файлы и папки из 
+каталога </span><a href="3_2">3_2</a> <span lang="ru">текущего урока в каталог
+</span><a href="file:///C:/WebServers/home/mmclub/www">C:\WebServer<span lang="ru">s</span>\home\mmclub\www</a><br>
+<span lang="ru">и войдите в игру:<br>
+<img border="0" src="start.jpg" width="345" height="78"><br>
+<br>
+Авторизуйтесь с логином </span><b>Defender</b> <span lang="ru">и паролем </span>
+<b>1234</b> <span lang="ru">и посмотрите на работу странички </span>
+<font color="#0000FF">char.phtml</font>.<span lang="ru"><br>
+&nbsp; </span><span lang="ru"><br></span><b><span lang="ru">
+<font face="Arial" color="#000080"><a name="kopv2"><font size="2">3.3. </font>
+</a></font></span></b><span lang="ru"><b><a name="kopv3">
+<font size="2" face="Arial" color="#000080">&nbsp;Страница перечня игроков в 
+игровой локации.</font></a></b> <br><br></span>&nbsp;&nbsp;&nbsp;
+<span lang="ru">По мере прохождения нашего курса мы будем увеличивать количество 
+игровых объектов в клубе и при переходе из одного объекта в другой, поле <b>
+Building</b> в таблице </span><b>users</b> <span lang="ru">будет менять свое 
+значение. Пока у нас нет игровых объектов (локаций), а вернее есть только один - 
+то место где сейчас находится наш персонаж. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Давайте сделаем так, что по умолчанию при регистрации а 
+игре, персонаж будет получать локацию не 0 как у нас было до этого, а, например 
+1. </span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table14">
+  <tr>
+    <td bgcolor="#FFFFCC"><font size="2" face="Courier"><b>Building</b> INT 
+    DEFAULT <b>1</b> REFERENCES Buildings(`ID`), /*текущее положение перса в 
+    городе (здание, площадь)*/</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru"><br>
+Хотя, честно говоря, что 1 что 0 - особо ситуацию не проясняет и поэтому мы 
+срочно должны создать еще одну таблицу в нашей базе </span><b>mmclub</b> -
+<span lang="ru">таблицу игровых строений или объектов.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Назовем мы эту новую таблицу </span><b>Buildings</b>
+<span lang="ru">и добавим в наш скриптовый </span>sql <span lang="ru">файл&nbsp;
+</span>mmclub.sql.</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table12">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#008000" face="Courier" size="2">
+    /*Таблица строений,комнат и локаций в пределах города*/<br>
+    </font><font color="#000080" face="Courier" size="2">CREATE TABLE </font>
+    <b><font face="Courier" size="2">`Buildings`</font></b><font color="#000080" face="Courier" size="2"> 
+    (<br>
+    `ID` INT(3) unsigned NOT NULL AUTO_INCREMENT,<br>
+    `BuildingName` CHAR(50) NOT NULL, </font>
+    <font color="#008000" face="Courier" size="2">/*Название строения*/</font><font color="#000080" face="Courier" size="2"><br>
+    `BuildingType` INT(3) NOT NULL, </font>
+    <font color="#008000" face="Courier" size="2">/*Тип строения*/</font><font color="#000080" face="Courier" size="2"><br>
+    `Town` SMALLINT(2) NOT NULL REFERENCES Towns(`ID`), </font>
+    <font color="#008000" face="Courier" size="2">/*Город, где расположено 
+    строение*/</font><font color="#000080" face="Courier" size="2"><br>
+    PRIMARY KEY (`ID`)<br>
+    ) TYPE=MyISAM;</font></td>
+  </tr>
+</table>
+<p><font face="Arial"><span lang="ru"><font size="2">Теперь остается</font></span><font size="2">
+<span lang="ru">ввести туда пару игровых объектов:</span></font></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table13">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    INSERT INTO Buildings (ID, BuildingName, BuildingType, Town,PHP_File) 
+    VALUES(1,'</font><font color="#008000" face="Courier" size="2">Арена</font><font color="#000080" face="Courier" size="2">',1,1,'char.phtml');<br>
+    <br>
+    INSERT INTO Buildings (ID, BuildingName, BuildingType, Town,PHP_File) 
+    VALUES(2,'</font><font color="#008000" face="Courier" size="2">Центральная 
+    площадь</font><font color="#000080" face="Courier" size="2">',2,1,'map.phtml');</font></td>
+  </tr>
+</table>
+<p align="justify"><font color="#000080" face="Courier" size="2">BuildingType</font><font face="Arial" size="2"><span lang="ru"> 
+- отвечает у нас в таблице </span></font>
+<font color="#000080" face="Courier" size="2">Buildings </font>
+<font face="Arial" size="2"><span lang="ru">за тип игрового объекта (так для 
+Арены это будет 1, для Центральной площади - 2) В дальнейшем мы добавим еще 
+множество игровых объектов и локаций. <br>
+</span></font><font color="#000080" face="Courier" size="2">Town</font><font face="Arial" size="2"><span lang="ru"> 
+- это наш город и так как пока он у нас один, пусть и имеет идентификатор 1 в 
+таблице </span></font><font color="#000080" face="Courier" size="2">Buildings<span lang="ru">.</span></font><font face="Arial" size="2"><span lang="ru"><br>
+&nbsp;&nbsp;&nbsp; Теперь у нас с Вами есть все основания изменить наш файл
+</span>room.html <span lang="ru">на </span><b>room.phtml </b><span lang="ru">в 
+котором мы будем определять персонажей, находящихся в той же комнате, что и наш 
+герой.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table15">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2"><b>
+    &lt;?php</b><br>
+    </font><font color="#0000FF" face="Courier" size="2">if</font><font color="#000080" face="Courier" size="2"> 
+    (!</font><font color="#0000FF" face="Courier" size="2">empty</font><font color="#000080" face="Courier" size="2">($</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['NickName'])){<br>
+    $aNickName = $</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['NickName'];<br>
+    <br>
+    $aWhatStat = &quot;&quot;;<br>
+    $aWhatSkill = &quot;&quot;;<br>
+    <br>
+    $mysql_host = &quot;localhost&quot;;<br>
+    $mysql_user = &quot;root&quot;;<br>
+    $mysql_password = &quot;&quot;;<br>
+    $my_database = &quot;mmclub&quot;;<br>
+    <br>
+    $link = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_connect</font><font color="#000080" face="Courier" size="2">($mysql_host, 
+    $mysql_user, $mysql_password)<br>
+    or </font><font color="#0000FF" face="Courier" size="2">die</font><font color="#000080" face="Courier" size="2">(&quot;Could 
+    not connect : &quot; . </font><font color="#0000FF" face="Courier" size="2">
+    mysql_error</font><font color="#000080" face="Courier" size="2">());<br>
+    </font><font color="#0000FF" face="Courier" size="2">mysql_select_db</font><font color="#000080" face="Courier" size="2">($my_database) 
+    or </font><font color="#0000FF" face="Courier" size="2">die</font><font color="#000080" face="Courier" size="2">(&quot;Could 
+    not select database&quot;);<br>
+    <br>
+    $query = &quot;</font><font color="#008000" face="Courier" size="2">SELECT 
+    b.BuildingName, u.Building FROM users u </font>
+    <font color="#FF0000" face="Courier" size="2">inner join</font><font color="#008000" face="Courier" size="2"> 
+    Buildings b on b.id = u.Building WHERE Nick_Name='$aNickName'</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+    $result = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_query</font><font color="#000080" face="Courier" size="2">($query) 
+    or </font><font color="#0000FF" face="Courier" size="2">die</font><font color="#000080" face="Courier" size="2">(&quot;Query 
+    failed : &quot; . </font><font color="#0000FF" face="Courier" size="2">
+    mysql_error</font><font color="#000080" face="Courier" size="2">());<br>
+    $aRow = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_fetch_array</font><font color="#000080" face="Courier" size="2">( 
+    $result);<br>
+    $aRoom = $aRow[&quot;BuildingName&quot;];<br>
+    $aBuldingID = $aRow[&quot;Building&quot;];<br>
+    $query = &quot;</font><font color="#008000" face="Courier" size="2">SELECT 
+    count(USER_ID) as CountUsers from users where Building = '$aBuldingID'</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+    $result = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_query</font><font color="#000080" face="Courier" size="2">($query) 
+    or </font><font color="#0000FF" face="Courier" size="2">die</font><font color="#000080" face="Courier" size="2">(&quot;Query 
+    failed : &quot; . mysql_error());<br>
+    $aRow = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_fetch_array</font><font color="#000080" face="Courier" size="2">( 
+    $result);<br>
+    $aCountUsers = $aRow[&quot;CountUsers&quot;];<br>
+    </font><font color="#008080" face="Courier" size="2"><br>
+    // пишем название комнаты и сколько там народу</font><font color="#000080" face="Courier" size="2"><br>
+    </font><font color="#0000FF" face="Courier" size="2">print</font><font color="#000080" face="Courier" size="2">('&lt;b&gt;'.$aRoom.'&lt;/b&gt;('.$aCountUsers.')');<br>
+    $query = &quot;</font><font color="#008000" face="Courier" size="2">SELECT 
+    Nick_Name,Character_Level from users where Building = '$aBuldingID'</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+    $result = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_query</font><font color="#000080" face="Courier" size="2">($query) 
+    or </font><font color="#0000FF" face="Courier" size="2">die</font><font color="#000080" face="Courier" size="2">(&quot;Query 
+    failed : &quot; . mysql_error());<br>
+    </font><font color="#0000FF" face="Courier" size="2">while</font><font color="#000080" face="Courier" size="2"> 
+    ($aRow = </font><font color="#0000FF" face="Courier" size="2">
+    mysql_fetch_array</font><font color="#000080" face="Courier" size="2">($result)) 
+    {<br>
+    $aUser = $aRow[&quot;Nick_Name&quot;];<br>
+    $aLevel = $aRow[&quot;Character_Level&quot;];<br>
+    </font><font color="#0000FF" face="Courier" size="2">print</font><font color="#000080" face="Courier" size="2">($aUser.'['.$aLevel.'] 
+    &lt;img src=&quot;img\inf.jpg&quot;&gt;&lt;br&gt;');<br>
+    }<br>
+    }<br>
+    <b>?&gt;</b></font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="en-us">&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang="ru">Как Вы могли заметить из </span><span lang="en-us">SQL
+</span><span lang="ru">кода (</span></font><font color="#008000" face="Courier" size="2">SELECT 
+    b.BuildingName, u.Building FROM users u </font>
+    <font color="#FF0000" face="Courier" size="2">inner join</font><font color="#008000" face="Courier" size="2"> 
+    Buildings b on b.id = u.Building WHERE Nick_Name='$aNickName'</font><font face="Arial" size="2"><span lang="ru">)&nbsp; 
+мы используем соединение двух таблиц&nbsp; </span></font><font color="#008000" face="Courier" size="2">
+<b>users</b> </font>
+    <font face="Arial" size="2"><span lang="ru">и </span></font><font color="#008000" face="Courier" size="2"> 
+    <b>Buildings</b> </font><font face="Arial" size="2"><span lang="ru">так 
+как в обеих есть общее поле ( поле </span><span lang="en-us">Building </span>в<span lang="ru"> 
+таблице </span><span lang="en-us"><b>users</b> </span><span lang="ru">
+соответствует полю </span><span lang="en-us">ID</span><span lang="ru"> </span>
+<span lang="en-us">&nbsp;</span>в<span lang="ru"> таблице </span>
+<span lang="en-us"><b>Buildings</b> </span><span lang="ru">)</span><span lang="en-us">.
+</span>То есть, другими словами таблица <span lang="en-us"><b>Buildings</b>
+</span>является справочной для поля <span lang="en-us">Building </span>из 
+таблицы <span lang="en-us"><b>users</b>. </span>Т<span lang="ru">аким образом в 
+поле </span><span lang="en-us">Building </span>т<span lang="ru">аблицы </span>
+<span lang="en-us"><b>users</b> </span>м<span lang="ru">ы храним, к примеру 
+числа 1, 2 и т.д. а из таблицы </span><span lang="en-us"><b>Buildings</b> </span>
+<span lang="ru">по этим числам извлекаем текстовой название этой комнаты 
+(строения) - Арена, Центральная площадь и т.д.<br>
+</span><span lang="en-us">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span lang="ru">
+Результатом выполнения вышеприведенного </span><span lang="en-us">PHP-</span>к<span lang="ru">ода 
+со страницы </span><span lang="en-us">room.phtml </span>б<span lang="ru">удет 
+следующая страница в браузере:<br>
+<br>
+<img border="0" src="room.jpg" width="219" height="122"><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Безусловно, это не совсем корректно, так как 
+Пользователи с никами <font color="#000080">Создатель</font> и </span>
+<span lang="en-us"><font color="#000080">Stranger</font> </span>д<span lang="ru">ействительно 
+привязаны к объекту с номером 1 (</span><span lang="en-us">у</span> них
+<span lang="en-us">Building = 1 </span><span lang="ru">в таблице </span>
+<span lang="en-us">users</span><span lang="ru">) но они не активны, так как мы 
+сейчас зашли только пользователем </span><span lang="en-us">Defender. </span>В<span lang="ru"> 
+дальнейшем мы сделаем так, что в текущей комнате авторизовавшегося игрока 
+показывались только активные пользователи.<br>
+&nbsp;&nbsp;&nbsp; Полный код измененного </span><span lang="en-us">room.phtml
+</span>В<span lang="ru">ы можете посмотреть<b><a href="3_3/room.phtml"> здесь</a></b>.<br>
+&nbsp;&nbsp;&nbsp; Весь файл </span><b>
+mmclub.sql</b><span lang="ru"> целиком Вы можете взять <b>
+<a href="3_2/sql/mmclub2.sql">здесь</a></b>.<br><br> </span><b><span lang="ru"><font face="Arial" color="#000080">
+<a name="kopv4"><font size="2">3.4. </font></a></font></span></b>
+<span lang="ru"><b><a name="kopv5"><font size="2" face="Arial" color="#000080">&nbsp;Страница 
+управления</font></a></b> <br><br>&nbsp;&nbsp; В этой и следующей главах нашего 
+третьего урока мы совсем вскользь остановимся на&nbsp; создании страниц 
+управления и чата, так для этого у нас будет отведен отдельный урок. <br>
+</span><span lang="en-us">&nbsp;&nbsp; </span>С<span lang="ru">траница 
+управления нужна нам для отправки в чат сообщений, стирания окна сообщений, 
+отображением текущего времени сервера и ряда других функций. некоторые картинки, 
+которые мы позаимствовали в онлайн-игре Бойцовский Клуб (</span><span lang="en-us"><a href="http://www.combats.ru">www.combats.ru</a></span><span lang="ru">)</span><span lang="en-us">
+</span>т<span lang="ru">еперь Вы можете найти <b><a href="3_4/img">тут</a></b></span><span lang="en-us">.</span><span lang="ru"><br>
+&nbsp;&nbsp;&nbsp; Давайте изменим код нашей странички </span>
+<span lang="en-us">buttons.html </span>ч<span lang="ru">тоб отобразить на ней 
+некоторые кнопки, </span><span lang="en-us">flash</span>-к<span lang="ru">омпонент 
+показывающий время и текстовое поле для отправки в чат сообщений. Основная форма 
+странички </span><span lang="en-us">buttons.html </span><span lang="ru">теперь 
+будет выглядеть так:</span></font></p>
+<table border="0" width="99%" cellspacing="0" cellpadding="0" id="table16">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    &lt;form action=&quot;<span lang="en-us"> </span>id=&quot;F1&quot;&gt;<br>
+    &lt;table width=&quot;100%&quot; height=&quot;30&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;<br>
+    &lt;tr valign=&quot;top&quot; style=&quot;background-image:url(http://mmclub.com/img/beg_chat_03.gif); 
+    background-position: top; background-repeat:repeat-x; &quot;&gt;<br>
+    &lt;td width=&quot;30&quot;&gt;&lt;img src=&quot;img/b.gif&quot; width=&quot;30&quot; height=&quot;30&quot; alt=&quot;Чат&quot; 
+    /&gt;&lt;/td&gt;<br>
+    &lt;td valign=&quot;middle&quot; id=&quot;T2&quot;&gt;&lt;input type=&quot;text&quot; name=&quot;text&quot; maxlength=&quot;240&quot; 
+    size=&quot;80&quot;&gt;&lt;/td&gt;<br>
+    &lt;td nowrap id=&quot;T3&quot;&gt;&lt;img src=&quot;img/b_ok.gif&quot; width=&quot;30&quot; height=&quot;30&quot; alt=&quot;Добавить 
+    текст в чат&quot; style=&quot;cursor: hand&quot;&gt;<br>
+    &lt;img src=&quot;img/1x1.gif&quot; width=&quot;8&quot; height=&quot;1&quot; alt=&quot;&quot; /&gt;<br>
+    &lt;img src=&quot;img/b_clear.gif&quot; width=&quot;30&quot; height=&quot;30&quot; alt=&quot;Очистить строку 
+    ввода/чат&quot; style=&quot;cursor: hand&quot;&gt;<br>
+    &lt;img src=&quot;img/b_smile.gif&quot; width=&quot;30&quot; height=&quot;30&quot; alt=&quot;Смайлики&quot; style=&quot;cursor:hand&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;19&quot; id=&quot;T4&quot; background=&quot;img/b_bg2.gif&quot;&gt;&lt;img src=&quot;img/beg_chat_05.gif&quot; 
+    width=&quot;19&quot; height=&quot;30&quot; alt=&quot;&quot;&gt;&lt;/td&gt;<br>
+    &lt;td align=&quot;right&quot; nowrap=&quot;nowrap&quot; bgcolor=&quot;BAB7B3&quot; id=&quot;T5&quot; background=&quot;img/b_bg2.gif&quot;&gt;<br>
+    &lt;img src=&quot;img/a_inv.gif&quot; width=&quot;30&quot; height=&quot;30&quot; alt=&quot;Настройки/Инвентарь&quot; 
+    style=&quot;cursor:hand&quot;&gt;<br>
+    &lt;img src=&quot;img/a_friend.gif&quot; width=&quot;30&quot; height=&quot;30&quot; alt=&quot;Друзья&quot; style=&quot;cursor:hand&quot;&gt;<br>
+    &lt;img src=&quot;img/a_ext.gif&quot; width=&quot;30&quot; height=&quot;30&quot; alt=&quot;Выход из игры&quot; 
+    style=&quot;cursor:hand&quot; onclick=&quot;if (confirm('Выйти из игры?')) 
+    top.window.navigate('/main.phtml?exit=0.781520416407446')&quot;&gt;&lt;/td&gt;<br>
+    &lt;td width=&quot;70&quot; valign=&quot;middle&quot; background=&quot;img/b_bg2.gif&quot; bgcolor=&quot;BAB7B3&quot; 
+    id=&quot;T6&quot;&gt;&lt;object classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot;<br>
+    codebase=&quot;http://download.macromedia.com/pub/shockwave/cabs/<br>
+    flash/swflash.cab#version=6,0,29,0&quot; 
+    width=&quot;70&quot; height=&quot;26&quot;&gt;<br>
+    &lt;param name=&quot;movie&quot; value=&quot;img/clock.swf?hours=14&amp;minutes=0&amp;sec=22&quot; /&gt;<br>
+    &lt;param name=&quot;quality&quot; value=&quot;high&quot; /&gt;<br>
+    &lt;/object&gt;<br>
+    &lt;/td&gt;<br>
+    &lt;td width=&quot;9&quot; valign=&quot;middle&quot; background=&quot;img/b_bg2.gif&quot; bgcolor=&quot;BAB7B3&quot;&gt;<br>
+    &lt;/tr&gt;<br>
+    &lt;/table&gt;<br>
+    &lt;/form&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><span lang="ru"><font face="Arial" size="2">Теперь страница 
+будет смотреться примерно так:<br>
+</font></span><font face="Arial" size="2"><span lang="ru">
+<br>
+<img border="0" src="control.jpg" width="583" height="37"><br>
+<br>
+Никакой особой функциональности она пока не имеет, но мы будем ее наращивать в 
+последующих уроках.<br>
+&nbsp;&nbsp;&nbsp; Для того чтоб </span>flash-<span lang="ru">компонент 
+показывал правильное время нашего сервера, а не то что мы статично передали в 
+строке:&nbsp; &quot;</span></font><font color="#008000" face="Courier" size="2">img/clock.swf?hours=14&amp;minutes=0&amp;sec=22</font><font face="Arial" size="2"><span lang="ru">&quot; 
+(иначе каждое обновление странички будет приводит к установке таймера в 14</span>:00:22<span lang="ru">)</span>
+<span lang="ru">можно сделать следующее - меняем нашу страничку </span>
+buttons.html <span lang="ru">на </span>buttons.phtml <span lang="ru">и добавляем 
+в нее немного </span>PHP <span lang="ru">кода, а именно:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table17">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    <b>&lt;?php <br>
+    </b>$aHours = </font><font color="#0000FF" face="Courier" size="2">
+    date</font><font color="#000080" face="Courier" size="2">(</font><font color="#008000" face="Courier" size="2">&quot;H</font><font color="#000080" face="Courier" size="2"><font color="#008000" face="Courier" size="2">&quot;</font>);<br>
+    $aMinutes = </font><font color="#0000FF" face="Courier" size="2">
+    date</font><font color="#000080" face="Courier" size="2">(</font><font color="#008000" face="Courier" size="2">&quot;i</font><font color="#000080" face="Courier" size="2"><font color="#008000" face="Courier" size="2">&quot;</font>);<br>
+    $aSeconds = </font><font color="#0000FF" face="Courier" size="2">
+    date</font><font color="#000080" face="Courier" size="2">(</font><font color="#008000" face="Courier" size="2">&quot;s</font><font color="#000080" face="Courier" size="2"><font color="#008000" face="Courier" size="2">&quot;</font>);<br>
+    <b>?&gt;</b></font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">Таким образом мы 
+узнали часы:минуты:секунды на нашем сервере. Теперь остается подставить 
+найденные значения в строку, передаваемую </span>flash-<span lang="ru">компоненту.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table18">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    &lt;param name=&quot;movie&quot; value=&quot;img/clock.swf?<b>&lt;?php</b> echo 'hours='.</font><font color="#008000" face="Courier" size="2">$aHours</font><font color="#000080" face="Courier" size="2">.'&amp;minutes='.</font><font color="#008000" face="Courier" size="2">$aMinutes</font><font color="#000080" face="Courier" size="2">.'&amp;sec='.</font><font color="#008000" face="Courier" size="2">$aSeconds</font><font color="#000080" face="Courier" size="2">
+    <b>?&gt;</b>&quot; /&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">После этого 
+поменяйте в файле </span>game.phtml <span lang="ru">чтоб фрейм </span>bottom
+<span lang="ru">указывал на страничку </span>buttons.phtml<span lang="ru">, а не
+</span>buttons.html <span lang="ru">как было ранее.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table19">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    &lt;frame name=&quot;bottom&quot; scrolling=&quot;no&quot; noresize src=&quot;<b>buttons.phtml</b>&quot;&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">Таким образом
+</span>flash-<span lang="ru">компонент будет всегда показывать актуальное время.<br>
+Вы можете целиком посмотреть страницу </span>buttons.phtml<span lang="ru"> <b>
+<a href="3_4/buttons.phtml">здесь</a></b>.<br>
+<br>
+<br></span><b>
+<span lang="ru"><font face="Arial" color="#000080"><a name="kopv6">
+<font size="2">3.5. </font></a></font></span></b><span lang="ru"><b>
+<a name="kopv7"><font size="2" face="Arial" color="#000080">&nbsp;Страница чата.</font></a></b>
+<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;Созданию клубного чата мы с Вами посвятим весь 
+11 урок нашего курса. Поэтому в завершающей главе нашего текущего занятия мы 
+лишь подготовим страничку </span>chat.html <span lang="ru">и </span>buttons.html
+<span lang="ru">для их дальнейшего использования в составе чата.<br>
+&nbsp;&nbsp; В страничке </span>chat.html <span lang="ru">мы создадим слой с 
+именем </span></font><font color="#000080" face="Courier" size="2">
+    <b>mes</b></font><font face="Arial" size="2"><span lang="ru">, в который 
+будем впоследствии заносить сообщения чата как от своего, так и от других 
+пользователей. Вся страница у нас пока будет выглядеть так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table20">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    <b>&lt;html&gt;<br>
+    </b>&lt;body bgcolor=&quot;#FDFBE1&quot;&gt;<br>
+    &lt;div id=&quot;<b>mes</b>&quot;&gt;&lt;/div&gt;<br>
+    &lt;/body&gt;<br>
+    <b>&lt;/html&gt;</b></font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+Для теста отображения написанных нами в чат сообщений немного изменим знакомый 
+нам файл </span>buttons.html <span lang="ru">и добавим туда парочку функций на
+</span>JavaScript.</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table21">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#008000" face="Courier" size="2">
+    &lt;script&gt;</font><font color="#000080" face="Courier" size="2"><br>
+    <br>
+    <b>function</b> getCookie(Name) {<br>
+    var search = Name + &quot;=&quot;<br>
+    if (document.cookie.length &gt; 0){<br>
+    offset = document.cookie.indexOf(search)<br>
+    if (offset != -1) {<br>
+    offset += search.length<br>
+    end = document.cookie.indexOf(&quot;;&quot;, offset)<br>
+    if (end == -1) end = document.cookie.length<br>
+    return unescape(document.cookie.substring(offset, end))<br>
+    }<br>
+    }<br>
+    }<br>
+    <br>
+    var UserName = &quot;&lt;a href=toad.html&gt;&lt;SPAN&gt;[&quot;+getCookie(&quot;MMCLUB_NICK_NAME&quot;)+&quot;]&lt;/SPAN&gt;&lt;/a&gt;&quot;+&quot; 
+    &quot;<br>
+    <br>
+    <b>function</b> rslength() // изменяет размер строки ввода текста<br>
+    {<br>
+    var size = document.body.clientWidth-(3*30)-21-59-256-18-30;<br>
+    if (size&lt;100) { size=100 }<br>
+    document.F1.text.width = size;<br>
+    document.all('T2').width = size;<br>
+    }<br>
+    window.onresize=rslength;<br>
+    <br>
+    <b>function</b> AddToChat()<br>
+    {<br>
+    var hsh = new Date();<br>
+    var S = top.frames['chat'].mes.innerHTML;<br>
+    cAdd = top.frames['bottom'].F1.text.value; <br>
+    top.frames['chat'].mes.innerHTML = S+&quot;&lt;font color=red&gt;&quot;+hsh.getHours()+&quot;:&quot;+hsh.getMinutes()+&quot;&lt;/font&gt; 
+    &quot;+UserName+cAdd+&quot;&lt;BR&gt;&quot;; <br>
+    top.frames['bottom'].F1.text.value = &quot;&quot;; <br>
+    top.frames['chat'].window.scrollBy(0, 65000);<br>
+    }<br>
+    <br>
+    </font><font color="#008000" face="Courier" size="2">
+    &lt;/script&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+Функция </span></font><font color="#000080" face="Courier" size="2">
+    getCookie<span lang="ru"> </span></font><font face="Arial" size="2">
+<span lang="ru">нам уже известна и она вытаскивает логин авторизовавшегося 
+игрока из </span>cookie <span lang="ru">браузера. Что касается функции </span></font>
+<font color="#000080" face="Courier" size="2">
+    rslength</font><font face="Arial" size="2"><span lang="ru">, то она 
+просто задает размер ячейки таблицы и строки ввода сообщения в чат в зависимости 
+от размеров текущего окна браузера. А вот функция </span></font>
+<font color="#000080" face="Courier" size="2">
+    AddToChat<span lang="ru"> </span></font><font face="Arial" size="2">
+<span lang="ru">уже непосредственно пишет введенное на странице </span>
+buttons.html <span lang="ru">сообщение чата во фрейм </span><b>chat</b><span lang="ru">,</span>
+<span lang="ru">не забывая сохранить имеющийся там ранее текст и добавляя каждое 
+следующее сообщение к нему.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Естественно, для вызова функции </span></font>
+<font color="#000080" face="Courier" size="2">
+    AddToChat<span lang="ru"> </span></font><font face="Arial" size="2">
+<span lang="ru">мы должны создать событие </span>onClick <span lang="ru">для 
+картинки </span></font><font color="#000080" face="Courier" size="2">
+    b_ok.gif<span lang="ru">:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table22">
+  <tr>
+    <td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+    &lt;img src=&quot;img/b_ok.gif&quot; width=&quot;30&quot; height=&quot;30&quot; alt=&quot;Добавить текст в чат&quot; 
+    style=&quot;cursor: hand&quot; <b>onclick</b>=&quot;</font><font color="#008000" face="Courier" size="2">AddToChat()</font><font color="#000080" face="Courier" size="2">&quot; 
+    /&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">Теперь после 
+теста этой добавленной функциональности у нас с Вами должна получиться следующая 
+картина:<br>
+<br>
+<img border="0" src="chat.jpg" width="579" height="598"><br>
+<br>
+Как Вы уже знаете из урока 1, нам следует собрать все написанные нами файлы в 
+папке </span><a href="file:///C:/WebServers/home/mmclub/www">C:\WebServer<span lang="ru">s</span>\home\mmclub\www</a>
+<span lang="ru">&nbsp;или скопируйте из папки </span><b>WWW</b>
+<span lang="ru">второго урока все файлы в папку </span>
+<a href="file:///C:/WebServers/home/mmclub/www">C:\WebServer<span lang="ru">s</span>\home\mmclub\www</a><span lang="ru">&nbsp; 
+если вы не сделали этого ранее.<br>
+Теперь все готово для теста написанного нами проекта.<br>
+Набрав в строке браузера:<br>
+<img border="0" src="start.jpg" width="345" height="78"><br>
+и авторизовавшись в игре с логином
+</span>Defender <span lang="ru">и паролем 1234 потестируйте отправку сообщений 
+во фрейм чата. В уроке 11 мы сделаем полноценный чат с использованием
+</span>mySQL <span lang="ru">таблицы, приватных сообщений и смайликов.<br>
+<b><br>
+В следующем уроке</b> мы подробно познакомимся с характеристика персонажа и для 
+их теста попутно создадим простую
+</span>JavaScript <span lang="ru">игру на стороне клиентской машины без
+</span>PHP <span lang="ru">и базы данных
+</span>MySQL<span lang="ru">,</span> <span lang="ru">в которой наглядно 
+продемонстрируем принципы боя между двумя персонажами и расчет наносимого урона 
+в зависимости от их статов.<br>
+&nbsp;</span></font></p>
+<font size="2" face="Arial">
+        <p align="left">&nbsp;</font></td>
+      <td width="27" height="356" background="Site/middle2.jpg">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="740" height="38" background="Site/bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

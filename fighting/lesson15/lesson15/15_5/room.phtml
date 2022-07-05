@@ -1,0 +1,61 @@
+<html>
+
+<?php
+  if (!empty($_GET['NickName'])){
+     $aNickName = $_GET['NickName'];
+
+    $aWhatStat = "";
+    $aWhatSkill = "";
+    // ”знаем характеристики персонажа
+
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+
+       $query = "SELECT b.BuildingName, u.Building FROM users u inner join Buildings b on b.id = u.Building WHERE Nick_Name='$aNickName'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       $aRow = mysql_fetch_array( $result);
+       $aRoom = $aRow["BuildingName"];
+       $aBuldingID = $aRow["Building"];
+       $query = "SELECT count(USER_ID) as CountUsers from users where Building = '$aBuldingID'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       $aRow = mysql_fetch_array( $result);
+       $aCountUsers = $aRow["CountUsers"];
+       // пишем название комнаты и сколько там народу
+       print('<b>'.$aRoom.'</b>('.$aCountUsers.')<br>');
+       $query = "SELECT Nick_Name,Character_Level,Char_Side,Char_ShutUp,Char_Chaos from users where Building = '$aBuldingID'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       while ($aRow = mysql_fetch_array($result)) {
+           $aUser  = $aRow["Nick_Name"];
+           $aLevel  = $aRow["Character_Level"];
+           $aChar_Side = $aRow["Char_Side"];    // добавлено в 15 уроке
+           $aChar_ShutUp = $aRow["Char_ShutUp"];    // добавлено в 15 уроке
+           $aChar_Chaos = $aRow["Char_Chaos"];    // добавлено в 15 уроке
+           print(GetCharSide().$aUser.'['.$aLevel.'] <img src="img\inf.jpg"> '.GetShutUp().'<br>');
+       }
+  }
+  
+    function GetCharSide(){         // добавлено в 15 уроке
+        global $aChar_Side,$aChar_Chaos;
+
+        if ( $aChar_Side == 1 ) print ('<img src=img/pal.gif alt="»грок принадлежит к светлому братству"> ');
+        if ( $aChar_Side == 2 ) print ('<img src=img/dark.gif alt="»грок принадлежит к темному братству"> ');
+        if ( $aChar_Chaos == 1 ) print ('<img src=img/chaos.gif alt="»грок находитс€ в хаосе"> ');
+    }
+    function GetShutUp(){         // добавлено в 15 уроке
+        global $aChar_ShutUp;
+        if ( $aChar_ShutUp == 1 ) return ('<img src=img/shut_up.gif alt="Ќа игрока наложено молчание"> ');
+        else return ("");
+    }
+
+  
+?>
+
+<body bgcolor="#E1FDE2">
+</body>
+</html>

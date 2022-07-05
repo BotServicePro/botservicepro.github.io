@@ -1,0 +1,1014 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<style>
+<!--
+table.MsoTableGrid
+  {border:1.0pt solid windowtext;
+  font-size:10.0pt;
+  font-family:"Times New Roman","serif"}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="740" height="350" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+  <tr>
+      <td width="740" height="133" background="Site/top.jpg" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="127" height="356" background="Site/middle1.jpg" valign="top">
+        <p align="left">
+        <b><font face="Arial" size="1" color="#505866">&nbsp;&nbsp;&nbsp; 
+    <a href="http://www.blitz-school.info"><font color="#FFFF99">Курсы</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font face="Arial" size="1" color="#FFFF99">
+    <a href="http://www.blitz-school.info/reg.html"><font color="#FFFF99">Регистрация</font></a><br>
+        &nbsp;&nbsp;&nbsp;
+    <a href="http://www.blitz-school.info/study_tech.html">
+    <font color="#FFFF99">Методика</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font>
+    <a href="http://www.blitz-school.info/program.html"><font face="Arial" size="1" color="#FFFF99">Оглавление</font></a><font face="Arial" size="1" color="#FFFF99"><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://www.blitz-school.info/login.html">
+    <font color="#FFFF99">Для учащихся</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font></b>
+    <img border="0" src="../navdiv.gif" width="80" height="4"><br>
+        <b><font size="1" face="Arial" color="#505866">&nbsp;&nbsp;&nbsp;
+        <a href="http://www.blitz-school.info/articles.html">
+    <font color="#FFFF99">Статьи</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font size="1" face="Arial" color="#FFFF99">
+    <a href="http://www.blitz-school.info/instrum.html">
+    <font color="#FFFF99">Инструменты</font></a><br>
+    <span lang="en-us">&nbsp;&nbsp;&nbsp; </span>
+    <a href="http://www.blitz-school.info/contacts.html">
+    <font color="#FFFF99">Контакты</font></a><br>
+    <span lang="en-us">&nbsp;&nbsp;&nbsp; </span></font></b>&nbsp;</td>
+      <td width="586" height="356" background="Site/bg.gif" valign="top">
+
+<p align="center"><font color="#008000"><b><font size="5"><span lang="ru">Урок 
+8. Проведение боя</span></font></b><span lang="ru"><br>
+</span>
+</font><b></p>
+<p align="justify"><font face="Arial" size="2" color="#000080">8</font><span lang="ru"><font face="Arial" color="#000080"><a name="kopv"><font size="2">.1. 
+</font></a></font></span></b><span lang="ru"><b><a name="kopv">
+<font size="2" face="Arial" color="#000080">Таблицы боя. Удары и блоки .</font></a></b><font size="2" face="Arial">
+<br>
+</font></span><font size="2" face="Arial">
+&nbsp;&nbsp;&nbsp;&nbsp; <span lang="ru"><br>
+</span>&nbsp;&nbsp;&nbsp;Итак, мы <span lang="ru">постепенно подобрались к самой 
+важной части игры - проведению поединка. Мы ранее уже рассматривали тестовый 
+бой, который реализовали исключительно на </span><span lang="en-us">JavaScript.
+</span>Т<span lang="ru">еперь же нам предстоит использовать язык сценариев </span>
+<span lang="en-us">PHP </span>и<span lang="ru"> нашу базу </span>
+<span lang="en-us"><b>mmclub</b> </span>на <span lang="en-us">MySQL</span>
+<span lang="ru">для реализации поединка.<br>
+&nbsp;&nbsp; Для начала, давайте создадим справочную табличку для однозначного 
+определения зон ударов и блоков, которая пригодится нам впоследствии.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">/*Справочник зон*/<br>
+    </font>CREATE TABLE `<b>body_zones</b>` (<br>
+    `BZ_ID` SMALLINT(1) unsigned NOT NULL DEFAULT 0,<br>
+    `BZ_NAME` CHAR(20) NOT NULL DEFAULT '',<br>
+    PRIMARY KEY (`BZ_ID`)<br>
+    ) TYPE=MyISAM;</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">и заполним ее значениями:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    INSERT INTO body_zones(BZ_ID,BZ_NAME) values(1,'Голова');<br>
+    INSERT INTO body_zones(BZ_ID,BZ_NAME) values(2,'Грудь');<br>
+    INSERT INTO body_zones(BZ_ID,BZ_NAME) values(3,'Живот');<br>
+    INSERT INTO body_zones(BZ_ID,BZ_NAME) values(4,'Ноги');</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">Для описания поединка нам также понадобятся две таблицы. Первая 
+(назовем ее - <b>battle</b>) будет служить для определения текущего состояния 
+боя в целом, вторая (ее название будет - <b>battledetails</b>) дополнит первую, 
+сохраняя в себе каждый ход сражающихся соперников.<br>
+Таблица <b>battle </b>будет выглядеть так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">/* Таблица поединка 1 х 1 */<br>
+    </font>CREATE TABLE `battle` (<br>
+    `BAT_ID` BIGINT unsigned NOT NULL auto_increment, <font color="#008080">
+    /*ID поединка*/</font><br>
+    `USER1_ID` bigint(20), <font color="#008080">/*ID 1 игрока*/</font><br>
+    `USER2_ID` bigint(20), <font color="#008080">/*ID 2 игрока*/</font><br>
+    `TIMEOUT` SMALLINT(2), <font color="#008080">/*Таймаут*/</font><br>
+    `STARTTIME` DATETIME, <font color="#008080">&nbsp;/*время начала 
+    поединка*/</font><br>
+    `M1` SMALLINT(1) unsigned NOT NULL DEFAULT 0, <font color="#008080">
+    /*Ход первого*/</font><br>
+    `M2` SMALLINT(1) unsigned NOT NULL DEFAULT 0, <font color="#008080">
+    /*Ход второго*/</font><br>
+    `LASTMOVE` DATETIME, <font color="#008080">&nbsp;/*время последнего 
+    хода*/</font><br>
+    `STATUS` SMALLINT(1), <font color="#008080">/*статус поединка 
+    1-идет,2-завершен*/</font><br>
+    PRIMARY KEY (`BAT_ID`)<br>
+    ) TYPE=MyISAM;<br>
+&nbsp;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2">&nbsp;<span lang="ru">&nbsp; Так 
+как мы будем рассматривать кулачный поединок двух соперников, нам понадобится 
+хранить их идентификаторы ( </span></font><font face="Courier" size="2">
+    USER1_ID </font><font face="Arial" size="2"><span lang="ru">и </span>
+</font><font face="Courier" size="2">
+    USER2_ID</font><font face="Arial" size="2"><span lang="ru">). Таймаут из 
+заявки перейдет в эту таблицу (поле </span></font><font face="Courier" size="2">
+    TIMEOUT</font><font face="Arial" size="2"><span lang="ru">). Для 
+отслеживания времени, нам естественно понадобится время начала поединка (будем 
+хранить в поле - </span></font><font face="Courier" size="2">
+    STARTTIME</font><font face="Arial" size="2"><span lang="ru">).<br>
+&nbsp;&nbsp;&nbsp; Для того, чтоб знать какой из игроков походил, а какой еще 
+нет в активной фазе боя, предусмотрены поля и </span></font>
+<font face="Courier" size="2">
+    M1</font><font face="Arial" size="2"><span lang="ru"> , </span></font>
+<font face="Courier" size="2">
+    M2 </font><font face="Arial" size="2"><span lang="ru">в которых должны 
+содержаться флаги хода (</span><span lang="en-us">MOVE</span><span lang="ru">)</span><span lang="en-us">
+</span>д<span lang="ru">ля первого и второго игроков соответственно. Значение 0 
+(ноль) в таком поле означает, что игрок еще не сделал хода, 1 (один) - игрок 
+походил. Для проверки соответствия таймауту, будем также хранить время 
+последнего хода, для чего предусмотрено поле </span></font>
+<font face="Courier" size="2">
+    LASTMOVE</font><font face="Arial" size="2"><span lang="ru">. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; И последнее - поле </span></font>
+<font face="Courier" size="2">
+    STATUS</font><font face="Arial" size="2"><span lang="ru">, для того чтоб 
+определять статус поединка, 1-идет, 2-поединок закончился.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Таблица детализации поединка, выглядит так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">/* Таблица детализации поединка 1 х 1 */<br>
+    </font>CREATE TABLE `battledetails` (<br>
+    `BATDET_ID` BIGINT unsigned NOT NULL auto_increment,
+    <font color="#008080">/*ID строки хода*/</font><br>
+    `BAT_ID` BIGINT unsigned NOT NULL DEFAULT 1, <font color="#008080">/*ID 
+    поединка*/</font><br>
+    `USERID` bigint(20),<font color="#008080"> /*ID игрока сделавшего ход*/</font><br>
+    `ATTACK` SMALLINT(1) unsigned NOT NULL DEFAULT 0, <font color="#008080">
+    /*Зона атаки*/</font><br>
+    `DEFEND` SMALLINT(1) unsigned NOT NULL DEFAULT 0, <font color="#008080">
+    /*Зона защиты*/</font><br>
+    `MESSAGE` CHAR(255) NOT NULL DEFAULT '', <font color="#008080">
+    /*Описание действия....куда нанес удар и т.д.*/</font><br>
+    PRIMARY KEY (`BATDET_ID`)<br>
+    ) TYPE=MyISAM;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+В этой таблице, мы сохраняем идентификатор поединка, чтоб связать ее с главной 
+таблицей боя - </span></font><b><font face="Courier" size="2">
+    battle</font></b><font face="Arial" size="2"><span lang="ru">. Поле&nbsp; </span>
+</font><font face="Courier" size="2">
+    USERID </font><font face="Arial" size="2"><span lang="ru">хранит 
+идентификатор игрока, сделавшего последний ход. Поля </span></font>
+<font face="Courier" size="2">
+    ATTACK </font><font face="Arial" size="2"><span lang="ru">и </span>
+</font><font face="Courier" size="2">
+    DEFEND</font><font face="Arial" size="2"><span lang="ru"> содержат зоны 
+удара и блока (которые мы определили в таблице </span><b><span lang="en-us">
+body_zones</span></b><span lang="ru">)</span><span lang="en-us">. </span>Ч<span lang="ru">то 
+касается поля </span></font><font face="Courier" size="2">
+    MESSAGE</font><font face="Arial" size="2"><span lang="ru">, то мы его 
+зарезервируем для текстового описания нанесенных ударов и поставленных блоков.<br>
+&nbsp;&nbsp;&nbsp; Скачать добавленные таблицы можно <a href="8_1/db/battle.sql">
+здесь</a>.<br>
+<br>
+<br></span><a name="kopv0"><font color="#000080"><b>8</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv0"><font size="2">.2. 
+</font></a></font></span><font size="2" face="Arial" color="#000080">
+<span lang="ru"><a name="kopv0">Вход в поединок</a><a name="kopv1">.</a></span></font></b><span lang="ru"> <br>
+<br>
+&nbsp;&nbsp;&nbsp; Давайте в нашу таблицу
+</span>
+<span lang="en-us"><b>users</b> </span>д<span lang="ru">обавим еще одно поле:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <b>Character_Status</b> INT DEFAULT 1, <font color="#008080">/* 
+    1-обычное состояние,2-в бою, 3-бой окончен (смотрим результат), 4-в 
+    транспортном средстве */</font></font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru"> которое 
+определит текущее состояние нашего героя. Это поле понадобится нам чуть позже. А 
+сейчас мы немного видоизменим файл
+</span>
+<span lang="en-us">zayavka.phtml</span>, который мы разрабатывали в прошлом 
+уроке. Нам необходимо сделать <span lang="ru"> две кнопки - &quot;Начать бой&quot; и 
+&quot;Отказать&quot;. Первая кнопка, как ясно из ее названия должна переводить игроков из 
+заявки непосредственно в фазу боя, а вторая кнопка, дает возможность отказаться 
+от боя. Обе эти кнопки доступны только подающему заявку. <br>
+&nbsp;&nbsp;&nbsp; После добавления этих кнопок, наш код в файле
+</span><span lang="en-us">zayavka.phtml</span> <span lang="ru"> будет выглядеть 
+так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#0000FF">if</font> ($aNick2 != ''){<br>
+    <font color="#0000FF">print</font>(&quot;&lt;INPUT TYPE=radio NAME=gocombat 
+    value=$aUserID disabled&gt;&lt;font color=green&gt;&quot;.$aTime.&quot;&lt;/font&gt;&lt;b&gt; &quot;.$aNick.&quot; 
+    &lt;/b&gt;[$aLevel1] против &lt;b&gt;&quot;.$aNick2.&quot; &lt;/b&gt;[$aUserLevel] тип боя: &lt;img src=Items\fighttype&quot;.$aBattleType.&quot;.gif&gt; 
+    (таймаут $aTimeOut мин)&quot;);<br>
+    <font color="#0000FF">print</font>('&lt;INPUT class=btn TYPE=button value=&quot;Начать 
+    бой&quot; id=&quot;battle&quot; NAME=&quot;battle&quot; onClick=&quot;<font color="#000080">gotoBattleCheck()</font>&quot;&gt;&amp;nbsp;');<br>
+    <font color="#0000FF">print</font>('&lt;INPUT class=btn TYPE=button value=&quot;Отказать&quot; 
+    id=&quot;decline&quot; NAME=&quot;decline&quot; onClick=&quot;<font color="#000080">otkazZapros()</font>&quot;&gt;&lt;br&gt;');<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru"> &nbsp;&nbsp; При 
+нажатии на кнопку отказать, срабатывает
+</span>
+<span lang="en-us">JavaScript </span>ф<span lang="ru">ункция
+</span></font><font color="#000080" face="Courier" size="2">otkazZapros()</font><font face="Arial" size="2"><span lang="ru">, 
+которая описывается следующим образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <b>function</b> otkazZapros(){<br>
+    location.href='zayavka.phtml?<font color="#000080">otkaz=1</font>&amp;level=fiz&amp;NickName=<b>&lt;?php</b>
+    <font color="#0000FF">echo</font> $aNickName; <b>?&gt;</b>';<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru"> В
+</span>
+<span lang="en-us">PHP </span>э<span lang="ru">тот параметр (</span></font><font face="Courier" size="2"><font color="#000080">otkaz=1</font></font><font face="Arial" size="2"><span lang="ru">) 
+обрабатываем стандартным образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table8">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">// отказываем принявшему<br>
+    </font><font color="#0000FF">if</font> (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['otkaz'])){<br>
+&nbsp; $lOtkazZapros = 1;<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru"> и далее 
+реализация:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table9">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">// Отозвали запрос - уберем из 2ой части 
+    принявшего<br>
+    </font><font color="#0000FF">if</font> ($lOtkazZapros){<br>
+    $query = <font color="#008000">&quot;UPDATE zayavki SET CHAR2_NAME='', 
+    level2='' where CHAR1_NAME='$aNickName'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aUser2ID = 0;<br>
+    $lInZayavka2 = 0;<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru"> таким образом мы 
+очищаем вторую часть заявки - то есть, по сути выкидываем из заявки принявшего.<br>
+<br>
+При нажатии игроком на кнопку &quot;Начать бой&quot; срабатывает функция
+</span></font><font color="#000080" face="Courier" size="2">gotoBattleCheck()</font><font face="Arial" size="2"><span lang="ru">, 
+которая выглядит так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table10">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2"><b>function</b> 
+    gotoBattleCheck(){<br>
+    location.href='battlecheck.phtml?NickName=<b>&lt;?php</b>
+    <font color="#0000FF">echo</font> $aNickName; <b>?&gt;</b>';<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru"> Эта функция 
+передает управление в файл
+</span></font><font face="Courier" size="2">battlecheck.phtml</font><font face="Arial" size="2"><span lang="ru">, 
+который занимается некоторыми проверками перед началом поединка.</span> <span lang="ru">
+Код проверки предельно прост:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table11">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">// Узнаем статус заявки перед поединком<br>
+    </font>$query = <font color="#008000">&quot;SELECT * FROM zayavki where 
+    CHAR1_NAME='$aNickName'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $line = <font color="#0000FF">mysql_fetch_array</font>($result);<br>
+    $aChar2 = $line[&quot;CHAR2_NAME&quot;];<br>
+    $aTimeOut = $line[&quot;ZTIMEOUT&quot;]; <font color="#008080">// тайм<span lang="ru">а</span>ут<br>
+    </font>$aType = $line[&quot;ZTYPE&quot;]; <span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span><font color="#008080">// тип боя<br>
+    </font><br>
+    <font color="#0000FF">if</font>( $aChar2 &lt;&gt; '' ) <font color="#008080">
+    // успели отозвать запрос ?<br>
+    </font>{<br>
+    <font color="#008080">// меняем на статус - юзеры 1 и 2 в поединке<br>
+    </font>$query = <font color="#008000">&quot;UPDATE users SET Character_Status=2,Character_CurHealth=Character_Endurance*6 
+    WHERE Nick_Name='$aNickName' OR Nick_Name='$aChar2'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#008080">// создадим новый поединок:<br>
+    </font>$query = &quot;<font color="#008000">INSERT INTO BATTLE 
+    (CHAR1_NAME,CHAR2_NAME,STARTTIME,TIMEOUT,STATUS) values ('$aNickName','$aChar2',Now(),$aTimeOut,1)&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <br>
+    <font color="#008080">// удаляем заявку перед поединком<br>
+    </font>$query = <font color="#008000">&quot;DELETE FROM zayavki WHERE 
+    CHAR1_NAME='$aNickName'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#0000FF">print</font>('&lt;SCRIPT&gt;location.href=&quot;battle.phtml?NickName='.$aNickName.'&quot;;&lt;/SCRIPT&gt;');<br>
+    }<br>
+    <font color="#0000FF">else</font> <font color="#0000FF">print</font>('&lt;SCRIPT&gt;location.href=&quot;zayavka.phtml?NickName='.$aNickName.'&quot;;&lt;/SCRIPT&gt;');</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp; Так 
+как, только подающий заявку инициирует начало поединка, то проверяется в этом 
+файле только возможность отозвать запрос вторым игроков из заявки (</span></font><font face="Courier" size="2"><font color="#0000FF">if</font>( 
+$aChar2 &lt;&gt; '' )</font><font face="Arial" size="2"><span lang="ru">)<br>
+&nbsp;&nbsp;&nbsp; Далее скрипт создает новую запись в таблице боев
+</span><b>battle</b><span lang="ru">, удаляет заявку и меняет статус играющих (</span></font><font color="#008000" face="Courier" size="2">Character_Status=2</font><font face="Arial" size="2"><span lang="ru">), 
+после чего переправляет игроков на страничку </span>battle.phtml.<span lang="ru"><br>
+</span>
+<span lang="en-us">&nbsp;&nbsp;&nbsp;&nbsp;</span><span lang="ru"><br> </span>
+<a name="kopv2"><font color="#000080"><b>8</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv2"><font size="2">.3. </font>
+</a></font></span></b><span lang="ru"><b><a name="kopv3">
+<font size="2" face="Arial" color="#000080">Проведение поединка.</font></a></b> <br>
+<br>
+</span>&nbsp;&nbsp; <span lang="ru">Страница </span><b>battle.phtml</b><span lang="ru">, 
+которую мы сделаем в этом уроке, управляет ходом поединка. После того как 
+отработал скрипт, содержащийся в файле </span></font><font face="Courier" size="2">battlecheck.phtml</font><font face="Arial" size="2"><span lang="ru">, 
+оба игрока должны увидеть следующую картину в своем браузере:<br>
+<img border="0" src="battle.jpg" width="585" height="355"><br>
+<br>
+&nbsp;&nbsp; Мы уже рассматривали в предыдущих урок принципы проведения боя. 
+Поэтому вы уже знаете, что каждый из противников должен выбрать зону атаки 
+(голова, корпус, пояс, ноги) и зоны защиты (голова-корпус, корпус-пояс, 
+пояс-ноги и ноги-голова) и нажать на кнопку &quot;Вперед&quot;. За проверки нанесения 
+ударов и блоков теперь отвечает не код на языке </span>JavaScript
+<span lang="ru">на стороне клиента, а алгоритм в нашей </span>PHP
+<span lang="ru">страничке </span><b>battle.phtml</b>.<span lang="ru"><br>
+</span>&nbsp;&nbsp;&nbsp; <span lang="ru">Вначале мы должны узнать кто есть кто 
+в строке записи поединка:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table12">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">// узнаем каким номером мы находимсяя в строке боя 
+    CHAR1 или CHAR2, кто наш противник<br>
+    // и кто уже успел сделать ход ?<br>
+    </font>$query = <font color="#008000">&quot;SELECT 
+    BAT_ID,CHAR1_NAME,CHAR2_NAME,M1,M2 FROM battle WHERE CHAR1_NAME='$aNickName' 
+    OR CHAR2_NAME='$aNickName'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+    $aBattleID = $aRow[&quot;BAT_ID&quot;];<br>
+    $aChar1 = $aRow[&quot;CHAR1_NAME&quot;];<br>
+    $aChar2 = $aRow[&quot;CHAR2_NAME&quot;];<br>
+    $aMove1 = $aRow[&quot;M1&quot;];<br>
+    $aMove2 = $aRow[&quot;M2&quot;];</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp; 
+После этого нужно уточнить характеристики сражающихся персонажей:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table13">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">// определим некоторые параметры char1 и char2<br>
+    // 1</font><br>
+    $query = <font color="#008000">&quot;SELECT * FROM users WHERE Nick_Name='$aChar1'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+    $aStrength1 = $aRow[&quot;Character_Strength&quot;];<br>
+    $aEndurance1 = $aRow[&quot;Character_Endurance&quot;];<br>
+    $aCurHealth1 = $aRow[&quot;Character_CurHealth&quot;];<br>
+    <font color="#008080">// 2</font><br>
+    $query = <font color="#008000">&quot;SELECT * FROM users WHERE Nick_Name='$aChar2'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+    $aStrength2 = $aRow[&quot;Character_Strength&quot;];<br>
+    $aEndurance2 = $aRow[&quot;Character_Endurance&quot;];<br>
+    $aCurHealth2 = $aRow[&quot;Character_CurHealth&quot;];</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2">&nbsp;&nbsp;&nbsp; <span lang="ru">
+Теперь на примере первого игрока рассмотрим алгоритм хода. </span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table14">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#0000FF">if</font> ( $aNickName == $aChar1 ){
+    <font color="#008080">// Мы под первым номером<br>
+    </font><br>
+    $aShowEndurance1 = $aEndurance1;<br>
+    $aShowHealth1 = $aCurHealth1;<br>
+    $aShowEndurance2 = $aEndurance2;<br>
+    $aShowHealth2 = $aCurHealth2;<br>
+    <br>
+    $aOrder = 1;<br>
+    $aOpponentNick = $aChar2;<br>
+    <font color="#008080">// Проверим походил ли соперник<br>
+    </font><font color="#0000FF">if</font> (($aMove1 == 1) &amp; ($aMove2 == 
+    0)){<br>
+    print('&lt;SCRIPT&gt;location.href=&quot;<b><font color="#000080">wait.phtml</font></b>?NickName='.$aNickName.'&amp;bat_id='.$aBattleID.'&quot;;&lt;/SCRIPT&gt;');<br>
+    }<br>
+    <font color="#0000FF">if</font> ($aMove1 == 0){<br>
+    <font color="#008080">// мы <span lang="ru">не делали ход, делаем его 
+    сейчас</span>!</font><br>
+    <font color="#0000FF">if</font> (!<font color="#0000FF">empty</font>($_POST['attack'])) 
+    {<br>
+    $aAttack = $_POST['attack'];<br>
+    $aDefend = $_POST['defend'];<br>
+    $query = <font color="#008000">&quot;INSERT INTO <b>battledetails </b>(BAT_ID,CHAR_NAME,ATTACK,DEFEND) 
+    values ($aBattleID,'$aNickName',$aAttack,$aDefend)&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#008080">// установим флаг хода для 1 игрока<br>
+    </font>$query = <font color="#008000">&quot;UPDATE battle set M1=1 where 
+    CHAR1_NAME='$aNickName'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#0000FF">print</font>('&lt;SCRIPT&gt;location.href=&quot;battle.phtml?NickName='.$aNickName.'&quot;;&lt;/SCRIPT&gt;');<br>
+    }<br>
+    }<br>
+    <font color="#0000FF">if</font> (($aMove1 == 1) &amp; ($aMove2 == 1)){
+    <font color="#008080">// расчитываем damage для обоих </font>персонажей<br>
+    <font color="#FF00FF">CalcDamage</font>($aChar1,$aChar2,$aBattleID);
+    <font color="#008080">// считаем повреждения<br>
+    </font>print('&lt;SCRIPT&gt;location.href=&quot;battle.phtml?NickName='.$aNickName.'&quot;;&lt;/SCRIPT&gt;');<br>
+    }<br>
+    <br>
+    } <font color="#0000FF">else</font> { <span lang="ru">....</span></font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp; 
+Вначале мы определяем, походил ли наш оппонент. Если мы уже делали ход, а 
+противник запаздывает с ответным ходом, то мы должны немного подождать, для чего 
+мы будем переадресованы на страницу </span><b>wait.phtml</b>.<span lang="ru"> В 
+эту страницу передается ник персонажа и идентификатор боя. <br>
+&nbsp;&nbsp; Если мы еще не ходили (</span></font><font face="Courier" size="2">$aMove1 
+== 0</font><font face="Arial" size="2"><span lang="ru">), то программа считывает 
+полученные методом </span>POST <span lang="ru">значения параметров </span>attack
+<span lang="ru">и </span>defend <span lang="ru">и помещает их в таблицу 
+детализации поединка </span><b>battledetails</b>.<span lang="ru"> Затем 
+происходит запись в главную таблицу боя </span><b>battle</b> <span lang="ru">
+флага, что игрок походил. Это осуществляется установкой поля </span>M1
+<span lang="ru">в единицу (для первого игрока).<br>
+&nbsp;&nbsp;&nbsp; Если второй игрок перед этим уже тоже успел сделать ход (</span></font><font face="Courier" size="2">($aMove1 
+== 1) &amp; ($aMove2 == 1)</font><font face="Arial" size="2"><span lang="ru">) то 
+все данные для <u>расчета повреждений</u> уже есть и мы вызываем функцию </span>
+<b><font color="#0000FF">CalcDamage<span lang="ru">()</span></font></b><span lang="ru"> 
+которая и занимается этими делами.<br>
+&nbsp;&nbsp;&nbsp; Код функции </span><font color="#0000FF">CalcDamage</font><span lang="ru"> 
+выглядит так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table15">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <b>function</b> <b><font color="#0000FF">CalcDamage</font></b>($aChar1,$aChar2,$aBattleID){<br>
+    <font color="#008080">// обнуляем флаги ходов игроков<br>
+    </font>$query = <font color="#008000">&quot;UPDATE battle set M1=0, M2=0 
+    where BAT_ID=$aBattleID&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <br>
+    <font color="#008080">// параметры 1 игрока</font><br>
+    $query = <font color="#008000">&quot;SELECT * FROM users WHERE Nick_Name='$aChar1'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+    $aStrength1 = $aRow[&quot;Character_Strength&quot;];<br>
+    $aCharLevel = $aRow[&quot;Character_Level&quot;];<br>
+    $aCurHealth1 = $aRow[&quot;Character_CurHealth&quot;];<br>
+    <font color="#008080">// параметры 2 игрока</font><br>
+    $query = <font color="#008000">&quot;SELECT * FROM users WHERE Nick_Name='$aChar1'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+    $aStrength2 = $aRow[&quot;Character_Strength&quot;];<br>
+    $aCharLevel2 = $aRow[&quot;Character_Level&quot;];<br>
+    $aCurHealth2 = $aRow[&quot;Character_CurHealth&quot;];<br>
+    <br>
+    <font color="#008080">// кто куда ударил и что блокировал<br>
+    // первый игрок</font><br>
+    $query = <font color="#008000">&quot;select * from battledetails WHERE 
+    CHAR_NAME='$aChar1' order by batdet_id DESC limit 1&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+    $aAttack1 = $aRow[&quot;ATTACK&quot;];<br>
+    $aDefend1 = $aRow[&quot;DEFEND&quot;];<br>
+    <font color="#008080">// второй игрок</font><br>
+    $query = <font color="#008000">&quot;select * from battledetails WHERE 
+    CHAR_NAME='$aChar2' order by batdet_id DESC limit 1&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+    $aAttack2 = $aRow[&quot;ATTACK&quot;];<br>
+    $aDefend2 = $aRow[&quot;DEFEND&quot;];<br>
+    <font color="#008080">// считаем повреждения, с учетом блоков<br>
+    // куда бил игрок 1 и что блокировал игрок 2 ?</font><br>
+    <br>
+    <font color="#0000FF">if</font> ( ! <b><font color="#0000FF">Blocked</font></b>($aAttack1,$aDefend2) 
+    ){<br>
+    $aCurHealth2 = $aCurHealth2 - $aStrength1;<br>
+    $aCurHealth2 = $aCurHealth2 &lt; 0 ? 0 : $aCurHealth2;<br>
+    $query = <font color="#008000">&quot;UPDATE users set Character_CurHealth=$aCurHealth2 
+    where Nick_Name='$aChar2'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    }<br>
+    <font color="#008080">// куда бил игрок 2 и что блокировал игрок 1 ?</font><br>
+    <font color="#0000FF">if</font> ( ! <font color="#0000FF"><b>Blocked</b></font>($aAttack2,$aDefend1) 
+    ){<br>
+    $aCurHealth1 = $aCurHealth1 - $aStrength2;<br>
+    $aCurHealth1 = $aCurHealth1 &lt; 0 ? 0 : $aCurHealth1;<br>
+    $query = <font color="#008000">&quot;UPDATE users set Character_CurHealth=$aCurHealth1 
+    where Nick_Name='$aChar1'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    }<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp; 
+Вначале мы обнуляем флаги ходов (поля </span>M1 <span lang="ru">и </span>M2<span lang="ru">), 
+так как фаза хода завершилась. Затем выбираем самые последние записи для наших 
+игроков из таблицы </span><b>battledetails</b><span lang="ru"> для того чтоб 
+узнать значения полей </span><span lang="en-us">attack </span>и<span lang="ru"> </span>
+<span lang="en-us">defend. </span><br>
+&nbsp;&nbsp;&nbsp; П<span lang="ru">осле этого используем функцию </span>
+<span lang="en-us"><font color="#000080">Blocked</font> </span>в<span lang="ru"> 
+качестве аргументов которой передаются значения атаки одного игрока и защиты 
+второго, чтоб определить заблокирован ли удар или попал в незащищенное блоком 
+место. Код функции </span><span lang="en-us"><font color="#000080">Blocked</font>
+</span><span lang="ru">&nbsp;приведен ниже:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table16">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <b>function</b> <font color="#0000FF"><b>Blocked</b></font>($a,$d){<br>
+    $def = <font color="#0000FF">array</font>(1=&gt;'12',2=&gt;'23',3=&gt;'34',4=&gt;'41');<br>
+    <font color="#0000FF">if</font>( <font color="#0000FF">strpos</font>($def[$d],$a) 
+    === false ){<br>
+    $retv = false;<br>
+    }<font color="#0000FF">else</font>{<br>
+    $retv = true;<br>
+    }<br>
+    <font color="#0000FF">return</font> ($retv);<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="en-us">&nbsp;&nbsp;
+</span>Ф<span lang="ru">ункция производит анализ на вхождение значения атаки в 
+строку определяющую зоны блока. Так, например, если игрок заблокировал зоны 
+голова-корпус нажав на первую радио-кнопку в форме поединка, то параметр </span>
+<span lang="en-us">$d </span><span lang="ru">функции</span><span lang="en-us">
+</span></font><font color="#0000FF" face="Courier" size="2"><b>Blocked</b></font><font face="Arial" size="2"><span lang="en-us">,
+</span>п<span lang="ru">римет значение 1, в массиве </span><span lang="en-us">
+$def </span>э<span lang="ru">то соответствует строке </span><span lang="en-us">
+'12' </span>т<span lang="ru">ак как блокируются, на самом деле, две зоны. <br>
+&nbsp;&nbsp;&nbsp; В конце концов функция </span></font>
+<font color="#0000FF" face="Courier" size="2"><b>Blocked</b></font><font face="Arial" size="2"><span lang="ru">, 
+вернет </span><b><span lang="en-us">false</span></b>,<span lang="en-us"> </span>
+е<span lang="ru">сли удар не попал в блок и </span><b><span lang="en-us">true</span></b>,<span lang="en-us">
+</span>е<span lang="ru">сли удар заблокирован.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Если удар достиг цели, то функция </span></font><font face="Courier" size="2">
+<b><font color="#0000FF">CalcDamage</font></b></font><font face="Arial" size="2"><span lang="ru"> 
+про изведет расчет повреждений по простой формуле Здоровье игрока = Здоровье 
+игрока - Сила удара. Ну и, естественно, сделает проверку, чтоб здоровье не стало 
+отрицательным.<br>
+&nbsp;&nbsp; Затем параметры рассчитанного здоровья (</span></font><font face="Courier" size="2">$aCurHealth1 
+и $aCurHealth2</font><font face="Arial" size="2"><span lang="ru">) записываются 
+в таблицу </span><span lang="en-us">users.</span><span lang="ru"><br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp; 
+<br> </span><a name="kopv4"><font color="#000080"><b>8</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv4"><font size="2">.4. </font></a></font></span></b>
+<span lang="ru"><b><a name="kopv5"><font size="2" face="Arial" color="#000080">
+Сообщения о результатах хода</font></a><font size="2" face="Arial" color="#000080">/боя</font></b> <br>
+<br>
+</span><span lang="en-us">&nbsp;&nbsp; </span>Чтобы видеть, как протекает 
+поединок, нужно выдавать в клиентский браузер<span lang="en-us">&nbsp; </span>
+<span lang="ru">информацию о его ходе. <br>
+&nbsp;&nbsp;&nbsp; Во первых, как мы уже говорили, если один игрок ждет другого, 
+то его взору должна предстать картинка ожидания хода соперника. Для ее 
+отображения служит файл
+</span><b>wait.phtml</b>.<br>
+<br>
+<img border="0" src="wait.jpg" width="528" height="313"><br>
+<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Во-первых <span lang="en-us">PHP </span>код<span lang="en-us">
+</span>в этом файле, проверяет ходы нашего персонажа и соперника, чтоб знать, не 
+пора ли снова возвращаться к странице <span lang="en-us"><b>battle.phtml</b>.
+</span>За это отвечает следующий фрагмент кода:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table17">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#0000FF">if</font>( $aCharStatus == 2 ){<br>
+    <font color="#0000FF">if</font> ( $aNickName == $aChar1 ){
+    <font color="#008080">// Мы под первым номером</font><br>
+    <font color="#0000FF">if</font> ( $aMove1 == 0 ){<br>
+    print('&lt;SCRIPT&gt;location.href=&quot;<font color="#000080">battle.phtml</font>?NickName='.$aNickName.'&quot;;&lt;/SCRIPT&gt;');<br>
+    }<br>
+    }<br>
+    <font color="#0000FF">if</font> ( $aNickName == $aChar2 ){
+    <font color="#008080">// Мы под вторым номером</font><br>
+    <font color="#0000FF">if</font> ( $aMove2 == 0 ){<br>
+    print('&lt;SCRIPT&gt;location.href=&quot;<font color="#000080">battle.phtml</font>?NickName='.$aNickName.'&quot;;&lt;/SCRIPT&gt;');<br>
+    }<br>
+    }<br>
+    $message = &quot;Ожидаем хода соперника. &amp;nbsp;&quot;;<br>
+    } <font color="#0000FF">else</font> {&nbsp; .....</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp; Если 
+поединок закончен, файл
+</span><span lang="en-us"><b>wait.phtml</b> </span>д<span lang="ru">олжен тоже 
+это показать. В файле
+</span><b><span lang="en-us">battle.phtml</span> </b><span lang="ru">есть такой 
+фрагмент когда, который проверяет, не исчерпалось ли здоровье наших героев? :</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table18">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">// Поединок закончен ?<br>
+    </font><font color="#0000FF">if</font> ( ($aCurHealth1 == 0) || 
+    ($aCurHealth2 == 0) ){<br>
+    <font color="#008080">// Устанавливаем статус 3 (чтоб посмотреть 
+    результаты)<br>
+    </font>$query = <font color="#008000">&quot;UPDATE users set Character_Status 
+    = 3 where Nick_Name='$aChar1' or Nick_Name='$aChar2'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#008080">// установим статусы после боя, согласно 
+    сохранившегося здоровья<br>
+    </font>$query = <font color="#008000">&quot;UPDATE battle set 
+    R1=$aCurHealth1,R2=$aCurHealth2 where CHAR1_NAME='$aChar1' or 
+    CHAR2_NAME='$aChar2'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <br>
+    <font color="#0000FF">print</font>('&lt;SCRIPT&gt;location.href=&quot;wait.phtml?NickName='.$aNickName.'&amp;bat_id='.$aBattleID.'&quot;;&lt;/SCRIPT&gt;');<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp;&nbsp; Если 
+здоровье одного или обоих игроков упало до нуля, значит бой завершен и мы 
+переводим игроков в статус 3 (</span></font><font color="#008000" face="Courier" size="2">Character_Status 
+= 3</font><font face="Arial" size="2"><span lang="ru">) и вызываем страничку
+</span><span lang="en-us">wait.phtml, </span>ч<span lang="ru">тоб показать 
+результат поединка. В поля
+</span><span lang="en-us">R1 </span>и<span lang="ru">
+</span><span lang="en-us">R2 - </span>т<span lang="ru">аблицы
+</span><span lang="en-us"><b>battle</b> </span><span lang="ru">записываются 
+значения оставшегося после боя здоровья наших персонажей.<br>
+&nbsp;&nbsp;&nbsp; Для чего это нужно? Допустим бой закончен и один игрок 
+отлучился от компьютера, второй уже восстановил здоровье после боя и его
+</span></font> <font color="#008000" face="Courier" size="2">Character_CurHealth </font>
+<font face="Arial" size="2"><span lang="ru">естественно будет отличаться от 
+того, которое было на момент завершения поединка. А поля
+</span><span lang="en-us">R1 </span>и<span lang="ru">
+</span><span lang="en-us">R2</span> <span lang="ru">навсегда сохранят параметры 
+здоровья в состоявшемся бое.<br>
+&nbsp;&nbsp;&nbsp; Зная, эти значения мы можем вывести результаты поединка в 
+файле
+</span><span lang="en-us">wait.phtml </span>т<span lang="ru">аким образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table19">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">...<br>
+    $aChar1StatusAfterBattle = $aRow[&quot;R1&quot;]; <font color="#008080">// 
+    осталось ли здоровье у первого после боя (если бой завершен)</font><br>
+    $aChar2StatusAfterBattle = $aRow[&quot;R2&quot;]; <font color="#008080">// 
+    осталось ли здоровье у второго после боя (если бой завершен)</font><br>
+    ...<br>
+    ...<font color="#0000FF">else</font> { <font color="#008080">// бой 
+    окончен</font><br>
+    <font color="#008080">// Устанавливаем статус 1 (нормальное состояние)</font><br>
+    $query = <font color="#008000">&quot;UPDATE users set Character_Status = 1 
+    where Nick_Name='$aChar1' or Nick_Name='$aChar2'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#0000FF">print</font>('&lt;SCRIPT&gt; mode = 2; &lt;/SCRIPT&gt;');<br>
+    <font color="#0000FF">if</font> ( $aNickName == $aChar1 ){<br>
+    <font color="#0000FF">if</font>($aChar1StatusAfterBattle&gt;$aChar2StatusAfterBattle){<br>
+    $message = &quot;Поединок завершен. &lt;b&gt;Вы победили!&lt;/b&gt; &amp;nbsp;&quot;;<br>
+    }<font color="#0000FF">elseif</font>($aChar1StatusAfterBattle&lt;$aChar2StatusAfterBattle){<br>
+    $message = &quot;Поединок завершен. &lt;b&gt;Вы проиграли!&lt;/b&gt; &amp;nbsp;&quot;;<br>
+    }<font color="#0000FF">else</font>{<br>
+    $message = &quot;Поединок завершен &lt;b&gt;вничью&lt;/b&gt;. &amp;nbsp;&quot;;<br>
+    }<br>
+    }<br>
+    <font color="#0000FF">if</font> ( $aNickName == $aChar2 ){<br>
+    <font color="#0000FF">if</font>($aChar2StatusAfterBattle&gt;$aChar1StatusAfterBattle){<br>
+    $message = &quot;Поединок завершен. &lt;b&gt;Вы победили!&lt;/b&gt; &amp;nbsp;&quot;;<br>
+    }<font color="#0000FF">elseif</font>($aChar2StatusAfterBattle&lt;$aChar1StatusAfterBattle){<br>
+    $message = &quot;Поединок завершен. &lt;b&gt;Вы проиграли!&lt;/b&gt; &amp;nbsp;&quot;;<br>
+    }<font color="#0000FF">else</font>{<br>
+    $message = &quot;Поединок завершен &lt;b&gt;вничью&lt;/b&gt;. &amp;nbsp;&quot;;<br>
+    }<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">&nbsp; Смотрите 
+полный код в файле
+</span><span lang="en-us">wait.phtml </span><a href="8_4/wait.phtml">з<span lang="ru">десь</span></a><span lang="ru">.<br>
+&nbsp;&nbsp;&nbsp;<br>
+</span><a name="kopv6"><font color="#000080"><b>8</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv6"><font size="2">.5. 
+К</font></a></font></span></b><span lang="ru"><b><font size="2" face="Arial" color="#000080"><a name="kopv6">раткая 
+статистика боя</a><a name="kopv7">.</a></font></b>
+<br>&nbsp;<br>
+&nbsp;&nbsp;&nbsp; В учебных целях, мы создадим краткую статистику результатов 
+боя. Которая покажет нам все удары и блоки игроков в процессе поединка. 
+Статистика будет создаваться файлом </span><span lang="en-us">stat.phtml </span>
+и<span lang="ru"> этот файл будет доступен по ссылке:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table20">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">$StatUrl = &quot;&lt;a 
+    target=_blank href=stat.phtml?bat_id=$aBattleID&gt; (Статистика)&lt;/a&gt;&quot;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="ru">генерируемой в 
+конце поединка в файле </span><span lang="en-us">wait.phtml. </span>То есть, как 
+Вы видите<span lang="en-us">,</span> в скрипт <span lang="en-us">stat.phtml
+</span>передается идентификатор поединка.<span lang="en-us"> </span>Сперва мы 
+должны прочитать данные из таблицы детали<span lang="en-us">з</span>ации <b>battledetails </b>
+<span lang="en-us">п</span>о каждому игроку <span lang="en-us">и</span> сохранит<span lang="en-us">ь</span> 
+их в строковых параметрах:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table21">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">// читаем статистику боя<br>
+    </font>$query = <font color="#008000">&quot;SELECT CHAR_NAME, ATTACK, DEFEND 
+    FROM battledetails WHERE BAT_ID=$aBattleID&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#0000FF">while</font> ($aRow = <font color="#0000FF">
+    mysql_fetch_array</font>($result)) {<br>
+    $aChar = $aRow[&quot;CHAR_NAME&quot;];<br>
+    $aAttack = $aRow[&quot;ATTACK&quot;];<br>
+    $aDefend = $aRow[&quot;DEFEND&quot;];<br>
+    <font color="#0000FF">if</font> ( $aChar == $aChar1 ){<br>
+    $AStat1 .= $aAttack;<br>
+    $DStat1 .= $aDefend;<br>
+    }<br>
+    <font color="#0000FF">if</font> ( $aChar == $aChar2 ){<br>
+    $AStat2 .= $aAttack;<br>
+    $DStat2 .= $aDefend;<br>
+    }<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2">&nbsp; После этого переменные </font>
+<font face="Courier" size="2">$AStat1</font><font face="Arial" size="2"> и </font>
+<font face="Courier" size="2">$DStat1</font><font face="Arial" size="2"> , а 
+также </font><font face="Courier" size="2">$AStat2</font><font face="Arial" size="2"> 
+и </font><font face="Courier" size="2">$DStat2</font><font face="Arial" size="2"> 
+будут содержать<span lang="en-us"> </span>ряд чисел символизирующих собой номера<span lang="en-us">
+</span>зон поражения и защиты первого и второго игрока на протяжении всего 
+поединка.<span lang="en-us"><br>
+</span>&nbsp;&nbsp; Теперь нашей задачей будет - визуализация в табличной форме
+<span lang="en-us">э</span>тих данных. У нас должны получиться две таблицы<span lang="en-us">
+</span>- &quot;Таблица последовательности ударов&quot;<span lang="en-us"> </span>и 
+&quot;Таблица последовательности блоков&quot;<span lang="en-us">.<br>
+</span>&nbsp;&nbsp;&nbsp; Последовательность ударов в табличной форме реализуем 
+следующим кодом на <span lang="en-us">PHP </span>и <span lang="en-us">HTML:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table22">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;TABLE cellSpacing=0 
+    cellPadding=4 border=1&gt;<br>
+    &lt;TBODY&gt;<br>
+    &lt;TR&gt;<br>
+    &lt;TD align=middle&gt;Логин&lt;/TD&gt;<br>
+    &lt;TD&gt;Удар в&lt;/TD&gt;<br>
+    &lt;TD&gt;Последовательность ударов&lt;/TD&gt;<br>
+    &lt;/TR&gt;<br>
+    &lt;TR&gt;<br>
+    &lt;TD noWrap&gt; &lt;b&gt;<b>&lt;?php</b> <font color="#0000FF">echo</font> $aChar1 <b>
+    ?&gt;</b>&lt;/b&gt; &lt;/TD&gt;<br>
+    &lt;TD noWrap&gt;&lt;PRE&gt;<font color="#008000">голову</font>&lt;BR&gt;
+    <font color="#008000">грудь</font>&lt;BR&gt; <font color="#008000">живот</font>&lt;BR&gt;
+    <font color="#008000">ноги</font>&lt;/PRE&gt;&lt;/TD&gt;<br>
+    &lt;TD noWrap&gt;<br>
+    <b>&lt;?php</b><br>
+    <font color="#0000FF">print</font>('&lt;PRE&gt;');<br>
+    <font color="#0000FF">for</font>($i=1;$i&lt;=4;$i++){<br>
+    $pos = 0;<br>
+    $pl = &quot;&quot;;<br>
+    <font color="#0000FF">while</font> ( $pos ++ &lt; <font color="#0000FF">
+    strlen</font>($AStat1)){<br>
+    <font color="#0000FF">if</font>( substr($AStat1,$pos,1) == $i ){<br>
+    <font color="#0000FF">if</font> ( ! <b>Blocked</b>(<font color="#0000FF">substr</font>($AStat1,$pos,1),<font color="#0000FF">substr</font>($DStat2,$pos,1)) 
+    ){<br>
+    $pl.= &quot;X&quot;;<br>
+    } <font color="#0000FF">else</font> {<br>
+    $pl.= &quot;&lt;B&gt;•&lt;/B&gt;&quot;;<br>
+    }<br>
+    }<font color="#0000FF">else</font>{<br>
+    $pl.= &quot; &quot;;<br>
+    }<br>
+    }<br>
+    <font color="#0000FF">print</font>($pl);<br>
+    <font color="#0000FF">if</font>( $i&lt;&gt;4 ) <font color="#0000FF">print</font>(&quot;&lt;BR&gt;&quot;);<br>
+    }<br>
+    <b>?&gt;</b><br>
+    &lt;/PRE&gt;<br>
+    &lt;/TD&gt;<br>
+    &lt;/TR&gt;<br>
+    &lt;TR&gt;<br>
+    &lt;TD noWrap&gt; &lt;b&gt;<b>&lt;?php</b> <font color="#0000FF">echo</font> $aChar2 <b>
+    ?&gt;</b>&lt;/b&gt;&lt;/TD&gt;<br>
+    &lt;TD noWrap&gt;&lt;PRE&gt;<font color="#008000">голову</font>&lt;BR&gt;
+    <font color="#008000">грудь</font>&lt;BR&gt; <font color="#008000">живот</font>&lt;BR&gt;
+    <font color="#008000">ноги</font>&lt;/PRE&gt;&lt;/TD&gt;<br>
+    &lt;TD noWrap&gt;<br>
+    <b>&lt;?php</b><br>
+    <font color="#0000FF">print</font>('&lt;PRE&gt;');<br>
+    <font color="#0000FF">for</font>($i=1;$i&lt;=4;$i++){<br>
+    $pos = 0;<br>
+    $pl = &quot;&quot;;<br>
+    <font color="#0000FF">while</font> ( $pos ++ &lt; <font color="#0000FF">
+    strlen</font>($AStat2)){<br>
+    <font color="#0000FF">if</font>( <font color="#0000FF">substr</font>($AStat2,$pos,1) 
+    == $i ){<br>
+    <font color="#0000FF">if</font> ( ! <b>Blocked</b>(<font color="#0000FF">substr</font>($AStat2,$pos,1),<font color="#0000FF">substr</font>($DStat1,$pos,1)) 
+    ){<br>
+    $pl.= &quot;X&quot;;<br>
+    } <font color="#0000FF">else</font> {<br>
+    $pl.= &quot;&lt;B&gt;•&lt;/B&gt;&quot;;<br>
+    }<br>
+    }<font color="#0000FF">else</font>{<br>
+    $pl.= &quot; &quot;;<br>
+    }<br>
+    }<br>
+    <font color="#0000FF">print</font>($pl);<br>
+    <font color="#0000FF">if</font>( $i&lt;&gt;4 ) <font color="#0000FF">print</font>(&quot;&lt;BR&gt;&quot;);<br>
+    }<br>
+    <b>?&gt;</b><br>
+    &lt;/PRE&gt;&lt;/TD&gt;&lt;/TR&gt;<br>
+    &lt;/TBODY&gt;<br>
+    &lt;/TABLE&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2"><span lang="en-us">&nbsp;&nbsp;
+</span>В вышеприведенном коде мы анализируем при помощи нашей знакомой функции
+<span lang="en-us"><b>Blocked</b> </span>какие<span lang="en-us"> </span>удары 
+достигли цели, а какие были заблокированы и выводим их в соответствующие
+<span lang="en-us">м</span>еста сводной таблицы в разрезе зон поражения (голова,грудь,живот,ноги)<span lang="en-us"><br>
+</span>&nbsp;&nbsp;&nbsp; Результ<span lang="en-us">а</span>т <span lang="en-us">&nbsp;</span>будет 
+отображаться на странице браузера в таком виде:<br>
+<br>
+<span lang="en-us"><img border="0" src="udar.jpg" width="360" height="253"><br>
+<br>
+</span>Последовательность блоков&nbsp; в табличной форме реализуем следующим 
+кодом на <span lang="en-us">PHP </span>и <span lang="en-us">HTML:<br>
+<br>
+&nbsp;</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table23">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;H4&gt;&lt;font color=&quot;#8F003F&quot;&gt;Последовательность 
+    блоков&lt;/font&gt;&lt;/H4&gt;<br>
+    &lt;TABLE cellSpacing=0 cellPadding=4 border=1&gt;<br>
+    &lt;TBODY&gt;<br>
+    &lt;TR&gt;<br>
+    &lt;TD align=middle&gt;Логин&lt;/TD&gt;<br>
+    &lt;TD&gt;блок&lt;/TD&gt;<br>
+    &lt;TD&gt;Последовательность блоков&lt;/TD&gt;<br>
+    &lt;/TR&gt;<br>
+    &lt;TR&gt;<br>
+    &lt;TD noWrap&gt; &lt;b&gt;<b>&lt;?php</b> ec<font color="#0000FF">h</font>o $aChar1 <b>
+    ?&gt;</b>&lt;/b&gt; &lt;/TD&gt;<br>
+    &lt;TD noWrap&gt;&lt;PRE&gt;<font color="#008000">головы и груди</font>&lt;BR&gt;<font color="#008000"> 
+    груди и живота</font>&lt;BR&gt; <font color="#008000">живота и ног</font>&lt;BR&gt;
+    <font color="#008000">ног и головы</font>&lt;/PRE&gt;&lt;/TD&gt;<br>
+    &lt;TD noWrap&gt;<br>
+    <b>&lt;?php</b><br>
+    <font color="#0000FF">print</font>('&lt;PRE&gt;');<br>
+    <font color="#0000FF">for</font>($i=1;$i&lt;=4;$i++){<br>
+    $pos = 0;<br>
+    $pl = &quot;&quot;;<br>
+    <font color="#0000FF">while</font> ( $pos ++ &lt; <font color="#0000FF">
+    strlen</font>($DStat1)){<br>
+    <font color="#0000FF">if</font>( <font color="#0000FF">substr</font>($DStat1,$pos,1) 
+    == $i ){<br>
+    <font color="#0000FF">if</font> ( ! <b>Blocked</b>(<font color="#0000FF">substr</font>($AStat2,$pos,1),<font color="#0000FF">substr</font>($DStat1,$pos,1)) 
+    ){<br>
+    $pl.= &quot;&lt;B&gt;•&lt;/B&gt;&quot;;<br>
+    } <font color="#0000FF">else</font> {<br>
+    $pl.= &quot;X&quot;;<br>
+    }<br>
+    }<font color="#0000FF">else</font>{<br>
+    $pl.= &quot; &quot;;<br>
+    }<br>
+    }<br>
+    <font color="#0000FF">print</font>($pl);<br>
+    <font color="#0000FF">if</font>( $i&lt;&gt;4 ) <font color="#0000FF">print</font>(&quot;&lt;BR&gt;&quot;);<br>
+    }<br>
+    <b>?&gt;</b><br>
+    &lt;/PRE&gt;<br>
+    &lt;/TD&gt;<br>
+    &lt;/TR&gt;<br>
+    &lt;TR&gt;<br>
+    &lt;TD noWrap&gt; &lt;b&gt;<b>&lt;?php</b> <font color="#0000FF">echo</font> $aChar2 <b>
+    ?&gt;</b>&lt;/b&gt;&lt;/TD&gt;<br>
+    &lt;TD noWrap&gt;&lt;PRE&gt;<font color="#008000">головы и груди</font>&lt;BR&gt;<font color="#008000"> 
+    груди и живота</font>&lt;BR&gt; <font color="#008000">живота и ног</font>&lt;BR&gt;
+    <font color="#008000">ног и головы</font>&lt;/PRE&gt;&lt;/TD&gt;<br>
+    &lt;TD noWrap&gt;<br>
+    <b>&lt;?php</b><br>
+    <font color="#0000FF">print</font>('&lt;PRE&gt;');<br>
+    <font color="#0000FF">for</font>($i=1;$i&lt;=4;$i++){<br>
+    $pos = 0;<br>
+    $pl = &quot;&quot;;<br>
+    <font color="#0000FF">while</font> ( $pos ++ &lt; <font color="#0000FF">
+    strlen</font>($DStat2)){<br>
+    <font color="#0000FF">if</font>( <font color="#0000FF">substr</font>($DStat2,$pos,1) 
+    == $i ){<br>
+    <font color="#0000FF">if</font> ( ! <b>Blocked</b>(<font color="#0000FF">substr</font>($AStat1,$pos,1),<font color="#0000FF">substr</font>($DStat2,$pos,1)) 
+    ){<br>
+    $pl.= &quot;&lt;B&gt;•&lt;/B&gt;&quot;;<br>
+    } <font color="#0000FF">else</font> {<br>
+    $pl.= &quot;X&quot;;<br>
+    }<br>
+    }<font color="#0000FF">else</font>{<br>
+    $pl.= &quot; &quot;;<br>
+    }<br>
+    }<br>
+    <font color="#0000FF">print</font>($pl);<br>
+    <font color="#0000FF">if</font>( $i&lt;&gt;4 ) <font color="#0000FF">print</font>(&quot;&lt;BR&gt;&quot;);<br>
+    }<br>
+    <b>?&gt;</b><br>
+    &lt;/PRE&gt;&lt;/TD&gt;&lt;/TR&gt;<br>
+    &lt;/TBODY&gt;<br>
+    &lt;/TABLE&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font face="Arial" size="2">Результ<span lang="en-us">а</span>т 
+блокирования<span lang="en-us">&nbsp;</span>будет 
+отображаться на странице браузера в таком виде:<br>
+<br>
+<img border="0" src="block.jpg" width="426" height="251"><br>
+<br>
+<br>
+&nbsp;&nbsp; В случае ударов символом • - обозначаются заблокированные удары, а
+<span lang="en-us">с</span>имволом </font><font face="Courier" size="2">X</font><font face="Arial" size="2"> 
+-<span lang="en-us"> </span>удары достигшие цели. В случае блоков символом • - 
+обозначаются пропущенные удары, а <span lang="en-us">с</span>имволом </font>
+<font face="Courier" size="2">X</font><font face="Arial" size="2"> -<span lang="en-us"> </span>
+удачно поставленные блок<span lang="en-us">и</span>.<span lang="ru"><br>&nbsp;Полный 
+текст файла </span><span lang="en-us">stat.phtml </span><span lang="ru">смотрите
+<a href="8_5/stat.phtml">здесь</a><br>
+&nbsp; <br>
+&nbsp;&nbsp;&nbsp;<b><br>
+В следующем уроке</b> мы рассмотрим примеры использования магии в поединках, 
+добавим слот для хранения магического свитка, создадим магазин по продаже 
+магических товаров и научимся защищаться от атак с использованием магии.</span></font></p>
+<font size="2" face="Arial">
+        <p align="left">&nbsp;</font></td>
+      <td width="27" height="356" background="Site/middle2.jpg">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="740" height="38" background="Site/bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

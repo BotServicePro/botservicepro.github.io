@@ -1,0 +1,617 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<style>
+<!--
+table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif"}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="740" height="350" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+	<tr>
+      <td width="740" height="133" background="Site/top.jpg" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="127" height="356" background="Site/middle1.jpg" valign="top">
+        <p align="left">
+        <b><font face="Arial" size="1" color="#505866">&nbsp;&nbsp;&nbsp; 
+		<a href="http://www.blitz-school.info"><font color="#FFFF99">Курсы</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font face="Arial" size="1" color="#FFFF99">
+		<a href="http://www.blitz-school.info/reg.html"><font color="#FFFF99">Регистрация</font></a><br>
+        &nbsp;&nbsp;&nbsp;
+		<a href="http://www.blitz-school.info/study_tech.html">
+		<font color="#FFFF99">Методика</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font>
+		<a href="http://www.blitz-school.info/program.html"><font face="Arial" size="1" color="#FFFF99">Оглавление</font></a><font face="Arial" size="1" color="#FFFF99"><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://www.blitz-school.info/login.html">
+		<font color="#FFFF99">Для учащихся</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font></b>
+		<img border="0" src="../navdiv.gif" width="80" height="4"><br>
+        <b><font size="1" face="Arial" color="#505866">&nbsp;&nbsp;&nbsp;
+        <a href="http://www.blitz-school.info/articles.html">
+		<font color="#FFFF99">Статьи</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font size="1" face="Arial" color="#FFFF99">
+		<a href="http://www.blitz-school.info/instrum.html">
+		<font color="#FFFF99">Инструменты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span>
+		<a href="http://www.blitz-school.info/contacts.html">
+		<font color="#FFFF99">Контакты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span></font></b>&nbsp;</td>
+      <td width="586" height="356" background="Site/bg.gif" valign="top">
+
+<p align="center"><font color="#008000"><b><font size="5"><span lang="ru">Урок </span>
+13<span lang="ru">.</span></font></b><span lang="ru"><font size="5"><b>&nbsp; 
+Торговля</b></font><br>
+</span>
+</font><b></p>
+<p align="justify"><span lang="ru"><font size="2" face="Arial" color="#000080">
+12<a name="kopv">.1. 
+</a></font></span></b><a name="kopv"><b>
+<font face="Arial" size="2" color="#000080">Торговые ряды, принципы торговли</font></b></a><span lang="ru"><b><a name="kopv"><font size="2" face="Arial" color="#000080">.</font></a></b><font size="2" face="Arial">
+<br>
+</font></span><font size="2" face="Arial">
+&nbsp;&nbsp;&nbsp;&nbsp; <span lang="ru"><br>
+&nbsp;</span>&nbsp; <span lang="ru"> Торговля - жизненно важный аспект 
+существования сообщества онлайновой игры. Без торговли игра была бы скучна и 
+превратилась бы в череду поединков и покупок вещей в госмагазине (кузне). 
+Покупка и продажа вещей в реальном времени, позволяет игрокам, уставшим от 
+поединков окунуться в мир торговли, заработать внутриигровую валюту для 
+дальнейшего усовершенствования своего персонажа в будущем.<br>
+&nbsp;&nbsp; Для проведения торговых операций нам понадобится создать объект 
+торговые ряды, где и будут заключаться торговые сделки между персонажами. Всего 
+игрокам будет доступно три режима:<br>
+&nbsp;&nbsp; 1. Передача предмета - безвозмездная передача игрового предмета 
+другому игроку.<br>
+&nbsp;&nbsp; 2. Продажа предмета - режим предложения игрового предмета для 
+покупки другим игроком.<br>
+&nbsp;&nbsp; 3. Покупка предмета - приобретение предложенного продавцом игрового 
+предмета.<br>
+<br>
+&nbsp;&nbsp; Реклама продаваемого товара будет осуществляться в общем чате 
+объекта &quot;Торговые ряды&quot; типа:<br>
+&nbsp;&nbsp;
+</span><span lang="en-us"><b>Defender</b>&nbsp; </span>п<span lang="ru">родам 
+топор Вихря с износом 11/50 за 300 кредиток.<br>
+</span><span lang="en-us">&nbsp;&nbsp; </span>П<span lang="ru">окупатель, либо 
+сам пишет в чат строки о его желании приобретения какого-то товара, либо ищет 
+нужный предмет среди строк чата, которые написали продавцы.<br>
+&nbsp;&nbsp;&nbsp; Когда покупатель и продавец договариваются о сделке, второй 
+инициирует предложение, которое становится видным в окне браузера первого. 
+Покупатель должен иметь возможность подтвердить или отклонить сделку.<br>
+&nbsp; 
+<br>
+</span></font><a name="kopv0"><span lang="ru"><b>
+<font face="Arial" size="2" color="#000080">12</font></b></span></a><font size="2" face="Arial"><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv0"><font size="2">.2. 
+</font></a></font></span><font size="2" face="Arial" color="#000080">
+<span lang="ru"><a name="kopv0">Создание торговых рядов на ЦП</a><a name="kopv1">.</a></span></font></b><span lang="ru"> <br>
+<br>
+&nbsp;&nbsp;&nbsp; Наши торговые ряды на Центральной площади будут выглядеть 
+следующим образом:</span></font></p>
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td>
+		<img border="0" src="../lesson12/12_5/items/TOWNS/Silluria/market.gif" width="61" height="59"> 
+		Торговые ряды</td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru"> &nbsp;&nbsp;&nbsp; 
+Подправим немного нашу страничку </span><span lang="en-us">map.phtml:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;div style=&quot;position:absolute;left:120px;top:230px;width:149px; 
+		height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/market.gif 
+		CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; 
+		onclick=&quot;<font color="#000080">gotoMarket</font>()&quot; ALT=&quot;<font color="#008000">Торговые 
+		ряды</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="en-us">&nbsp;&nbsp;&nbsp;
+</span>По нажатию на картинку торговых рядов выполняется функция </font>
+<font color="#000080" face="Courier" size="2">gotoMarket</font><font size="2" face="Arial"><span lang="en-us">,</span> 
+которая переносит игрока в объект &quot;Торговые ряды&quot;</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2"><b>function</b>
+		<font color="#000080">gotoMarket</font>()<br>
+		{<br>
+		location.href='market.phtml?NickName=<b>&lt;?php</b> <font color="#0000FF">
+		echo</font> &quot;$aNickName&quot;; <b>?&gt;</b>';<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">&nbsp;&nbsp; Итак нам необходимо 
+создать файл </font><font face="Courier" size="2">market.phtml</font><font size="2" face="Arial">,<span lang="en-us">
+</span>который будет реализовывать вышеописанные режимы (покупку, продажу и 
+передачу)<span lang="en-us">.</span> Меню этого объекта будет предельно простым:<br>
+<span lang="en-us"><br>
+<img border="0" src="market1.jpg" width="416" height="366"> <br>
+<br>
+</span>&nbsp;&nbsp;&nbsp; <span lang="en-us">Н</span>а <span lang="en-us">HTML
+</span>меню выглядит так:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;td width=&quot;18&quot; 
+		height=&quot;100&quot; valign=&quot;top&quot;&gt;<br>
+		&lt;a href=&quot;market.phtml?buy=1&amp;NickName=&lt;<b>?php</b> <font color="#0000FF">
+		echo</font> $aNickName; <b>?&gt;</b>&quot;&gt;<font color="#008000"> Прием<span lang="en-us">/</span>Передача</font>&lt;/a&gt;&lt;/font&gt;<br>
+		&lt;a href=&quot;map.phtml?&amp;NickName=<b>&lt;?php</b> <font color="#0000FF">echo</font> 
+		$aNickName; <b>?&gt;</b>&quot;&gt;<font color="#008000"> Выйти</font>&lt;/a&gt;&lt;/font&gt;<br>
+		&lt;/td&gt;</font></td>
+	</tr>
+</table>
+<p><font face="Arial" size="2">Файл </font><font face="Courier" size="2">
+market.phtml </font><font face="Arial" size="2">Вы можете переписать<a href="13_2/market.phtml"> 
+здесь</a>.</font></p>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">
+<font color="#000080"><b><a name="kopv2">12</a></b></font></span><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv2"><font size="2">.3. </font>
+</a></font></span></b><span lang="ru"><b>
+<font size="2" face="Arial" color="#000080"><a name="kopv2">Режим передачи 
+предметов</a><a name="kopv3">.</a></font></b> <br>
+<br>
+&nbsp; Как Вы уже догадались, режим приема/передачи совмещен и&nbsp;&nbsp;задается передачей параметра&nbsp; 
+</span></font><font face="Courier" size="2">sell=1 </font>
+<font size="2" face="Arial"><span lang="ru">файлу скрипта. <br>
+&nbsp; Как только мы установили этот режим, мы должны указать ник персонажа, с 
+которым собираемся взаимодействовать во время процесса передачи или продажи. Для 
+ввода ника игрока, сделаем простую динамически созданную форму на 
+</span><span lang="en-us">HTML:</span><span lang="ru"> 
+</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">print(&quot;Кому продать: 
+		&lt;input type=text id=user_login&gt; &amp;nbsp; &lt;input type=button value = '<font color="#008000">Подойти</font>' 
+		onClick='negotiate()'&gt; &lt;input type=button value = '<font color="#008000">Обновить</font>' 
+		onClick='renew()'&gt;&quot;);</font></td>
+	</tr>
+</table>
+<p><font face="Arial" size="2">&nbsp; Которая выглядит так:<br>
+<br>
+<img border="0" src="init.jpg" width="470" height="108"></font></p>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; В 
+поле &quot;Кому передать&quot; предлагается ввести ник персонажа, которому мы будем 
+передавать предмет. Если игрок случайно вводит свой же логин, мы должны 
+обработать эту ситуацию и&nbsp; вывести такое предупреждение:<br>
+<br>
+<img border="0" src="error.jpg" width="454" height="114"><br>
+<br>
+&nbsp;&nbsp; Это можно решить следующим кодом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#000080">if</font> (<font color="#000080">$aBuyer</font> == 
+		$aNickName){<br>
+		<font color="#000080">print</font> ('Вы не можете передавать/продавть 
+		вещи сами себе! &lt;br&gt;');<br>
+		<font color="#000080">print</font>(&quot;Укажите правильный логин: &lt;input 
+		type=text id=user_login&gt; &amp;nbsp; &lt;input type=button value = 'Подойти' 
+		onClick='negotiate()'&gt;&quot;); <br>
+		...</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; 
+</span><span lang="en-us"><i>JavaScript</i> </span>ф<span lang="ru">ункция 
+</span><font color="#000080"><span lang="en-us">negotiate</span></font><span lang="ru">, 
+переводит</span><span lang="en-us"> </span>о<span lang="ru">бъект &quot;Торговые 
+ряды&quot; в режим взаимодействия с выбранным персонажем. Вот эта функция:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2"><b>function</b>
+		<font color="#000080">negotiate</font>(){<br>
+		usr_login = document.getElementById('user_login').value;<br>
+		location.href = &quot;market.phtml?buy=1<font color="#000080">&amp;buyer</font>=&quot;+usr_login+&quot;&amp;NickName=<b>&lt;?php</b>
+		<font color="#0000FF">echo</font> $aNickName <b>?&gt;</b>&quot;;<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; 
+Параметр 
+</span></font><font face="Courier" size="2">&amp;<font color="#000080">buyer</font> </font>
+<font size="2" face="Arial"><span lang="ru">как раз устанавливает переменную 
+</span></font><font face="Courier" size="2" color="#000080">$aBuyer</font><font size="2" face="Arial"><span lang="ru">.<br>
+&nbsp;&nbsp; Если Вы заранее позаботились и купили пару вещей в кузнице для 
+тестирования продаж/передач, то при переходе в этот режим Вы увидите примерно 
+такую картину:<br>
+<br>
+<img border="0" src="give.jpg" width="405" height="286"><br>
+&nbsp;&nbsp; <br>
+&nbsp;&nbsp; Это реализуется следующим фрагментом кода на 
+</span><span lang="en-us">PHP:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table8">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#0000FF">print</font> ('Выберите вещь для продажи/передачи 
+		к &lt;b&gt;'.$aBuyer.'&lt;/b&gt; &lt;br&gt;');<br>
+		<font color="#008080">// покажем вещи из рюкзака для продажи с полем 
+		ввода цены:</font><br>
+		<font color="#0000FF">echo</font> '&lt;table border=1&gt;';<br>
+		$query = <font color="#008000">&quot;SELECT i.IT_ID, i.Item_Position, 
+		il.ItemType, il.ItemNo, il.Item_Image, il.ItemName, il.ItemSlotName, 
+		i.Item_DateTime FROM Items i inner join Items_List il on il.il_id=i.il_id 
+		WHERE Item_Owner='$aUserID' and Item_Position <span lang="en-us">=</span> 
+		'2'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		<font color="#0000FF">while</font> ($aRow = <font color="#0000FF">
+		mysql_fetch_array</font>($result)) {<br>
+		$aItemID = $aRow[&quot;IT_ID&quot;];<br>
+		$aItemType = $aRow[&quot;ItemType&quot;];<br>
+		$aItemNo = $aRow[&quot;ItemNo&quot;];<br>
+		$aItemImage = $aRow[&quot;Item_Image&quot;];<br>
+		$aItemName = $aRow[&quot;ItemName&quot;];<br>
+		$aItemSlotName = $aRow[&quot;ItemSlotName&quot;]; <br>
+		$aItem_DateTime = $aRow[&quot;Item_DateTime&quot;]; <br>
+		$aItemPosition = $aRow[&quot;Item_Position&quot;]; <br>
+		<font color="#0000FF">if</font> ( $aItemSlotName &lt;&gt; 'Ticket' ) {<br>
+		<font color="#0000FF">echo</font> &quot;&lt;tr&gt;&lt;td&gt;&lt;img border=0 src=items/&quot;.$aItemImage.&quot; 
+		ALT='Предложить предмет &quot;.$aItemName.&quot;'&gt; &lt;input type=text id=price&quot;.$aItemID.&quot; 
+		value=0&gt; &lt;input type=button value='Передать за 1 кр' onClick='<font color="#000080">give1kr</font>(&quot;.$aItemID.&quot;)'&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;<br>
+		}<br>
+		}<br>
+		echo '&lt;/table&gt;';</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="en-us">&nbsp;&nbsp;
+</span>Итак, мы просто показываем все вещи для передачи из нашего рюкзака. 
+Текстовое поле с </font><font face="Courier" size="2">id=price </font>
+<font size="2" face="Arial">зарезервировано для режима продажи<span lang="en-us">.</span> 
+При нажатии на кнопку &quot;Передать за 1 кр&quot;<span lang="en-us"> </span>выполняется
+<span lang="en-us"><i>JavaScript</i> </span>функция<span lang="en-us"> </span></font>
+<font color="#000080" face="Courier" size="2">give1kr</font><font size="2" face="Arial">,<span lang="en-us">
+</span>в качестве аргумента которая принимает идентификатор передаваемого 
+предмета из таблицы <span lang="en-us"><b>items</b>. <br>
+&nbsp;&nbsp; </span>Вот реализация этой функции:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table9">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2"><b>function</b>
+		<font color="#000080">give1kr</font>( itemid ){<br>
+		usr_login = &quot;<b>&lt;?php</b> <font color="#0000FF">echo</font> $aBuyer <b>
+		?&gt;</b>&quot;;<br>
+		if (confirm(&quot;Вы действительно хотите передать предмет за 1 кр?&quot;)) {<br>
+		location.href='market.phtml?buy=1&amp;give=1&amp;buyer='+usr_login+'&amp;NickName=<b>&lt;?php</b>
+		<font color="#0000FF">echo</font> $aNickName <b>?&gt;</b>&amp;itemid='+itemid;<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">&nbsp;&nbsp; Параметр </font>
+<font face="Courier" size="2">give=1 </font><font size="2" face="Arial">
+переводит скрипт<span lang="en-us"> </span>в режим передачи, которая на
+<span lang="en-us">PHP </span>выглядит следующим образом:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table10">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><a name="kopv4"><span lang="ru"><font color="#000080"><b>12</b></font></span></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv4"><font size="2">.4.</font></a></font></span></b><font color="#000080"><b>
+<span lang="ru">Режим продажи предметов<a name="kopv4"> </a>
+</span> </b></font><span lang="ru">&nbsp;<br>
+<br>
+&nbsp;&nbsp; Режим продажи очень похож на режим передачи. Единственное, 
+пользователь должен заполнить поле суммы, за которую он намеревается продать 
+выбранную вещь и нажать кнопку &quot;Предложить&quot;.<br>
+<br>
+<img border="0" src="sell_p.jpg" width="525" height="284"><br>
+<br>
+&nbsp;&nbsp; Давайте дополним таблицу
+</span><span lang="en-us">ItemPosistion_List </span>е<span lang="ru">ще одной 
+строкой:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table11">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">INSERT INTO 
+		ItemPosition_List (ItemPosName) VALUES(<font color="#008000">'Предмет 
+		предложен в передаче'</font>); </font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; А 
+таблицу
+</span><span lang="en-us"><b>items</b> </span>п<span lang="ru">олями:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table12">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">`<font color="#000080">Item_Receiver</font>` 
+		BIGINT(20) DEFAULT 0 NOT NULL, <font color="#008080">/*кому предлагается 
+		предмет (ID игрока)*/</font><br>
+		`<font color="#000080">Item_SellPrice</font>` INT DEFAULT 0,
+		<font color="#008080">/*Цена предложения*/</font></font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp; Теперь 
+можно немного модифицировать наш
+</span><span lang="en-us">PHP </span>с<span lang="ru">крипт в части отображения 
+кнопок предложения предметов:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table13">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">$ITEM_IN_BID = 6;&nbsp;&nbsp;
+		<font color="#008080">// предмет в режиме предложения</font><br>
+		.....<br>
+		<font color="#0000FF">if</font> ( $aItemSlotName &lt;&gt; 'Ticket' ) {<br>
+		<font color="#0000FF">if</font> ( $aItemPosition ==
+		<font color="#000080">$ITEM_IN_BID </font>){<br>
+		<font color="#0000FF">echo</font> &quot;&lt;tr&gt;&lt;td&gt;&lt;img border=0 src=items/&quot;.$aItemImage.&quot; 
+		ALT='Отозвать предмет &quot;.$aItemName.&quot;'&gt; Предмет предложен покупателю &lt;input 
+		type=button value='Отозвать предмет' onClick='<font color="#000080">takeback</font>(&quot;.$aItemID.&quot;)'&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;
+		<br>
+		} <font color="#0000FF">else</font> {<br>
+		<font color="#0000FF">echo</font> &quot;&lt;tr&gt;&lt;td&gt;&lt;img border=0 src=items/&quot;.$aItemImage.&quot; 
+		ALT='Предложить предмет &quot;.$aItemName.&quot;'&gt; &lt;input type=text id=price&quot;.$aItemID.&quot; 
+		value=0&gt; &lt;input type=button value='Предложить' onClick='<font color="#000080">propose</font>(&quot;.$aItemID.&quot;)'&gt;&lt;input 
+		type=button value='Передать за 1 кр' onClick='<font color="#000080">give1kr</font>(&quot;.$aItemID.&quot;)'&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp; При 
+нажатии на кнопку &quot;Предложить&quot; выполняется функция
+</span></font><font color="#000080" face="Courier" size="2">propose</font><font size="2" face="Arial"><span lang="ru">, 
+которая описана следующим образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table14">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2"><b>function</b>
+		<font color="#000080">propose</font>( itemid ){<br>
+		usr_login = &quot;<b>&lt;?php</b> <font color="#0000FF">echo</font> $aBuyer <b>
+		?&gt;</b>&quot;;<br>
+		price = parseFloat( document.getElementById('price'+itemid).value );<br>
+		if (price &gt; 0){<br>
+		if (confirm(&quot;Вы действительно хотите продать предмет за &quot;+price+&quot; кр?&quot;)) 
+		{ <br>
+		location.href='market.phtml?buy=1&amp;propose=1&amp;buyer='+usr_login+'&amp;NickName=&lt;?php 
+		echo $aNickName ?&gt;&amp;itemid='+itemid+'&amp;price='+price;<br>
+		}<br>
+		} else {<br>
+		alert(&quot;Нельзя продать предмет за эту цену!&quot;);<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp; Функция 
+проверяет введенную стоимость и в случае подтверждения намерения о продаже 
+задает примерно такой вопрос:<br>
+<br>
+<img border="0" src="sell.jpg" width="350" height="121"><br>
+<br>
+&nbsp;&nbsp; если же игрок забыл ввести сумму, высветится сообщение об ошибке:<br>
+<br>
+<img border="0" src="sell_error.jpg" width="269" height="121"><br>
+<br>
+&nbsp; Если предложение сработало, мы увидим следующую картину:<br>
+<br>
+<img border="0" src="pr_pr.jpg" width="510" height="291"><br>
+<br>
+&nbsp;&nbsp; Предмет засовывается в статус предложения (6) следующим фрагментом 
+кода:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table15">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Режим предложения - засунем предмет в статус 
+		предложения (6)<br>
+		</font><font color="#0000FF">if</font> ( $aPropose &lt;&gt; 0 ) { <br>
+		<font color="#008080">// кому передаем </font><br>
+		$query = <font color="#008000">&quot;SELECT USER_ID from users WHERE 
+		Nick_Name='$aBuyer'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$aRow = mysql_fetch_array( $result);<br>
+		$aBuyerID = $aRow[&quot;USER_ID&quot;]; <font color="#008080">// ID игрока 
+		которому предлагается предмет для покупки</font><br>
+		<br>
+		$query = <font color="#008000">&quot;update items set Item_Position='6', 
+		Item_SellPrice='$aSellPrice', Item_Receiver='$aBuyerID' where it_id='$aSellItemId'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; При 
+нажатии на кнопку &quot;Отозвать предмет&quot;, мы можем вернуть предложенный товар в 
+режим нахождения в рюкзаке персонажа.&nbsp; Срабатывает функция , которая 
+передает в наш скрипт параметры отзываемого предмета:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table16">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2"><b>function</b>
+		<font color="#000080">takeback</font>( itemid ){<br>
+		usr_login = &quot;<b>&lt;?php</b> <font color="#0000FF">echo</font> $aBuyer <b>
+		?&gt;</b>&quot;;<br>
+		if (confirm(&quot;Вы действительно хотите отозвать предмет?&quot;)) {<br>
+		location.href='market.phtml?buy=1&amp;takeback=1&amp;buyer='+usr_login+'&amp;NickName=<b>&lt;?php</b>
+		<font color="#0000FF">echo</font> $aNickName <b>?&gt;</b>&amp;itemid='+itemid;<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; На
+</span><span lang="en-us">PHP </span><span lang="ru">отзыв предмета реализуется 
+следующим фрагментом кода:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table17">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Режим отзыва - засунем предмет в статус рюкзака 
+		(2)<br>
+		</font><font color="#0000FF">if</font> ( $aTakeBack &lt;&gt; 0 ) { <br>
+		$query = <font color="#008000">&quot;update items set Item_Position='2', 
+		Item_SellPrice=0, Item_Receiver=0 where it_id='$aSellItemId'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><a name="kopv6"><span lang="ru"><font color="#000080"><b>12</b></font></span></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv6"><font size="2">.5. 
+</font></a></font></span></b><span lang="ru"><b>
+<font size="2" face="Arial" color="#000080"><a name="kopv6">Режим покупки 
+предмета</a><a name="kopv7">.</a></font></b>
+<br><br>
+&nbsp;&nbsp; Реально процедуру покупки предложенного предмета может осуществить 
+только персонаж, которому предложен этот предмет. Без его подтверждения, 
+предложение продавца так и останется не больше чем предложением.<br>
+&nbsp;&nbsp; Когда покупатель нажимает ссылку &quot;Прием/Передача&quot; он сразу может 
+увидеть предложенные ему продавцом товары, с их характеристиками - износом и 
+стоимостью, которую назначил продавец.<br>
+&nbsp;&nbsp; Этот режим легко описывает следующий код на </span>
+<span lang="en-us">PHP:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table18">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// покажем перечень вещей, которые предложены 
+		именно нам<br>
+		</font><font color="#0000FF">print</font> ('&lt;br&gt;&lt;br&gt;Вам предложены 
+		предметы: &lt;br&gt;');<br>
+		<font color="#0000FF">echo</font> '&lt;table border=1&gt;';<br>
+		$query = &quot;SELECT i.IT_ID, i.Item_Position, i.Item_SellPrice, il.ItemType, 
+		i.Item_CurrentLife, il.Item_FullLife, il.ItemNo, il.Item_Image, 
+		il.ItemName, il.ItemSlotName, i.Item_DateTime FROM Items i inner join 
+		Items_List il on il.il_id=i.il_id WHERE Item_Receiver='$aUserID' and 
+		Item_Position = 6&quot;;<br>
+		$result = mysql_query($query) or die(&quot;Query failed : &quot; . mysql_error());<br>
+		<font color="#0000FF">while</font> ($aRow = mysql_fetch_array($result)) 
+		{<br>
+		$aItemID = $aRow[&quot;IT_ID&quot;];<br>
+		$aItemType = $aRow[&quot;ItemType&quot;];<br>
+		$aItemNo = $aRow[&quot;ItemNo&quot;];<br>
+		$aItemImage = $aRow[&quot;Item_Image&quot;];<br>
+		$aItemName = $aRow[&quot;ItemName&quot;];<br>
+		$aItemSlotName = $aRow[&quot;ItemSlotName&quot;];<br>
+		$aItem_DateTime = $aRow[&quot;Item_DateTime&quot;];<br>
+		$aItemPosition = $aRow[&quot;Item_Position&quot;];<br>
+		$aItemSellPrice = $aRow[&quot;Item_SellPrice&quot;];<br>
+		$aItem_CurrentLife = $aRow[&quot;Item_CurrentLife&quot;];<br>
+		$aItem_FullLife = $aRow[&quot;Item_FullLife&quot;];<br>
+		<font color="#0000FF">if</font> ( $aItemSlotName &lt;&gt; 'Ticket' ) {<br>
+		<font color="#0000FF">if</font> ($aItemSellPrice &gt; $aMoney){<br>
+		<font color="#0000FF">echo</font> &quot;&lt;tr&gt;&lt;td&gt;&lt;img border=0 src=items/&quot;.$aItemImage.&quot; 
+		ALT='Купить предмет &quot;.$aItemName.&quot;'&gt; Предложен предмет с износом ($aItem_CurrentLife/$aItem_FullLife) 
+		за &lt;b&gt;$aItemSellPrice&lt;/b&gt; кр.&lt;input type=button disabled value='Купить 
+		предмет' onClick='buyitem(&quot;.$aItemID.&quot;)'&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;<br>
+		}<font color="#0000FF">else</font>{<br>
+		<font color="#0000FF">echo</font> &quot;&lt;tr&gt;&lt;td&gt;&lt;img border=0 src=items/&quot;.$aItemImage.&quot; 
+		ALT='Купить предмет &quot;.$aItemName.&quot;'&gt; Предложен предмет с износом ($aItem_CurrentLife/$aItem_FullLife) 
+		за &lt;b&gt;$aItemSellPrice&lt;/b&gt; кр.&lt;input type=button value='Купить предмет' 
+		onClick='<font color="#000080">buyitem</font>(&quot;.$aItemID.&quot;)'&gt;&lt;/td&gt;&lt;/tr&gt;&quot;;<br>
+		}<br>
+		}<br>
+		}<br>
+		<font color="#0000FF">echo</font> '&lt;/table&gt;';</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="en-us">&nbsp;&nbsp;
+</span>Если стоимость предложенного предмета больше суммы которая есть у 
+покупателя<span lang="en-us">,</span> кнопка &quot;Купить предмет&quot; <span lang="en-us">
+н</span>еактивна. В окне браузера это выглядит так:<br>
+<br>
+<span lang="en-us"><img border="0" src="buying.jpg" width="581" height="320"><br>
+<br>
+</span>&nbsp;&nbsp; Если покупатель согласен на приобретение предложенного 
+предмета, он нажимает кнопку &quot;Купить предмет&quot;<span lang="en-us">,</span> в 
+результате чего<span lang="en-us"> </span>срабатывает функция </font>
+<font color="#000080" face="Courier" size="2">buyitem</font><font size="2" face="Arial"><span lang="en-us">,</span> 
+код которой выглядит следующим образом:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table19">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2"><b>function</b>
+		<font color="#000080">buyitem</font>( itemid ){<br>
+		if (confirm(&quot;Вы действительно хотите купить этот предмет?&quot;)) {<br>
+		location.href='market.phtml?buy=1&amp;buyitem=1&amp;NickName=<b>&lt;?php</b>
+		<font color="#0000FF">echo</font> $aNickName <b>?&gt;</b>&amp;itemid='+itemid;<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">&nbsp;&nbsp; Параметр </font>
+<font face="Courier" size="2">&amp;<font color="#000080">itemid</font> </font>
+<font size="2" face="Arial">передается нашему скрипту в <span lang="en-us">
+market.phtml </span>и предмет оказывается в рюкзаке купившего его персонажа<span lang="en-us">.</span> 
+Процесс покупки на <span lang="en-us">PHP </span>сделан так:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table20">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008080">// Режим покупки - засунем предмет к себе в рюкзак<br>
+		</font><font color="#0000FF">if</font> ( $aBuyItem &lt;&gt; 0 ) {<br>
+		<font color="#008080">// Узнаем владельца и цену вещи</font><br>
+		$query = <font color="#008000">&quot;SELECT Item_Owner, Item_SellPrice from 
+		items where it_id = '$aBuyItemId'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$aRow = mysql_fetch_array($result);<br>
+		$aOwner = $aRow[&quot;Item_Owner&quot;];<br>
+		$aPrice = $aRow[&quot;Item_SellPrice&quot;];<br>
+		<br>
+		<font color="#008080">// уменьшим наши деньги</font><br>
+		$aMoney = $aMoney - $aPrice;<br>
+		$query = <font color="#008000">&quot;UPDATE users SET Character_Money=$aMoney 
+		WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		<font color="#008080">// увеличим деньги продавца, удержав 1 кр за 
+		передачу</font><br>
+		$query = <font color="#008000">&quot;UPDATE users SET Character_Money=Character_Money+$aPrice-1 
+		WHERE USER_ID='$aOwner'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$query = <font color="#008000">&quot;INSERT INTO chat (CH_MSG,USER_ID,USER_ID_TO,CH_ROOM,IS_PRIVATE) 
+		values('У вас купили предмет','$aUserID','$aOwner','0',1)&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		<br>
+		<font color="#008080">// засунем предмет к нам в рюкзак</font><br>
+		$query = <font color="#008000">&quot;update items set Item_Owner = '$aUserID', 
+		Item_Position='2', Item_SellPrice=0, Item_Receiver=0 where it_id='$aBuyItemId'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">&nbsp;&nbsp; Итак, в начале<span lang="en-us">
+</span>по идентификатору предмета мы узнаем его цену и владельца. Затем вычтем 
+из денег покупателя стоимость предмета<span lang="en-us">.</span> После этого<span lang="en-us">
+</span>увеличим деньги продавца на сумму проданной вещи и вычтем одну кредитку 
+от сделки в пользу заведения (Торговых рядов)<span lang="en-us">.</span> Вслед 
+за этим <span lang="en-us">м</span>ы поменяем владельца вещи (поле </font>
+<font color="#008000" face="Courier" size="2">Item_Owner</font><font size="2" face="Arial">)<span lang="en-us">
+</span>и засунем его в рюкзак <span lang="en-us">п</span>окупателя. Кроме того 
+создадим еще системное сообщение в чат для продавца, чтоб уведомить его о 
+покупке предложенного им предмета.<span lang="en-us"><br>
+</span><span lang="ru">&nbsp;&nbsp;&nbsp; Полный код скрипта Торговых рядов </span>
+<span lang="en-us">market.phtml </span><span lang="ru">Вы можете найти
+<a href="13_5/market.phtml">здесь</a>.<br>
+</span><span lang="en-us">&nbsp;&nbsp;&nbsp; </span>Н<span lang="ru">аш </span>
+<span lang="en-us">SQL </span>с<span lang="ru">крипт с учетом добавлений, 
+скачайте <a href="13_5/db/mmclub.sql">отсюда</a>.<br>
+<br>
+<b>В следующем уроке</b> мы рассмотрим Платные сервисы игры. В ходе урока мы 
+создадим магазин по продаже артефактов и валютных вещей, а также сделаем банк, 
+где можно будет открывать счета и переносить игровые деньги между ними и 
+наличными.</span></font></p>
+<font size="2" face="Arial">
+        <p align="left">&nbsp;</font></td>
+      <td width="27" height="356" background="Site/middle2.jpg">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="740" height="38" background="Site/bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,1021 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<style>
+<!--
+table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif"}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="740" height="350" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+	<tr>
+      <td width="740" height="134" background="Site/top.jpg" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="127" height="178" background="Site/middle1.jpg" valign="top">
+        <p align="left">
+        <b><font face="Arial" size="1" color="#505866">&nbsp;&nbsp;&nbsp; 
+		<a href="http://www.blitz-school.info"><font color="#FFFF99">Курсы</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font face="Arial" size="1" color="#FFFF99">
+		<a href="http://www.blitz-school.info/reg.html"><font color="#FFFF99">Регистрация</font></a><br>
+        &nbsp;&nbsp;&nbsp;
+		<a href="http://www.blitz-school.info/study_tech.html">
+		<font color="#FFFF99">Методика</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font>
+		<a href="http://www.blitz-school.info/program.html"><font face="Arial" size="1" color="#FFFF99">Оглавление</font></a><font face="Arial" size="1" color="#FFFF99"><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://www.blitz-school.info/login.html">
+		<font color="#FFFF99">Для учащихся</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font></b>
+		<img border="0" src="../navdiv.gif" width="80" height="4"><br>
+        <b><font size="1" face="Arial" color="#505866">&nbsp;&nbsp;&nbsp;
+        <a href="http://www.blitz-school.info/articles.html">
+		<font color="#FFFF99">Статьи</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font size="1" face="Arial" color="#FFFF99">
+		<a href="http://www.blitz-school.info/instrum.html">
+		<font color="#FFFF99">Инструменты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span>
+		<a href="http://www.blitz-school.info/contacts.html">
+		<font color="#FFFF99">Контакты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span></font></b>&nbsp;</td>
+      <td width="586" height="178" background="Site/bg.gif" valign="top">
+
+<p align="center"><font color="#008000"><b><span lang="ru"><font size="5">Урок </font>
+</span>
+<font size="5">2<span lang="ru">. Создание регистрации в игре</span></font></b><span lang="ru"><br>
+</span>
+</font><b><span lang="ru"></p><font face="Arial" color="#000080"><a name="kopv">
+<font size="2">1.1. 
+</font></a></font></span></b><span lang="ru"><b><a name="kopv">
+<font size="2" face="Arial" color="#000080">&nbsp;Таблица регистрационной 
+информации.</font></a></b><font size="2" face="Arial">
+<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Для того, чтоб пользователь мог войти в создаваемый 
+нами игровой мир, он должен пройти регистрацию на нашем сайте онлайновой игры.&nbsp; 
+Обычно регистрация состоит из заполнения десятка обязательных и необязательных 
+полей, где потенциальный игрок делится с разработчиком информацией о себе и 
+придумывает имя персонажа, которым впоследствии намеревается играть.<br>
+&nbsp;&nbsp;&nbsp; Чтоб сохранить всю эту введенную информацию у нас в базе</font></span><font size="2" face="Arial">,<span lang="ru"> 
+нам для начала нужна сама база, посему давайте ее создадим.<br>
+&nbsp;&nbsp;&nbsp; Мы можем воспользоваться поставляемым вместе с пакетом </span>
+Denwer <span lang="ru">инструментом </span>PHPMyAdmin <span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp;
+</span><a href="http://localhost/Tools/phpmyadmin/index.php">
+http://localhost/Tools/phpmyadmin/index.php</a><span lang="ru">&nbsp; <br>
+(где в разделе </span></font><b>Создать новую БД<span lang="ru"> </span></b>
+<span lang="ru">- </span><font size="2" face="Arial"><span lang="ru">вписать 
+название <b>mmclub -</b> так мы будем именовать нашу базу, и нажать <b>Создать</b>) 
+<br>
+<br>
+Для того чтоб все это сделать в программе </span>EMS MySQL Manager<span lang="ru"> 
+нужно проделать следующие шаги:<br>
+<br>
+1.&nbsp; После запуска программы, мы должны зарегистрировать хост. Жмем правой 
+кнопкой на правой панели и выбираем Register Host<br>
+<br>
+<img border="0" src="host.jpg" width="406" height="592"><br>
+<br>
+&nbsp;выбираем из списка <b>localhost</b> и вводим для него логин <b>root</b> 
+поле пароля оставляем пустым<br>
+<br>
+<img border="0" src="hostname.jpg" width="601" height="375"><br>
+<br>
+должен высветиться список созданных баз.&nbsp; Если вы уже создали базу mmclub в 
+phpMyAdmin выбираем ее и переносим в правое поле (Selected Databases)<br>
+<br>
+<img border="0" src="base.jpg" width="601" height="375"><br>
+<br>
+Нажимаем Register и выбранная база становится доступной в левой панели. Если мы 
+щелкнем левой кнопкой мыши по названию </span><span lang="en-us">(</span>алиасу<span lang="en-us">)
+</span><span lang="ru"> нашей базы </span><b><span lang="en-us">mmclub on 
+localhost</span></b><span lang="ru">, то откроется список входящих в нее таблиц<br>
+<br>
+<img border="0" src="tables.jpg" width="299" height="418"><br>
+<br>
+Естественно, у Вас пока в ней не будет таблиц, но они будут по мере прохождения 
+наших занятий.<br>
+<br>
+<b>Если база ранее не была создана</b> в phpMyAdmin, то выберите пункт меню: <br>
+<br>
+<img border="0" src="script.jpg" width="477" height="461"><br>
+<br>
+<br>
+Инструменты - </span>&gt; SQL <span lang="ru">Скрипт (</span><span lang="en-us">Tools 
+-&gt; SQL Script</span><span lang="ru">) и введите в открывшемся окне 
+такие строки:<br>
+&nbsp;</span></font><table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+		CREATE DATABASE <b>mmclub</b> DEFAULT CHARACTER SET cp1251 COLLATE 
+		cp1251_general_ci;</font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">Затем нажмите на треугольнике 
+(показано на Рис.1 красной стрелочкой) для выполнения скрипта.<br>
+<br>
+<img border="0" src="f9.jpg" width="547" height="26"><br>
+<br>
+Рис.1<br>
+<br>
+Убедитесь что в выпадающем списке хостов&nbsp; у Вас выбран именно </span><b>
+localhost</b>.<span lang="ru"><br>
+Рекомендуем Вам воспользоваться именно вторым способом создания базы (то есть 
+пользоваться программой </span><font color="#000080">EMS MySQL Manager</font><span lang="ru"> 
+), так как в 
+дальнейшем мы будем добавлять в этот скрипт еще большое количество таблиц и 
+данных.</span><br>
+<span lang="ru"><br>
+Результатом выполнения скрипта будет создание базы
+</span><b>mmclub</b> (<span lang="ru"> </span>Might and Magic Club )<span lang="ru">
+<br>
+Сама база разместится у Вас на диске по такому пути:<br>
+</span><font color="#0000FF">C:\<span lang="ru">W</span>ebServers\usr\local\mysql4\data\mmclub</font><span lang="ru"><font color="#0000FF"><br>
+</font>когда мы начнем добавлять таблицы в нашу базу, Вы заметите, что в этой 
+папке добавляются файлы, содержащие данные из этих таблиц.<br>
+<br>
+Наша база данных недолго будет оставаться пустой, поскольку мы с Вами сейчас 
+создадим в ней самую главную таблицу, которая будет содержать информацию об 
+игроках. Назовем таблицу <b>users</b>. Немного изменим наш скрипт:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">DROP 
+		DATABASE mmclub;<br>
+		CREATE DATABASE <b>mmclub</b> DEFAULT CHARACTER SET cp1251 COLLATE 
+		cp1251_general_ci;<br>
+		USE mmclub;</font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">Команда
+</span></font><font color="#000080">DROP DATABASE<span lang="ru"> </span></font>
+<font size="2" face="Arial">- <span lang="ru">физически удаляет базу. Если не 
+выполнить эту команду, то команда
+</span></font><font color="#000080">CREATE DATABASE<span lang="ru"> </span>
+</font><font size="2" face="Arial"><span lang="ru">выдаст ошибку, что такая база 
+уже существует.<br>
+И наконец откроем базу для использования командой:
+</span></font><font color="#000080">USE<span lang="ru">.</span></font><font size="2" face="Arial"><span lang="ru"><br>
+Нажимаем на треугольнике для выполнения скрипта (или кнопку
+</span>F9 <span lang="ru">на клавиатуре)<br>
+Дело сделано, пришло время добавления таблицы пользователей.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier"><font color="#505866">
+		<span lang="ru"><font size="2">--</font></span><font size="2">Таблица 
+		персонажей<br>
+		</font></font><font size="2">CREATE TABLE users (<br>
+		<br>
+		USER_ID bigint(20) unsigned NOT NULL auto_increment,<br>
+		Nick_Name CHAR(32) UNIQUE, <br>
+		User_Pass CHAR(32),<br>
+		SessionID bigint,<br>
+		User_EMail CHAR(64) UNIQUE, <br>
+		Security_Answer CHAR(30),<br>
+		Full_Name CHAR(50),<br>
+		User_Birth_Day DATE NOT NULL, <br>
+		Character_Birth_Day DATE NOT NULL,<br>
+		User_Gender SMALLINT(1),<br>
+		User_City CHAR(32),<br>
+		ICQ_Number CHAR(16),<br>
+		<br>
+		PRIMARY KEY (`USER_ID`)<br>
+		) ENGINE=MyISAM DEFAULT CHARSET=cp1251;</font></font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">Давайте разберемся, для чего эти 
+поля.<br>
+</span></font><font size="2" face="Courier"><b>USER_ID</b></font><font size="2" face="Arial"><span lang="ru"> 
+- будет хранить уникальный идентификационный номер созданного игроком персонажа 
+и автоматом будет увеличиваться на единицу с каждым новым зарегистрированным 
+пользователем (о чем свидетельствует ключевое слово </span></font><b>
+<font size="2" face="Courier">auto_increment</font></b><font size="2" face="Arial"><span lang="ru">)<br>
+</span></font><b><font size="2" face="Courier">Nick_Name</font></b><font size="2" face="Arial"><span lang="ru"> 
+- тоже уникальное поле, в котором будет храниться логин персонажа. Если при 
+регистрации, игрок введет логин, который уже есть в таблице </span>users
+<span lang="ru">у другого ранее зарегистрировавшегося пользователя, то он должен 
+будет быть предупрежден об этом и выбрать себе другой логин (</span>Nick_Name<span lang="ru">)<br>
+</span></font><font size="2" face="Courier"><b>User_Pass</b><span lang="ru">
+</span></font><font size="2" face="Arial">- <span lang="ru">пароль пользователя 
+(для простоты будем хранить его в таблице в открытом текстовом виде, хотя можно 
+было бы применить ну хотя бы простейшее </span>MD5 <span lang="ru">шифрование )<br>
+</span></font><font size="2" face="Courier"><b>SessionID</b><span lang="ru">
+</span></font><font size="2" face="Arial"><span lang="ru">- нужно нам для 
+служебных целей и мы остановимся на этом чуть позже.<br>
+</span></font><font size="2" face="Courier"><b>User_EMail</b><span lang="ru">
+</span></font><font size="2" face="Arial"><span lang="ru">- почтовый адрес 
+регистрирующегося юзера.<br>
+</span></font><b><font size="2" face="Courier">Security_Answer</font></b><font size="2" face="Arial"><span lang="ru"> 
+- выбранный при регистрации пользователя секретный ответ на один из вопросов 
+регистрационный формы (впоследствии может помочь восстановить забытый пароль)<br>
+</span></font><b><font size="2" face="Courier">Full_Name</font></b><font size="2" face="Arial"><span lang="ru"> 
+- ФИО игрока<br>
+</span></font><font size="2" face="Courier"><b>User_Birth_Day</b><span lang="ru">
+</span></font><font size="2" face="Arial"><span lang="ru">- день рождения игрока 
+(реальный день рождения играющего).<br>
+</span></font><font size="2" face="Courier"><b>Character_Birth_Day</b><span lang="ru">
+</span></font><font size="2" face="Arial"><span lang="ru">- дата создания 
+персонажа в клубе (системная дата сервера на момент регистрации)<br>
+</span></font><b><font size="2" face="Courier">User_Gender</font></b><font size="2" face="Arial"><span lang="ru"> 
+- пол игрока.<br>
+</span></font><b><font size="2" face="Courier">User_City</font></b><font size="2" face="Arial"><span lang="ru"> 
+- город рождения играющего (впоследствии может нам пригодится, для того чтоб 
+вести статистику - из каких стран и городов больше всего собралось играющих в 
+нашем клубе)<br>
+</span></font><b><font size="2" face="Courier">ICQ_Number</font></b><font size="2" face="Arial"><span lang="ru"> 
+- </span>ICQ <span lang="ru">игрока.<br>
+<br>
+Безусловно это только верхушка айсберга нашей с Вами таблицы </span>users<span lang="ru"> 
+и мы ее еще будем дополнять на протяжении наших уроков, вводя нужные поля по 
+мере появления в них необходимости.<br>
+<br>
+Итак, наш скрипт целиком выглядит так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">DROP 
+		DATABASE mmclub;<br>
+		CREATE DATABASE <b>mmclub</b> DEFAULT CHARACTER SET cp1251 COLLATE 
+		cp1251_general_ci;<br>
+		USE mmclub;<br>
+		</font><font face="Courier"><font color="#505866"><span lang="ru">
+		<font size="2"><br>
+		--</font></span><font size="2">Таблица персонажей<br>
+		</font></font><font size="2">CREATE TABLE users (<br>
+		<br>
+		USER_ID bigint(20) unsigned NOT NULL auto_increment,<br>
+		Nick_Name CHAR(32) UNIQUE, <br>
+		User_Pass CHAR(32),<br>
+		SessionID bigint,<br>
+		User_EMail CHAR(64) UNIQUE, <br>
+		Security_Answer CHAR(30),<br>
+		Full_Name CHAR(50),<br>
+		User_Birth_Day DATE NOT NULL, <br>
+		Character_Birth_Day DATE NOT NULL,<br>
+		User_Gender SMALLINT(1),<br>
+		User_City CHAR(32),<br>
+		ICQ_Number CHAR(16),<br>
+		<br>
+		PRIMARY KEY (`USER_ID`)<br>
+		) ENGINE=<b>MyISAM</b> DEFAULT CHARSET=cp1251;<br>
+&nbsp;</font></font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">Если кто не особо знаком с базой
+</span>MySQL <span lang="ru">то заметим, что тип таблиц для нашего клуба мы 
+выбрали </span>MyISAM. <b>MyISAM</b> – это стандартный тип 
+				таблиц в MySQL. 
+				Он основывается на коде
+				<a title="ISAM" href="http://ru.wikipedia.org/wiki/ISAM">ISAM</a> 
+				и обладает в сравнении с ним большим количеством полезных 
+				дополнений. MyISAM-таблицы идеально 
+				оптимизированы для использования в
+				WWW, где преобладают запросы на чтение. Таблицы типа MyISAM 
+				показывают хорошие результаты при выборках SELECT. Во многом это 
+				связано с отсутствием поддержки транзакций и внешних ключей.<br>
+<span lang="ru">Если вы теперь загляните в папку&nbsp; </span><font color="#0000FF">C:\<span lang="ru">W</span>ebServers\usr\local\mysql4\data\mmclub</font><span lang="ru"><br>
+то увидите, что там появились несколько файлов:</span> <span lang="ru">&nbsp;</span>Индексные файлы имеют расширение 
+				.MYI (MYIndex). Файлы с расширением .MYD (MYData) содержат 
+				данные, а с расширением .frm – схему таблицы. Если индексный 
+				файл по какой-то причине теряется, программа перестраивает 
+				индексы, используя информацию из frm-файла.<span lang="ru"> Пока 
+что у нас создались файлы:<br>
+</span>users.frm, users.MYD, users.MYI<span lang="ru">.</span><br>
+<b>Users.frm</b> - <span lang="ru">содержит только голую структуру таблицы, 
+поскольку мы не ввели в него никаких данных и ни один пользователь не 
+зарегистрировался в нашей с Вами игре. Да и как он может зарегистрироваться, 
+если у нас до сих пор нет формы регистрации! Что ж, пора исправлять эту 
+несправедливость и переходить к следующему разделу нашего урока.<br>
+Смотрите полный код
+</span>sql-<span lang="ru">скрипта создания базы и таблицы <b>
+<a href="sql/mmclub.sql">здесь</a></b>.<br>
+<br>
+</span><b><span lang="ru"><font face="Arial" color="#000080">
+<a name="kopv0"><font size="2">1.2. </font></a></font></span><a name="kopv1"><font size="2" face="Arial" color="#000080">
+<span lang="ru">&nbsp;Форма ввода данных пользователя.</span></font></a></b><font size="2" face="Arial"><span lang="ru">
+<br>
+<br>
+&nbsp;&nbsp; Форма ввода данных пользователя - это дверь, через которую игрок 
+попадает во вселенную нашего игрового мира. Все данные которые, он честно введет 
+в соответствующие поля ввода на странице браузера в регистрационной анкете 
+попадут в нашу таблицу </span> <b>users</b> <span lang="ru">и будет затем 
+использоваться для авторизации пользователя&nbsp; в игре. <br>
+&nbsp;&nbsp; Итак для создания анкеты для регистрации игрока, создадим пустой 
+файл с расширением </span>.html <span lang="ru">или </span>.phtml.
+<span lang="ru">Давайте назовем его </span>
+<b>reg.phtml</b>.
+<span lang="ru">Вы можете пользоваться любым удобным для Вас редактором </span>
+HTML<span lang="ru"> (</span>FrontPage, DreamWeaver <span lang="ru">) или просто 
+набирать код страницы вручную в текстовом редакторе.<br>
+Для более удачного размещения полей ввода, можно создать таблицу (</span>&lt;TABLE&gt;<span lang="ru">)</span>
+<span lang="ru"><br>
+Так, если Вы создаете эту форму вручную, фрагмент кода для ввода логина и пароля 
+пользователя будет выглядеть так:</span></font></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;html&gt;<br>
+		&lt;head&gt;<br>
+		&lt;/head&gt;<br>
+		&lt;body&gt;<br>
+		&lt;form name=regform action=&quot;testreg.phtml&quot; method=POST onSubmit=&quot;feedbackSubmit()&quot;&gt;<br>
+		<br>
+		&lt;<font color="#008000">TABLE</font> width=515 cellPadding=0 border=0 
+		style=&quot;border-style: dashed; border-width: 1px&quot; bgcolor=&quot;#FFE5B6&quot;&gt;<br>
+		&lt;TR&gt;<br>
+		&lt;TD width=&quot;72&quot;&gt;<font color="#FF00FF">Логин:</font>&lt;font 
+		color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/TD&gt;<br>
+		&lt;TD width=&quot;204&quot;&gt;&lt;INPUT <font color="#505866">name</font>=<font color="#0000FF">nickname</font> 
+		size=&quot;20&quot;&gt;&lt;/TD&gt;<br>
+		&lt;TD width=&quot;98&quot;&gt;<font color="#FF00FF">Пароль:</font>&lt;font 
+		color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/TD&gt;<br>
+		&lt;TD width=&quot;193&quot;&gt;&lt;INPUT type=password <font color="#505866">name</font>=<font color="#0000FF">pass</font> 
+		size=&quot;20&quot;&gt;&lt;/TD&gt;<br>
+		&lt;/TR&gt;<br>
+		&lt;<font color="#008000">/TABLE</font>&gt;<br>
+		&lt;/body&gt;<br>
+		&lt;/html&gt;</font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">Если вы решили воспользоваться 
+визуальным редактором (к примеру </span>FrontPage<span lang="ru">)</span>
+<span lang="ru">то можно легко, в режиме проектирования создать такую форму, а
+</span>HTML<span lang="ru">-код за вас создаст сам редактор.<br>
+Какие же поля, нам нужно создать для заполнения пользователем! Кроме уже 
+вышеперечисленных Логина и Пароля, которые называются </span> </font>
+<font face="Courier" size="2"><font color="#0000FF">nickname</font>
+<span lang="ru">и</span><font color="#0000FF"> pass</font> </font>
+<font size="2" face="Arial"><span lang="ru">соответственно нам понадобятся поля</span>
+<span lang="ru">для ввода </span>e-mail<span lang="ru"> и ФИО игрока:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;TR&gt;<br>
+		&lt;TD&gt;<font color="#FF00FF">E-Mail</font>&lt;font 
+		color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/TD&gt;<br>
+		&lt;TD width=&quot;204&quot;&gt;&lt;INPUT <font color="#505866">name</font>=<font color="#0000FF">email</font> 
+		size=&quot;20&quot;&gt;&lt;/TD&gt;<br>
+		<br>
+		&lt;TD&gt;<font color="#FF00FF">ФИО</font>&lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt;&lt;/TD&gt;<br>
+		&lt;TD&gt;&lt;INPUT <font color="#505866">name</font>=<font color="#0000FF">fio</font> 
+		size=&quot;37&quot;&gt;&lt;/TD&gt;<br>
+		&lt;/TR&gt;</font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">Выбор (радио-кнопки) пола игрока:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;INPUT TYPE=&quot;radio&quot; 
+		NAME=&quot;<font color="#008000">gender</font>&quot; value=&quot;Мужской&quot; style=&quot;cursor:hand&quot; 
+		ID=A1 checked&gt;&lt;LABEL FOR=A1&gt; Мужской &lt;/LABEL&gt;<br>
+		&lt;INPUT TYPE=&quot;radio&quot; NAME=&quot;<font color="#008000">gender</font>&quot; value=&quot;Женский&quot; 
+		style=&quot;cursor:hand&quot; ID=A2&gt;&lt;LABEL FOR=A2&gt; Женский&lt;/LABEL&gt;</font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">а также информация о городе и
+</span>ICQ <span lang="ru">игрока и дате его рождения. Полный код странички вы 
+можете посмотреть <b>здесь</b>. Можно также обязать игрока прочитать правила 
+нашего клуба и согласиться с ними, поставив птичку (</span>check-button<span lang="ru">)<br>
+<br>
+Ну и конечно, нам понадобится кнопка для завершения регистрации и отправки формы 
+к нам в базу данных (а точнее - отправки значений заполненных полей к нам в 
+таблицу </span><b>users</b><span lang="ru">)<br>
+<br>
+На рисунке (Рис.2) вы видите, что у нас с Вами получилось:<br>
+<br>
+<img border="0" src="form.jpg" width="558" height="287"><br>
+<br>
+Рис. 2<br>
+<br>
+В последнем разделе нашего сегодняшнего урока мы еще добавим небольшую защиту 
+для ввода данных, а сейчас нам вполне достаточно и этого. Полный текст файла
+</span>reg.phtml <span lang="ru">смотрите <b><a href="2_2/reg.phtml">здесь</a></b>.<br>
+<br>
+</span><b><span lang="ru">
+<font face="Arial" color="#000080"><a name="kopv2"><font size="2">1.3. </font>
+</a></font></span></b><span lang="ru"><b><a name="kopv3">
+<font size="2" face="Arial" color="#000080">&nbsp;Проверка ввода на стороне 
+клиента.</font></a></b>
+<br>
+<br>
+Как вы заметили некоторые поля являются обязательными для заполнения и помечены 
+звездочкой (<font color="#FF0000">*</font>). Для пользователя это значит, что он 
+не может оставить их пустыми, а для нас как создателей регистрационной формы это 
+значит, что мы должны проверить их заполнение. Чтоб не проверять их лишний раз 
+на стороне нашего сервера, проверим их прямо на странице браузера при помощи 
+языка </span>JavaScript.<span lang="ru"><br>
+Например для проверки, заполнено ли поле Логин достаточно следующего кода:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table8">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;<font color="#008000">SCRIPT</font>&gt;<br>
+		if (document.regform.nickname.value==&quot;&quot;) {<br>
+&nbsp;&nbsp; alert(&quot;Заполните ник персонажа!&quot;);<br>
+&nbsp;&nbsp; document.regform.<font color="#0000FF">nickname</font>.focus();<br>
+&nbsp;&nbsp; return false;<br>
+		}<br>
+		&lt;<font color="#008000">/SCRIPT</font>&gt;</font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">Таким образом, если пользователь 
+не ввел Логин своего персонажа и нажал на кнопку Регистрация, то он увидит 
+диалоговое окно следующего содержания:<br>
+<img border="0" src="error.jpg" width="212" height="119"><br>
+<br>
+Аналогично мы поступим и с другими обязательными полями для чего напишем на
+</span>JavaScript<span lang="ru"> простую функцию с названием </span> </font><b>
+<font face="Courier" size="2">feedbackSubmit</font></b><font size="2" face="Arial"><span lang="ru">. 
+Эта функция вызывается автоматически, когда пользователь нажимает на кнопку 
+Регистрация, которая имеет следующий </span>HTML-<span lang="ru">код:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table10">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;INPUT class=SubmitButton 
+		type=button value=Регистрация name=reg onClick=&quot;<font color="#0000FF">feedbackSubmit()</font>&quot;&gt;</font></td>
+	</tr>
+</table>
+<p><font size="2" face="Arial"><span lang="ru">Как вы заметили в событии </span> </font>
+<font face="Courier" size="2">onClick<span lang="ru"> </span></font>
+<font size="2" face="Arial"><span lang="ru">кнопки и вызывается наша функция, 
+которая теперь имеет в своем теле проверки всех необходимых элементов формы 
+(regform)</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table9">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;<font color="#008000">script</font>&gt;<br>
+		function feedbackSubmit(){<br>
+		var cUserMail = document.regform.email.value;<br>
+		if (document.regform.nickname.value==&quot;&quot;) {<br>
+		alert(&quot;Заполните ник персонажа!&quot;);<br>
+		document.regform.nickname.focus();<br>
+		return false;<br>
+		}<br>
+		if (document.regform.pass.value==&quot;&quot;) {<br>
+		alert(&quot;Поле пароля не должно оставаться пустыми!&quot;);<br>
+		document.regform.pass.focus();<br>
+		return false;<br>
+		}<br>
+		<br>
+		if ( (cUserMail.indexOf(&quot;@&quot;) == -1) || (cUserMail.indexOf(&quot;.&quot;) == -1) ) 
+		{<br>
+		alert(&quot;Неправильно заполнено поле e-mail!&quot;);<br>
+		document.regform.email.focus();<br>
+		return false;<br>
+		} <br>
+		<br>
+		if (document.regform.fio.value==&quot;&quot;) {<br>
+		alert(&quot;Пожалуйста укажите ФИО!&quot;);<br>
+		document.regform.fio.focus();<br>
+		return false;<br>
+		} <br>
+		<br>
+		if (document.regform.law.checked==false)<br>
+		{<br>
+		alert(&quot;Вам нужно ознакомиться с правилами клуба!&quot;);<br>
+		return false;<br>
+		}<br>
+		<br>
+		<font color="#000080">document.regform.submit()</font>;<br>
+		<br>
+		}<br>
+		<br>
+		&lt;<font color="#008000">/script</font>&gt;<br>
+		<br>
+&nbsp;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Если все проверки 
+выполнены, то в самом конце функции выполняется команда&nbsp; </span> </font>
+<font face="Courier" size="2">document.regform.submit()<span lang="ru"> </span>
+</font><font size="2" face="Arial"><span lang="ru">и форма уходит к нам на 
+сервер.<br>
+Как Вы могли заметить, мы чуть сложнее проверяем на заполнение поле ввода </span>
+e-mail<span lang="ru">. Часто пользователи вводят туда просто набор букв или 
+цифр. Наша проверка позволит им придерживаться хоть и упрощенного, но правила 
+для ввода </span>e-mail, <span lang="ru">проверяя, ввели ли они в названии 
+почтового ящика обязательные символы (</span> . <span lang="ru">и </span>@<span lang="ru"> 
+) </span>. <span lang="ru">Само собой разумеется эта проверка примитивная и не 
+убережет от неправильного заполнения поля </span>e-mail<span lang="ru">.</span>
+<span lang="ru">Более правильным будет следующая проверка правильности ввода 
+почтового ящика:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table11">
+	<tr>
+		<td bgcolor="#FFFFCC"><span class="post"><font size="2" face="Courier">
+		if (</font></span><font face="Courier" size="2">cUserMail</font><span class="post"><font size="2" face="Courier"> 
+		=='') {<br>
+		<span lang="ru">&nbsp;&nbsp;&nbsp; </span>alert(&quot;<span lang="ru">Пожалуйста 
+		заполните поле </span>E-Mail&quot;);<br>
+&nbsp;&nbsp;&nbsp; </font></span><font face="Courier" size="2">
+		document.regform.email.focus();</font><span class="post"><font size="2" face="Courier"><br>
+&nbsp;&nbsp;&nbsp; return false<br>
+		} &nbsp;<br>
+		if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(</font></span><font face="Courier" size="2">cUserMail</font><span class="post"><font size="2" face="Courier">))) 
+		{ <br>
+&nbsp;&nbsp; &nbsp;alert('<span lang="ru">Введите правильное название почтового ящика!</span>');<br>
+		<span lang="ru">&nbsp;&nbsp;&nbsp; </span></font></span>
+		<font face="Courier" size="2">document.regform.email.focus();</font><span class="post"><font size="2" face="Courier"> 
+		&nbsp;<br>
+&nbsp;&nbsp; &nbsp;return false &nbsp;<br>
+		} &nbsp;</font></span></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Здесь 
+используется проверка при помощи поддерживаемого </span>JavaScript<span lang="ru"> 
+регулярного выражения. Но эта тема не для наших курсов, поэтому, если это 
+вызывает у Вас трудности, можете просто оставить простую проверку </span>E-Mail.<span lang="ru"> 
+Измененный текст файла
+</span>reg.phtml <span lang="ru">смотрите <b><a href="2_3/reg.phtml">здесь</a></b>.<br>
+<br>
+</span><b><span lang="ru"><font face="Arial" color="#000080">
+<a name="kopv4"><font size="2">1.4. </font></a></font></span></b>
+<span lang="ru"><b><a name="kopv5"><font size="2" face="Arial" color="#000080">&nbsp;</font></a></b><a name="kopv5"><b><font face="Arial" size="2" color="#000080">Обработка 
+и сохранение данных на сервере</font></b></a><font size="2" face="Arial"> <br>
+<br>
+&nbsp;&nbsp;&nbsp; Давайте посмотрим, как передаются данные, заполненной 
+пользователем анкеты в нашу таблицу
+</font></span><font size="2" face="Arial"> users
+<span lang="ru">на стороне сервера. Как вы наверно заметили, в </span>HTML
+<span lang="ru">коде описывающем форму ключевой параметр </span>
+</font> </font><font face="Courier" size="2">action<span lang="ru"> </span>
+</font><font size="2" face="Arial"> <span lang="ru">имеет значение </span>
+</font><font face="Courier" size="2">testreg.phtml</font><font size="2" face="Arial"><span lang="ru">.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table12">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;form name=regform 
+		action=&quot;<font color="#008000">testreg.phtml</font>&quot; method=POST&gt;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Это означает лишь 
+одно - файл с этим названием осуществляет прием и сохранение в таблицу </span>
+<b>users</b> <span lang="ru">значений из заполненной пользователем анкеты.</span> <span lang="ru">
+Так как передача значений осуществляется методом
+</span>Post&nbsp; <span lang="ru">(</span></font><font face="Courier" size="2">method=POST</font><font size="2" face="Arial">)<span lang="ru">, 
+то и наша программа на языке
+</span>PHP <span lang="ru">должна принимать их этим методом. Делается это в 
+файле
+</span></font><font color="#008000" face="Courier" size="2">testreg.phtml<span lang="ru">
+</span></font><font size="2" face="Arial"><span lang="ru">так:
+</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table13">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2"><b>
+		<font color="#000080">&lt;?php</font></b><br>
+		$aNickName = <font color="#008000">$_POST</font>['<font color="#0000FF">nickname</font>'];<br>
+		$aPass = <font color="#008000">$_POST</font>['<font color="#0000FF">pass</font>'];<br>
+		$aFIO = <font color="#008000">$_POST</font>['<font color="#0000FF">fio</font>'];<br>
+		$aMail = <font color="#008000">$_POST</font>['<font color="#0000FF">email</font>'];<br>
+		$aYear = <font color="#008000">$_POST</font>['<font color="#0000FF">year</font>'];<br>
+		$aMonth = <font color="#008000">$_POST</font>['<font color="#0000FF">month</font>'];<br>
+		$aDay = <font color="#008000">$_POST</font>['<font color="#0000FF">day</font>'];<br>
+		$aDate = $aYear.&quot;-&quot;.$aMonth.&quot;-&quot;.$aDay; <font color="#FF00FF">/*<span lang="ru">Собираем 
+		в формат </span>yyyy-mm-dd*/</font><br>
+		$aAnswer = <font color="#008000">$_POST</font>['<font color="#0000FF">answer</font>'];<br>
+		$aGender = <font color="#008000">$_POST</font>['<font color="#0000FF">gender</font>'];<br>
+		if ($aGender=='Мужской'){<br>
+		$aUserGender = 1;<br>
+		}else{<br>
+		$aUserGender = 2;<br>
+		}<br>
+		$aCity = <font color="#008000">$_POST</font>['<font color="#0000FF">city</font>'];<br>
+		$aICQ = <font color="#008000">$_POST</font>['<font color="#0000FF">icq</font>'];<br>
+		<b><font color="#000080">?&gt;</font></b></font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Как Вы успели 
+заметить,&nbsp; - это имена элементов формы в файле</span> <b>reg<span lang="ru">.</span>phtml</b>.<span lang="ru"> 
+Все они принимаются в специальный служебный массив
+</span>$_POST <span lang="ru">и мы для удобства сохраняем эти значения в 
+переменные
+</span></font><font face="Courier" size="2">$aNickName<span lang="ru">,</span>$aPass<span lang="ru">,</span>$aFIO</font><font size="2" face="Arial"><span lang="ru">. 
+и т.д.<br>
+После этой процедуры мы должны сделать&nbsp; проверку, не используется ли 
+введенный регистрирующимся пользователем логин? Если нет, сохраняем все значения 
+к нам в таблицу
+</span><b>users</b>. <span lang="ru">Следующий фрагмент кода реализует это 
+действие:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table14">
+	<tr>
+		<td bgcolor="#FFFFCC"><span class="post"><font size="2" face="Courier">
+		$mysql_host = 'localhost';<br>
+		$mysql_user = 'root';<br>
+		$mysql_password = '';<br>
+		$my_database = 'mmclub';<br>
+		<br>
+		$link = <font color="#0000FF">mysql_connect</font>($mysql_host, $mysql_user, 
+		$mysql_password)<br>
+		or <font color="#0000FF">die</font>(&quot;Could not connect : &quot; . mysql_error());<br>
+		<font color="#0000FF">mysql_select_db</font>($my_database) or
+		<font color="#0000FF">die</font>(&quot;Could not select database&quot;);<br>
+		<br>
+		$query = &quot;SELECT * from users where Nick_Name = '$aNickName'&quot;;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query,$link) or
+		<font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		$num_rows = <font color="#0000FF">mysql_num_rows</font>($result);<br>
+		<br>
+		<font color="#0000FF">if</font>( $num_rows == 0 ){<br>
+		<br>
+		$query = &quot;INSERT INTO 
+		users(Nick_Name,User_Pass,Full_Name,User_Birth_Day,User_EMail,<br>
+		Character_Birth_Day,Security_Answer,User_Gender,User_City,ICQ_Number)&quot;;<br>
+		<br>
+		$query .= &quot;Values ('$aNickName','$aPass','$aFIO',Now(),'$aMail','$aDate','$aAnswer','$aUserGender','$aCity','$aICQ')&quot;;<br>
+		<br>
+		$result = <font color="#0000FF">mysql_query</font>($query,$link) or 
+		die(&quot;Query failed : &quot; . mysql_error());<br>
+		<br>
+		<font color="#0000FF">print</font>(&quot;Юзер: $aNickName, с паролем: $aPass, 
+		именем: $aFIO, Датой рождения: $aDate добавлен в базу!&quot;);<br>
+		} <font color="#0000FF">else</font> {<br>
+		<font color="#0000FF">print</font>(&quot;Юзер: $aNickName уже есть в игре, 
+		выберите другой логин!&quot;);<br>
+		}<br>
+		<font color="#0000FF">mysql_close</font>($link);</font></span></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Если Вы делаете 
+только первые шаги в программировании на
+</span>PHP<span lang="ru">, то мы сделаем беглый осмотр этого простого кода.
+</span>&nbsp;<span lang="ru">В языке
+</span>PHP<span lang="ru"> есть целый набор встроенных функций для работы с 
+базой данных
+</span>MySQL. <span lang="ru">Для того чтоб подключиться к базе данных
+</span>MySQL<span lang="ru">, нам нужно использовать четыре параметра: хост, 
+логин и пароль пользователя в базе данных и имя базы данных. За это отвечают 
+соответственно переменные
+</span></font><span class="post"><font size="2" face="Courier">
+		$mysql_host</font></span><font size="2" face="Arial"><span lang="ru">,</span></font><span class="post"><font size="2" face="Courier">$mysql_user</font></span><span lang="ru"><font face="Arial" size="2">,
+</font></span><span class="post"><font size="2" face="Courier">
+		$mysql_password<span lang="ru"> и </span>$my_database</font></span><font size="2" face="Arial"><span lang="ru">, 
+которые мы инициализировали в начале выше приведенного фрагмента кода. <br>
+Затем мы используем функции
+</span></font><span class="post"><font size="2" face="Courier">
+		<font color="#0000FF">mysql_connect</font></font></span><font size="2" face="Arial"><span lang="ru"> 
+и
+</span></font><span class="post"><font size="2" face="Courier">
+		<font color="#0000FF">mysql_select_db</font></font></span><font size="2" face="Arial"><span lang="ru"> 
+для подключения и выбора базы
+</span>MySQL<span lang="ru">, куда передаем в качестве аргументов наши 
+переменные с названием хоста (</span>'localhost<span lang="ru">'), логина</span>('root')<span lang="ru"> 
+, пароля</span>('')<span lang="ru"> и имени базы данных</span> ('mmclub')<span lang="ru"><br>
+Если подключение не удачно, конструкция кода&nbsp;
+</span><font color="#000080">... or </font></font><span class="post">
+<font color="#000080" size="2" face="Courier">die(&quot;Could not connect : &quot; . 
+mysql_error());</font></span><font size="2" face="Arial"><span lang="ru"> выдаст 
+в окно браузера сообщение об ошибке</span>.<span lang="ru"><br>
+Теперь, когда мы подключились к базе, мы можем делать к ней запросы на языке
+</span>SQL. <span lang="ru">Первым нашим запросом будет попытка сделать выборку 
+из таблицы
+</span>users <span lang="ru">на предмет существования в ней логина, под которым 
+хочет зарегистрироваться новый пользователь.<br>
+Запрос имеет вид:</span></font><span class="post"><font size="2" face="Courier">
+		<font color="#008000"><span lang="ru">&quot;</span>SELECT * from users where 
+Nick_Name = '$aNickName'</font></font></span><font size="2" face="Arial"><span lang="ru"><font color="#008000">&quot;</font><br>
+После выполнения функции
+</span></font><span class="post"><font size="2" face="Courier">
+		<font color="#0000FF">mysql_query</font></font></span><font size="2" face="Arial"><span lang="ru">, 
+которой мы в качестве аргумента передали эту строку запроса (в переменной
+</span></font><span class="post"><font size="2" face="Courier">
+		$query</font></span><font size="2" face="Arial"><span lang="ru">), мы 
+вызываем функцию
+</span></font><span class="post"><font size="2" face="Courier">
+		<font color="#0000FF">mysql_num_rows</font></font></span><font size="2" face="Arial"><span lang="ru">, 
+которая служит для возвращения количества строк результата предыдущего запроса. 
+То есть если таких строк 0&nbsp;&nbsp; <font color="#0000FF">( </font>
+</span></font><span class="post"><font color="#0000FF" size="2" face="Courier">
+if( $num_rows == 0 )<span lang="ru"> </span></font></span>
+<font size="2" face="Arial"><span lang="ru"><font color="#0000FF">) </font>&nbsp;, 
+значит пользователя с именем, содержащимся в переменной
+</span></font><span class="post"><font color="#008000" size="2" face="Courier">$aNickName<span lang="ru">
+</span></font></span><font size="2" face="Arial"><span lang="ru">нет и мы можем 
+его спокойно зарегистрировать в нашей таблице
+</span><b>users</b>.<span lang="ru"> <br>
+Этот запрос вставляет в таблицу
+</span>users <span lang="ru">все переданные поля из формы регистрации<br>
+</span></font><span class="post"><font size="2" face="Courier" color="#008000">
+		INSERT INTO users(Nick_Name,User_Pass<span lang="ru">...)</span>values('$aNickName','$aPass'..)</font></span></p>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Если количество 
+строк отлично от 0 - значит пользователь с таким логином уже есть в таблице
+</span><b>users</b><span lang="ru"> и мы отказываем новому пользователю в 
+регистрации, печатая в окно браузера:<br>
+</span></font><span class="post"><font size="2" face="Courier">
+		<font color="#0000FF">print</font>(<font color="#008000">&quot;Юзер:<span lang="ru">
+</span></font><font color="#FF00FF">$aNickName</font><font color="#008000"> уже 
+есть в игре, выберите другой логин!&quot;</font>);</font></span><font size="2" face="Arial"><span lang="ru"><br>
+Вот собственно и все! Файл
+</span></font><font face="Courier" size="2">testreg.phtml<span lang="ru"> </span></font>
+<font size="2" face="Arial"><span lang="ru">вы можете увидеть <b>
+<a href="2_4/testreg.phtml">здесь</a></b>.<br>
+<br>
+Теперь, когда пользователь занесен в таблицу
+</span><b>users</b> <span lang="ru">он может в ходить в игру. Собственно пока 
+что игровых файлов у нас пока нет, но форму ввода логина и пароля для входа в 
+наш игровой мир мы сделать должны. Это обычно форма с двумя полями (логин, 
+пароль) и кнопкой (Войти)<br>
+Выглядит наша форма примерно так:<br>
+<br>
+<img border="0" src="index.jpg" width="247" height="135"><br>
+Ссылка <font color="#000080">Зарегистрироваться</font> ведет на нашу страницу 
+регистрации. Так как форма входа в игру обычно располагается на самой первой 
+страничке игровых проектов, чтоб пользователь не искал ее долго, разместим
+</span>HTML <span lang="ru">код с этой формой в файле
+</span>index.phml - <span lang="ru">стартовом файле нашего проекта.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table18">
+	<tr>
+		<td bgcolor="#FFFFCC"><span class="post"><font size="2" face="Courier">
+		&lt;FORM name=log_in action=<font color="#0000FF">login.phtml</font> 
+		method=<b>post</b>&gt;<br>
+		&lt;p&gt;&lt;img border=&quot;0&quot; src=&quot;img/logo.gif&quot;&gt;&lt;br&gt;<br>
+		&amp;nbsp;&lt;/p&gt;<br>
+		&lt;TABLE width=200 cellSpacing=5 cellPadding=0 border=0 
+		style=&quot;border-style: dashed; border-width: 1px&quot; bgcolor=&quot;#FFE5B6&quot;&gt;<br>
+		&lt;TR&gt;<br>
+		&lt;TD&gt;<font color="#FF00FF">Логин</font>:&lt;/TD&gt;<br>
+		&lt;TD&gt;&lt;INPUT name=login&gt;&lt;/TD&gt;<br>
+		&lt;/TR&gt;<br>
+		&lt;TR&gt;<br>
+		&lt;TD&gt;<font color="#FF00FF">Пароль</font>:&lt;/TD&gt;<br>
+		&lt;TD&gt;&lt;INPUT type=password name=pass&gt;<br>
+		&lt;/TD&gt;<br>
+		&lt;/TR&gt;<br>
+		&lt;TR&gt;<br>
+		&lt;TD&gt; <br>
+		&lt;INPUT class=loginButton type=submit value=<font color="#FF00FF">Вход</font> 
+		name=sbm&gt;&lt;/p&gt;<br>
+		&lt;/TD&gt;<br>
+		&lt;TD style=&quot;PADDING-BOTTOM: 10px&quot; width=&quot;99%&quot;&gt;&lt;A href=&quot;<font color="#0000FF">reg.phtml</font>&quot;&gt;<font color="#000080">Зарегистрироваться</font>&lt;/A&gt;<br>
+		&lt;/TD&gt;<br>
+		&lt;/TR&gt;<br>
+		&lt;/TABLE&gt;<br>
+		&lt;/FORM&gt;</font></span></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Полный код 
+странички </span><b>index.phtml</b> - <span lang="ru">смотрите
+<a href="2_5/index.phtml">здесь</a>.<br>
+Как видно из из самой первой строки кода, после ввода логина и пароля, эти 
+данные передаются в файл </span></font><span class="post">
+<font color="#0000FF" size="2" face="Courier">login.phtml</font></span><font size="2" face="Arial"><span lang="ru">, 
+методом </span>POST.<span lang="ru"><br>
+Логика обработка переданных в файл </span></font><span class="post">
+<font color="#0000FF" size="2" face="Courier">login.phtml</font></span><font size="2" face="Arial"><span lang="ru"> 
+данных выглядит следующим образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table19">
+	<tr>
+		<td bgcolor="#FFFFCC"><span class="post"><font size="2" face="Courier">
+		<b><font color="#000080">&lt;?php</font></b><br>
+		$mysql_host = 'localhost';<br>
+		$mysql_user = 'root';<br>
+		$mysql_password = '';<br>
+		$my_database = 'mmclub';<br>
+		<br>
+		if ((!<font color="#0000FF">empty</font>($<font color="#0000FF">_POST</font>['login'])) 
+		&amp;&amp; (!<font color="#0000FF">empty</font>($<font color="#0000FF">_POST</font>['pass'])) 
+		)<br>
+		{<br>
+		$aNickName = $<font color="#0000FF">_POST</font>['login'];<br>
+		$aUserPass = $<font color="#0000FF">_POST</font>['pass'];<br>
+		<br>
+		$link = <font color="#0000FF">mysql_connect</font>($mysql_host, $mysql_user, 
+		$mysql_password)<br>
+		or <font color="#0000FF">die</font>(&quot;Could not connect : &quot; .
+		<font color="#0000FF">mysql_error</font>());<br>
+		<font color="#0000FF">mysql_select_db</font>($my_database) or
+		<font color="#0000FF">die</font>(&quot;Could not select database&quot;);<br>
+		<br>
+		$query = &quot;<font color="#008000">SELECT * FROM users where Nick_Name='$aNickName' 
+		and User_Pass='$aUserPass'&quot;</font>;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or die(&quot;Query 
+		failed : &quot; . mysql_error());<br>
+		$line = <font color="#0000FF">mysql_fetch_array</font>($result);<br>
+		$aRes = $line[&quot;Nick_Name&quot;];<br>
+		if( $aRes === $aNickName )<br>
+		{<br>
+		$aRandVal = <font color="#0000FF">rand</font>(0,1000000000);<br>
+		$query = &quot;<font color="#008000">UPDATE users SET SessionID='$aRandVal' 
+		WHERE Nick_Name='$aNickName'</font>&quot;;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or die(&quot;Query 
+		failed : &quot; . mysql_error());<br>
+		<font color="#0000FF">print</font>('&lt;SCRIPT&gt;setCookie(&quot;MMCLUB_NICK_NAME&quot;,&quot;'.$aNickName.'&quot;);&lt;/SCRIPT&gt;');<br>
+		<font color="#0000FF">print</font>('&lt;SCRIPT&gt;setCookie(&quot;MMCLUB_SESSION&quot;,&quot;'.$aRandVal.'&quot;);&lt;/SCRIPT&gt;');<br>
+		<font color="#0000FF">print</font>('&lt;SCRIPT&gt;location.href=&quot;main.phtml?NickName='.$aNickName.'&quot;;&lt;/SCRIPT&gt;');<br>
+		}<br>
+		<font color="#0000FF">else</font> <font color="#0000FF">print</font>('&lt;SCRIPT&gt;location.href=&quot;login_error.html&quot;;&lt;/SCRIPT&gt;');<br>
+		}<br>
+		<font color="#0000FF">else</font> <font color="#0000FF">print</font>('&lt;SCRIPT&gt;location.href=&quot;login_error.html&quot;;&lt;/SCRIPT&gt;');<br>
+		<font color="#000080"><b>?&gt;</b></font></font></span></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Здесь Вам уже 
+много знакомо. В начале мы проверяем, не пустые ли значения переданных скрипту 
+параметров логина и пароля и затем</span>, <span lang="ru">подключившись к нашей 
+базе </span><b>mmclub</b> <span lang="ru">узнаем при помощи </span>SQL
+<span lang="ru">запросов - есть ли такой пользователь и пароль для него в 
+таблице </span><b>users</b>.<span lang="ru"><br>
+Если такой пользователь есть, создаем случайный параметр сессии и пишем его в
+</span>cookie <span lang="ru">и в специально подготовленное для этих целей поле 
+в таблице </span><b>users</b> <span lang="ru">для этого пользователя, после чего 
+переадресуем его на главную страницу нашей игры </span>main.phtml (<span lang="ru">которой 
+пока что нет, но мы ее сделаем в нашем следующем уроке</span>)<span lang="ru">:<br>
+&nbsp;</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table20">
+	<tr>
+		<td bgcolor="#FFFFCC"><span class="post"><font size="2" face="Courier">
+		$aRandVal = <font color="#0000FF">rand</font>(0,1000000000);<br>
+		$query = &quot;<font color="#008000">UPDATE users SET SessionID='$aRandVal' 
+		WHERE Nick_Name='$aNickName'</font>&quot;;<br>
+		$result = <font color="#0000FF">mysql_query</font>($query) or die(&quot;Query 
+		failed : &quot; . mysql_error());<br>
+		<font color="#0000FF">print</font>('&lt;SCRIPT&gt;setCookie(&quot;MMCLUB_NICK_NAME&quot;,&quot;'.$aNickName.'&quot;);&lt;/SCRIPT&gt;');<br>
+		<font color="#0000FF">print</font>('&lt;SCRIPT&gt;setCookie(&quot;MMCLUB_SESSION&quot;,&quot;'.$aRandVal.'&quot;);&lt;/SCRIPT&gt;');<br>
+		<font color="#0000FF">print</font>('&lt;SCRIPT&gt;location.href=&quot;<font color="#000080">main.phtml</font>?NickName='.$aNickName.'&quot;;&lt;/SCRIPT&gt;');</font></span></td>
+	</tr>
+</table>
+<p align="justify"><span class="post">
+<font size="2" face="Courier" color="#000080">
+		setCookie</font></span><font size="2" face="Arial"><span lang="ru"> - 
+эта функция написана на </span>JavaScript <span lang="ru">и служит для записи
+</span>cookie <span lang="ru">для данного открытого окна браузера.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table21">
+	<tr>
+		<td bgcolor="#FFFFCC"><span class="post"><font face="Courier" size="2">&lt;<font color="#008000">SCRIPT</font>&gt;<br>
+		function setCookie(name, value) {<br>
+&nbsp; document.cookie = name+&quot;=&quot;+escape(value)+&quot;; path=/&quot;;<br>
+		}<br>
+		&lt;<font color="#008000">/SCRIPT</font>&gt;</font></span></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Для чего все это 
+нужно?&nbsp; При входе в игру, мы будем проверять совпадение нашего (</span></font><span class="post"><font color="#008000" size="2" face="Courier">SessionID</font></span><font size="2" face="Arial"><span lang="ru">)&nbsp; 
+в таблице </span><b>users</b> <span lang="ru">для игрока со значением в </span>
+cookie </font><span class="post"><font size="2" face="Courier">
+		MMCLUB_SESSION<span lang="ru"> </span></font></span>
+<font size="2" face="Arial"><span lang="ru">чтоб проверить правильность входа 
+пользователя в игру. Конечно мы могли бы использовать механизм сессий встроенный 
+в </span>PHP, <span lang="ru">но так проще. <br>
+В случае несовпадений, программа переадресует пользователя на страницу ошибки:
+</span></font><span class="post"><font size="2" face="Courier" color="#0000FF">
+		login_error.html</font></span><font size="2" face="Arial"><span lang="ru">
+<br>
+Смотрите полный код скрипта, который отвечает за вход в игру&nbsp; </span></font>
+<span class="post"><font color="#0000FF" size="2" face="Courier">login.phtml<span lang="ru">
+</span></font></span><font size="2" face="Arial"><span lang="ru"><b>
+<a href="2_5/login.phtml">здесь</a></b>.<br>
+<br>
+</span><b>
+<span lang="ru"><font face="Arial" color="#000080"><a name="kopv6">
+<font size="2">1.5. </font></a></font></span></b><span lang="ru"><b>
+<a name="kopv7"><font size="2" face="Arial" color="#000080">&nbsp;Добавление 
+правил безопасности.</font></a></b><font size="2" face="Arial"> <br>
+&nbsp;<br>&nbsp;&nbsp;&nbsp; Для того, чтоб немного защитить нашу игру от частых 
+регистраций при помощи разного рода программ автоматической регистрации на 
+веб-ресурсах сделаем очень простое добавление цифрового кода, который должен 
+ввести пользователь при регистрации. Для того чтоб не углубляться в эту тему (а 
+таких методов с применением как ввода цифрового кода, так и других сходных 
+способов защиты существует великое множество) мы сделаем с вами самый 
+примитивный вариант ввода цифрового кода.<br>
+&nbsp;&nbsp; И так нам понадобится кусочек кода на </font></span>PHP
+<span lang="ru">который по переданной ему строке с цифрами, сделает нам из нее 
+картинку в формате </span>.gif.&nbsp; <span lang="ru">В </span>PHP<span lang="ru"> 
+есть специальная библиотечка </span><b>php_gd2.dl</b>l <span lang="ru">которая 
+как раз и занимается работой с графическими данными. Эта библиотека поставляется 
+вместе с пакетом </span>Denwer <span lang="ru">и находится в папке: </span>
+<a href="file:///C:/WebServers/usr/local/php/extensions/">
+C:\WebServers\usr\local\php\extension<span lang="ru">s</span>\</a><span lang="ru"><br>
+</span>&nbsp;&nbsp; <span lang="ru">Для начала заготовим файл формата </span>
+.gif <span lang="ru">в который специальные функции из библиотеки </span><b>
+php_gd2.dl</b>l<span lang="ru"> будут дорисовывать цифры. Вот этот файл: </span>
+<a href="img/code.gif">code.gif</a><span lang="ru"> - то есть это обычный 
+прямоугольник черного цвета.</span><br>
+<span lang="ru">&nbsp;&nbsp;&nbsp; Теперь напишем маленький фрагмент кода на
+</span>PHP<span lang="ru">, который будет рисовать в этот прямоугольник цифры:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table15">
+	<tr>
+		<td bgcolor="#FFFFCC"><span class="post"><font size="2" face="Courier">
+		<b><font color="#000080">&lt;?php<br>
+		</font></b>if ( !empty(<font color="#0000FF">$_GET</font>['code']) ){<br>
+		$code = <font color="#0000FF">$_GET</font>['code'];<br>
+		}<br>
+		<br>
+		<font color="#0000FF">Header</font>(&quot;Pragma: no-cache&quot;);<br>
+		<br>
+		$pic = <font color="#0000FF">ImageCreateFromgif</font>(&quot;img/code.gif&quot;);<br>
+		<font color="#0000FF">Header</font>(&quot;Content-type: image/gif&quot;);<br>
+		$color=<font color="#0000FF">ImageColorAllocate</font>($pic, 255, 125, 
+		255);<br>
+		<font color="#0000FF">ImageString</font>($pic,4,12,1,$code,$color);<br>
+		<font color="#0000FF">Imagegif</font>($pic);<br>
+		<font color="#0000FF">ImageDestroy</font>($pic);<br>
+		<b><font color="#000080">?&gt;</font></b> &nbsp;</font></span></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Как мы уже 
+говорили этот фрагмент кода, который мы поместим в файл </span>
+<a href="2_5/code.php">code<span lang="ru">.</span>php</a> <span lang="ru">
+принимает методом </span>GET <span lang="ru">строку из четырех цифр (например 
+1234) и затем при помощи функции </span></font><span class="post">
+<font color="#0000FF" size="2" face="Courier">ImageString<span lang="ru"> </span>
+</font></span><font size="2" face="Arial"><span lang="ru">рисует их в виде 
+графики в наш заранее подготовленный черный прямоугольник файла </span>
+<a href="img/code.gif">code.gif</a><span lang="ru">. Строка </span></font>
+<span class="post"><font size="2" face="Courier">
+		<font color="#0000FF">Header</font>(&quot;Content-type: image/gif&quot;);<span lang="ru">
+</span></font></span><font size="2" face="Arial"><span lang="ru">информирует 
+браузер, что ему передаются данные в виде рисунка и он их должен отобразить как 
+рисунок и никак иначе.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Теперь давайте немного изменим нашу регистрационную 
+форму, находящуюся в файле </span>reg.phtml <span lang="ru">, добавив туда показ 
+этой картинки. Сделаем это так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table16">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;INPUT 
+		TYPE=&quot;text&quot; NAME=&quot;digits&quot; size=10 maxlength=40&gt;<br>
+		Введите код с картинки &lt;font color=&quot;#FF0000&quot;&gt;*&lt;/font&gt; <br>
+		<br>
+		&lt;?php<br>
+		$code = ''.<font color="#0000FF">mt_rand</font>(1000,9999);<br>
+		$md5code = <font color="#0000FF">md5</font>($code);<br>
+		<font color="#0000FF">echo</font> &quot;&lt;img src=code.php?code=$code&gt;&lt;p&gt;&quot;;<br>
+		?&gt; <br>
+		&lt;input type=&quot;hidden&quot; name=&quot;check&quot; class=inup size=&quot;20&quot; value=&quot;&lt;?php
+		<font color="#0000FF">echo</font> $md5code ?&gt;&quot;<br>
+&nbsp;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Как видно из 
+кода, мы создаем случайное 4-хзначное число функцией </span></font>
+<font color="#0000FF" face="Courier" size="2">mt_rand<span lang="ru"> </span>
+</font><font size="2" face="Arial"><span lang="ru">из диапазона 1000-9999 и 
+кодируем его при помощи функции </span>PHP </font>
+<font color="#0000FF" face="Courier" size="2">md5<span lang="ru"> </span></font>
+<font size="2" face="Arial"><span lang="ru">и затем помещаем в скрытое поле с 
+именем </span>check<span lang="ru"> </span>&nbsp;(</font><font face="Courier" size="2">&lt;input 
+type=&quot;hidden&quot; name=&quot;check&quot; class=inup size=&quot;20&quot; value=&quot;&lt;?php
+<font color="#0000FF">echo</font> $md5code ?&gt;&quot;</font><font size="2" face="Arial">)<span lang="ru">.</span>
+<span lang="ru">Картинка с цифрами отображается при помощи кода: (</span></font><font face="Courier" size="2">&lt;img 
+src=code.php?code=$code&gt;</font><font size="2" face="Arial"><span lang="ru">)&nbsp; 
+После того, как пользователь ввел цифры с картинки в добавленное поле </span></font><font face="Courier" size="2">
+digits<span lang="ru"> </span></font><font size="2" face="Arial">
+<span lang="ru">нашей формы регистрации, вся эта информация обрабатывается 
+скриптом, содержащимся в файле </span>testreg.phtm <span lang="ru">в который мы 
+внесем тоже небольшое изменение, добавив проверки ввода цифрового кода:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table17">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">$md5code = $_POST['check']; 
+		// <span lang="ru">кодированные </span>md5<span lang="ru"> цифры <br>
+		</span>$code = $_POST['digits']; <span lang="ru">&nbsp;&nbsp; </span>//
+		<span lang="ru">реальные цифры</span><br>
+		<br>
+&nbsp;if ($md5code === md5($code)){<br>
+		<br>
+		<span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp; ...... // тут идет ранее 
+		используемый код<br>
+&nbsp;} else {<br>
+		print(&quot;Вы ввели неправильные цифры с картинки!&quot;); <br>
+		}<br>
+&nbsp;</span></font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Смотрите полный 
+код с учетом произведенных изменений в файлах </span><a href="2_5/reg.phtml">
+reg.phtml</a> <span lang="ru">и </span><a href="2_5/testreg.phtml">testreg.phtml</a><span lang="ru"><br>
+Теперь наша регистрационная анкета выглядит так:<br>
+<img border="0" src="form2.jpg" width="562" height="329"><br>
+<br>
+Каждое обновление страницы с в браузере с регистрационной анкетой будет вызывать 
+изменение цифрового кода на картинке. Это конечно пустяковая защита, но все же 
+лучше чем ничего.<br>
+Как Вы уже знаете из урока 1, нам следует собрать все написанные нами файлы в 
+папке </span><a href="file:///C:/WebServers/home/mmclub/www">C:\WebServer<span lang="ru">s</span>\home\mmclub\www</a>
+<span lang="ru">и картинки собрать в подкаталог </span><font color="#0000FF">img</font>
+<span lang="ru">вышеназванной папки. или скопируйте из папки </span><b>WWW</b>
+<span lang="ru">второго урока все файлы в папку </span>
+<a href="file:///C:/WebServers/home/mmclub/www">C:\WebServer<span lang="ru">s</span>\home\mmclub\www</a><span lang="ru">&nbsp; 
+если вы не сделали этого ранее.<br>
+Теперь все готово для теста написанного нами проекта.<br>
+Набрав в строке браузера <br>
+<img border="0" src="start.jpg" width="345" height="78"><br>
+<br>
+мы попадем на стартовую страницу нашей игры, где вы можете проверить вход в 
+систему или перейти на страницу регистрации нового пользователя в нашем проекте.
+</span></p>
+<p><span lang="ru"><b>В следующем уроке</b> мы создадим главный фрейм игры,&nbsp; 
+а также слагающие его элементы<br>
+Страницу нашего персонажа, страницу перечня игроков в игровой локации, страницу 
+управления и чата.</span></p>
+        <p align="left">&nbsp;</font></td>
+      <td width="27" height="178" background="Site/middle2.jpg">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="740" height="38" background="Site/bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

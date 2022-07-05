@@ -1,0 +1,262 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ru">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<LINK href="main.css" type=text/css rel=stylesheet>
+<title>Euroshop Силлурии</title>
+
+<?php
+
+$OBJECT_TYPE = 9;    // тип данного объекта 9 для всех городов
+
+$aMode = 1;
+$aItem = 0;         // покупаемый предмет
+$aItemType = 1;     // тип предмета
+$aRepairUnits = 0;  // на сколько единиц чиним предмет
+$aRepItem = 0;      // что за предмет чиним
+if (!empty($_GET['NickName']))
+{
+   $aNickName = $_GET['NickName'];
+}
+if (!empty($_GET['mode']))
+{
+   $aMode = $_GET['mode'];
+}
+if (!empty($_GET['itemtype']))
+{
+   $aItemType = $_GET['itemtype'];
+}
+// Раз передан этот параметр, значит режим покупки
+$iBuy = false;
+if (!empty($_GET['item']))
+{
+   $aItem = $_GET['item'];
+   $iBuy = true;
+}
+
+if (!empty($_GET['repair']))
+{
+   $aRepairUnits = $_GET['repair'];
+}
+if (!empty($_GET['repitem']))
+{
+   $aRepItem = $_GET['repitem'];
+}
+
+
+
+?>
+
+</head>
+
+<body bgcolor=e2e0e0>
+
+
+<?php
+     // Коннект к базе
+     $mysql_host = "localhost";
+     $mysql_user = "root";
+     $mysql_password = "";
+     $my_database = "mmclub";
+     
+     $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+             or die("Could not connect : " . mysql_error());
+             mysql_select_db($my_database) or die("Could not select database");
+
+     // Сколько денег у перса
+     $query = "SELECT * FROM users WHERE Nick_Name='$aNickName'";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+     $aRow = mysql_fetch_array( $result);
+     $aUserID = $aRow["USER_ID"];
+     $aMoney = $aRow["Character_Euro"];
+	 $aUserTown = $aRow["Town"];
+
+     //------------ добавлено в 11 уроке
+     $query = "SELECT ID FROM Buildings where Town=$aUserTown and BuildingType=$OBJECT_TYPE";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+     $aRow = mysql_fetch_array( $result);
+     $aObjectID = $aRow["ID"];
+     // меняем комнату у игрока
+     $query = "UPDATE Users SET Building=$aObjectID WHERE Nick_Name='$aNickName'";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+     // -----------
+
+
+ if ($iBuy){    // Была инициирована покупка
+
+     // Сколько вещей этого типа?
+     $query = "SELECT s.EUR_ID,s.QTY,il.Item_StateCost,il.ItemName,il.ItemType,il.ItemNo FROM euroshop s inner join Items_List il on s.IL_ID=il.IL_ID WHERE il.IL_ID = '$aItem'";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+     $aRow = mysql_fetch_array( $result);
+     $aEURID     = $aRow["EUR_ID"];
+     $aQTY       = $aRow["QTY"];
+     $aStateCost = $aRow["Item_StateCost"];
+     $aItemName  = $aRow["ItemName"];
+
+     if ($aQTY-- > -1){   // есть ли вообще эти вещи?
+        $lNoMoney=false;
+        if ($aMoney >= $aStateCost){   // хватит ли денег купить вещь?
+           $aMoney = $aMoney - $aStateCost;
+           // Засунем в рюкзак купленную вещь!
+           $query = "INSERT INTO items(IL_ID,Item_Owner,Item_Position,Item_CurrentLife)";
+           $query .= "Values ('$aItem','$aUserID','2','0')";
+           $result = mysql_query($query,$link) or die("Query failed : " . mysql_error());
+
+           // Уменьшим деньги
+           $query = "UPDATE users SET Character_Euro='$aMoney' WHERE Nick_Name='$aNickName'";
+           $result = mysql_query($query) or die("Query failed : " . mysql_error());
+           
+           // Уменьшим кол-во предметов в магазине
+           $query = "UPDATE euroshop SET QTY='$aQTY' WHERE EUR_ID='$aEURID'";
+           $result = mysql_query($query) or die("Query failed : " . mysql_error());
+
+        }else
+        {
+           $lNoMoney=true;
+        }
+     }
+ }
+ if (($aRepairUnits <> 0) && ($aRepItem <> 0)){   // Была инициирована починка
+    if ($aMoney >= ($aRepairUnits/10)){
+        // Починима предмет
+        $query = "UPDATE Items SET Item_CurrentLife=Item_CurrentLife-$aRepairUnits WHERE IT_ID='$aRepItem'";
+        $result = mysql_query($query) or die("Query failed : " . mysql_error());
+        // Уменьшим деньги
+        $aMoney = $aMoney - ($aRepairUnits/10);
+        $query = "UPDATE users SET Character_Euro='$aMoney' WHERE Nick_Name='$aNickName'";
+        $result = mysql_query($query) or die("Query failed : " . mysql_error());
+
+    }
+    else{
+       $lNoMoney=true;
+    }
+    
+ }
+ 
+ 
+ 
+?>
+
+<div align="center">
+  <center>
+  <table border="1" width="985" height="115" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="863" height="115" rowspan="2" valign="top">
+        <p align="center"><font face="Arial"><b>Валютный магазин Силлурии</b> (EURO-предметы и Артефакты)<br></font>
+        <font size=2 color=red><div id="mes">             </div></font>
+        <table border="1" width="80%">
+
+          <?php
+            if ($iBuy){    // Была инициирована покупка
+               if($lNoMoney){
+                  print("<SCRIPT>document.all('mes').innerHTML='К сожалению у Вас больше нет денег!';</SCRIPT>");
+               }
+               else
+               {
+                  print("<SCRIPT>document.all('mes').innerHTML='Вы успешно приобрели предмет: $aItemName';</SCRIPT>");
+               }
+            }
+
+        if ($aMode==1){
+          // Отобразим содержимое магазина евро-товаров
+          $query = "SELECT il.IL_ID, il.Item_Euro_Art, il.ItemName, il.ItemType, il.ItemNo, il.Item_Image, il.Item_StateCost, s.QTY FROM euroshop s inner join Items_List il on s.IL_ID=il.IL_ID WHERE il.ItemType='$aItemType'";
+          $result = mysql_query($query) or die("Query failed : " . mysql_error());
+          while ($aRow = mysql_fetch_array($result)) {
+             $aItem      = $aRow["IL_ID"];
+             $aItemType  = $aRow["ItemType"];
+             $aItemNo    = $aRow["ItemNo"];
+             $aItemQty   = $aRow["QTY"];
+             $aItemImage = $aRow["Item_Image"];
+             $aStateCost = $aRow["Item_StateCost"];
+             $aItemName  = $aRow["ItemName"];
+             $aItem_Euro_Art  = $aRow["Item_Euro_Art"];
+             print('<tr>');
+             print('<td width="10%" valign="top"><img src=Items/'.$aItemImage);
+             print("><br><a href=euroshop.phtml?NickName=$aNickName&itemtype=$aItemType&item=$aItem>купить</a></td>");
+             print('<td width="90%" valign="top" bgcolor=eae0e0>'.$aItemName);
+             if ( $aItem_Euro_Art == 2 )  print(' <img src="Items/artefact.gif" alt="Предмет является артефактом">');
+             print('<br>Стоимость: '.$aStateCost.' екр (количество:'.$aItemQty.')</td>');
+             print('</tr>');
+
+          }
+         }
+        if ($aMode==2){
+         print('<tr><td width="700" bgcolor="#6B6683" height="16"><b><font face="Arial" color="#FFFF00" size="2">
+         Предметы, требующие починки</font></b></td></tr>');
+
+          // Отобразим содержимое нашего рюкзака (те предметы, у которых есть изно)
+          // Отобразим содержимое рюкзачка
+          $query = "SELECT i.IT_ID, i.Item_Position, i.Item_CurrentLife, il.Item_FullLife, il.ItemType, il.ItemNo, il.Item_Image, il.ItemName FROM Items i inner join Items_List il on il.il_id=i.il_id WHERE Item_Owner='$aUserID' and Item_Position='2'";
+          $result = mysql_query($query) or die("Query failed : " . mysql_error());
+          while ($aRow = mysql_fetch_array($result)) {
+             $aSlotItemID  = $aRow["IT_ID"];
+             $aItemType    = $aRow["ItemType"];
+             $aItemNo      = $aRow["ItemNo"];
+             $aItemImage   = $aRow["Item_Image"];
+             $aItemName    = $aRow["ItemName"];
+             $aItemCurLife = $aRow["Item_CurrentLife"];
+             $aItemFullLife = $aRow["Item_FullLife"];
+             //<a href='smith.phtml?mode=2&repair=1&NickName=".$aNickName."'>
+             if ($aItemCurLife <> 0){
+               echo "<tr><td>" . "<img border=0 src=Items/".$aItemImage." ALT='Предмет ".$aItemName."'> $aItemName $aItemCurLife/$aItemFullLife ";
+               echo "<br><a href='euroshop.phtml?mode=2&repair=$aItemCurLife&repitem=$aSlotItemID&NickName=".$aNickName."'>Починить на $aItemCurLife ед. за ".($aItemCurLife/10)." кр.</a>";
+               if ($aItemCurLife>=10){
+                 echo "<br><a href='euroshop.phtml?mode=2&repair=10&repitem=$aSlotItemID&NickName=".$aNickName."'>Починить на 10 ед. за 1 кр.</a>";
+               }
+               echo "<br><a href='euroshop.phtml?mode=2&repair=1&repitem=$aSlotItemID&NickName=".$aNickName."'>Починить на 1 ед. за 0.1 кр.</a>";
+               echo "</td></tr>";
+             }
+
+          }
+         }
+
+         ?>
+
+        </table>
+      </td>
+
+      <?php
+      print( '<td width="138" height="115" rowspan="2" valign="top">' );
+         print( 'EURO-Предметы:<br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=120>Булавы</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=121>Мечи</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=122>Топоры</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=123>Копья</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=124>Кинжалы</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=125>Щиты</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=126>Шлемы</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=127>Перчатки</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=128>Сапоги</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=129>Броня</a><br>' );
+         print( '<a href=euroshop.phtml?NickName='.$aNickName.'&mode=1&itemtype=130>Пояса</a><br>' );
+         print( '<HR>' );
+      print( '</td>' );
+
+      if ($aMode==2){       // отобразим износившиеся предметы из рюкзака
+      
+      }
+      ?>
+
+      <img border="0" align=left valign=center src="Items/icon_money_bag.gif">EURO-Деньги: <font color=red><?php echo $aMoney; ?></font> eкр
+
+      <td width="18" height="173" valign="top">
+        <p align="center"><img border="0" src="Items/euroshop_pic.jpg"></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="18" height="330" valign="top"><font face="Arial"><a href="euroshop.phtml?mode=1&item=1&NickName=<? echo $aNickName ?>">Купить</a><br>
+        <a href="euroshop.phtml?mode=2&NickName=<? echo $aNickName ?>">Починить</a><br>
+        Обучиться<br>
+        <a href="map2.phtml?NickName=<?php echo $aNickName; ?>">
+        Выйти</a></font>
+        </td>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

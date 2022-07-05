@@ -1,0 +1,332 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="description" content="Blitz-School - Школа создателей компьютерных игр на языке Blitz3D. Если вы хотите быстро научиться делать компьютерные игры или интересуетесь их созданием, то этот сайт будет вам полезен">
+<meta name="keywords" content="создание игр, курсы создания игр, школа создателей компьютерных игр, blitzbasic,  компьютерные игры, как написать игру, программирование компьютерных игр, Blitz3D">
+<link rel="stylesheet" type="text/css" href="main.css">
+<title>Регистрационная Форма</title>
+
+<SCRIPT>
+
+function feedbackSubmit(){
+   var cUserMail = document.regform.Mail.value;
+   var cUserLogin = document.regform.Login.value;
+
+   if (document.regform.Name.value=="") {
+      alert("Заполните Ваше Имя!");
+      document.regform.Name.focus();
+      return false;
+   }
+   if (document.regform.SecondName.value=="") {
+      alert("Заполните Ваше Отчество!");
+      document.regform.SecondName.focus();
+      return false;
+   }
+   if (document.regform.LastName.value=="") {
+      alert("Заполните Вашу Фамилию!");
+      document.regform.LastName.focus();
+      return false;
+   }
+   if (document.regform.Index.value=="") {
+      alert("Пожалуйста укажите Ваш почтовый индекс!");
+      document.regform.Index.focus();
+      return false;
+   }             
+   if (document.regform.Country.value=="") {
+      alert("Пожалуйста укажите Вашу страну проживания!");
+      document.regform.Country.focus();
+      return false;
+   }             
+   if (document.regform.City.value=="") {
+      alert("Пожалуйста укажите Ваше город проживания!");
+      document.regform.City.focus();
+      return false;
+   }             
+   if ( (cUserMail.indexOf("@") == -1) || (cUserMail.indexOf(".") == -1) ) {
+      alert("Неправильно заполнено поле e-mail!");
+      document.regform.UserEMail.focus();
+      return false;
+   }  
+   if (document.regform.Login.value=="") {
+      alert("Пожалуйста укажите Ваш логин!");
+      document.regform.Login.focus();
+      return false;
+   }
+   if (cUserLogin.indexOf(' ')!=-1) {
+      alert("Логин не должен содержать пробелов!");
+      document.regform.Login.focus();
+      return false;
+   }
+   if (document.regform.Passw.value=="") {
+      alert("Поле пароля не должно оставаться пустыми!");
+      document.regform.Passw.focus();
+      return false;
+   }
+   if (document.regform.Law.checked==false) 
+   {
+      alert("Вам нужно ознакомиться с Положением об учебе и согласиться с ним!");
+      return false;
+   }
+
+   document.regform.submit();
+  
+}
+
+</SCRIPT>
+
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="960" height="617" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+  <tr>
+      <td width="960" height="210" background="images/n_top.jpg" colspan="3" valign="top">
+    <br>
+&nbsp;<table border="0" width="960" height="64">
+    <tr>
+      <td width="527">&nbsp;</td>
+      <td width="468">
+<!--      
+<center>
+<script language="JavaScript"> var loc = ''; </script>
+<script language="JavaScript1.4">try{ var loc = escape(top.location.href); }catch(e){;}</script>
+<script language="JavaScript">document.write("<sc"+"ript language='JavaScript' src='http://ad7.bannerbank.ru/bb.cgi?cmd=ad&hreftarget=_blank&pubid=103857098&pg=1&r=js&ssi=nofillers&vbn=1098&num=1&w=468&h=60&&ref="+escape(document.referrer)+"&loc="+loc+"&nocache="+Math.round(Math.random()*999111)+"'>\n</sc"+"ript>");</script>
+</center>
+<center><FONT SIZE=1><A HREF="http://bannerdrive.ru" target = "_top" >BannerDrive.ru</A></FONT></center>
+-->
+<script type="text/javascript"><!--
+google_ad_client = "pub-1750706626042815";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text_image";
+google_ad_channel = "";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>    
+
+      
+      </td>
+      <td width="23">&nbsp;</td>
+    </tr>
+    </table>
+      </td>
+    </tr>
+    <tr>
+      <td width="200" height="369" background="images/n_l.jpg" valign="top" rowspan="2">
+        &nbsp;&nbsp;&nbsp; <br>
+    <font size="2">&nbsp;&nbsp;&nbsp;&nbsp; </font> 
+    <font face="Arial" color="#FFFFCC"><span lang="ru">
+    <font size="2"><a href="index.phtml"><font color="#FFFFCC">Главная</font></a><br>
+&nbsp;&nbsp;&nbsp; <a href="begin_study.html"><font color="#FFFFCC">Как стать слушателем</font></a><br>
+&nbsp;&nbsp;&nbsp; <a href="study_tech.html"><font color="#FFFFCC">Технология обучения</font></a><br>
+&nbsp;&nbsp;&nbsp;
+    <img border="0" src="images/navdiv.gif" width="80" height="4"><br>
+&nbsp;&nbsp;&nbsp; <font color="#FFFFCC">Регистрация</font><br>
+&nbsp;&nbsp;&nbsp;<font color="#FFFFCC"> <a href="login.html">
+    <font color="#FFFFCC">Вход для слушателей</font></a></font><br>
+&nbsp;&nbsp;&nbsp; <a href="program.html"><font color="#FFFFCC">Программа курсов</font></a> <br>
+&nbsp;&nbsp;&nbsp;
+    <img border="0" src="images/navdiv.gif" width="80" height="4"><br>
+&nbsp;&nbsp;&nbsp; <a href="articles.html"><font color="#FFFFCC">Статьи</font></a><br>
+&nbsp;&nbsp;&nbsp; <a href="less_ex.html">
+    <font color="#FFFFCC">Изложение материала
+</font></a><br>
+&nbsp;&nbsp;&nbsp; <a href="gallery.html"><font color="#FFFFCC">Галерея</font></a><br>
+&nbsp;&nbsp;&nbsp; <a href="links.html"><font color="#FFFFCC">Полезные ссылки</font></a><br>
+&nbsp;&nbsp;&nbsp; <a href="contacts.html"><font color="#FFFFCC">Контакты</font></a></font></span></font></td>
+      <td width="733" height="21" bgcolor="#7B92AD">
+
+<p align="center"><font color="#FFFFFF"><span lang="ru">РЕГИСТРАЦИОННАЯ АНКЕТА</span></font></td>
+      <td width="27" height="369" background="images/n_r.jpg" rowspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="733" height="342" valign="top" bgcolor="#FFFFFF">
+
+<br>
+
+<form name=regform action="reg.phtml" method=POST>
+
+<font color="#39597D" face="Arial"><font size="2"><span lang="ru">Уважаемые 
+посетители портала обучения программирования игр на </span>Blitz3D<span lang="ru">.</span><br>
+<span lang="ru">Зарегистрировавшись на нашем сайте, вы получите доступ к первому 
+бесплатному уроку, где сможете подробно узнать, что вы сможете изучить, 
+занимаясь на наших курсах и что Вы, получив эти знания сможете реализовать в 
+качестве самостоятельных проектов.<br>
+&nbsp;</span></font></font><table border="0" width="733">
+  <tr>
+    <td width="179" valign="bottom">
+    <font face="Arial" size="2" color="#39597D"><span lang="ru">Фамилия</span> </font>
+        <i>
+        <font color="#39597D" face="Arial">
+
+        <input type="text" name="LastName" size="15" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+    <td width="69" valign="bottom">
+    <span lang="ru"><font face="Arial" size="2" color="#39597D">Имя</font></span></td>
+    <td width="181" valign="bottom">
+        <i>
+        <font color="#39597D" face="Arial">
+        <input type="text" name="Name" size="25" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+    <td width="286" valign="bottom">
+    <font face="Arial" size="2" color="#39597D"><span lang="ru">Отчество
+    </span></font>
+        <i>
+        <font color="#39597D" face="Arial">
+        <input type="text" name="SecondName" size="26" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+  </tr>
+  <tr>
+    <td width="179" valign="bottom"><span lang="ru">
+    <font face="Arial" size="2" color="#39597D">Почтовый индекс </font>
+    </span>
+        <i>
+        <font color="#39597D" face="Arial">
+        <input type="text" name="Index" size="7" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+    <td width="69" valign="bottom"><span lang="ru">
+    <font face="Arial" size="2" color="#39597D">Страна&nbsp; </font></span>
+    </td>
+    <td width="181" valign="bottom">
+        <i>
+        <font color="#39597D" face="Arial">
+        <input type="text" name="Country" size="25" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+    <td width="286" valign="bottom"><span lang="ru">
+    <font face="Arial" size="2" color="#39597D">Город </font></span>
+        <i>
+        <font color="#39597D" face="Arial">
+        <input type="text" name="City" size="29" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+  </tr>
+  <tr>
+    <td width="179" valign="bottom">
+    <font color="#39597D" size="2" face="Arial">e-mail</font><i><font color="#39597D" face="Arial"><span lang="ru">
+    </span></font></i><font color="#39597D" size="2" face="Arial">
+    <span lang="ru">&nbsp;</span></font><i><font color="#39597D" face="Arial"><input type="text" name="Mail" size="18" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+    <td width="69" valign="bottom"><font color="#39597D" face="Arial">
+    <span lang="ru"><font size="2">Адрес</font><i>&nbsp;&nbsp; </i></span>
+    </font></td>
+    <td width="471" valign="bottom" colspan="2">
+        <i>
+        <font color="#39597D" face="Arial">
+        <input type="text" name="Adress" size="66" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+  </tr>
+  <tr>
+    <td width="179" valign="bottom"><font color="#39597D" face="Arial">
+    <span lang="ru"><font size="2">Логин: </font></span></font>
+        <i>
+        <font color="#39597D" face="Arial">
+        <input type="text" name="Login" size="18" style="border-style: solid; border-color: #C0C0C0"></font></i></td>
+    <td width="69" valign="bottom"><font color="#39597D"><span lang="ru">
+    <font size="2" face="Arial">Пароль</font></span></font></td>
+    <td width="471" valign="bottom" colspan="2">
+        <i>
+        <font color="#39597D" face="Arial">
+        <input type="password" name="Passw" size="25" style="border-style: solid; border-color: #C0C0C0"><span lang="ru">&nbsp;&nbsp;&nbsp;
+    </span></font></i><span lang="ru">
+    <font face="Arial" size="2" color="#39597D">Год рождения</font></span><font color="#39597D"><span lang="ru"><font size="2" face="Arial">&nbsp;&nbsp;
+    </font></span><font color="#39597D" face="Arial">
+    <select size="1" name="UserBYear" style="border: 1px solid #C0C0C0">
+          <option value="1945">1945</option>
+          <option value="1946">1946</option>
+          <option value="1947">1947</option>
+          <option value="1948">1948</option>
+          <option value="1949">1949</option>
+          <option value="1950">1950</option>
+          <option value="1951">1951</option>
+          <option value="1952">1952</option>
+          <option value="1953">1953</option>
+          <option value="1954">1954</option>
+          <option value="1955">1955</option>
+          <option value="1956">1956</option>
+          <option value="1957">1957</option>
+          <option value="1958">1958</option>
+          <option value="1959">1959</option>
+          <option value="1960">1960</option>
+          <option value="1961">1961</option>
+          <option value="1962">1962</option>
+          <option value="1963">1963</option>
+          <option value="1964">1964</option>
+          <option value="1965">1965</option>
+          <option value="1966">1966</option>
+          <option value="1967">1967</option>
+          <option value="1968">1968</option>
+          <option value="1969">1969</option>
+          <option value="1970">1970</option>
+          <option value="1971">1971</option>
+          <option value="1972">1972</option>
+          <option value="1973">1973</option>
+          <option value="1974">1974</option>
+          <option value="1975">1975</option>
+          <option value="1976">1976</option>
+          <option value="1977">1977</option>
+          <option value="1978">1978</option>
+          <option value="1979">1979</option>
+          <option value="1980">1980</option>
+          <option value="1981" selected>1981</option>
+          <option value="1982">1982</option>
+          <option value="1983">1983</option>
+          <option value="1984">1984</option>
+          <option value="1985">1985</option>
+          <option value="1986">1986</option>
+          <option value="1987">1987</option>
+          <option value="1988">1988</option>
+          <option value="1989">1989</option>
+          <option value="1990">1990</option>
+          <option value="1991">1991</option>
+          <option value="1992">1992</option>
+          <option value="1993">1993</option>
+          <option value="1994">1994</option>
+          <option value="1995">1995</option>
+          <option value="1996">1996</option>
+          <option value="1997">1997</option>
+          <option value="1998">1998</option>
+          <option value="1999">1999</option>
+          <option value="2000">2000</option>
+          
+        </select></font><span lang="ru"><font size="2" face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;
+    </font></span></font></td>
+  </tr>
+  <tr>
+    <td width="179" valign="bottom"><font size="1" face="Arial">Логин должен быть без пробелов.</font><input type="hidden" name="mode" value="add" size="20"></td>
+    <td width="69" valign="bottom">&nbsp;</td>
+                 
+    <td width="471" valign="bottom" colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="719" valign="bottom" colspan="4">
+        <INPUT TYPE="checkbox" ID=A3 NAME="Law" style="cursor:hand"><font color="#39597D" size="2" face="Arial"><span lang="ru">я 
+    ознакомлен(а) с <a href="sogl.html"><u>Соглашением</u></a> о 
+    предоставлении сервиса обучающего портала &quot;</span>Blitz <span lang="ru">
+    курс&quot; и согласен(а) по всем пунктам</span></font></td>
+  </tr>
+  <tr>
+    <td width="719" valign="bottom" colspan="4">
+    <p align="center">
+    <INPUT TYPE="button" value="Зарегистрировать" name="add" onClick="feedbackSubmit()"></td>
+  </tr>
+
+        </form>
+
+
+  <tr>
+    <td width="719" valign="bottom" colspan="4"><i>
+    <font color="#39597D" size="2" face="Arial"><span lang="ru"><br>
+    Примечание: Все поля, кроме адреса, являются обязательными для заполнения .Регистрация 
+    теряет силу через 30 дней, если Вы не приступили к учебе.</span></font></i></td>
+  </tr>
+</table>
+    </td>
+      </tr>
+    <tr>
+      <td width="960" height="38" background="images/n_bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

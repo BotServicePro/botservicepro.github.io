@@ -1,0 +1,36 @@
+<html>
+<head>
+<META http-equiv=content-type content="text/html; charset=windows-1251">
+<LINK href="main.css" type=text/css rel=stylesheet>
+
+<?php
+  if (!empty($_GET['NickName'])){
+     $aNickName = $_GET['NickName'];
+  }
+  print('Вы зашли как: '.$aNickName); 
+?>
+
+<SCRIPT>
+
+function getCookie(Name) {
+var search = Name + "="
+if (document.cookie.length > 0){
+  offset = document.cookie.indexOf(search)
+  if (offset != -1) {
+    offset += search.length
+    end = document.cookie.indexOf(";", offset)
+    if (end == -1) end = document.cookie.length
+    return unescape(document.cookie.substring(offset, end))
+  }
+}
+}
+
+var MMCLUB_NICK_NAME = getCookie("MMCLUB_NICK_NAME");
+var MMCLUB_SESSION = getCookie("MMCLUB_SESSION");
+                               
+if (MMCLUB_NICK_NAME != "<?php echo $aNickName ?>"){
+   top.location.href="index.phtml";
+}
+</SCRIPT>
+</head>
+</html>

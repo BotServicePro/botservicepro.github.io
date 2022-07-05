@@ -1,0 +1,917 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<style>
+<!--
+table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif"}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="740" height="350" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+	<tr>
+      <td width="740" height="133" background="Site/top.jpg" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="127" height="356" background="Site/middle1.jpg" valign="top">
+        <p align="left">
+        <b><font face="Arial" size="1" color="#505866">&nbsp;&nbsp;&nbsp; 
+		<a href="http://www.blitz-school.info"><font color="#FFFF99">Курсы</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font face="Arial" size="1" color="#FFFF99">
+		<a href="http://www.blitz-school.info/reg.html"><font color="#FFFF99">Регистрация</font></a><br>
+        &nbsp;&nbsp;&nbsp;
+		<a href="http://www.blitz-school.info/study_tech.html">
+		<font color="#FFFF99">Методика</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font>
+		<a href="http://www.blitz-school.info/program.html"><font face="Arial" size="1" color="#FFFF99">Оглавление</font></a><font face="Arial" size="1" color="#FFFF99"><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://www.blitz-school.info/login.html">
+		<font color="#FFFF99">Для учащихся</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font></b>
+		<img border="0" src="../navdiv.gif" width="80" height="4"><br>
+        <b><font size="1" face="Arial" color="#505866">&nbsp;&nbsp;&nbsp;
+        <a href="http://www.blitz-school.info/articles.html">
+		<font color="#FFFF99">Статьи</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font size="1" face="Arial" color="#FFFF99">
+		<a href="http://www.blitz-school.info/instrum.html">
+		<font color="#FFFF99">Инструменты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span>
+		<a href="http://www.blitz-school.info/contacts.html">
+		<font color="#FFFF99">Контакты</font></a><br>
+		<span lang="en-us">&nbsp;&nbsp;&nbsp; </span></font></b>&nbsp;</td>
+      <td width="586" height="356" background="Site/bg.gif" valign="top">
+
+<p align="center"><font color="#008000"><b><span lang="ru"><font size="5">Урок </font>
+</span>
+<font size="5">4<span lang="ru">. </span></font></b><span lang="ru">
+<font size="5"><b>Статы игрока и игровые предметы</b></font><br>
+</span>
+</font><b><span lang="ru"></p>
+<p align="justify"><a name="kopv"><font face="Arial" size="2" color="#000080">4</font></a><font face="Arial" color="#000080"><a name="kopv"><font size="2">.1. 
+</font></a></font></span></b><span lang="ru"><b><a name="kopv">
+<font size="2" face="Arial" color="#000080">&nbsp; Характеристики персонажа.</font></a></b><font size="2" face="Arial">
+<br>
+<br></font></span><font size="2" face="Arial">
+&nbsp;&nbsp; В большинстве случаев, целью любой браузерной ролевой игры - есть 
+развитие персонажа, что подразумевает получение опыта и распределение его в 
+характеристики героя<span lang="ru">. Участвуя в поединках, наш персонаж 
+становится либо более сильным, либо более ловким и т.д. Если герой планируется 
+как маг, значит совсем не лишним будет прокачать интеллект и т.д.<br>
+&nbsp;&nbsp; За эти характеристики, как Вы уже знаете отвечают соответствующие 
+поля в нашей таблице </span><b><span lang="en-us">users</span></b><span lang="ru">:</span></font></p><table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+		Character_Strength INT DEFAULT 3, </font>
+		<font color="#008000" face="Courier" size="2">
+		/*сила персонажа*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Strength_Total INT DEFAULT 3,/</font><font color="#008000" face="Courier" size="2">*сила 
+		персонажа c учетом вещей*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Endurance INT DEFAULT 3, </font>
+		<font color="#008000" face="Courier" size="2">
+		/*Выносливость (Здоровье=Выносливость*6)*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Accuracy INT DEFAULT 3,</font><font color="#008000" face="Courier" size="2">/*Точность 
+		перса (влияет на крит.удар)*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Accuracy_Total INT DEFAULT 0, </font>
+		<font color="#008000" face="Courier" size="2">
+		/*Точность с уч. вещей перса*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Dexterity INT DEFAULT 3, </font>
+		<font color="#008000" face="Courier" size="2">
+		/*Ловкость перса (влияет на уворот)*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Dexterity_Total INT DEFAULT 0,</font><font color="#008000" face="Courier" size="2"> 
+		/*Ловкость перса с уч. вещей*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Sword INT DEFAULT 0, </font>
+		<font color="#008000" face="Courier" size="2">
+		&nbsp;/*Мастерство владения мечом*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Spear INT DEFAULT 0, </font>
+		<font color="#008000" face="Courier" size="2">
+		&nbsp;/*Мастерство владения копьем*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Axe INT DEFAULT 0, </font>
+		<font color="#008000" face="Courier" size="2">
+		&nbsp;&nbsp; /*Мастерство владения Топором*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Mace INT DEFAULT 0,&nbsp;&nbsp; </font>
+		<font color="#008000" face="Courier" size="2">
+		/*Мастерство владения Молот,Дубина*/</font><font color="#000080" face="Courier" size="2"><br>
+		Character_Dagger INT DEFAULT 0, </font>
+		<font color="#008000" face="Courier" size="2">
+		/*Мастерство владения Ножом*/</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp;&nbsp; Так, к примеру,&nbsp; </span></font>
+<font color="#000080" face="Courier" size="2">
+		Character_Strength </font><font size="2" face="Arial">
+<span lang="ru">- это сила нашего героя, которая после регистрации сразу 
+получает значение 3. Если же наш герой экипирован в какие-то доспехи и 
+использует оружие для поединка, то эти предметы также могут менять статы нашего 
+персонажа. Для этих целей предусмотрены поля </span></font>
+<font color="#000080" face="Courier" size="2">
+		Character_Strength_Total</font><font size="2" face="Arial"><span lang="ru">, </span></font>
+<font color="#000080" face="Courier" size="2">
+		Character_Dexterity_Total INT DEFAULT </font>
+<font size="2" face="Arial">
+<span lang="ru">и т.д.<br>
+&nbsp;&nbsp; Кроме того у нас есть поле в таблице </span><span lang="en-us">
+users -&nbsp; <font color="#000080">Character_UnUsed_Points</font></span> ,<span lang="ru"> 
+которое может содержать некоторое количество нераспределенных очков умений.<br>
+&nbsp;&nbsp;&nbsp; Давайте в качестве тренировки сделаем простую страничку для 
+распределения запасных очков в статы нашего персонажа. Мы создадим страничку </span>
+<span lang="en-us">afterreg.phtml </span>г<span lang="ru">де сможем нажатием на 
+плюсики напротив соответствующих статов героя (сила, ловкость...) повышать их в 
+перделах доступных нам очков, хранящихся в поле </span><span lang="en-us">
+<font color="#000080">Character_UnUsed_Points</font></span><span lang="ru"> 
+таблицы </span><span lang="en-us"><b>users</b>.</span><span lang="ru"><br>
+</span><span lang="en-us">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>В<span lang="ru">озьмем 
+за шаблон файл </span><span lang="en-us">char.phtml </span>и<span lang="ru"> 
+немного его изменим. Так для распределения очков в характеристики, эта секция 
+кода на </span><span lang="en-us">HTML </span><span lang="ru">примет вид:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+		&lt;<b>td</b> width=&quot;252&quot; height=&quot;1&quot; valign=&quot;top&quot;&gt;&lt;font color=&quot;#000080&quot;&gt;<br>
+		Сила: <b>&lt;?php</b> echo &quot;$aStrength&quot;; ?&gt;<br>
+		<b>&lt;?php</b> </font><font color="#0000FF" face="Courier" size="2">
+		if</font><font color="#000080" face="Courier" size="2">
+		($aNotUsedStats &gt; 0){</font><font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2">
+		'&lt;a href=&quot;afterreg.phtml?NickName='.$aNickName.'&amp;setstat=</font><font color="#008000" face="Courier" size="2">Strength</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;img 
+		src=&quot;img/plus.gif&quot; border=0&gt;&lt;/a&gt;';} <b>?&gt;</b>&lt;br&gt;<br>
+		Выносливость: <b>&lt;?php</b> </font>
+		<font color="#0000FF" face="Courier" size="2">
+		echo</font><font color="#000080" face="Courier" size="2">
+		&quot;$aEndurance&quot;; ?&gt;<br>
+		<b>&lt;?php</b> </font><font color="#0000FF" face="Courier" size="2">
+		if</font><font color="#000080" face="Courier" size="2">
+		($aNotUsedStats &gt; 0){</font><font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2">
+		'&lt;a href=&quot;afterreg.phtml?NickName='.$aNickName.'&amp;setstat=</font><font color="#008000" face="Courier" size="2">Endurance</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;img 
+		src=&quot;img/plus.gif&quot; border=0&gt;&lt;/a&gt;';} <b>?&gt;</b>&lt;br&gt;<br>
+		Точность: <b>&lt;?php</b> </font>
+		<font color="#0000FF" face="Courier" size="2">
+		echo</font><font color="#000080" face="Courier" size="2">
+		&quot;$aAccuracy&quot;; ?&gt;<br>
+		<b>&lt;?php</b> </font><font color="#0000FF" face="Courier" size="2">
+		if</font><font color="#000080" face="Courier" size="2">
+		($aNotUsedStats &gt; 0){</font><font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2">
+		'&lt;a href=&quot;afterreg.phtml?NickName='.$aNickName.'&amp;setstat=</font><font color="#008000" face="Courier" size="2">Accuracy</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;img 
+		src=&quot;img/plus.gif&quot; border=0&gt;&lt;/a&gt;';} <b>?&gt;</b>&lt;br&gt;<br>
+		Ловкость: <b>&lt;?php</b> </font>
+		<font color="#0000FF" face="Courier" size="2">
+		echo</font><font color="#000080" face="Courier" size="2">
+		&quot;$aDexterity&quot;; ?&gt;<br>
+		<b>&lt;?php</b> </font><font color="#0000FF" face="Courier" size="2">
+		if</font><font color="#000080" face="Courier" size="2">
+		($aNotUsedStats &gt; 0){</font><font color="#0000FF" face="Courier" size="2">echo</font><font color="#000080" face="Courier" size="2">
+		'&lt;a href=&quot;afterreg.phtml?NickName='.$aNickName.'&amp;setstat=</font><font color="#008000" face="Courier" size="2">Dexterity</font><font color="#000080" face="Courier" size="2">&quot;&gt;&lt;img 
+		src=&quot;img/plus.gif&quot; border=0&gt;&lt;/a&gt;';} <b>?&gt;</b>&lt;br&gt;<br>
+		______________________&lt;br&gt;<br>
+		Опыт: 0 &lt;br&gt;<br>
+		Уровень: 0&lt;br&gt;<br>
+		Побед: 0 &lt;br&gt;<br>
+		Поражений: 0&lt;br&gt;<br>
+		Ничьих: 0&lt;br&gt;<br>
+		____________&lt;br&gt;<br>
+		Статы: (<b>&lt;?php</b> </font>
+		<font color="#0000FF" face="Courier" size="2">
+		echo</font><font color="#000080" face="Courier" size="2">
+		&quot;$aNotUsedStats&quot; <b>?&gt;</b>)&lt;br&gt;<br>
+		&lt;p&gt;&amp;nbsp;<br>
+		<br>
+		&lt;/<b>td</b>&gt;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">Вставочки кода на </span><span lang="en-us">PHP </span>в<span lang="ru"> </span>
+<span lang="en-us">HTML </span>к<span lang="ru">од решают такую задачу - если 
+переменная </span></font><span lang="en-us">
+<font face="Courier" size="2" color="#000080">$</font></span><font color="#000080" face="Courier" size="2">aNotUsedStats </font>
+<font size="2" face="Arial">
+<span lang="ru">отлична от нуля, значит отображаем красный плюсик напротив 
+соответствующей характеристики героя, для возможности увеличить эту 
+характеристику.<br>
+&nbsp;&nbsp;&nbsp; Вот как это будет выглядеть на страничке браузера:<br>
+<br>
+<img border="0" src="plus.jpg" width="440" height="325"><br>
+<br>
+&nbsp;&nbsp; Нажав на плюсик, к примеру, напротив параметра Сила, мы передадим 
+нашему скрипту значение </span></font>
+<font color="#000080" face="Courier" size="2">
+		&amp;setstat=</font><font color="#008000" face="Courier" size="2">Strength</font><font size="2" face="Arial"><span lang="ru">, 
+что позволит нам увеличить эту характеристику. Для точности это будет </span></font>
+<font color="#000080" face="Courier" size="2">
+		&amp;setstat=</font><font color="#008000" face="Courier" size="2">Accuracy</font><font size="2" face="Arial"><span lang="ru"> 
+и т.д.<br>
+&nbsp;&nbsp;&nbsp; Нам лишь остается анализировать в нашем </span>
+<span lang="en-us">PHP </span>к<span lang="ru">оде какую из характеристик игрок 
+решил увеличить. Этот код будет выглядеть следующим образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#008080" face="Courier" size="2">
+		// Меняем статы</font><font color="#000080" face="Courier" size="2"><br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		if</font><font color="#000080" face="Courier" size="2">
+		(!</font><font color="#0000FF" face="Courier" size="2">empty</font><font color="#000080" face="Courier" size="2">($</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['setstat']))<br>
+		{<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		if</font><font color="#000080" face="Courier" size="2">
+		($aNotUsedStats &gt; 0){<br>
+		$aWhatStat = $</font><font color="#0000FF" face="Courier" size="2">_GET</font><font color="#000080" face="Courier" size="2">['setstat'];
+		<br>
+		<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		switch</font><font color="#000080" face="Courier" size="2">
+		($aWhatStat){<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		case</font><font color="#000080" face="Courier" size="2">
+		&quot;Strength&quot;:<br>
+		{ $aStrength++; $aNotUsedStats--;<br>
+		$query = &quot;</font><font color="#008000" face="Courier" size="2">UPDATE 
+		Users SET Character_Strength=$aStrength,Character_UnUsed_Points=$aNotUsedStats 
+		WHERE Nick_Name='$aNickName'</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		break</font><font color="#000080" face="Courier" size="2">;<br>
+		}<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		case</font><font color="#000080" face="Courier" size="2">
+		&quot;Endurance&quot;:<br>
+		{ $aEndurance++; $aNotUsedStats--;<br>
+		$query = &quot;</font><font color="#008000" face="Courier" size="2">UPDATE 
+		Users SET Character_Endurance=$aEndurance,Character_UnUsed_Points=$aNotUsedStats 
+		WHERE Nick_Name='$aNickName'</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		break</font><font color="#000080" face="Courier" size="2">;<br>
+		}<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		case</font><font color="#000080" face="Courier" size="2">
+		&quot;Accuracy&quot;:<br>
+		{ $aAccuracy++; $aNotUsedStats--;<br>
+		$query = &quot;</font><font color="#008000" face="Courier" size="2">UPDATE 
+		Users SET Character_Accuracy=$aAccuracy,Character_UnUsed_Points=$aNotUsedStats 
+		WHERE Nick_Name='$aNickName'</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		break</font><font color="#000080" face="Courier" size="2">;<br>
+		}<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		case</font><font color="#000080" face="Courier" size="2">
+		&quot;Dexterity&quot;:<br>
+		{ $aDexterity++; $aNotUsedStats--;<br>
+		$query = &quot;</font><font color="#008000" face="Courier" size="2">UPDATE 
+		Users SET Character_Dexterity=$aDexterity,Character_UnUsed_Points=$aNotUsedStats 
+		WHERE Nick_Name='$aNickName'</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+		</font><font color="#0000FF" face="Courier" size="2">
+		break</font><font color="#000080" face="Courier" size="2">;<br>
+		}<br>
+		}<br>
+		$result = </font><font color="#0000FF" face="Courier" size="2">
+		mysql_query</font><font color="#000080" face="Courier" size="2">($query) 
+		or </font><font color="#0000FF" face="Courier" size="2">
+		die</font><font color="#000080" face="Courier" size="2">(&quot;Query failed : 
+		&quot; . </font><font color="#0000FF" face="Courier" size="2">
+		mysql_error</font><font color="#000080" face="Courier" size="2">());<br>
+		<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp;&nbsp; Как Вы заметили </span><span lang="en-us">SQL
+</span><span lang="ru">запрос </span><span lang="en-us">update </span>у<span lang="ru">величивает 
+соответствующий параметр нашего персонажа и уменьшает значение поля </span></font>
+<font color="#008000" face="Courier" size="2">
+		Character_UnUsed_Points</font><font size="2" face="Arial"><span lang="ru">, 
+чтоб мы не смогли прокачать нашего героя до бесконечности!<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Полный текст файла </span><span lang="en-us"><b>
+afterreg.phtml</b> </span><span lang="ru">Вы можете найти
+<a href="4_1/afterreg.phtml">здесь</a>. Может понадобится и файл </span>
+<span lang="en-us"><b>char.phtml</b> </span>п<span lang="ru">отому что мы 
+добавили там кнопку, ведущую на страницу распределения статов - его вы найдете
+<b><a href="4_1/char.phtml">тут</a></b>. Также используйте картинки из папок</span><span lang="en-us">
+<a href="4_1/img">img</a> </span>и<span lang="ru"> </span><span lang="en-us">
+<a href="4_1/items">items</a>.</span><span lang="ru"><br>
+<br><a name="kopv0"><font color="#000080"><b>4</b></font></a></span><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv0"><font size="2">.2. 
+</font></a></font></span><a name="kopv1">
+<font size="2" face="Arial" color="#000080"><span lang="ru">&nbsp;Зоны защиты и 
+поражения (тестовая игра).</span></font></a></b><span lang="ru"> <br><br> </span>
+<span lang="en-us">&nbsp;&nbsp;&nbsp;&nbsp; </span><span lang="ru"> &nbsp;&nbsp;Предметом 
+нашего второго пункта четвертого урока будет рассмотрение проведения боя, 
+который будет реализован только средствами </span><span lang="en-us">HTML </span>
+и <span lang="en-us">JavaScript</span> <span lang="ru"> на стороне клиента без 
+привлечения </span><span lang="en-us">PHP </span>и <span lang="en-us">MySQL</span>.<br>
+<span lang="ru"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Если вы никогда не 
+играли в подобные онлайновые игры (типа Бойцовский клуб или </span>
+<span lang="en-us">Carnage</span><span lang="ru">)</span><span lang="en-us">
+</span>т<span lang="ru">о поспешим Вам сообщить, что поединок в них проходит 
+примерно так - игроки обмениваются ударами в соответствующие зоны поражения и 
+одновременно прикрывают их - блокируют удары.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Таких зон поражения мы назначим 
+четыре:&nbsp; голова, корпус, пояс и ноги.&nbsp; Для упрощения сделаем 
+возможность блокировать сразу две зоны: голова-корпус, корпус-пояс, пояс-ноги, 
+ноги-голова.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; На веб-страничке это будет 
+выглядеть так:<br>
+<br>
+<img border="0" src="zpzb.jpg" width="393" height="203"><br>
+<br>
+&nbsp;&nbsp;&nbsp; В реальной игре, которую мы с Вами разрабатываем конечно 
+будет невозможно управлять сразу своим персонажем и соперником, но в тестовых 
+целях - это вполне допустимо.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Мы добавим еще несколько характеристик наших 
+сражающихся героев и выведм их в рабочей области веб-странички:<br>
+<br>
+<img border="0" src="battle.jpg" width="455" height="478"><br>
+<br>
+&nbsp;&nbsp;&nbsp; Кроме обычных ударов и блоков могут быть использованы увороты 
+и критические удары. Если параметр скорости одного героя (</span></font><font color="#000080" face="Courier" size="2">Speed</font><font size="2" face="Arial"><span lang="ru">) 
+выше, чем у другого, то он может вообще увернуться от удара, если же параметр 
+точности одного героя (</span></font><font color="#000080" face="Courier" size="2">Accuracy</font><font size="2" face="Arial"><span lang="ru">) 
+выше, чем у другого, то он способен нанести критический удар, от которого не 
+спасет даже блок (хотя половина мощности удара будет поглощена блоком)<br>
+&nbsp;&nbsp;&nbsp; Все эти параметры, как собственно формулы для расчета 
+параметров уворотов, антиуворотов, критов и антикритов задаются непосредственно 
+в </span><span lang="en-us">JavaScript </span>к<span lang="ru">оде примерно так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#008000" face="Courier" size="2">&lt;SCRIPT&gt;</font><font color="#000080" face="Courier" size="2"><br>
+		<br>
+		//-- Статы персонажа 1<br>
+		var Strength1 = 10;<br>
+		var Intelligence1 = 2;<br>
+		var Personality1 = 2;<br>
+		var Endurance1 = 10; <br>
+		var Accuracy1 = 10;<br>
+		var Luck1 = 0; <br>
+		var Speed1 = 15;<br>
+		<br>
+		var uvorot1 = Speed1*2.5+Luck1;<br>
+		var antiuvorot1 = Speed1*2+Luck1;<br>
+		var krit1 = Accuracy1*1.5+Luck1;<br>
+		var antikrit1 = Accuracy1*2.2+Luck1;<br>
+		<br>
+		//-- Статы персонажа 2<br>
+		var Strength2 = 10;<br>
+		var Intelligence2 = 9;<br>
+		var Personality2 = 5;<br>
+		var Endurance2 = 15; <br>
+		var Accuracy2 = 15;<br>
+		var Luck2 = 0; <br>
+		var Speed2 = 10;<br>
+		<br>
+		var uvorot2 = Speed2*2.5+Luck2;<br>
+		var antiuvorot2 = Speed2*2+Luck2;<br>
+		var krit2 = Accuracy2*1.5+Luck2;<br>
+		var antikrit2 = Accuracy2*2.2+Luck2;<br>
+		<br>
+		var s_attack1, s_attack2, s_defend1, s_defend2;<br>
+		<br>
+		</font><font color="#008000" face="Courier" size="2">&lt;/SCRIPT&gt;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+Для выбора удара и блока будем использовать </span><span lang="en-us">о</span>бычные
+<span lang="en-us">HTML radio-</span>к<span lang="ru">нопки</span><span lang="en-us">:
+</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+		Атака<br>
+		<br>
+		&lt;p&gt;&lt;font size=&quot;2&quot;&gt;&lt;input type=&quot;</font><font color="#008080" face="Courier" size="2">radio</font><font color="#000080" face="Courier" size="2">&quot; 
+		id=A11 name=&quot;attack1&quot; value=&quot;1&quot; onclick=&quot;</font><font color="#0000FF" face="Courier" size="2">setattack1</font><font color="#000080" face="Courier" size="2">(1)&quot;&gt;в<span lang="en-us">
+		</span>голову&lt;br&gt;<br>
+		&lt;input type=&quot;</font><font color="#008080" face="Courier" size="2">radio</font><font color="#000080" face="Courier" size="2">&quot; 
+		id=A12 name=&quot;attack1&quot; value=&quot;2&quot; onclick=&quot;</font><font color="#0000FF" face="Courier" size="2">setattack1</font><font color="#000080" face="Courier" size="2">(2)&quot;&gt;в 
+		корпус&lt;br&gt;<br>
+		&lt;input type=&quot;</font><font color="#008080" face="Courier" size="2">radio</font><font color="#000080" face="Courier" size="2">&quot; 
+		id=A13 name=&quot;attack1&quot; value=&quot;3&quot; onclick=&quot;</font><font color="#0000FF" face="Courier" size="2">setattack1</font><font color="#000080" face="Courier" size="2">(3)&quot;&gt;в 
+		пояс&lt;br&gt;<br>
+		&lt;input type=&quot;</font><font color="#008080" face="Courier" size="2">radio</font><font color="#000080" face="Courier" size="2">&quot; 
+		id=A14 name=&quot;attack1&quot; value=&quot;4&quot; onclick=&quot;</font><font color="#0000FF" face="Courier" size="2">setattack1</font><font color="#000080" face="Courier" size="2">(4)&quot;&gt;в 
+		ноги&lt;br&gt;<br>
+		&lt;/font&gt;<br>
+		&lt;/p&gt;<br>
+		<br>
+		Защита<br>
+		<br>
+		&lt;input type=&quot;</font><font color="#008080" face="Courier" size="2">radio</font><font color="#000080" face="Courier" size="2">&quot; 
+		id=D11 name=&quot;defend1&quot; value=&quot;1&quot; onclick=&quot;</font><font color="#0000FF" face="Courier" size="2">setdefend1</font><font color="#000080" face="Courier" size="2">(1)&quot;&gt; 
+		голова корпус&lt;br&gt;<br>
+		&lt;input type=&quot;</font><font color="#008080" face="Courier" size="2">radio</font><font color="#000080" face="Courier" size="2">&quot; 
+		id=D12 name=&quot;defend1&quot; value=&quot;2&quot; onclick=&quot;</font><font color="#0000FF" face="Courier" size="2">setdefend1</font><font color="#000080" face="Courier" size="2">(2)&quot;&gt;корпус 
+		пояс&lt;br&gt;<br>
+		&lt;input type=&quot;</font><font color="#008080" face="Courier" size="2">radio</font><font color="#000080" face="Courier" size="2">&quot; 
+		id=D13 name=&quot;defend1&quot; value=&quot;3&quot; onclick=&quot;</font><font color="#0000FF" face="Courier" size="2">setdefend1</font><font color="#000080" face="Courier" size="2">(3)&quot;&gt;пояс 
+		ноги&lt;br&gt;<br>
+		&lt;input type=&quot;</font><font color="#008080" face="Courier" size="2">radio</font><font color="#000080" face="Courier" size="2">&quot; 
+		id=D14 name=&quot;defend1&quot; value=&quot;4&quot; onclick=&quot;</font><font color="#0000FF" face="Courier" size="2">setdefend1</font><font color="#000080" face="Courier" size="2">(4)&quot;&gt;ноги 
+		голова&lt;/font&gt;</font><font color="#0000FF" face="Courier" size="2"><br>
+		</font><font color="#000080" face="Courier" size="2">
+		&lt;p&gt;&amp;nbsp;<br>
+&nbsp;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+Когда мы выбираем зону атаки и зоны блока, мы нажимаем мышкой на соответствующие </span>
+<span lang="en-us">radio-</span><span lang="ru">кнопки при этом возникает 
+определенное в их описании событие </span><span lang="en-us">onClick. </span>Д<span lang="ru">ля 
+атаки после этого вызывается функция </span></font>
+<font color="#0000FF" face="Courier" size="2">
+		setattack1</font><font size="2" face="Arial"><span lang="ru">, для 
+защиты - </span></font><font color="#0000FF" face="Courier" size="2">
+		setdefend1</font><font size="2" face="Arial"><span lang="ru">, в 
+качестве аргумента которых используется номер зоны поражения/защиты. Для 
+управления вторым игроком это будет соответственно функции&nbsp; </span></font>
+<font color="#0000FF" face="Courier" size="2">
+		setattack2 </font><font size="2" face="Arial"><span lang="ru">и </span></font>
+<font color="#0000FF" face="Courier" size="2">
+		setdefend2</font><font size="2" face="Arial"><span lang="ru">.<br>
+&nbsp;&nbsp;&nbsp; Увороты и Критические удары рассчитываются по математическим 
+формулам с применением случайных величин.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; К примеру если была атака первым игроков второго игрока 
+в зону 4 (ноги), а он заблокировал зоны 3 и 4 (пояс и ноги) - то он отобьет 
+удар, если заблокировал что-то другое - пропустит удар:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+		if (s_attack1==4){ <br>
+		if((s_defend2==3) || (s_defend2==4)){ <br>
+		document.all(&quot;mes&quot;).innerHTML=&quot;</font><font color="#008080" face="Courier" size="2">Pers2 
+		заблокировал удар в ноги&lt;BR&gt;</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+		lHit1=false;<br>
+		}else{<br>
+		document.all(&quot;mes&quot;).innerHTML=&quot;</font><font color="#008080" face="Courier" size="2">Pers2 
+		пропустил удар в ноги -&quot;+povreduha+&quot;&lt;BR&gt;</font><font color="#000080" face="Courier" size="2">&quot;;<br>
+		lHit1=true;<br>
+		}<br>
+		}</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">При попадании 
+удара показывается повреждения, которые рассчитываются исходя из параметра силы 
+персонажа:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+		var maxblow = Math.round((Strength1-1)/3)+3;&nbsp; /* максимальный удар 
+		*/<br>
+		var minblow = Math.round(maxblow/2);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		/* минимальный удар */ <br>
+		povreduha = getRandom(minblow,maxblow);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		/* что-то из диапазона */<br>
+		tkHP2 = tkHP2 - povreduha;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		/* понизим уровень жизни */</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Бой идет до 
+победы одного из героев. Вы можете варьировать переменными отвечающими за 
+характеристики героев, чтоб потестировать игру.<br>
+Запустите эту страничку для тестовой игры</span><span lang="en-us"> - </span>
+<a href="4_2/Damage/battle.html">т<span lang="ru">естовый бой</span></a><span lang="ru">.<br>
+<br> </span><a name="kopv2"><font color="#000080"><b>4</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv2"><font size="2">.3. </font>
+</a></font></span></b><span lang="ru"><b><a name="kopv3">
+<font size="2" face="Arial" color="#000080">&nbsp;Справочник предметов.</font></a></b> <br>
+<br>
+&nbsp;&nbsp;&nbsp; Чтоб говорить о предметах, которые может использовать 
+персонаж для ведения поединка с другими персонажами более предметно, нам 
+понадобится таблица в базе данных </span><span lang="en-us">MySQL</span><span lang="ru">, 
+в которой мы сможем хранить описания этих предметов и непосредственно предметы, 
+принадлежащие своим владельцам. По сути, нам понадобится справочник предметов и 
+таблица предметов. Кроме того еще можно создать вспомогательный справочник, 
+который будет описывать места хранения предмета (непосредственно в слотах 
+персонажа, в рюкзаке, в магазине и&nbsp; т.д.)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Давайте начнем со справочника предметов. Тут должны 
+храниться только описания предметов и их характеристики.&nbsp; Вот он и назовем 
+мы его </span><span lang="en-us">Items_List</span><span lang="ru">:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table8">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#008080" face="Courier" size="2">
+		/* Справочник типов предметов и их свойств */</font><font color="#000080" face="Courier" size="2"><br>
+		CREATE TABLE <b>`Items_List`</b> (<br>
+		`IL_ID` INT(4) unsigned NOT NULL AUTO_INCREMENT, /*идентификатор 
+		предмета*/<br>
+		`ItemType` INT DEFAULT 0, /*Тип предмета : напр. 1 = меч, 2-топор....*/<br>
+		`ItemNo` INT DEFAULT 1, /*Номер предмета внутри типа : напр. 1-меч 
+		новичка,8-меч урагана....*/<br>
+		`ItemName` CHAR(50) NOT NULL, /*Название предмета*/<br>
+		`ItemSlotName` CHAR(15) NOT NULL DEFAULT '', /*Слот предмета*/<br>
+		`Item_StateCost` INT DEFAULT 0, /*гос цена предмета*/<br>
+		`Item_Image` CHAR(32), /*путь к картинке предмета и ее имя*/<br>
+		`Item_Weight` INT DEFAULT 1, /*вес предмета*/<br>
+		<br>
+		`Item_FullLife` INT DEFAULT 0, /*Долговечность предмета напр. 0/50*/<br>
+		`Item_Strength` INT DEFAULT 0, /*требования к силе перса*/<br>
+		`Item_Intelligence` INT DEFAULT 0, /*требования к интеллекту перса*/<br>
+		`Item_Endurance` INT DEFAULT 0, /*требования к выносливости перса*/<br>
+		`Item_Accuracy` INT DEFAULT 0, /*требования к точность перса*/<br>
+		`Item_Dexterity` INT DEFAULT 0, /*требования к ловкости перса*/<br>
+		`Item_Sword` INT DEFAULT 0, /*требования к владению мечом перса*/<br>
+		`Item_Spear` INT DEFAULT 0, /*требования к владению копьем перса*/<br>
+		`Item_Axe` INT DEFAULT 0, /*требования к владению топором перса*/<br>
+		`Item_Club` INT DEFAULT 0, /*требования к владению булавой,дубиной 
+		перса*/<br>
+		`Item_Dagger` INT DEFAULT 0, /*требования к владению ножом перса*/<br>
+		`Item_Level` INT DEFAULT 0, /*требования к уровню перса*/<br>
+		`Item_Fire` INT DEFAULT 0, /*требования к владению магией огня перса*/<br>
+		`Item_Air` INT DEFAULT 0, /*требования к владению магией воздуха перса*/<br>
+		`Item_Water` INT DEFAULT 0, /*требования к владению магией воды перса*/<br>
+		`Item_Earth` INT DEFAULT 0, /*требования к владению магией земли перса*/<br>
+		`ManaCost` INT DEFAULT 0, /*сколько забирает маны, для свитков*/<br>
+		`Min_Damage` INT DEFAULT 0, /*минимальное повреждение предметом*/<br>
+		`Max_Damage` INT DEFAULT 0, /*максимальное повреждение предметом*/<br>
+		`MF_Deviation` INT DEFAULT 0, /*модификатор уклонения*/<br>
+		`MF_UnDeviation` INT DEFAULT 0, /*модификатор антиуклонения*/<br>
+		`MF_ShokingBlow` INT DEFAULT 0, /*модификатор критического удара*/<br>
+		`MF_UnShokingBlow` INT DEFAULT 0, /*модификатор антикритической защиты*/<br>
+		PRIMARY KEY (`IL_ID`),<br>
+		KEY(`ItemType`)<br>
+		) TYPE=MyISAM;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="en-us">&nbsp;&nbsp;
+</span>Таблица выглядит достаточно громоздко, и мы, со временем, добавим 
+туда&nbsp;&nbsp;еще несколько полей. Напротив каждого<span lang="ru"> поля идет 
+комментарий, так что, думается у Вас не возникло затруднений в определении 
+смысловой нагрузки каждого из этих полей. <br>
+&nbsp;&nbsp;&nbsp; Как Вы заметили, предметы делятся по типам </span></font>
+<font color="#000080" face="Courier" size="2">
+		`ItemType` </font><font size="2" face="Arial"><span lang="ru">(меч, 
+топор, нож, броня, шлем и т.д.) и&nbsp; внутри типов они еще подразделяются по 
+номерам </span></font><font color="#000080" face="Courier" size="2">
+		`ItemNo` </font><font size="2" face="Arial"><span lang="ru">(меч 
+новичка, меч ветерана, меч хаоса и т.д.) и&nbsp; так - практически для всех 
+предметов в игре. У предметов есть название (</span></font><font color="#000080" face="Courier" size="2">`ItemName`</font><font size="2" face="Arial"><span lang="ru">) 
+, картинка для отображения их в игре (</span></font><font color="#000080" face="Courier" size="2">`Item_Image`</font><font size="2" face="Arial"><span lang="ru">), 
+слот, куда это предмет может быть одет&nbsp; (</span></font><font color="#000080" face="Courier" size="2">`ItemSlotName`</font><font size="2" face="Arial"><span lang="ru">) 
+и т.д. <br>
+&nbsp;&nbsp;&nbsp; Кроме этого, чтоб воспользоваться тем или иным предметом, 
+персонаж должен удовлетворять некоторым условиям. К примеру, чтоб взять в руки 
+Меч Хаоса, у персонажа должна быть сила 10 и уровень 5 ( </span></font>
+<font color="#000080" face="Courier" size="2">
+		`Item_Level` = 5, `Item_Strength` = 10</font><font size="2" face="Arial"><span lang="ru">). 
+Еще возможно предъявить требования к мастерству владения тем или иным предметом 
+(</span></font><font color="#000080" face="Courier" size="2">`Item_Sword`, 
+`Item_Spear`...</font><font size="2" face="Arial"><span lang="ru">). Если 
+предмет обладает какими-то магическими возможностями, то вполне может для его 
+использования предъявлять требования по какой-ни будь магии стихий (</span></font><font color="#000080" face="Courier" size="2">`Item_Fire`, 
+`Item_Water`... </font><font size="2" face="Arial"><span lang="ru">). <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Если это предмет нападения, то для него должны быть 
+указаны значения минимального и максимального урона (</span></font><font color="#000080" face="Courier" size="2">`Min_Damage`, 
+`Max_Damage` </font><font size="2" face="Arial"><span lang="ru">)&nbsp; и т.д.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Выполните его в </span><span lang="en-us">EMS MySQL 
+Manager </span>д<span lang="ru">ля создания таблицы </span></font>
+<font color="#000080" face="Courier" size="2"><b>Items_List</b> </font>
+<font size="2" face="Arial"><span lang="ru"><br>
+&nbsp;&nbsp;&nbsp; Теперь нам остается добавить в пустой справочник несколько 
+наименований предметов. Вот&nbsp; эти наименования:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table9">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#000080" face="Courier" size="2">
+		/*Добавим несколько описаний предметов в справочник*/<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(1,1,1,'Молот Новичка',20,'mace.jpg','Weapon',1,20);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) VALUES(2,2,1,'Щит 
+		Пророчества',25,'shield.jpg','Shield',1,30);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(3,3,1,'Шлем Рыцаря',20,'helmet.jpg','Helmet',1,30);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(4,3,2,'Шлем Всадника',15,'helmet1.jpg','Helmet',1,30);<br>
+		<br>
+		INSERT INTO Items_List(IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(5,4,1,'Перчатки кузнеца',15,'gloves.jpg','Gloves',1,20);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(6,5,1,'Серьги обновления',22,'earrings.jpg','Ear',1,30);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(7,6,1,'Кулон знахаря',26,'necklace.jpg','Necklace',1,40);<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(8,7,1,'Болотные Сапоги',10,'boots.jpg','Shoes',1,40);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(9,8,1,'Пояс отваги',10,'belt.jpg','Belt',2,20);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(10,9,1,'Кольцо повелевания',15,'ring1.jpg','Ring',2,30);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(11,9,2,'Кольцо Разрушения',24,'ring2.jpg','Ring',1,40);<br>
+		<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(12,10,1,'Рубашка',5,'skirt.jpg','Armor',1,20);<br>
+		INSERT INTO Items_List (IL_ID,ItemType,ItemNo,ItemName,Item_StateCost,Item_Image, 
+		ItemSlotName,Item_Level,Item_FullLife) <br>
+		VALUES(13,10,2,'Рубашка воина',14,'skirt1.jpg','Armor',1,30);<br>
+		<br>
+		) TYPE=MyISAM;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp; 
+Наш с вами </span><span lang="en-us">sql-</span>с<span lang="ru">крипт 
+дополненный таблицей справочника предметов можете увидеть <b>
+<a href="4_3/DB/mmclub.sql">тут</a></b>.<br>
+</span><span lang="en-us">&nbsp;&nbsp; </span>&nbsp;Вот<span lang="ru"> 
+несколько изображений предметов из этого справочника, которые мы будем 
+использовать в нашей игре:&nbsp;&nbsp; </span></font></p>
+<table border="1" width="100%" id="table10">
+	<tr>
+		<td><img border="0" src="4_3/items/belt.jpg" width="55" height="19"><br>
+		<font color="#000080" face="Courier" size="2">Пояс отваги</font></td>
+		<td><img border="0" src="4_3/items/boots.jpg" width="55" height="54"><br>
+		<font color="#000080" face="Courier" size="2">Болотные Сапоги</font><br>
+&nbsp;</td>
+		<td><img border="0" src="4_3/items/helmet1.jpg" width="55" height="49"><br>
+		<font color="#000080" face="Courier" size="2">Шлем Всадника</font><br>
+&nbsp;</td>
+		<td><img border="0" src="4_3/items/shield.jpg" width="56" height="80"><br>
+		<font color="#000080" face="Courier" size="2">Щит Пророчества</font></td>
+		<td><img border="0" src="4_3/items/skirt1.jpg" width="55" height="77"><br>
+		<font color="#000080" face="Courier" size="2">Рубашка воина</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">
+<br> </span><a name="kopv4"><font color="#000080"><b>4</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv4"><font size="2">.4. </font></a></font></span></b>
+<span lang="ru"><b><a name="kopv5"><font size="2" face="Arial" color="#000080">&nbsp;Таблица 
+предметов</font></a></b> <br><br>
+&nbsp;&nbsp;&nbsp; Сейчас нам остается создать реальные предметы на основе 
+справочника и дать их какому-либо из игроков, зарегистрировавшихся в клубе.&nbsp;&nbsp;Но 
+для этого нам нужна таблица, где будут хранится предметы, связанные с 
+непосредственным своим владельцем.<br>
+&nbsp;&nbsp;&nbsp; Создадим такую таблицу, которую назовем <b>Items</b>:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table11">
+	<tr>
+		<td bgcolor="#FFFFCC"><font color="#008080" face="Courier" size="2">/* 
+		таблица всех предметов в КЛУБЕ */</font><font color="#000080" face="Courier" size="2"><br>
+		CREATE TABLE `Items`(<br>
+		`IT_ID` BIGINT(20) unsigned NOT NULL auto_increment, /*уник. 
+		идентификатор предмета*/<br>
+		`IL_ID` INT(4) unsigned NOT NULL, /* ID предмета в справочнике 
+		предметов*/<br>
+		`Item_ComissionCost` FLOAT DEFAULT 0, /*комиссионная стоимость (если не 
+		0 - предмет сдан для продажи)*/<br>
+		`Item_Owner` BIGINT(20) DEFAULT 0 NOT NULL, /*владелец предмета (ID 
+		игрока или номер системного объекта)*/<br>
+		`Item_Position` INT REFERENCES ItemPosition_List(`ID`), /*позиция 
+		предмета*/<br>
+		`Item_CurrentLife` INT DEFAULT 0, /*Износ предмета*/<br>
+		<br>
+		PRIMARY KEY (`IT_ID`),<br>
+		KEY (`Item_Owner`)<br>
+		) TYPE=MyISAM;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; 
+Таблица
+</span><span lang="en-us"><b>Items</b> </span>с<span lang="ru">вязана со 
+справочной таблицей
+</span><span lang="en-us"><b>Items_List</b> </span>ч<span lang="ru">ерез поле
+</span></font><font color="#000080" face="Courier" size="2">IL_ID </font>
+<font size="2" face="Arial"><span lang="ru">, которое присутствует в обеих 
+таблицах. Поле
+</span></font><font color="#000080" face="Courier" size="2">Item_Owner</font><font size="2" face="Arial"><span lang="ru"> 
+- отвечает за владельца этого предмета. Например если оно содержит значение 1, 
+значит этот предмет принадлежит первому зарегистрировшемуся персонажу в нашем 
+клубе. Поле
+</span></font><font color="#000080" face="Courier" size="2">Item_CurrentLife </font>
+<font size="2" face="Arial"><span lang="ru">- содержит значение текущего износа 
+предмета. То есть предмет для которого износ прописан как 12/50 означает что у 
+него&nbsp;
+</span></font><font color="#000080" face="Courier" size="2">Item_CurrentLife </font>
+<font size="2" face="Arial"><span lang="ru">= 12, а
+</span></font><font color="#000080" face="Courier" size="2">Item_FullLife </font>
+<font size="2" face="Arial"><span lang="ru">&nbsp;= 50. Второй параметр мы взяли 
+из справочника предметов. Параметром</span></font><font color="#000080" face="Courier" size="2"> 
+Item_ComissionCost </font><font size="2" face="Arial"><span lang="ru">- мы 
+воспользуемся позднее, когда создадим магазин комиссионных товаров на 
+Центральной Площади нашего игрового города. <br>
+&nbsp;&nbsp;&nbsp; Что касается поля
+</span></font><font color="#000080" face="Courier" size="2">Item_Position </font>
+<font size="2" face="Arial"><span lang="ru">, то оно показывает в каком месте 
+находится данный предмет.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Для наглядности мы создадим справочник мест нахождения 
+предмета и он у нас будет носить простое название <b>ItemPosition_List</b>, 
+заодно сразу добавим туда несколько записей:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table12">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">
+		<font color="#008000">/* Справочник позиций предмета */<br>
+		</font>CREATE Table <b>`ItemPosition_List`</b>(<br>
+		`IP_ID` INT(4) unsigned NOT NULL AUTO_INCREMENT, /*идентификатор 
+		позиции*/<br>
+		`ItemPosName` CHAR(30), /*Название позиции*/<br>
+		PRIMARY KEY (`IP_ID`)<br>
+		) TYPE=MyISAM;<br>
+		<br>
+		INSERT INTO ItemPosition_List (ItemPosName) VALUES('<font color="#008000">Полка 
+		комиссионного магазина</font>'); --1<br>
+		INSERT INTO ItemPosition_List (ItemPosName) VALUES('<font color="#008000">Рюкзак 
+		игрока</font>'); --2<br>
+		INSERT INTO ItemPosition_List (ItemPosName) VALUES('<font color="#008000">Слот 
+		игрока</font>'); --3<br>
+		INSERT INTO ItemPosition_List (ItemPosName) VALUES('<font color="#008000">Предмет 
+		выброшен</font>'); --4<br>
+		INSERT INTO ItemPosition_List (ItemPosName) VALUES('<font color="#008000">Предмет 
+		полностью пришел в негодность</font>'); --5<br>
+		;</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp;&nbsp; 
+На текущий момент, любой предмет может находится в одной из следующих позиций, 
+которые указаны в таблице
+</span></font><font face="Courier" size="2"><b>ItemPosition_List</b></font><font size="2" face="Arial"><span lang="ru">.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Теперь давайте добавим несколько предметов для нашего 
+самого первого игрока с логином &quot;<font color="#0000FF">Создатель</font>&quot;.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table13">
+	<tr>
+		<td bgcolor="#FFFFCC"><font face="Courier" size="2">INSERT INTO Items (IT_ID,IL_ID,<font color="#0000FF">Item_Owner</font>,Item_Position,Item_CurrentLife) 
+		VALUES(1,9,<font color="#0000FF">1</font>,2,0);<br>
+		INSERT INTO Items (IT_ID,IL_ID,<font color="#0000FF">Item_Owner</font>,Item_Position,Item_CurrentLife) 
+		VALUES(2,10,<font color="#0000FF">1</font>,2,12);<br>
+		INSERT INTO Items (IT_ID,IL_ID,<font color="#0000FF">Item_Owner</font>,Item_Position,Item_CurrentLife) 
+		VALUES(3,3,<font color="#0000FF">1</font>,2,15);</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; Что 
+за предметы мы добавили в таблицу
+</span><span lang="en-us"><b>Items</b>, </span>м<span lang="ru">ы можем судить 
+по полю
+</span></font><font face="Courier" size="2"><font color="#0000FF">IL_ID</font></font><font size="2" face="Arial"><span lang="ru">, 
+которое у нас также имеется в справочнике предметов. Из него мы узнаем что 
+добавленные персонажу <br>
+&quot;<font color="#0000FF">Создатель</font>&quot; предметы это - &quot;</span></font><font color="#000080" face="Courier" size="2">Пояс 
+отваги</font><font size="2" face="Arial"><span lang="ru">&quot;,&quot;</span></font><font color="#000080" face="Courier" size="2">Кольцо 
+повелевания</font><font size="2" face="Arial"><span lang="ru">&quot; и &quot;</span></font><font color="#000080" face="Courier" size="2">Шлем 
+Рыцаря</font><font size="2" face="Arial"><span lang="ru">&quot;.<br>
+<br>
+Вот они:</span></font></p>
+<table border="1" width="100%" id="table14">
+	<tr>
+		<td><font size="2" face="Arial">
+		<img border="0" src="4_3/items/belt.jpg" width="55" height="19"><br>
+		Пояс отваги</font></td>
+		<td><font size="2" face="Arial">
+		<img border="0" src="4_3/items/ring2.jpg" width="25" height="21"><br>
+		Кольцо повелевания</font></td>
+		<td><font size="2" face="Arial">
+		<img border="0" src="4_3/items/helmet.jpg" width="55" height="49"><br>
+		Шлем рыцаря</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; Судя 
+по значению поля
+</span></font><font face="Courier" size="2"><b>Item_Position</b> </font>
+<font size="2" face="Arial"><span lang="ru">все предметы были добавлены в рюкзак 
+нашего героя.&nbsp; (</span></font><font face="Courier" size="2">Item_Position = 
+2</font><font size="2" face="Arial"><span lang="ru">)<br>
+Добавленные таблицы вы сможете найти <b><a href="4_4/DB/mmclub.sql">здесь</a></b>.<br>
+<br>
+<br>
+</span><a name="kopv6"><font color="#000080"><b>4</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv6"><font size="2">.5. </font></a></font></span></b><span lang="ru"><b>
+<a name="kopv7"><font size="2" face="Arial" color="#000080">&nbsp;Влияние 
+предметов на параметры героя.</font></a></b>
+<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;Какими свойствами наделить предметы в игре - это 
+целиком задача Вашего творческого мышления и фантазии. Обычно разработчики 
+онлайновых игр подготавливают по нескольку предметов одного типа для разных 
+уровней развития персонажа. Так например для второго уровня нашего героя (<font color="#0000FF">Character_Level</font> 
+= 2)&nbsp; можно сделать несколько мечей, например таких:</span></font></p>
+<table border="1" width="100%" id="table15">
+	<tr>
+		<td><font size="2">
+		<img border="0" src="4_5/art/Item001.bmp" width="28" height="150"><br>
+		Сила 4<br>
+		Ловкость 5<br>
+		Точность 3<br>
+		Выносливость 3<br>
+		<br>
+		Урон 3-5<br>
+		Мф. уворот +5</font></td>
+		<td><font size="2">
+		<img border="0" src="4_5/art/Item002.bmp" width="32" height="154"><br>
+		Сила 3<br>
+		Ловкость 3<br>
+		Точность 6<br>
+		Выносливость 3<br>
+		<br>
+		Урон 4-5<br>
+		Мф. крит +10</font></td>
+		<td><font size="2">
+		<img border="0" src="4_5/art/item003.bmp" width="29" height="158"><br>
+		Сила 3<br>
+		Ловкость 3<br>
+		Точность 5<br>
+		Выносливость 4<br>
+		<br>
+		Урон 3-5<br>
+		Мф. крит +5</font></td>
+		<td><font size="2">
+		<img border="0" src="4_5/art/item004.bmp" width="28" height="156"><br>
+		Сила 6<br>
+		Ловкость 3<br>
+		Точность 3<br>
+		Выносливость 3<br>
+		<br>
+		Урон 4-7<br>
+&nbsp;</font></td>
+		<td><font size="2">
+		<img border="0" src="4_5/art/item005.bmp" width="37" height="164"><br>
+		Сила 4<br>
+		Ловкость 3<br>
+		Точность 4<br>
+		Выносливость 3<br>
+		<br>
+		Урон 3-6</font></td>
+		<td><font size="2">
+		<img border="0" src="4_5/art/item007.bmp" width="35" height="183"><br>
+		Сила 3<br>
+		Ловкость 6<br>
+		Точность 3<br>
+		Выносливость 3<br>
+		<br>
+		Урон 3-5<br>
+		Мф. уворот +10</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; Как 
+Вы заметили эти мечи предъявляют разные требования к статам нашего персонажа ( 
+для одного нужно больше ловкости, для другого больше силы) и соответственно 
+различаются в модификаторах, которые имеют и уроне, который наносят.<br>
+&nbsp;&nbsp; Таким образом игрок может планировать - какие статы поднимать, чтоб 
+можно было использовать то или иное оружие на том или ином уровне. На жаргоне 
+онлайн игр это означает - качаться под какую-то вещь. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Некоторые вещи, к примеру, могут сами добавлять статы:<br>
+Например:</span></font></p>
+<table border="1" width="586" id="table16">
+	<tr>
+		<td width="264">
+		<img border="0" src="4_5/art/skirt_art2.jpg" width="55" height="77">&nbsp; 
+		Броня Ангелов<br>
+		<font size="2">Сила 15<br>
+		Ловкость 25<br>
+		Точность 10<br>
+		Выносливость 20<br>
+		<br>
+		Действует на:<br>
+		Ловкость <b>+4</b><br>
+		Мф. уворот +20</font></td>
+		<td width="306">
+		<img border="0" src="4_5/art/item008.bmp" width="41" height="190">&nbsp;&nbsp; 
+		Меч Вихря<br>
+		<font size="2">Сила 15<br>
+		Ловкость <b>29</b><br>
+		Точность 10<br>
+		Выносливость 20<br>
+		<br>
+		Урон 20-25<br>
+		Мф. уворот +50</font></td>
+	</tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">&nbsp;&nbsp; Если 
+у нас есть необходимость владеть предметом &quot;Меч Вихря&quot;, но&nbsp; у нас развит 
+параметр ловкость только на 25, а для его использования нужна ловкость 29. Для 
+решения этой проблемы можно воспользоваться Броней ангелов, которая добавляет к 
+ловкости +4 единицы.<br>
+&nbsp;&nbsp;&nbsp; Вы можете сами придумать различные комбинации параметров 
+предметов для разных уровней.<br>
+<br>
+<b>В следующем уроке</b> мы подробно рассмотрим создание инвентаря. По сути - 
+это будет рюкзак героя. В ходе урока мы научимся переносить предметы из рюкзака 
+в слоты персонажа и обратно.<br>
+<br>
+<br>
+<br>
+&nbsp;</span></font></p>
+<font size="2" face="Arial">
+        <p align="left">&nbsp;</font></td>
+      <td width="27" height="356" background="Site/middle2.jpg">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="740" height="38" background="Site/bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

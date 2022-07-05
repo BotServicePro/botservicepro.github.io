@@ -1,0 +1,400 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<title>Char Info</title>
+
+
+<?php
+  $aNickName = $_GET['NickName'];
+  if (!empty($_GET['setoff']))
+  {
+      // Вошли после режима снятия предмета
+      $setoff  = $_GET['setoff'];
+      $aSlot    = $_GET['aslot'];
+  }
+  else
+  {
+      $setoff = 0;
+  }
+  if (!empty($_GET['seton']))
+  {
+      // Вошли после режима одевания предмета
+      $seton      = $_GET['seton'];
+      
+  }
+  else
+  {
+      $seton = 0;
+  }
+
+  $aWhatStat = "";
+  $aWhatSkill = "";
+
+  // Узнаем характеристики персонажа
+
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+
+
+       // Уберем предмет с идентификатором в переменной setoff в рюкзак
+       if( $setoff != 0 ){
+           $query = "UPDATE Items SET Item_Position='2' WHERE IT_ID='$setoff'";
+           $result = mysql_query($query) or die("Query failed : " . mysql_error());
+           $aSlot  = $aSlot."_Slot";
+           // Надеваем в слот
+           $query = "UPDATE Users SET ".$aSlot."='0' WHERE Nick_Name='$aNickName'";
+           //print ($query);
+           $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       }
+
+       // Надеваем предмет с идентификатором в переменной seton в слот
+       if( $seton != 0 ){
+
+           $query = "SELECT il.Item_Level,il.ItemType,il.ItemNo from Items i inner join Items_List il on il.il_id=i.il_id WHERE i.IT_ID='$seton'";
+           $result = mysql_query($query) or die("Query failed : " . mysql_error());
+           $aRow = mysql_fetch_array( $result);
+           $aItem_Level = $aRow["Item_Level"];  // определим уровень этого предмета  (для урока 5 п.5)
+           $aItemType = $aRow["ItemType"];
+           $aItemNo = $aRow["ItemNo"];
+
+           // В какой слот ?  из справочника предметов
+           $query = "SELECT * FROM Items_List WHERE ItemType='$aItemType' and ItemNo='$aItemNo'";
+           $result = mysql_query($query) or die("Query failed : " . mysql_error());
+           $aRow = mysql_fetch_array( $result);
+           $aItemSlot  = $aRow["ItemSlotName"]."_Slot";
+           
+           // Узнаем, что в слотах и уровень Персонажа ?
+           $query = "SELECT * FROM users WHERE Nick_Name='$aNickName'";
+           $result = mysql_query($query) or die("Query failed : " . mysql_error());
+           $aRow = mysql_fetch_array( $result);
+           $aHelmet_Slot  = $aRow["Helmet_Slot"];
+           $aShield_Slot  = $aRow["Shield_Slot"];
+           $aWeapon_Slot  = $aRow["Weapon_Slot"];
+           $aGloves_Slot  = $aRow["Gloves_Slot"];
+           $aShoes_Slot  = $aRow["Shoes_Slot"];
+           $aArmor_Slot  = $aRow["Armor_Slot"];
+           $aNecklace_Slot  = $aRow["Necklace_Slot"];
+           $aEar_Slot  = $aRow["Ear_Slot"];
+           $aBelt_Slot  = $aRow["Belt_Slot"];
+           $aRing1_Slot  = $aRow["Ring1_Slot"];
+           $aRing2_Slot  = $aRow["Ring2_Slot"];
+           $aRing3_Slot  = $aRow["Ring3_Slot"];
+           $aRing4_Slot  = $aRow["Ring4_Slot"];
+           $aCharLevel  = $aRow["Character_Level"];
+
+           if ($aItemSlot == 'Ring_Slot'){
+             if( $aCharLevel >= $aItem_Level ){    // проверка на уровень (level)
+               $NotEmpty = false;
+               if ($aRing1_Slot == 0){
+                  $query = "UPDATE Users SET Ring1_Slot='$seton' WHERE Nick_Name='$aNickName'";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                  $NotEmpty = true;
+               }
+               if (($aRing2_Slot == 0) && (!$NotEmpty) ){
+                  $query = "UPDATE Users SET Ring2_Slot='$seton' WHERE Nick_Name='$aNickName'";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                  $NotEmpty = true;
+               }
+               if (($aRing3_Slot == 0) && (!$NotEmpty) ){
+                  $query = "UPDATE Users SET Ring3_Slot='$seton' WHERE Nick_Name='$aNickName'";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                  $NotEmpty = true;
+               }
+               if (($aRing4_Slot == 0) && (!$NotEmpty) ){
+                  $query = "UPDATE Users SET Ring4_Slot='$seton' WHERE Nick_Name='$aNickName'";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                  $NotEmpty = true;
+               }
+               if (!$NotEmpty){   // Если все слоты под кольца заняты - засовываем в первый
+                  // сперва снимем первое кольцо
+                  $query = "UPDATE Items SET Item_Position='2' WHERE ID='$aRing1_Slot'";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                  // засунем из рюкзака
+                  $query = "UPDATE Users SET Ring1_Slot='$seton' WHERE Nick_Name='$aNickName'";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                  $NotEmpty = true;
+               }
+              // Убираем из рюкзака - перемещаем в слоты
+              $query = "UPDATE Items SET Item_Position='3' WHERE IT_ID='$seton'";
+              $result = mysql_query($query) or die("Query failed : " . mysql_error());
+             }
+           }
+           else  // не кольца
+           {
+
+             if( $aCharLevel >= $aItem_Level ){    // проверка на уровень (level)
+               // сперва снимем если что-то есть?
+               $link_slot_var = "a".$aItemSlot;
+               $aSlotItemID = $$link_slot_var;
+               if ($aSlotItemID <> 0){
+                  $query = "UPDATE Items SET Item_Position='2' WHERE IT_ID='$aSlotItemID'";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+               }
+               $query = "UPDATE Users SET ".$aItemSlot."='$seton' WHERE Nick_Name='$aNickName'";
+               $result = mysql_query($query) or die("Query failed : " . mysql_error());
+               // Убираем из рюкзака - перемещаем в слоты
+               $query = "UPDATE Items SET Item_Position='3' WHERE IT_ID='$seton'";
+               $result = mysql_query($query) or die("Query failed : " . mysql_error());
+             }
+           }
+       }
+
+       // Теперь смотрим героя во всей красе
+
+       $query = "SELECT * FROM users WHERE Nick_Name='$aNickName'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       $aRow = mysql_fetch_array( $result);
+
+       $aUserID = $aRow["USER_ID"];
+       $aStrength = $aRow["Character_Strength"];
+       $aEndurance = $aRow["Character_Endurance"];
+       $aAccuracy = $aRow["Character_Accuracy"];
+       $aDexterity = $aRow["Character_Dexterity"];
+       $aNotUsedStats = $aRow["Character_UnUsed_Points"];
+       $aSwordSkill = $aRow["Character_Sword"];
+       $aSpearSkill = $aRow["Character_Spear"];
+       $aMaceSkill = $aRow["Character_Mace"];
+       $aAxeSkill = $aRow["Character_Axe"];
+       $aDaggerSkill = $aRow["Character_Dagger"];
+       $aCharLevel = $aRow["Character_Level"];
+       $aMoney = $aRow["Character_Money"];
+
+       // Узнаем что там в слотах?
+       $aHelmet_Slot  = $aRow["Helmet_Slot"];
+       $aShield_Slot  = $aRow["Shield_Slot"];
+       $aWeapon_Slot  = $aRow["Weapon_Slot"];
+       $aGloves_Slot  = $aRow["Gloves_Slot"];
+       $aShoes_Slot  = $aRow["Shoes_Slot"];
+       $aArmor_Slot  = $aRow["Armor_Slot"];
+       $aNecklace_Slot  = $aRow["Necklace_Slot"];
+       $aRing1_Slot  = $aRow["Ring1_Slot"];
+       $aRing2_Slot  = $aRow["Ring2_Slot"];
+       $aRing3_Slot  = $aRow["Ring3_Slot"];
+       $aRing4_Slot  = $aRow["Ring4_Slot"];
+       $aEar_Slot  = $aRow["Ear_Slot"];
+       $aBelt_Slot  = $aRow["Belt_Slot"];
+
+    mysql_free_result($result);
+
+    // Эта функция получает переменную из слота
+    // и если не 0 ищет этот предмет в таблице предметов
+    // затем по типу и номеру предмета - ищет картинку в справочнике предметов
+    function DrawItem($aSlot){
+       global $aNickName,$aHelmet_Slot,$aShield_Slot,$aWeapon_Slot,$aGloves_Slot,$aShoes_Slot,$aArmor_Slot;
+       global $aNecklace_Slot,$aRing1_Slot,$aRing2_Slot,$aRing3_Slot,$aRing4_Slot,$aEar_Slot,$aBelt_Slot;
+       global $mysql_host,$mysql_user,$mysql_password,$my_database;
+
+       $link_slot_var = "a".$aSlot."_Slot";
+       $aSlotItemID = $$link_slot_var;
+       if ( $aSlotItemID != 0 ){
+          // сперва выберем предмет из таблицы предметов
+          $query = "SELECT i.Item_Position, il.ItemType, il.ItemNo, il.Item_Image, il.ItemName FROM Items i inner join Items_List il on il.il_id=i.il_id WHERE IT_ID='$aSlotItemID'";
+          $result = mysql_query($query) or die("Query failed : " . mysql_error());
+          $aRow = mysql_fetch_array( $result );
+          $aItemType  = $aRow["ItemType"];
+          $aItemNo    = $aRow["ItemNo"];
+          $aItemPos   = $aRow["Item_Position"];
+          $aItemImage  = $aRow["Item_Image"];
+          $aItemName   = $aRow["ItemName"];
+
+          if($aItemPos == 3){   // Точно в слоте? (потом убрать!!!)
+             $aRetS = "<a href='inventory.phtml?NickName=".$aNickName."&setoff=".$aSlotItemID."&aslot=".$aSlot."'><img border=0 src=Items/".$aItemImage." ALT='Снять предмет $aItemName'></a>";
+          }
+          else
+          {
+             $aRetS = "<img src=Items/".$aSlot."_empty.jpg>";
+          }
+       }
+       else
+       {
+         $aRetS = "<img src=Items/".$aSlot."_empty.jpg>";
+       }
+       return $aRetS;
+    }
+
+?>
+
+<SCRIPT>
+var rnd = Math.random();
+//-- Смена хитпоинтов
+var delay = 2;    // Каждые 18сек. увеличение HP на 1%
+var redHP = 0.33; // меньше 30% красный цвет
+var yellowHP = 0.66;    // меньше 60% желтый цвет, иначе зеленый
+var TimerOn = -1; // id таймера
+var tkHP, maxHP;
+var speed=100;
+var mspeed=100;
+
+function setHP(value, max, newspeed) {
+  tkHP=value; maxHP=max;
+  if (TimerOn>=0) { clearTimeout(TimerOn); TimerOn=-1; }
+  speed=newspeed;
+  setHPlocal();
+}
+function setHPlocal() {
+  if (tkHP>maxHP) { tkHP=maxHP; }
+  var sz1 = Math.round((149/maxHP)*tkHP);
+  var sz2 = 150 - sz1;
+  if (document.all("HP")) {
+    document.HP1.width=sz1;
+    document.HP2.width=sz2;
+    if (tkHP/maxHP < redHP) { document.HP1.src='Items/1red.gif'; }
+    else {
+      if (tkHP/maxHP < yellowHP) { document.HP1.src='Items/1yellow.gif'; }
+      else { document.HP1.src='Items/1green.gif'; }
+    }
+    var s = document.all("HP").innerHTML;
+    document.all("HP").innerHTML = s.substring(0, s.lastIndexOf(':')+1) + Math.round(tkHP)+"/"+maxHP;
+  }
+  tkHP = (tkHP+(maxHP/100)*speed/1000);
+  if (tkHP<maxHP) { TimerOn=setTimeout('setHPlocal()', delay*100); }
+  else { TimerOn=-1; 
+   }
+}
+
+function SetImage(iName){
+    document.mainimage.src = 'Items/'+iName;
+    document.F1.Pers_Image.value = iName;
+}
+
+function gotoBack(){
+    location.href='char.phtml?NickName=<?php echo "$aNickName"; ?>';
+}
+
+
+</SCRIPT>
+
+
+</head>
+
+
+
+<body bgcolor="#BFBFBF" onLoad="setHP(<?php echo $aEndurance*6 ?>,
+                                               <?php echo $aEndurance*6 ?>,100)">
+<div align="left">
+  <table border="0" width="887" cellspacing="0" cellpadding="0" bgcolor="#BFBFBF">
+    <tr>
+      <td width="883" height="13" valign="top" colspan="3">
+      </td>
+    </tr>
+
+    <tr>
+      <td width="238" height="8" valign="top">
+        <p align="center"><?php echo "$aNickName [$aCharLevel]" ?></td>
+      <td width="645" height="8" valign="top" colspan="2"></td>
+    </tr>
+
+   <!--  Тут размещено здоровье персонажа  -->
+    <td width="238">
+   <table cellspacing=0 cellpadding=0 border="0" bordercolor="#000080"><tr><td>
+   <NOBR><div id=HP>
+  <IMG SRC="Items/herz.gif" ALT="Уровень жизни"> <IMG SRC=1silver.gif WIDTH=1 HEIGHT=10 ALT="Уровень жизни" name=HP1><IMG SRC=1silver.gif WIDTH=1 HEIGHT=10 ALT="Уровень жизни" name=HP2>:</div>
+   </nobr>
+  </table>
+  <!--  Конец Секции-->
+  
+
+    <tr>
+      <td width="238" height="1" valign="top">
+        <table border="1" width="183" height="228" cellspacing="0" cellpadding="0" bgcolor="#BFBFBF" bordercolor="#666699">
+          <tr>
+            <td width="27" height="32" rowspan="2" colspan="2" valign="top"><? echo DrawItem("Helmet"); ?></td>
+            <td width="99" height="176" rowspan="5" valign="top" colspan="2"><img border="0" name = "mainimage" src="Items/pers.jpg"></td>
+            <td width="49" height="23" colspan="2" valign="top"><? echo DrawItem("Ear"); ?></td>
+          </tr>
+          <tr>
+            <td width="49" height="2" colspan="2" valign="top"><? echo DrawItem("Necklace"); ?></td>
+          </tr>
+          <tr>
+            <td width="27" height="80" colspan="2" valign="top"><? echo DrawItem("Weapon"); ?></td>
+            <td width="49" height="80" colspan="2" valign="top"><? echo DrawItem("Shield"); ?></td>
+          </tr>
+          <tr>
+            <td width="1" height="24" valign="top"><? echo DrawItem("Ring1"); ?></td>
+            <td width="25" height="24" valign="top"><? echo DrawItem("Ring2"); ?></td>
+            <td width="22" height="24" valign="top"><? echo DrawItem("Ring3"); ?></td>
+            <td width="26" height="24" valign="top"><? echo DrawItem("Ring4"); ?></td>
+          </tr>
+          <tr>
+            <td width="27" height="77" colspan="2" rowspan="2" valign="top"><? echo DrawItem("Armor"); ?></td>
+            <td width="49" height="40" colspan="2" valign="top"><? echo DrawItem("Gloves"); ?></td>
+          </tr>
+          <tr>
+            <td width="99" height="34" valign="top" colspan="2">&nbsp;</td>
+            <td width="49" height="31" colspan="2" valign="top" rowspan="2"><? echo DrawItem("Shoes"); ?></td>
+          </tr>
+          <tr>
+            <td width="27" height="1" colspan="2" valign="top"><? echo DrawItem("Belt"); ?></td>
+            <td width="44" height="3" valign="top">&nbsp;</td>
+            <td width="53" height="3" valign="top">&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+      <td width="252" height="1" valign="top"><font color="#000080">
+        Сила: <?php echo "$aStrength"; ?><br>
+        Выносливость: <?php echo "$aEndurance"; ?><br>
+        Точность: <?php echo "$aAccuracy"; ?><br>
+        Ловкость: <?php echo "$aDexterity"; ?><br>
+        <HR>
+        Опыт: 0 <br>
+        Уровень: 0<br>
+        Побед: 0 <br>
+        Поражений: 0<br>
+        Ничьих: 0<br>
+        Деньги: </font><b><font color="#FF0000"><?php echo "$aMoney"; ?></font></b> <font color="#000080">кр<br>
+        <HR>
+        <p>&nbsp;</font>
+        
+      </td>
+      <td width="391" height="1" valign="top">
+      <!--
+      Кнопки управления и ссылки на форум, энциклопедию и т.д.
+      -->
+      <INPUT TYPE=button value="Вернуться" onclick="gotoBack()">
+      <HR>
+
+      <table border=1>
+        <tr><td width="700" bgcolor="#6B6683" height="16"><b><font face="Arial" color="#FFFF00" size="2">
+        Рюкзачок</font></b></td></tr>
+        <?php
+          echo "";
+          // Отобразим содержимое рюкзачка
+          $query = "SELECT i.IT_ID, i.Item_Position, il.ItemType, il.ItemNo, il.Item_Image, il.ItemName FROM Items i inner join Items_List il on il.il_id=i.il_id WHERE Item_Owner='$aUserID' and Item_Position='2'";
+          $result = mysql_query($query) or die("Query failed : " . mysql_error());
+          while ($aRow = mysql_fetch_array($result)) {
+             $aSlotItemID  = $aRow["IT_ID"];
+             $aItemType  = $aRow["ItemType"];
+             $aItemNo    = $aRow["ItemNo"];
+             $aItemImage  = $aRow["Item_Image"];
+             $aItemName  = $aRow["ItemName"];
+
+             echo "<tr><td>" . "<a href='inventory.phtml?NickName=".$aNickName."&seton=".$aSlotItemID."'><img border=0 src=Items/".$aItemImage." ALT='Одеть предмет ".$aItemName."'></a>" . "</td></tr>";
+          }
+        ?>
+      </table>
+
+
+      </td>
+    </tr>
+    <tr>
+      <td width="238" height="1" valign="top"></td>
+      <td width="645" height="1" valign="top" colspan="2">
+      <form name="F1">   
+          <p><input type="hidden" name="Pers_Image" value="" size="20">
+      </form>    
+        <p>&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+</body>
+<? mysql_close($link); ?>
+</html>

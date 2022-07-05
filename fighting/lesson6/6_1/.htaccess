@@ -1,0 +1,37 @@
+## Документы на диске в кодировке koi8-r
+#AddDefaultCharset koi8-r
+
+## Документы на диске в кодировке windows-1251
+AddDefaultCharset windows-1251
+
+## Документы на диске в кодировке iso-8859-1 (English, etc)
+#AddDefaultCharset iso-8859-1
+
+## Документы на диске в кодировке utf-8
+#AddDefaultCharset utf-8
+
+## Файл индексного документа
+DirectoryIndex index.shtml index.htm index.php3 index.php index.phtml
+
+## Воспринимать файлы *.html как SSI
+#AddHandler server-parsed .html
+
+## Разрешение показа содержимого каталога
+#Options +Indexes
+
+## Не писать в access.log информацию о файлах *.gif и *.jpg
+#SetEnvIf Request_URI \.gif$ access_log
+#SetEnvIf Request_URI \.jpg$ access_log
+
+AddType text/vnd.wap.wml;charset=UTF-8 wml 
+AddType application/vnd.wap.wmlc wmlc 
+AddType text/vnd.wap.wmlscript wmls 
+AddType application/vnd.wap.wmlscriptc wmlsc wmlscriptc 
+
+AddType image/vnd.wap.wbmp wbmp 
+AddType application/java-archive jar 
+AddType text/vnd.sun.j2me.app-descriptor;charset=UTF-8 jad
+AddType application/x-smaf .mmf 
+AddType audio/midi .mid .midi 
+
+

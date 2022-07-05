@@ -1,0 +1,266 @@
+<html>
+<head>
+<META http-equiv=content-type content="text/html; charset=windows-1251">
+<LINK href="main.css" type=text/css rel=stylesheet>
+
+<?php
+
+  $ITEM_IN_BID = 6;   // 
+
+  $lNoMoney = false;
+  $aBuy = 0;
+  $aBuyer = "";
+  $aSell = 0;
+  $aPropose = 0;
+  $aTakeBack = 0;
+  $aSellItemId = 0;
+  $aBuyItem = 0;        // режим покупки предмета
+  $aBuyItemId = 0;      // ID купленного предмета
+  if (!empty($_GET['NickName'])){
+     $aNickName = $_GET['NickName'];
+  }
+  if (!empty($_GET['buy'])){
+     $aBuy = $_GET['buy'];
+  }
+  if (!empty($_GET['buyer'])){
+     $aBuyer = $_GET['buyer'];
+  }
+  // предлагаем предмет к продаже
+  if ( (!empty($_GET['propose'])) && (!empty($_GET['itemid'])) && (!empty($_GET['price']))){
+     $aPropose = $_GET['propose'];
+     $aSellItemId = $_GET['itemid'];	 
+     $aSellPrice = $_GET['price'];	 	 
+  }
+  // отзываем предмет 
+  if ( (!empty($_GET['takeback'])) && (!empty($_GET['itemid'])) ){
+     $aTakeBack = $_GET['takeback'];
+     $aSellItemId = $_GET['itemid'];	 
+  }
+
+  // покупаем предмет
+  if ( (!empty($_GET['buyitem'])) && (!empty($_GET['itemid'])) ){
+     $aBuyItem  = $_GET['buyitem'];
+     $aBuyItemId = $_GET['itemid'];
+  }
+
+  
+?>
+
+
+<script>
+
+function negotiate(){
+   usr_login = document.getElementById('user_login').value;
+   location.href = "market.phtml?buy=1&buyer="+usr_login+"&NickName=<?php echo $aNickName ?>";
+}
+
+function propose( itemid ){
+  usr_login = "<?php echo $aBuyer ?>";
+  price = parseFloat( document.getElementById('price'+itemid).value );
+  if (price > 0){
+    if (confirm("Вы действительно хотите продать предмет за "+price+" кр?")) {  
+       location.href='market.phtml?buy=1&propose=1&buyer='+usr_login+'&NickName=<?php echo $aNickName ?>&itemid='+itemid+'&price='+price;
+	}
+  } else {
+    alert("Нельзя продать предмет за эту цену!");
+  }
+}
+
+function give1kr( itemid ){
+  usr_login = "<?php echo $aBuyer ?>";
+  if (confirm("Вы действительно хотите передать предмет за 1 кр?")) {
+      location.href='market.phtml?buy=1&give=1&buyer='+usr_login+'&NickName=<?php echo $aNickName ?>&itemid='+itemid;
+  }
+}
+
+function takeback( itemid ){
+  usr_login = "<?php echo $aBuyer ?>";
+  if (confirm("Вы действительно хотите отозвать предмет?")) {
+      location.href='market.phtml?buy=1&takeback=1&buyer='+usr_login+'&NickName=<?php echo $aNickName ?>&itemid='+itemid;
+  }
+}
+
+function renew()
+{
+   location.href='market.phtml?buy=1&NickName=<?php echo "$aNickName"; ?>';
+}
+
+function buyitem( itemid ){
+  if (confirm("Вы действительно хотите купить этот предмет?")) {
+      location.href='market.phtml?buy=1&buyitem=1&NickName=<?php echo $aNickName ?>&itemid='+itemid;
+  }
+}
+
+</script>
+
+
+</head>
+
+
+<body bgcolor="#e2e0e0">
+<div align="center">
+  <center>
+  <table border="1" width="985" height="115" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="863" height="115" rowspan="2" valign="top">
+        <br><p align="left"><font face="Arial"><b>ТОРГОВЫЕ РЯДЫ</b><br><br></font>
+        <font size=2 color=red><div id="mes">             </div></font>
+
+<?php
+
+    // Узнаем характеристики персонажа
+
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+			
+       $query = "SELECT Town, Character_Money, USER_ID from users WHERE Nick_Name='$aNickName'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       $aRow = mysql_fetch_array( $result);
+       $aUserID = $aRow["USER_ID"];   // ID нашего игрока
+       $aTown = $aRow["Town"];        // узнаем город
+       $aMoney = $aRow["Character_Money"];
+	   
+	   //  Режим покупки - засунем предмет к себе в рюкзак
+	   if ( $aBuyItem <> 0 ) {
+            // Узнаем владельца и цену вещи
+            $query = "SELECT Item_Owner, Item_SellPrice from items where it_id = '$aBuyItemId'";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+            $aRow = mysql_fetch_array($result);
+            $aOwner  = $aRow["Item_Owner"];
+            $aPrice  = $aRow["Item_SellPrice"];
+
+            // уменьшим наши деньги
+            $aMoney = $aMoney - $aPrice;
+            $query = "UPDATE users SET Character_Money=$aMoney WHERE Nick_Name='$aNickName'";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+            // увеличим деньги продавца, удержав  1 кр за передачу
+            $query = "UPDATE users SET Character_Money=Character_Money+$aPrice-1 WHERE USER_ID='$aOwner'";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+            $query = "INSERT INTO chat (CH_MSG,USER_ID,USER_ID_TO,CH_ROOM,IS_PRIVATE) values('У вас купили предмет','$aUserID','$aOwner','0',1)";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+
+            // засунем предмет к нам в рюкзак
+            $query = "update items set Item_Owner = '$aUserID', Item_Position='2', Item_SellPrice=0, Item_Receiver=0 where it_id='$aBuyItemId'";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+
+	   }
+
+	   //  Режим отзыва - засунем предмет в статус рюкзака (2)
+	   if ( $aTakeBack <> 0 ) {  
+            $query = "update items set Item_Position='2', Item_SellPrice=0, Item_Receiver=0 where it_id='$aSellItemId'";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+	   }
+
+	   //  Режим предложения - засунем предмет в статус предложения  (6)
+	   if ( $aPropose <> 0 ) {  
+	        // кому передаем   
+            $query = "SELECT USER_ID from users WHERE Nick_Name='$aBuyer'";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+            $aRow = mysql_fetch_array( $result);
+            $aBuyerID = $aRow["USER_ID"];   // ID игрока которому предлагается предмет для покупки
+			
+            $query = "update items set Item_Position='6', Item_SellPrice='$aSellPrice', Item_Receiver='$aBuyerID' where it_id='$aSellItemId'";
+            $result = mysql_query($query) or die("Query failed : " . mysql_error());
+	   }
+
+
+	   
+       // Режим показа предметов для продажи / передачи
+	   if( $aBuy <> 0){
+	       if( $aBuyer == "" ){
+		     print("Кому продать: <input type=text id=user_login> &nbsp; <input type=button value = 'Подойти' onClick='negotiate()'> <input type=button value = 'Обновить' onClick='renew()'>");
+       
+             // покажем перечень вещей, которые предложены именно нам
+			      print ('<br><br>Вам предложены предметы: <br>');
+				  echo '<table border=1>';
+                  $query = "SELECT i.IT_ID, i.Item_Position, i.Item_SellPrice, il.ItemType, i.Item_CurrentLife, il.Item_FullLife, il.ItemNo, il.Item_Image, il.ItemName, il.ItemSlotName, i.Item_DateTime  FROM Items i inner join Items_List il on il.il_id=i.il_id WHERE Item_Receiver='$aUserID' and Item_Position = 6";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                  while ($aRow = mysql_fetch_array($result)) {
+                    $aItemID  = $aRow["IT_ID"];
+                    $aItemType  = $aRow["ItemType"];
+                    $aItemNo    = $aRow["ItemNo"];
+                    $aItemImage  = $aRow["Item_Image"];
+                    $aItemName  = $aRow["ItemName"];
+                    $aItemSlotName  = $aRow["ItemSlotName"];
+                    $aItem_DateTime  = $aRow["Item_DateTime"];
+                    $aItemPosition  = $aRow["Item_Position"];
+                    $aItemSellPrice  = $aRow["Item_SellPrice"];
+                    $aItem_CurrentLife  = $aRow["Item_CurrentLife"];
+                    $aItem_FullLife = $aRow["Item_FullLife"];
+                    if ( $aItemSlotName <> 'Ticket' ) {
+                       if ($aItemSellPrice > $aMoney){
+                         echo "<tr><td><img border=0 src=items/".$aItemImage." ALT='Купить предмет ".$aItemName."'> Предложен предмет с износом ($aItem_CurrentLife/$aItem_FullLife) за <b>$aItemSellPrice</b> кр.<input type=button disabled value='Купить предмет' onClick='buyitem(".$aItemID.")'></td></tr>";
+                       }else{
+                         echo "<tr><td><img border=0 src=items/".$aItemImage." ALT='Купить предмет ".$aItemName."'> Предложен предмет с износом ($aItem_CurrentLife/$aItem_FullLife) за <b>$aItemSellPrice</b> кр.<input type=button value='Купить предмет' onClick='buyitem(".$aItemID.")'></td></tr>";
+                       }
+        			}
+                  }
+                  echo '</table>';
+
+		   } else {
+		     //print( '<script> alert("'.$aBuyer.'"); </script>' );
+             $query = "SELECT USER_ID from users WHERE Nick_Name='$aBuyer'";
+             $result = mysql_query($query) or die("Query failed : " . mysql_error());
+             if( mysql_num_rows($result) == 0 ){
+			    print ('Персонаж не найден в клубе! <br>');
+		        print("Укажите правильный логин: <input type=text id=user_login> &nbsp; <input type=button value = 'Подойти' onClick='negotiate()'>"); 				
+			 } else {
+			    if ($aBuyer == $aNickName){
+  			      print ('Вы не можете передавать/продавть вещи сами себе! <br>');
+		          print("Укажите правильный логин: <input type=text id=user_login> &nbsp; <input type=button value = 'Подойти' onClick='negotiate()'>"); 				
+				} else {
+			      print ('Выберите вещь для продажи/передачи к <b>'.$aBuyer.'</b> <br>');
+				  // покажем вещи из рюкзака для продажи с полем ввода цены:
+				  echo '<table border=1>';
+                  $query = "SELECT i.IT_ID, i.Item_Position, il.ItemType, il.ItemNo, il.Item_Image, il.ItemName, il.ItemSlotName, i.Item_DateTime  FROM Items i inner join Items_List il on il.il_id=i.il_id WHERE Item_Owner='$aUserID' and Item_Position in ('2','6')";
+                  $result = mysql_query($query) or die("Query failed : " . mysql_error());
+                  while ($aRow = mysql_fetch_array($result)) {
+                    $aItemID  = $aRow["IT_ID"];
+                    $aItemType  = $aRow["ItemType"];
+                    $aItemNo    = $aRow["ItemNo"];
+                    $aItemImage  = $aRow["Item_Image"];
+                    $aItemName  = $aRow["ItemName"];
+                    $aItemSlotName  = $aRow["ItemSlotName"];			 
+                    $aItem_DateTime  = $aRow["Item_DateTime"];			 			 
+                    $aItemPosition  = $aRow["Item_Position"];			 			 					
+                    if ( $aItemSlotName <> 'Ticket' ) {
+					  if ( $aItemPosition == $ITEM_IN_BID ){
+                        echo "<tr><td><img border=0 src=items/".$aItemImage." ALT='Отозвать предмет ".$aItemName."'> Предмет предложен покупателю <input type=button value='Отозвать предмет' onClick='takeback(".$aItemID.")'></td></tr>";					  
+					  } else {
+                        echo "<tr><td><img border=0 src=items/".$aItemImage." ALT='Предложить предмет ".$aItemName."'> <input type=text id=price".$aItemID." value=0> <input type=button value='Предложить' onClick='propose(".$aItemID.")'><input type=button value='Передать за 1 кр' onClick='give1kr(".$aItemID.")'></td></tr>";
+					  }
+        			}
+                  }
+                  echo '</table>';
+				}  
+			 }
+		   }
+	   }
+?>
+
+      </td>
+      Деньги: <font color=red><?php echo $aMoney; ?></font> кр
+
+      <td width="18" height="173" valign="top">
+        <p align="center"><img border="0" src="items/market_pic.jpg"></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="18" height="100" valign="top">
+        <a href="market.phtml?buy=1&NickName=<?php echo $aNickName; ?>">Прием</a></font>
+        <a href="market.phtml?sell=1&NickName=<?php echo $aNickName; ?>">Передача</a></font>
+        <a href="map.phtml?NickName=<?php echo $aNickName; ?>">Выйти</a></font>
+        </td>
+  </table>
+  </center>
+</div>
+	  
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<html>
+<head>
+<META http-equiv=content-type content="text/html; charset=windows-1251">
+<LINK href="main.css" type=text/css rel=stylesheet>
+
+<script>
+   function BuyTicket( tk_id ){
+       alert( tk_id );
+   }
+   
+</script>
+
+
+</head>
+
+
+<body bgcolor="#e2e0e0">
+<div align="center">
+  <center>
+  <table border="1" width="985" height="115" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="863" height="115" rowspan="2" valign="top">
+        <br><p align="left"><font face="Arial"><b>ВОКЗАЛ</b><br><br></font>
+        <font size=2 color=red><div id="mes">             </div></font>
+
+<?php
+  if (!empty($_GET['NickName'])){
+     $aNickName = $_GET['NickName'];
+
+    $aWhatStat = "";
+    $aWhatSkill = "";
+    // Узнаем характеристики персонажа
+
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+			
+       $query = "SELECT Town, Character_Money from users WHERE Nick_Name='$aNickName'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       $aRow = mysql_fetch_array( $result);
+       $aTown = $aRow["Town"];        // узнаем город
+       $aMoney = $aRow["Character_Money"];	   
+
+       $query = "select tk.TK_ID, tk.TownTo, tk.DateStart, tk.Price, tk.MovingTime, tk.QTY, tw.TownName from tickets tk inner join towns tw on tk.TownTo = tw.ID where tk.Town = '$aTown'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       print('<table bgcolor="#DDFAFB"><tr> <td><b>Пункт <br>назначения</b></td><td><b>Время <br>переезда</b></td><td><b>Время <br>отправления</b></td><td><b>Кол-во <br>билетов</b></td><td><b>Цена</b></td><td></td> </tr><tr>');	   
+       while ($aRow = mysql_fetch_array($result)) {
+           $aTK_ID      = $aRow["TK_ID"];	   
+           $aTownTo      = $aRow["TownTo"];
+           $aTownToName  = $aRow["TownName"];		   
+           $aQTY  = $aRow["QTY"];		   		   
+           $aMovingTime  = $aRow["MovingTime"];		   		   		   
+           $aPrice = $aRow["Price"];
+           $aDateStart = $aRow["DateStart"];		   
+           print("<td>$aTownToName</td><td>$aMovingTime</td><td>$aDateStart</td><td>$aQTY</td><td>$aPrice</td>");
+		   if ( $aQTY > 0 ) {
+		       print('<td><input type=button value="Купить" onClick="BuyTicket('.$aTK_ID .')"></td>');
+		   }
+		   print('</tr>');
+		   
+       }
+	   print('</table>');
+  }
+?>
+      </td>
+      Деньги: <font color=red><?php echo $aMoney; ?></font> кр
+
+      <td width="18" height="173" valign="top">
+        <p align="center"><img border="0" src="Items/station.jpg" width="116" height="230"></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="18" height="100" valign="top">
+        <a href="map.phtml?NickName=<?php echo $aNickName; ?>">
+        Выйти</a></font>
+        </td>
+  </table>
+  </center>
+</div>
+	  
+
+</body>
+</html>

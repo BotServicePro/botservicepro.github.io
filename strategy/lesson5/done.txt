@@ -1,0 +1,3 @@
+Изменена функция JS function updateClock ( )
+- теперь в ней используются массивы
+Вместе с ней изменена и PHP функция function show_res_upgrade( $p_fid )

@@ -1,0 +1,772 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<style>
+<!--
+table.MsoTableGrid
+  {border:1.0pt solid windowtext;
+  font-size:10.0pt;
+  font-family:"Times New Roman","serif"}
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="0" width="740" height="350" cellspacing="0" cellpadding="0">
+    <!-- MSTableType="nolayout" -->
+  <tr>
+      <td width="740" height="133" background="Site/top.jpg" colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="127" height="356" background="Site/middle1.jpg" valign="top">
+        <p align="left">
+        <b><font face="Arial" size="1" color="#505866">&nbsp;&nbsp;&nbsp; 
+    <a href="http://www.blitz-school.info"><font color="#FFFF99">Курсы</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font face="Arial" size="1" color="#FFFF99">
+    <a href="http://www.blitz-school.info/reg.html"><font color="#FFFF99">Регистрация</font></a><br>
+        &nbsp;&nbsp;&nbsp;
+    <a href="http://www.blitz-school.info/study_tech.html">
+    <font color="#FFFF99">Методика</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font>
+    <a href="http://www.blitz-school.info/program.html"><font face="Arial" size="1" color="#FFFF99">Оглавление</font></a><font face="Arial" size="1" color="#FFFF99"><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://www.blitz-school.info/login.html">
+    <font color="#FFFF99">Для учащихся</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font></b>
+    <img border="0" src="../navdiv.gif" width="80" height="4"><br>
+        <b><font size="1" face="Arial" color="#505866">&nbsp;&nbsp;&nbsp;
+        <a href="http://www.blitz-school.info/articles.html">
+    <font color="#FFFF99">Статьи</font></a><br>
+        &nbsp;&nbsp;&nbsp; </font><font size="1" face="Arial" color="#FFFF99">
+    <a href="http://www.blitz-school.info/instrum.html">
+    <font color="#FFFF99">Инструменты</font></a><br>
+    <span lang="en-us">&nbsp;&nbsp;&nbsp; </span>
+    <a href="http://www.blitz-school.info/contacts.html">
+    <font color="#FFFF99">Контакты</font></a><br>
+    <span lang="en-us">&nbsp;&nbsp;&nbsp; </span></font></b>&nbsp;</td>
+      <td width="586" height="356" background="Site/bg.gif" valign="top">
+
+<p align="center"><font color="#008000"><b><span lang="ru"><font size="5">Урок </font>
+</span>
+<font size="5">6<span lang="ru">. </span></font></b><span lang="ru">
+<font size="5"><b>Создание города</b></font><br>
+</span>
+</font><b></p>
+<p align="justify"><font face="Arial" size="2" color="#000080">6</font><font face="Arial" color="#000080"><a name="kopv"><font size="2">.1. 
+</font></a></font></span></b><span lang="ru"><a name="kopv"><b>
+<font face="Arial" size="2" color="#000080">Центральная площадь</font></b></a><font size="2" face="Arial">
+<br>
+<br></font></span><font size="2" face="Arial">
+&nbsp;&nbsp;&nbsp; <span lang="ru">Мы не не можем ограничить нашего персонажа 
+только одной комнатой</span>&nbsp;<span lang="ru">- Ареной, где ему приходилось 
+находится в течении предыдущих уроков. Посему нам предстоит создать городскую 
+площадь, которая в игре будет называться центральной площадью.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Так как этот курс создан для программистов, а не для 
+художников, то мы не станем рисовать как саму площадь, так и размещающиеся на 
+них объекты, а возьмем, к примеру графику из игры </span>Heroes of Might and 
+Magic 3 <span lang="ru">и вставим в наш проект.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Смотрите графические фалы
+<a href="6_1/items/TOWNS/Silluria">здесь</a>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Следующие объекты нам понадобятся в наших 
+ближайших уроках:</span></font></p>
+<table border="1" width="100%" id="table1">
+  <tr>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_1/items/TOWNS/Silluria/arena.gif" width="61" height="62"><br>
+    </font><span lang="ru"><font size="2">Арена</font></span></font></td>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_1/items/TOWNS/Silluria/smith.gif" width="58" height="64"><br>
+    </font><span lang="ru"><font size="2">Кузница</font></span></font></td>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_1/items/TOWNS/Silluria/market.gif" width="61" height="59"><br>
+    </font><span lang="ru"><font size="2">Торговые ряды</font></span></font></td>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_1/items/TOWNS/Silluria/church.gif" width="58" height="61"></font><span lang="ru"><font size="2"><br>
+    Магическая лавка</font></span></font></td>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_1/items/TOWNS/Silluria/bank.gif" width="61" height="59"><br>
+    </font><span lang="ru"><font size="2">Вокзал</font></span></font></td>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_1/items/TOWNS/Silluria/sign.gif" width="33" height="41"><br>
+    </font><span lang="ru"><font size="2">Знак</font></span></font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp;&nbsp; <b>Арена</b> - здание, в котором 
+осуществляются поединки наших персонажей и мы будем использовать картинку этого 
+объекта. чтоб возвращаться с Центральной Площади обратно на страничку с нашим 
+героем (</span>char.phtml<span lang="ru">)</span>.<span lang="ru"><br>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span lang="ru"><b>Кузница</b> - объект, в 
+котором игрок сможет приобретать вооружение и доспехи, а также ремонтировать 
+изношенные вещи (мы сделаем кузницу в этом уроке).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Торговые ряды</b> - место, где протекают 
+торговые сделки игроков. Здесь можно сбыть поношенный щит и приобрести оружие 
+для нового уровня, приобрести магические пузырьки и безвозмездно передать 
+кому-нибудь доспехи. В уроке 13 мы сделаем этот интересный и полезный для 
+играющих объект.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Магическая лавка</b> - этот объект позволит 
+нам приобретать магические снадобья по государственным ценам.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Вокзал</b> - здесь мы сможем приобрести билеты 
+на кареты, которые курсируют между разными городами. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Знак</b> - этот объект имеет 
+только одну смысловую нагрузку - позволяет нам переходить в другую часть 
+центральной площади (ЦП).<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; После того, как мы разместили объекты 
+на ЦП, она стала выглядеть примерно так:<br>
+<br>
+<br>
+<img border="0" src="square.jpg" width="397" height="314"><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Описание ЦП мы осуществим в файлах </span>map.phtml
+<span lang="ru">и </span>map2.phtml. <span lang="ru">Пока что остановимся только 
+на первом из них, так как в ближайшие уроки будет работать только с ним. Вот как 
+отображаются игровые объекты на Центральной площади при помощи языка </span>
+HTML.</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008000">&lt;CENTER&gt;<br>
+    </font><br>
+    &lt;div style=&quot;position:relative;&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/map1.jpg 
+    ALT=&quot;<font color="#FF00FF">Силлурия - столица королевства Альтрикс</font>&quot; 
+    width=&quot;769&quot; height=&quot;541&quot;&gt;<br>
+    &lt;div style=&quot;position:absolute; left:10px; top:10px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/silluria.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Вы 
+    находитесь в столице Королевства Альтрикс</font>&quot;&gt;&lt;/div&gt;<br>
+    <br>
+    &lt;div style=&quot;position:absolute; left:-49px; top:170px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/sign.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">В 
+    западную часть города</font>&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:160px;top:150px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/church.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Магическая 
+    лавка</font>&quot; width=&quot;58&quot; height=&quot;61&quot; &gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:420px;top:160px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/arena.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; 
+    onclick=&quot;gotoArena()&quot; ALT=&quot;<font color="#008000">Арена</font>&quot; 
+    width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:320px;top:230px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/smith.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Кузница</font>&quot; 
+    width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:120px;top:230px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/market.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Торговые 
+    ряды</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:210px;top:310px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/fireguild.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Гильдия 
+    огня</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:590px;top:290px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/waterguild.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;Г<font color="#008000">ильдия 
+    воды</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:590px;top:190px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/bank.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Вокзал</font>&quot; 
+    width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:370px;top:350px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/mercenary.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Торговец</font>&quot; 
+    width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:370px;top:70px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/armor.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Оружейник</font>&quot; 
+    width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:570px;top:90px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/house.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Эксперт 
+    топора</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:490px;top:390px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/house.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Магистр 
+    булавы</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:140px;top:400px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/house.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Эксперт 
+    кожи</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:70px;top:50px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/house.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Мастер 
+    огня</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:-20px;top:246px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/house.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Магистр 
+    воды</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:290px;top:150px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/house.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Эксперт 
+    земли</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:300px;top:430px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/house.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Магистр 
+    разума</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    <br>
+    <font color="#008000">&lt;/CENTER&gt;</font></font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+&nbsp;&nbsp;&nbsp; <span lang="ru">Как вы заметили, мы создаем каждый игровой 
+объект в виде слоя (</span>&lt;div&gt;<span lang="ru">)</span> <span lang="ru">в 
+котором указываем его абсолютные координаты: ( к примеру для вокзала</span></font><font face="Courier" size="2">: 
+left:590px;top:190px;</font><font size="2" face="Arial"><span lang="ru">)<br>
+Событие (</span></font><font face="Courier" size="2"><font color="#0000FF">onmouseout</font>=&quot;<b>imout</b>(this)&quot;</font><font size="2" face="Arial"><span lang="ru">)&nbsp; 
+позволяет подсвечивать объекты, которые находятся под курсором мыши.<br>
+Функции, ответственные за подсветку и ее отключение на </span>JavaScript
+<span lang="ru">выглядят так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    function <b>imover</b>(<font color="#0000FF">im</font>){<span lang="ru">
+    <br>
+&nbsp;&nbsp;&nbsp; </span>im.filters.Glow.Enabled=true;<br>
+    }<br>
+    function <b>imout</b>(<font color="#0000FF">im</font>){<br>
+    <span lang="ru">&nbsp;&nbsp;&nbsp; </span>im.filters.Glow.Enabled=false;<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">где </span><font color="#0000FF">im</font> - <span lang="ru">
+объект над которым находится курсор мыши для </span></font>
+<font face="Courier" size="2">
+    <b>imover<span lang="ru"> </span></b></font><font size="2" face="Arial">
+<span lang="ru">(или с которого убирается курсор мыши для функции - </span></font>
+<font face="Courier" size="2">
+    <b>imout</b></font><font size="2" face="Arial"><span lang="ru">)<br>
+Файл </span>map.phtml <span lang="ru">Вы найдете <a href="6_1/map.phtml">здесь</a><br>
+<br>
+<br></span><font color="#000080"><b><a name="kopv0">6</a></b></font><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv0"><font size="2">.2. 
+</font></a></font></span><a name="kopv1">
+<font size="2" face="Arial" color="#000080"><span lang="ru">&nbsp;Другие локации: 
+лес, озеро, шахта.</span></font></a></b><span lang="ru"> <br><br>
+&nbsp;&nbsp; Нажав на знак - мы можем перейти в западную часть центральной 
+площади. Пока там расположены только декоративные элементы:</span></font></p>
+<table border="1" width="100%" id="table4">
+  <tr>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_2/items/TOWNS/Silluria/forest.gif" width="116" height="127"><br>
+    </font><span lang="ru"><font size="2">Лес</font></span></font></td>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_2/items/TOWNS/Silluria/lake.gif" width="121" height="64"><br>
+    </font><span lang="ru"><font size="2">Озеро</font></span></font></td>
+    <td><font face="Arial"><font size="2">
+    <img border="0" src="6_2/items/TOWNS/Silluria/mine.gif" width="59" height="62"><br>
+    </font><span lang="ru"><font size="2">Вход в шахту</font></span></font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru"> &nbsp; Описываются эти объекты так:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008000">&lt;CENTER&gt;</font><br>
+    <br>
+    &lt;div style=&quot;position:absolute; left:649px; top:170px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/sign.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; 
+    onclick=&quot;gotoWest()&quot; ALT=&quot;<font color="#008000">В восточную часть города</font>&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:160px;top:150px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/lake.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Озеро</font>&quot; 
+    width=&quot;58&quot; height=&quot;61&quot; &gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:420px;top:160px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/forest.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Лес</font>&quot; 
+    width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    &lt;div style=&quot;position:absolute;left:320px;top:90px;width:149px; 
+    height:136px; z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/mine.gif 
+    CLASS=aFilter onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot; ALT=&quot;<font color="#008000">Шахта</font>&quot; 
+    width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;<br>
+    <br>
+    <br>
+    <font color="#008000">&lt;/CENTER&gt;</font></font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru"> &nbsp;&nbsp;&nbsp; Не будем также забывать про &quot;<b>Знак</b>&quot;, 
+который вернет нас в восточную часть Центральной площади по событию (</span></font><font face="Courier" size="2">onclick=&quot;gotoEast()</font><font size="2" face="Arial"><span lang="ru">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Функция, ответственная за переход на </span>
+JavaScript:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    function <b>gotoEast</b>()<br>
+    {<br>
+    location.href='map.phtml?NickName=<b>&lt;?php</b> echo &quot;$aNickName&quot;; <b>?&gt;</b>';<br>
+    }</font></td>
+  </tr>
+</table>
+<p><font size="2" face="Arial">
+<span lang="ru">Файл </span>map.phtml <span lang="ru">Вы найдете
+<a href="6_2/map2.phtml">здесь</a><br> </span>
+<span lang="en-us">&nbsp;&nbsp;&nbsp;&nbsp;</span><span lang="ru"><br>
+<br> </span><font color="#000080"><b><a name="kopv2">6</a></b></font><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv2"><font size="2">.3. </font>
+</a></font></span></b><span lang="ru"><a name="kopv2"><font color="#000080"><b>
+Таблица магазина оружия</b></font></a> <br>
+<br>
+</span>&nbsp;&nbsp; <span lang="ru">Как Вы уже догадались, оружие и доспехи 
+будет продаваться в кузне. Причем, цены на предметы будут фиксированными, так 
+что, по сути - кузница, является не чем иным как государственным магазином 
+амуниции и оружия.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Так как цены на типы и подвиды предметов у нас 
+одинаковые, значит мы можем создать таблицу для реализации эти предметов игрокам 
+в таком виде:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table1">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008000">/*таблица предметов для продажи у КУЗНЕЦА (ОРУЖЕЙНИКА)*/</font><br>
+    CREATE TABLE <b>`smith`</b>(<br>
+    `SM_ID` BIGINT(20) unsigned NOT NULL auto_increment,
+    <font color="#008000">/*уник. идентификатор предмета в магазине*/</font><br>
+    `IL_ID` INT(4) unsigned NOT NULL, <font color="#008000">/* ID предмета в 
+    справочнике предметов*/</font><br>
+    `Town` INT(2) unsigned NOT NULL, <font color="#008000">/*Город, где 
+    расположено здание*/</font><br>
+    `QTY` INT NOT NULL, <font color="#008000">/*количество предметов*/</font><br>
+    PRIMARY KEY (`SM_ID`),<br>
+    KEY (`Town`)<br>
+    ) TYPE=MyISAM;</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">Связь со справочником предметов <b>Items_List</b></span>
+<span lang="ru">осуществляется посредством общего для таблиц поля </span></font>
+<font face="Courier" size="2" color="#000080">IL_ID</font><font size="2" face="Arial"><span lang="ru">.&nbsp; 
+Поле </span></font><font face="Courier" size="2"><font color="#000080">QTY</font><span lang="ru">
+</span></font><font size="2" face="Arial">
+<span lang="ru">отвечает за количество предметов одного типа, которые 
+содержаться на полках нашей кузницы.<br>
+&nbsp;&nbsp; Давайте добавим несколько видов оружия и амуниции, чтоб полки 
+нашего государственного магазина не пустовали:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">INSERT INTO <b>smith</b> 
+    (Town,IL_ID,QTY) VALUES(1,2,100);<br>
+    INSERT INTO <b>smith</b> (Town,IL_ID,QTY) VALUES(1,5,50);<br>
+    INSERT INTO <b>smith</b> (Town,IL_ID,QTY) VALUES(1,8,300);<br>
+    INSERT INTO <b>smith</b> (Town,IL_ID,QTY) VALUES(1,13,300);</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp;&nbsp; Итак теперь у нас в кузнице продаются товары 
+с&nbsp; </span></font><font face="Courier" size="2"><font color="#000080">IL_ID</font><span lang="ru">
+</span></font><font size="2" face="Arial">
+<span lang="ru">( 2, 5, 8 и 13 ), а это говорит о том, что на полках содержаться 
+следующие товары:&nbsp; Щит Пророчества, Перчатки кузнеца, Болотные Сапоги и 
+Рубашка воина в соответствующих количествах, указанных в поле </span></font>
+<font face="Courier" size="2" color="#000080">QTY</font><font size="2" face="Arial"><span lang="ru">.<br>
+&nbsp;&nbsp;&nbsp; Смотрите наш </span>sql-<span lang="ru">скрипт
+<a href="6_3/db/smith.sql">здесь</a>.<br>
+&nbsp;&nbsp;&nbsp; При покупке в магазине какого-либо предмета, количество на 
+полке должно уменьшаться и этот предмет должен создаваться в рюкзаке покупателя.<br>
+<br>
+<br> </span><a name="kopv4"><font color="#000080"><b>6</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv4"><font size="2">.4. </font></a></font></span></b>
+<span lang="ru"><b><a name="kopv5"><font size="2" face="Arial" color="#000080">&nbsp;</font></a></b><a name="kopv5"><font color="#000080"><b>Создание 
+магазина продажи оружия</b></font></a> <br><br>
+&nbsp;&nbsp;&nbsp; Сейчас перед нами стоит задача отображения предметов на 
+полках нашего магазина (кузницы). Для этих целей давайте создадим файл
+</span><b>smith.phtml</b> (smith - <span lang="ru">англ. кузня</span>)<span lang="ru">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Кроме того нам понадобится внести небольшие 
+изменения в наш файл
+</span><b>map.phtml</b><span lang="ru">, чтоб при нажатии на картинку с кузницей 
+мы попадали в наш магазин. Сделаем это следующим образом - пропишем для этой 
+картинки событие
+</span>onClick. </font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">&lt;div 
+    style=&quot;position:absolute;left:320px;top:230px;width:149px; height:136px; 
+    z-index:12;z-index:12&quot;&gt;&lt;IMG SRC=Items/Towns/Silluria/smith.gif CLASS=aFilter 
+    onmouseover=&quot;imover(this)&quot; onmouseout=&quot;imout(this)&quot;
+    <font color="#000080">onclick</font>=<font color="#008000">&quot;gotoSmith()&quot;</font> 
+    ALT=&quot;<font color="#008000">Кузница</font>&quot; width=&quot;70&quot; height=&quot;70&quot;&gt;&lt;/div&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+&nbsp; <span lang="ru">А сама функция, которая перенесет нас в кузницу на
+</span>JavaScript <span lang="ru">выглядит, думается уже очень знакомо:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">function gotoSmith()<br>
+    {<br>
+    location.href='smith.phtml?itemtype=1&amp;mode=1&amp;NickName=&lt;?php<br>
+    echo &quot;$aNickName&quot;; ?&gt;';<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">единственное - мы еще передаем аргументы:
+</span></font><font face="Courier" size="2" color="#000080">itemtype</font><font size="2" face="Arial"><span lang="ru">&nbsp; 
+и&nbsp;
+</span></font><font face="Courier" size="2" color="#000080">mode</font><font size="2" face="Arial"><span lang="ru">, 
+чтобы инициализировать стартовые параметры - полку с какими предметами 
+показывать при входе в магазин и какой режим работы кузницы выбрать - режим 
+продажи предметов или режим починки.<br>
+<br>
+&nbsp;&nbsp;&nbsp; Давайте отобразим меню продающихся предметов в магазине. Это 
+легко сделать следующим кодом на
+</span>PHP:</font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#000080"><b>&lt;?php</b></font><br>
+    print( '&lt;td width=&quot;138&quot; height=&quot;115&quot; rowspan=&quot;2&quot; valign=&quot;top&quot;&gt;' );<br>
+    print( 'Оружие:&lt;br&gt;' );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=1&gt;<font color="#008000">Булавы</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=11&gt;<font color="#008000">Мечи</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=12&gt;<font color="#008000">Топоры</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=13&gt;<font color="#008000">Копья</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=14&gt;<font color="#008000">Кинжалы</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=2&gt;<font color="#008000">Щиты</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=3&gt;<font color="#008000">Шлемы</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=4&gt;<font color="#008000">Перчатки</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=7&gt;<font color="#008000">Сапоги</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print( '&lt;a href=smith.phtml?NickName='.$aNickName.'&amp;mode=1&amp;itemtype=10&gt;<font color="#008000">Броня</font>&lt;/a&gt;&lt;br&gt;' 
+    );<br>
+    print('&lt;HR&gt;');<br>
+    <br>
+    print( '&lt;/td&gt;' );<br>
+    <br>
+    <b><font color="#000080">?&gt;</font></b></font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+&nbsp; <span lang="ru">&nbsp;В браузере это будет выглядеть так:<br>
+<img border="0" src="menu.jpg" width="129" height="232"><br>
+<br>
+&nbsp;&nbsp; Теперь отобразим товары, выбранной из меню полки с товарами. На
+</span>PHP <span lang="ru">это будет выглядеть следующим образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table6">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">&lt;table border=&quot;1&quot; width=&quot;80%&quot;&gt;<br>
+    // Отобразим содержимое магазина у кузнеца (оружейника)<br>
+    </font>$query = <font color="#008000">&quot;SELECT il.IL_ID, il.ItemName, 
+    il.ItemType, il.ItemNo, il.Item_Image, il.Item_StateCost, s.QTY FROM 
+    smith s inner join Items_List il on s.IL_ID=il.IL_ID WHERE il.ItemType='$aItemType'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#0000FF">while</font> ($aRow = <font color="#0000FF">
+    mysql_fetch_array</font>($result)) {<br>
+    $aItem = $aRow[&quot;IL_ID&quot;];<br>
+    $aItemType = $aRow[&quot;ItemType&quot;];<br>
+    $aItemNo = $aRow[&quot;ItemNo&quot;];<br>
+    $aItemQty = $aRow[&quot;QTY&quot;];<br>
+    $aItemImage = $aRow[&quot;Item_Image&quot;];<br>
+    $aStateCost = $aRow[&quot;Item_StateCost&quot;];<br>
+    $aItemName = $aRow[&quot;ItemName&quot;];<br>
+    <br>
+    <font color="#0000FF">print</font>('&lt;tr&gt;');<br>
+    <font color="#0000FF">print</font>('&lt;td width=&quot;10%&quot; valign=&quot;top&quot;&gt;&lt;img 
+    src=Items/'.$aItemImage);<br>
+    <font color="#0000FF">print</font>(&quot;&gt;&lt;br&gt;&lt;a href=smith.phtml?NickName=$aNickName&amp;itemtype=$aItemType<font color="#000080">&amp;item</font>=$aItem&gt;<font color="#008000">купить</font>&lt;/a&gt;&lt;/td&gt;&quot;);<br>
+    <font color="#0000FF">print</font>('&lt;td width=&quot;90%&quot; valign=&quot;top&quot; bgcolor=eae0e0&gt;'.$aItemName.'&lt;br&gt;Стоимость: 
+    '.$aStateCost.' (количество:'.$aItemQty.')&lt;/td&gt;');<br>
+    <font color="#0000FF">print</font>('&lt;/tr&gt;');<br>
+    <font color="#008080">&lt;/table&gt;</font></font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp; В запросе </span>SELECT <span lang="ru">языка
+</span>SQL <span lang="ru">мы делаем выборку из двух таблиц, основная из которых 
+- </span><b>smith</b><span lang="ru">, а связанная с ней </span><b>items_list</b>.
+<span lang="ru">Основные данные которые нам нужно показать покупателю, это 
+картинка предмета, название, стоимость и количество (первые два берутся из 
+таблицы </span><b>items_list</b><span lang="ru">). Вы можете также, в качестве 
+тренировки, вывести и дополнительные параметры, например, урон для оружия.<br>
+&nbsp;&nbsp; Под картинкой предмета у нас также выводится ссылка для покупки.<br>
+&nbsp;&nbsp; В параметре </span></font>
+<font face="Courier" size="2" color="#000080">&amp;item</font><font size="2" face="Arial"><span lang="ru"> 
+мы передаем </span></font><font face="Courier" size="2" color="#000080">IL_ID</font><font size="2" face="Arial"><span lang="ru"> 
+этого предмета из справочника, что означает, что мы должны создать такой предмет 
+в рюкзаке купившего его игрока. <br>
+&nbsp;&nbsp; Это можно реализовать следующим образом. Сперва проверим, передан 
+ли параметр </span></font><font face="Courier" size="2" color="#000080">&amp;item</font><font size="2" face="Arial"><span lang="ru">.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#008080">// Раз передан этот параметр, значит режим покупки<br>
+    </font>$iBuy = false;<br>
+    if (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['item']))<br>
+    {<br>
+    $aItem = $<font color="#0000FF">_GET</font>['item'];<br>
+    $iBuy = true;<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">Затем</span>
+<span lang="ru">проведем непосредственно покупку предмета:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table8">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#0000FF">if</font> ($iBuy){ /<font color="#008080">/ Была 
+    инициирована покупка</font><br>
+    <br>
+    <font color="#008080">// Сколько вещей этого типа?</font><br>
+    $query = <font color="#008000">&quot;SELECT 
+    s.SM_ID,s.QTY,il.Item_StateCost,il.ItemName,il.ItemType,il.ItemNo FROM 
+    smith s inner join Items_List il on s.IL_ID=il.IL_ID WHERE il.IL_ID = '$aItem'</font>&quot;;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    $aRow = <font color="#0000FF">mysql_fetch_array</font>( $result);<br>
+    $aSMID = $aRow[&quot;SM_ID&quot;];<br>
+    $aQTY = $aRow[&quot;QTY&quot;];<br>
+    $aStateCost = $aRow[&quot;Item_StateCost&quot;];<br>
+    $aItemName = $aRow[&quot;ItemName&quot;];<br>
+    <br>
+    <font color="#0000FF">if</font> ($aQTY-- &gt; -1){ // есть ли вообще эти 
+    вещи?<br>
+    $lNoMoney=false;<br>
+    <font color="#0000FF">if</font> ($aMoney &gt;= $aStateCost){
+    <font color="#008080">// хватит ли денег купить вещь?</font><br>
+    $aMoney = $aMoney - $aStateCost;<br>
+    <font color="#008080">// Засунем в рюкзак купленную вещь!</font><br>
+    $query = <font color="#008000">&quot;INSERT INTO 
+    items(IL_ID,Item_Owner,Item_Position,Item_CurrentLife)&quot;;<br>
+    $query .= &quot;Values ('$aItem','$aUserID','2','0')&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query,$link) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <br>
+    <font color="#008080">// Уменьшим деньги</font><br>
+    $query = <font color="#008000">&quot;UPDATE users SET Character_Money='$aMoney' 
+    WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <br>
+    <font color="#008080">// Уменьшим кол-во предметов в магазине</font><br>
+    $query = <font color="#008000">&quot;UPDATE smith SET QTY='$aQTY' WHERE SM_ID='$aSMID'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <br>
+    }<font color="#0000FF">else</font><br>
+    {<br>
+    $lNoMoney=true;<br>
+    }<br>
+    }<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp; В первом запросе мы определим государственную 
+стоимость покупаемого предмета в кузнице. Затем проверим, хватит ли нам средств 
+для покупки этого предмета, путем сравнения его стоимости с количеством денег у 
+нашего персонажа (
+</span></font><font face="Courier" size="2">
+    $aStateCost<span lang="ru"> </span></font><font size="2" face="Arial">
+<span lang="ru">и&nbsp;
+</span></font><font face="Courier" size="2">
+    $aMoney</font><font size="2" face="Arial"><span lang="ru">).<br>
+&nbsp;&nbsp;&nbsp; Далее, мы создаем купленный предмет в рюкзаке игрока и 
+вычитаем из имеющейся наличности персонажа стоимость купленного предмета. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; И последнее - уменьшаем количество предметов этого типа 
+на полке магазина.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; Полный текст файла
+</span><b>smith.phtml</b> <span lang="ru">&nbsp;Вы найдете
+<a href="6_4/smith.phtml">здесь</a>.<br>
+&nbsp;&nbsp;&nbsp;<br>
+</span><a name="kopv6"><font color="#000080"><b>6</b></font></a><b><span lang="ru"><font face="Arial" color="#000080"><a name="kopv6"><font size="2">.5. 
+Создание ремонтной мастерской</font></a></font></span></b><span lang="ru"><b><a name="kopv7"><font size="2" face="Arial" color="#000080">.</font></a></b>
+<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp; В процессе поединков амуниция и оружие 
+имеет склонность изнашиваться и их периодически нужно ремонтировать. За эти 
+услуги кузницы (а вернее ее подразделения - ремонтной мастерской) конечно же 
+нужно платить.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Давайте договоримся, что починка 
+изношенного предмета на 1 единицу будет стоит 0.1 кредитки. То есть если у нас 
+есть меч с износом 11/30 и мы чиним его на 1 единицу до 10/30, то стоимость 
+такого ремонта будет составит 0.1 кредитки. Соответственно, если мы чиним этот 
+меч на 10 единиц, с 11/30 до 1/30, то заплатим одну кредитку полностью.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Для удобства игрока мы реализуем обе 
+возможности - починку на единицу и 10 единиц износа. Само собой разумеется, если 
+износ предмета составляет 8/30 - то мы не будем предлагать возможность чинить 
+такой предмет на 10 пунктов.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ну и последнее - будем предлагать 
+починить предмет полностью .<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; По умолчанию вход в магазин 
+осуществляется в режиме покупки предметов, поэтому мы должны сделать еще одно 
+меню, которое позволит нам переключаться также и в режим починки. Это 
+переключение можно сделать следующим образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table9">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    &lt;a href=&quot;smith.phtml?<font color="#000080">mode</font>=2&amp;NickName=<font color="#000080"><b>&lt;?</b></font>
+    <font color="#0000FF">echo</font> $aNickName <font color="#000080"><b>?&gt;</b></font>&quot;&gt;<font color="#008000">Починить</font><span lang="ru">
+    </span>&lt;/a&gt;&lt;br&gt;</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Как Вы заметили, мы передаем 
+параметр </span></font><font face="Courier" size="2">
+    <font color="#000080">mode</font>=2</font><font size="2" face="Arial"><span lang="ru"> 
+в нашу программу хранящуюся в файле </span><b>smith.phtml<span lang="ru"> </span></b> 
+<span lang="ru">для входа в режим 2 (починки предметов)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; В начале, мы с Вами конечно проверим этот режим:<br>
+&nbsp;</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table11">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    if (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['mode']))<br>
+    {<br>
+    <span lang="ru">&nbsp;&nbsp; </span>$aMode = $<font color="#0000FF">_GET</font>['mode'];<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp;&nbsp; И если этот режим равен 2, выполним следующий </span>
+PHP <span lang="ru">код:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table10">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#0000FF">if</font> ($aMode==2){<br>
+    <font color="#0000FF">print</font>('&lt;tr&gt;&lt;td width=&quot;700&quot; bgcolor=&quot;#6B6683&quot; 
+    height=&quot;16&quot;&gt;&lt;b&gt;&lt;font face=&quot;Arial&quot; color=&quot;#FFFF00&quot; size=&quot;2&quot;&gt;<br>
+    Предметы, требующие починки&lt;/font&gt;&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;');<br>
+    <br>
+    <font color="#008080">// Отобразим содержимое нашего рюкзака (те предметы, у которых есть 
+    износ)</font><br>
+    $query = <font color="#008000">&quot;SELECT i.IT_ID, i.Item_Position, i.Item_CurrentLife, 
+    il.Item_FullLife, il.ItemType, il.ItemNo, il.Item_Image, il.ItemName 
+    FROM Items i inner join Items_List il on il.il_id=i.il_id WHERE 
+    Item_Owner='$aUserID' and Item_Position='2'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#0000FF">while</font> ($aRow = <font color="#0000FF">mysql_fetch_array</font>($result)) 
+    {<br>
+    $aSlotItemID = $aRow[&quot;IT_ID&quot;];<br>
+    $aItemType = $aRow[&quot;ItemType&quot;];<br>
+    $aItemNo = $aRow[&quot;ItemNo&quot;];<br>
+    $aItemImage = $aRow[&quot;Item_Image&quot;];<br>
+    $aItemName = $aRow[&quot;ItemName&quot;];<br>
+    $aItemCurLife = $aRow[&quot;Item_CurrentLife&quot;];<br>
+    $aItemFullLife = $aRow[&quot;Item_FullLife&quot;];<br>
+    <font color="#0000FF">if</font> ($aItemCurLife &lt;&gt; 0){<br>
+    <font color="#0000FF">echo</font> &quot;&lt;tr&gt;&lt;td&gt;&quot; . &quot;&lt;img border=0 src=Items/&quot;.$aItemImage.&quot; 
+    ALT='Предмет &quot;.$aItemName.&quot;'&gt; $aItemName $aItemCurLife/$aItemFullLife &quot;;<br>
+    <font color="#0000FF">echo</font> &quot;&lt;br&gt;&lt;a href='smith.phtml?mode=2&amp;repair=$aItemCurLife&amp;repitem=$aSlotItemID&amp;NickName=&quot;.$aNickName.&quot;'&gt; Починить 
+    на $aItemCurLife ед. за &quot;.($aItemCurLife/10).&quot; кр.&lt;/a&gt;&quot;;<br>
+    <font color="#0000FF">if</font> ($aItemCurLife&gt;=10){<br>
+    <font color="#0000FF">echo</font> &quot;&lt;br&gt;&lt;a href='smith.phtml?mode=2&amp;repair=10&amp;repitem=$aSlotItemID&amp;NickName=&quot;.$aNickName.&quot;'&gt;Починить 
+    на 10 ед. за 1 кр.&lt;/a&gt;&quot;;<br>
+    }<br>
+    <font color="#0000FF">echo</font> &quot;&lt;br&gt;&lt;a href='smith.phtml?mode=2&amp;repair=1&amp;repitem=$aSlotItemID&amp;NickName=&quot;.$aNickName.&quot;'&gt;Починить 
+    на 1 ед. за 0.1 кр.&lt;/a&gt;&quot;;<br>
+    <font color="#0000FF">echo</font> &quot;&lt;/td&gt;&lt;/tr&gt;&quot;;<br>
+    }<br>
+    <br>
+    }<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">&nbsp;&nbsp; Как видно из запроса </span><span lang="en-us">
+SELECT</span>,<span lang="en-us"> </span>м<span lang="ru">ы показываем 
+содержимое рюкзака (</span></font><font color="#008000" face="Courier" size="2">Item_Position='2'</font><font size="2" face="Arial"><span lang="ru">), 
+но потом отбираем предметы по условию (</span></font><font face="Courier" size="2" color="#0000FF">
+</font><font face="Courier" size="2">
+    $aItemCurLife &lt;&gt; 0 </font><font size="2" face="Arial">
+<span lang="ru">), чтоб не показывать предметы с нулевым износом. Используя 
+соответствующие условия, мы выводим ссылки для починки предмета&nbsp; целиком, 
+либо на 10 единиц, либо на 1 единицу износа.<br>
+&nbsp;&nbsp; Выглядит это следующим образом:<br>
+<br>
+<img border="0" src="repair.jpg" width="541" height="274"><br>
+<br>
+При нажатии на соответствующую ссылку, мы инициируем починку предмета, передавая 
+нашему </span><span lang="en-us">PHP - </span>с<span lang="ru">ценарию параметры&nbsp; </span></font><font face="Courier" size="2">
+    &amp;<font color="#000080">repair</font></font><font size="2" face="Arial"><span lang="ru"> 
+и </span></font><font face="Courier" size="2">
+    &amp;<font color="#000080">repitem</font></font><font size="2" face="Arial"><span lang="ru">.<br>
+&nbsp;&nbsp;&nbsp; В теле файла </span><b>smith.phtml </b> <span lang="ru">они 
+принимаются уже знакомым Вам образом:</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table12">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    if (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['repair']))<br>
+    {<br>
+    $aRepairUnits = $<font color="#0000FF">_GET</font>['repair'];<br>
+    }<br>
+    if (!<font color="#0000FF">empty</font>($<font color="#0000FF">_GET</font>['repitem']))<br>
+    {<br>
+    $aRepItem = $<font color="#0000FF">_GET</font>['repitem'];<br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial">
+<span lang="ru">Теперь остается починить предмет на соответствующее количество 
+единиц износа и вычесть из содержащейся у персонажа суммы наличных стоимость 
+этой услуги ремонтной мастерской.</span></font></p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table13">
+  <tr>
+    <td bgcolor="#FFFFCC"><font face="Courier" size="2">
+    <font color="#0000FF">if</font> (($aRepairUnits &lt;&gt; 0) &amp;&amp; ($aRepItem &lt;&gt; 
+    0)){ // Была инициирована починка<br>
+    <font color="#0000FF">if</font> ($aMoney &gt;= ($aRepairUnits/10)){<br>
+    <font color="#008080">// Починима предмет</font><br>
+    $query = <font color="#008000">&quot;UPDATE Items SET Item_CurrentLife=Item_CurrentLife-$aRepairUnits 
+    WHERE IT_ID='$aRepItem'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <font color="#008080">// Уменьшим деньги</font><br>
+    $aMoney = $aMoney - ($aRepairUnits/10);<br>
+    $query = <font color="#008000">&quot;UPDATE users SET Character_Money='$aMoney' 
+    WHERE Nick_Name='$aNickName'&quot;</font>;<br>
+    $result = <font color="#0000FF">mysql_query</font>($query) or
+    <font color="#0000FF">die</font>(&quot;Query failed : &quot; .
+    <font color="#0000FF">mysql_error</font>());<br>
+    <br>
+    }<br>
+    <font color="#0000FF">else</font>{<br>
+    $lNoMoney=true;<br>
+    }<br>
+    <br>
+    }</font></td>
+  </tr>
+</table>
+<p align="justify"><font size="2" face="Arial"><span lang="ru">Полный текст 
+измененного в пункте 6.5. файла
+</span><b>smith.phtml</b> <span lang="ru">Вы найдете <a href="6_5/smith.phtml">здесь</a>.<br>
+<b><br>
+В следующем уроке</b> мы вплотную приблизимся к проведению поединков. Мы 
+научимся подавать, принимать и отзывать заявки на бой.</span></font></p>
+<font size="2" face="Arial">
+        <p align="left">&nbsp;</font></td>
+      <td width="27" height="356" background="Site/middle2.jpg">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="740" height="38" background="Site/bottom.jpg" colspan="3">&nbsp;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

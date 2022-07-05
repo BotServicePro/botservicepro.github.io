@@ -1,0 +1,48 @@
+<html>
+<head>
+</head>
+<body bgcolor=e2e0e0>
+<?php
+
+  if (!empty($_GET['NickName'])){
+     $aNickName = $_GET['NickName'];
+  }
+
+  $OBJECT_TYPE = 11;    // тип данного объекта  (кареты)  11 для всех городов
+
+    // Узнаем характеристики персонажа
+
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+			
+       $query = "SELECT Town, Character_Money, USER_ID from users WHERE Nick_Name='$aNickName'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       $aRow = mysql_fetch_array( $result);
+       $aUserID = $aRow["USER_ID"];   // ID нашего игрока
+       $aTown = $aRow["Town"];        // узнаем город
+       $aMoney = $aRow["Character_Money"];
+	   
+     $query = "SELECT ID FROM Buildings where Town=$aTown and BuildingType=$OBJECT_TYPE";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+     $aRow = mysql_fetch_array( $result);
+     $aObjectID = $aRow["ID"];
+	 print('>>>> '.$aObjectID);
+     // меняем комнату у игрока
+     $query = "UPDATE users SET Building=$aObjectID WHERE Nick_Name='$aNickName'";
+     $result = mysql_query($query) or die("Query failed : " . mysql_error());
+
+?>
+
+
+<br><br>
+<center>
+<img src="items/horseanim.gif">
+</center>
+</body>
+</html>

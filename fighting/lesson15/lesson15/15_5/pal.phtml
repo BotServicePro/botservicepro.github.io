@@ -1,0 +1,141 @@
+<html>
+<head>
+<META http-equiv=content-type content="text/html; charset=windows-1251">
+<LINK href="main.css" type=text/css rel=stylesheet>
+
+
+<?php
+$aPlayerLogin = "";
+if (!empty($_GET['playerlogin'])){
+   $aPlayerLogin = $_GET['playerlogin'];
+}
+?>
+
+<script>
+
+function ControlPlayer(){
+   pl_login = document.getElementById('user_login').value;
+   location.href="pal.phtml?playerlogin="+pl_login;
+}
+
+function ret(){
+   location.href="pal.phtml";
+}
+
+
+function PalAction( action ){
+    if (confirm("Вы уверены?")){
+      location.href="pal.phtml?act="+action+"&playerlogin=<?php echo $aPlayerLogin; ?>";
+    }
+}
+
+
+</script>
+
+</head>
+<body>
+
+<?php
+
+if ($aPlayerLogin == ""){
+
+?>
+
+Выберите игрока для управления: <br>
+<input type=text id=user_login> &nbsp; <input type=button value = 'Подойти' onClick='ControlPlayer()'>
+
+<?php
+
+} else {
+
+
+    // Узнаем характеристики управляемого персонажа
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+
+
+       $query = "SELECT Char_Chaos,Char_Block, Char_ShutUp, USER_ID from users WHERE Nick_Name='$aPlayerLogin'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       if( mysql_num_rows($result) <> 0 ){
+         $aRow = mysql_fetch_array( $result);
+         $aUserID = $aRow["USER_ID"];           // ID игрока
+         $aChar_Chaos= $aRow["Char_Chaos"];
+         $aChar_Block = $aRow["Char_Block"];
+         $aChar_ShutUp = $aRow["Char_ShutUp"];
+
+         print ( "<table border=1><tr><td>Персонаж: <b>$aPlayerLogin </b></td>");
+         if($aChar_ShutUp == 1){
+            print("<td> <a href='#' onClick='PalAction(1)'><img src=img/shut_up2.gif border=0  alt='Снять молчанку'></a></td>");
+         }else{
+            print("<td> <a href='#' onClick='PalAction(2)'><img src=img/shut_up.gif border=0  alt='Наложить молчанку'></a></td>");
+         }
+         if($aChar_Chaos == 1){
+            print("<td> <a href='#' onClick='PalAction(3)'><img src=img/chaos2.gif border=0 alt='Снять хаос'></a></td>");
+         }else{
+            print("<td> <a href='#' onClick='PalAction(4)'><img src=img/chaos.gif border=0  alt='Наложить хаос'></a></td>");
+         }
+         if($aChar_Block == 1){
+            print("<td> <a href='#' onClick='PalAction(5)'><img src=img/block2.jpg border=0  alt='Снять блок'></a></td>");
+         }else{
+            print("<td> <a href='#' onClick='PalAction(6)'><img src=img/block.jpg border=0  alt='Наложить блок'></a></td>");
+         }
+         print("</tr></table>");
+       } else {
+         print("Такого игрока нет в клубе! <input type=button value=Ok onClick='ret()'>");
+       }
+       
+if (!empty($_GET['act'])){
+   $aAction = $_GET['act'];
+   
+   switch ($aAction) {
+   case 1:
+      $query = "update users set Char_ShutUp=0 WHERE USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      $query = "INSERT INTO chat (CH_MSG,USER_ID,USER_ID_TO,CH_ROOM,IS_PRIVATE) values('С Вас снято заклятье молчания',1,'$aUserID','0',1)";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      break;
+   case 2:
+      $query = "update users set Char_ShutUp=1 WHERE USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      $query = "INSERT INTO chat (CH_MSG,USER_ID,USER_ID_TO,CH_ROOM,IS_PRIVATE) values('На Вас наложено заклятье молчания',1,'$aUserID','0',1)";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      break;
+   case 3:
+      $query = "update users set Char_Chaos=0 WHERE USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      $query = "INSERT INTO chat (CH_MSG,USER_ID,USER_ID_TO,CH_ROOM,IS_PRIVATE) values('С Вас снят хаос',1,'$aUserID','0',1)";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      break;
+   case 4:
+      $query = "update users set Char_Chaos=1 WHERE USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      $query = "INSERT INTO chat (CH_MSG,USER_ID,USER_ID_TO,CH_ROOM,IS_PRIVATE) values('На Вас наложен хаос',1,'$aUserID','0',1)";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      break;
+   case 5:
+      $query = "update users set Char_Block=0 WHERE USER_ID='$aUserID'";
+      $result = mysql_query($query) or die("Query failed : " . mysql_error());
+      break;
+   case 6:
+      $query = "update users set Char_Block=1 WHERE USER_ID='$aUserID'";
+      break;
+   }
+   print('<SCRIPT>location.href="pal.phtml?playerlogin='.$aPlayerLogin.'";</SCRIPT>');
+}
+
+
+?>
+
+
+
+<?php
+}
+?>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<html>
+<head>
+<META http-equiv=content-type content="text/html; charset=windows-1251">
+<LINK href="main.css" type=text/css rel=stylesheet>
+
+<?php
+
+  // это уникальный IL_ID для билета (из справочника предметов)
+  $TICKET_IL_ID = 17;
+
+  $lNoMoney = false;
+  $aItemId = 0;
+  $aTicketId = 0;
+  $aSell = 0;
+  if (!empty($_GET['NickName'])){
+     $aNickName = $_GET['NickName'];
+  }
+
+  if (!empty($_GET['tk_id'])){
+     $aTicketId = $_GET['tk_id'];
+  }
+
+
+  // переход в режим просмотра купленных билетов для сдачи
+  if (!empty($_GET['sell'])){
+     $aSell = $_GET['sell'];
+  }
+
+  // сдаем билет
+  if (!empty($_GET['it_id'])){
+     $aItemId = $_GET['it_id'];
+  }
+
+
+  
+?>
+
+
+<script>
+var StationTimerID = -1;   // id таймера для вокзала
+var StationDelay = 15;     // через сколько сек. рефрешить вокзал
+
+function BuyTicket( tk_id ){
+  location.href = "station.phtml?tk_id="+tk_id+"&NickName=<?php echo $aNickName ?>";
+}
+   
+function strt(){ // Начинаем
+  ChatTimerID = setTimeout('RefreshStation()', 1000);
+}
+
+function RefreshStation()
+{
+  if (StationTimerID>=0) { clearTimeout(StationTimerID); }
+  StationTimerID = setTimeout('RefreshStation()', StationDelay*1000);
+  CheckReadyToMove();
+}
+
+function CheckReadyToMove() {
+    var rval = Math.round(Math.random()*10000000000000000000);
+    url = "crtm.php?NickName=<?php echo $aNickName ?>&rv="+rval;
+    if (window.XMLHttpRequest) {
+        req = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        req = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    req.open("GET", url, false);
+    req.send(null);
+    if ( (req.readyState == 4) && (req.status == 200) ) {
+       it_id = req.responseText;
+       if (it_id != 0){
+          location.href = "karet.phtml?NickName=<?php echo $aNickName ?>";
+       }
+    }
+}
+
+   
+</script>
+
+
+</head>
+
+
+<body bgcolor="#e2e0e0" onload="strt()">
+<div align="center">
+  <center>
+  <table border="1" width="985" height="115" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="863" height="115" rowspan="2" valign="top">
+        <br><p align="left"><font face="Arial"><b>ВОКЗАЛ</b><br><br></font>
+        <font size=2 color=red><div id="mes">             </div></font>
+
+<?php
+
+    // Узнаем характеристики персонажа
+
+    $mysql_host = "localhost";
+    $mysql_user = "root";
+    $mysql_password = "";
+    $my_database = "mmclub";
+
+    $link = mysql_connect($mysql_host, $mysql_user, $mysql_password)
+            or die("Could not connect : " . mysql_error());
+            mysql_select_db($my_database) or die("Could not select database");
+			
+       $query = "SELECT Town, Character_Money, USER_ID from users WHERE Nick_Name='$aNickName'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       $aRow = mysql_fetch_array( $result);
+       $aUserID = $aRow["USER_ID"];   // ID нашего игрока
+       $aTown = $aRow["Town"];        // узнаем город
+       $aMoney = $aRow["Character_Money"];
+
+       // была инициирована покупка билета
+       if ($aTicketId <> 0){
+          $query = "select tk.TK_ID, tk.IL_ID, tk.TownTo, tk.DateStart, tk.Price, tk.MovingTime, tk.QTY from tickets tk where tk.tk_id = '$aTicketId'";
+          $result = mysql_query($query) or die("Query failed : " . mysql_error());
+          $aRow = mysql_fetch_array( $result);
+          $aTK_ID      = $aRow["TK_ID"];
+          $aIL_ID      = $aRow["IL_ID"];
+          $aTownTo      = $aRow["TownTo"];
+          $aQTY  = $aRow["QTY"];
+          $aMovingTime  = $aRow["MovingTime"];
+          $aPrice = $aRow["Price"];
+          $aDateStart = $aRow["DateStart"];
+          $lNoMoney=false;
+          if ($aQTY-- > -1){  // есть ли вообще билеты?
+          if ($aMoney >= $aPrice){   // хватит ли денег купить билет?
+             $aMoney = $aMoney - $aPrice;
+             // Засунем в рюкзак купленную вещь!
+             $query = "INSERT INTO items(IL_ID,Item_Owner,Item_Position,Item_CurrentLife,Item_TID,Item_DateTime)";
+             $query .= "Values ('$aIL_ID','$aUserID','2','1',$aTK_ID,'$aDateStart')";
+             $result = mysql_query($query,$link) or die("Query failed : " . mysql_error());
+
+             // Уменьшим деньги
+             $query = "UPDATE users SET Character_Money='$aMoney' WHERE Nick_Name='$aNickName'";
+             $result = mysql_query($query) or die("Query failed : " . mysql_error());
+
+             // Уменьшим кол-во предметов в магазине
+             $query = "UPDATE tickets SET QTY='$aQTY',DateStart='$aDateStart' WHERE TK_ID='$aTicketId'";
+             $result = mysql_query($query) or die("Query failed : " . mysql_error());
+
+          } else {
+           $lNoMoney=true;
+          }
+          }
+       }
+
+       // была инициирована сдача билета
+       if ($aItemId <> 0){
+          $query = "delete from items where it_id='$aItemId'";
+          $result = mysql_query($query) or die("Query failed : " . mysql_error());
+             // добавим 1 кр за сдачу билета
+             $query = "UPDATE users SET Character_Money=Character_Money+1 WHERE Nick_Name='$aNickName'";
+             $result = mysql_query($query) or die("Query failed : " . mysql_error());
+             $aMoney += 1;
+             $aSell = 1;
+
+       }
+
+       if ( $aSell == 1 ){
+       // покажем купленные билеты для сдачи
+          $query = "SELECT i.IT_ID, i.IL_ID,  il.Item_Image, il.ItemName, i.Item_DateTime FROM Items i inner join Items_List il on il.il_id=i.il_id WHERE i.Item_Owner='$aUserID' and i.IL_ID = '$TICKET_IL_ID'";
+          $result = mysql_query($query) or die("Query failed : " . mysql_error());
+          print('<table>');
+          while ($aRow = mysql_fetch_array($result)) {
+             $aSlotItemID  = $aRow["IT_ID"];
+             $aIL_ID  = $aRow["IL_ID"];
+             $aItemImage  = $aRow["Item_Image"];
+             $aItemName  = $aRow["ItemName"];
+             $aItem_DateTime  = $aRow["Item_DateTime"];
+             echo "<tr><td>" . "<img border=0 src=Items/".$aItemImage." ALT='".$aItemName.' Время отправления: '.$aItem_DateTime."'>" . " <a href='station.phtml?it_id=$aSlotItemID&NickName=$aNickName'>Сдать билет (за 1 кр)</a></td></tr>";
+          }
+          print('</table>');
+       
+       
+
+       } else {
+       // покажем таблицу билетов
+
+       $query = "select tk.TK_ID, tk.TownTo, tk.DateStart, tk.Price, tk.MovingTime, tk.QTY, tw.TownName from tickets tk inner join towns tw on tk.TownTo = tw.ID where tk.Town = '$aTown'";
+       $result = mysql_query($query) or die("Query failed : " . mysql_error());
+       print('<table bgcolor="#DDFAFB"><tr> <td><b>Пункт назначения</b></td><td><b>Время переезда</b></td><td><b>Время отправления</b></td><td><b>Кол-во билетов</b></td><td><b>Цена</b></td><td></td> </tr><tr>');	   
+       while ($aRow = mysql_fetch_array($result)) {
+           $aTK_ID      = $aRow["TK_ID"];	   
+           $aTownTo      = $aRow["TownTo"];
+           $aTownToName  = $aRow["TownName"];		   
+           $aQTY  = $aRow["QTY"];		   		   
+           $aMovingTime  = $aRow["MovingTime"];		   		   		   
+           $aPrice = $aRow["Price"];
+           $aDateStart = $aRow["DateStart"];		   
+           print("<td>$aTownToName</td><td>$aMovingTime</td><td>$aDateStart</td><td>$aQTY</td><td>$aPrice</td>");
+		   if ( $aQTY > 0 ) {
+		       print('<td><input type=button value="Купить" onClick="BuyTicket('.$aTK_ID .')"></td>');
+		   }
+		   print('</tr>');
+		   
+       }
+	   print('</table>');
+       }
+       
+       
+   if ($aTicketId <> 0){    // Была инициирована покупка
+       if($lNoMoney){
+          print("<SCRIPT>document.all('mes').innerHTML='К сожалению у Вас не хватает денег!';</SCRIPT>");
+       }  else {
+          print("<SCRIPT>document.all('mes').innerHTML='Вы успешно приобрели Билет';</SCRIPT>");
+       }
+   }
+   if ($aItemId <> 0){    // Была инициирована сдача
+       print("<SCRIPT>document.all('mes').innerHTML='Вы успешно сдали Билет за 1 кр';</SCRIPT>");
+   }
+    
+?>
+
+      </td>
+      Деньги: <font color=red><?php echo $aMoney; ?></font> кр
+
+      <td width="18" height="173" valign="top">
+        <p align="center"><img border="0" src="Items/station.jpg" width="116" height="230"></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="18" height="100" valign="top">
+        <a href="station.phtml?NickName=<?php echo $aNickName; ?>">Купить</a></font>
+        <a href="station.phtml?sell=1&NickName=<?php echo $aNickName; ?>">Сдать</a></font>
+        <a href="map.phtml?NickName=<?php echo $aNickName; ?>">Выйти</a></font>
+        </td>
+  </table>
+  </center>
+</div>
+	  
+
+</body>
+</html>
